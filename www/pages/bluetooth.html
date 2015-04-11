@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <title>ChildrenLab</title>
+</head>
+<body>
+<div class="bluetooth">
+    <div class="mainTitle">
+        <h1>Bluetooth<span></span></h1>
+    </div>
+
+    <div class="container">
+
+        <div class="status">
+            Bluetooth: <span class="bluetoothStatus"></span><br/>
+            Status: <span class="status"></span><br/>
+        </div>
+
+        <div class="mainButton searchDevice">
+            Search Device
+        </div>
+
+        <div class="deviceList">
+            <div class="title">Unpaired Device</div>
+            <div class="list"></div>
+        </div>
+
+        <div class="pairedDevice">
+            <div class="title">Paired Device</div>
+            <div class="list"></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="eachDevice">
+    Address: <span class="deviceAddress"></span> <br/>
+    Class: <span class="deviceClass"></span> <br/>
+    ID: <span class="deviceId"></span> <br/>
+    Name: <span class="deviceName"></span> <br/>
+    <div class="mainButton pairButton">Pair</div>
+</div>
+
+<script type="text/javascript" src="../cordova.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="../js/tools.js"></script>
+<script type="text/javascript" src="../js/bluetooth.js"></script>
+</body>
+</html>

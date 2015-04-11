@@ -17,9 +17,20 @@
  * under the License.
  */
 var app = {
+
+    setting: {
+        serverBase: "http://www.childrenLab.com",
+        signInAPI: "/api/login",
+        mainMenu: "pages/mainMenu.html",
+        validateTokenAPI: "/test/token",
+        connectAPI: "/connect/device",
+        tokenName: "x-auth-token"
+    },
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+
     },
     // Bind Event Listeners
     //
@@ -34,16 +45,128 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+        this.tool = new Tools();
+        this.$email = $('input[name="email"]');
+        this.$password = $('input[name="password"]');
+        this.$errorMessage = $('div.errorMessage');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        var token = window.localStorage.getItem('token');
+        if(token) { app.validateToken(); }
+
+        if(window.localStorage.getItem('email')){
+            this.$email.val(window.localStorage.getItem('email'));
+        }
+
+        $('.signUpText').on('click', function(){
+            window.location = "signUp.html";
+        });
+
+        $('div.signInButton').on('click', this.signInForm);
+
+        $(document).ajaxError(function(e){
+            app.$errorMessage.text("Please check your email and password");
+        });
+
+        this.tool.ajax({
+            url: app.serverBase + app.setting.connectAPI,
+            context: app,
+            data: {
+                model: device.model,
+                cordova: device.cordova,
+                platform: device.platform,
+                uuid: device.uuid,
+                version: device.version
+            }
+        });
 
         console.log('Received Event: ' + id);
+    },
+
+    signInForm: function(){
+        app.$errorMessage.text("");
+        console.log('sign in');
+
+        var email = app.$email.val();
+        var password = app.$password.val();
+
+        if(!app.validateEmail(email)){
+            app.$errorMessage.text("Please check your email format.");
+            return;
+        }
+
+        if(!app.validatePassword(password)){
+            app.$errorMessage.text("Password length must be more than 5..");
+            return;
+        }
+
+        app.signIn({
+            email: email,
+            password: password
+        });
+
+        console.log('email ' + email + " password: " + password);
+    },
+
+    signIn: function(params){
+        params = params || {};
+
+        this.tool.ajax({
+            url: app.serverBase + app.setting.signInAPI,
+            context: app,
+            data: {
+                email: params.email,
+                password: params.password
+            },
+            callback: app.signIn_load
+        });
+
+    },
+
+    signIn_load: function(data){
+        console.log(data);
+        data = data || {};
+
+        if(data.access_token){
+            window.localStorage.setItem("token", data.access_token);
+            window.localStorage.setItem("email", data.username);
+
+            window.location = app.setting.mainMenu;
+        }else{
+            window.location="index.html";
+            app.receivedEvent('deviceready');
+        }
+
+    },
+
+    validateToken: function(){
+        console.log("before validate");
+        this.tool.ajax({
+            url: app.setting.serverBase + app.setting.validateTokenAPI,
+            type: 'post',
+            context: app,
+            callback: app.validateToken_load
+        });
+    },
+
+    validateToken_load: function(data){
+            console.log(data);
+            if(data.success){
+                window.location = app.setting.mainMenu;
+            }
+    },
+
+    validateEmail: function(email) {
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return re.test(email);
+    },
+
+    validatePassword: function(password) {
+        return password.length > 5;
     }
 };
+
+app.initialize();
