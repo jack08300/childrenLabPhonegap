@@ -72,7 +72,7 @@ var app = {
         });
 
         this.tool.ajax({
-            url: app.serverBase + app.setting.connectAPI,
+            url: app.setting.serverBase + app.setting.connectAPI,
             context: app,
             data: {
                 model: device.model,
@@ -115,7 +115,7 @@ var app = {
         params = params || {};
 
         this.tool.ajax({
-            url: app.serverBase + app.setting.signInAPI,
+            url: app.setting.serverBase + app.setting.signInAPI,
             context: app,
             data: {
                 email: params.email,
@@ -166,6 +166,19 @@ var app = {
 
     validatePassword: function(password) {
         return password.length > 5;
+    },
+
+    notification: function(title, message, callback, button){
+        if(navigator.notification){
+            window.alert = function(){
+                navigator.notification.alert(
+                    title,
+                    callback,
+                    message,
+                    button
+                )
+            }
+        }
     }
 };
 
