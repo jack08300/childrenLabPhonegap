@@ -107,7 +107,17 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
+div.navigater {
+    height: 50px;
+    color: #2EB8B8;
+    font-size: 32px;
+    margin: 5px 20px 5px 20px;
+}
+
+div.navigater div.left { float: left; }
+div.navigater div.right { float: right; }
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
@@ -162,7 +172,7 @@ div.login {
 }
 
 div.signUpPage {
-    margin:-190px 0px 0px -112px;
+    margin:-236px 0px 0px -112px;
 }
 
 div.mainError {

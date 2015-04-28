@@ -10,7 +10,10 @@ Tools.prototype.ajax = function(params, oArgs){
         context: params.context,
         beforeSend: function (request)
         {
-            request.setRequestHeader(app.setting.tokenName, window.localStorage.getItem('token'));
+					if(params.url.indexOf("register") == -1 && params.url.indexOf("login") == -1){
+						request.setRequestHeader(app.setting.tokenName, window.localStorage.getItem('token'));
+					}
+
         },
         data: params.data,
         success: params.callback

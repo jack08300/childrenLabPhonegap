@@ -83,6 +83,7 @@ var app = {
             }
         });
 
+
         console.log('Received Event: ' + id);
     },
 
@@ -179,7 +180,27 @@ var app = {
                 )
             }
         }
-    }
+    },
+
+		addTopNavigater: function(oArgs){
+			oArgs = oArgs || {};
+			this.$navigater = $('<div class="navigater"></div>');
+
+			if(oArgs.left){
+				this.$navigater.append('<div class="left"><</div>');
+			}
+
+			if(oArgs.right){
+				this.$navigater.append('<div class="right">></div>');
+			}
+
+			this.$navigater.on('click', 'div.left', function(){
+				console.log("You got left");
+				history.go(-1);
+			});
+
+			$('body').prepend(this.$navigater);
+		}
 };
 
 app.initialize();

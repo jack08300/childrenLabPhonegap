@@ -20,6 +20,7 @@ Signup.prototype.init = function(){
     this.$gender = $('input[name="sex"]:checked');
     this.$errorMessage = $('div.errorMessage');
     this.$button = $('div.signUpButton');
+		this.tool = new Tools();
 
     this.attachEvent();
 };
@@ -29,6 +30,11 @@ Signup.prototype.attachEvent = function(){
     this.$button.on('click', function(){
         self.submitForm();
     });
+
+		app.addTopNavigater({
+			left: true,
+			right: false
+		});
 };
 
 Signup.prototype.submitForm = function(){
@@ -58,7 +64,7 @@ Signup.prototype.submitForm = function(){
         this.$errorMessage.text("Please enter your phone number.");
         return;
     }
-    app.ajax({
+		this.tool.ajax({
         url: this.signUpUrl,
         context: this,
         data: {
@@ -74,7 +80,7 @@ Signup.prototype.submitForm = function(){
 
 Signup.prototype.submitForm_load = function(data){
     if(data.success){
-        app.signIn({
+        this.signin({
             email: this.$email.val(),
             password: this.$password.val()
         });
@@ -82,6 +88,20 @@ Signup.prototype.submitForm_load = function(data){
         this.$errorMessage.text(data.message);
     }
 
+};
+
+Signup.prototype.signin = function(params){
+	params = params || {};
+
+	this.tool.ajax({
+		url: app.setting.serverBase + app.setting.signInAPI,
+		context: app,
+		data: {
+			email: params.email,
+			password: params.password
+		},
+		callback: app.signIn_load
+	});
 };
 
 new Signup();
