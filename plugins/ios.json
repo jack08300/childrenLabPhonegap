@@ -23,11 +23,13 @@
             },
             "config.xml": {
                 "parents": {
-                    "/*": [
+                    "/widget": [
                         {
-                            "xml": "<feature name=\"BluetoothLePlugin\"><param name=\"ios-package\" value=\"BluetoothLePlugin\" /></feature>",
+                            "xml": "<feature name=\"BLE\"><param name=\"ios-package\" onload=\"true\" value=\"BLECentralPlugin\" /></feature>",
                             "count": 1
-                        },
+                        }
+                    ],
+                    "/*": [
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
@@ -38,21 +40,11 @@
                         }
                     ]
                 }
-            },
-            "*-Info.plist": {
-                "parents": {
-                    "UIBackgroundModes": [
-                        {
-                            "xml": "<array><string>bluetooth-central</string></array>",
-                            "count": 1
-                        }
-                    ]
-                }
             }
         }
     },
     "installed_plugins": {
-        "com.randdusing.bluetoothle": {
+        "com.megster.cordova.ble": {
             "PACKAGE_NAME": "com.childrenLab"
         },
         "org.apache.cordova.device": {

@@ -27,7 +27,7 @@
         </div>
 
         <div class="deviceList">
-            <div class="title">Device</div>
+            <div class="title"></div>
             <div class="list"></div>
         </div>
 
@@ -39,17 +39,32 @@
 </div>
 
 <div class="template eachDevice">
-    Address: <span class="deviceAddress"></span> <br/>
-    Advertisement: <span class="advertisement"></span> <br/>
-    Name: <span class="deviceName"></span> <br/>
-    <div class="mainButton pairButton">Connect</div>
+	Id: <span class="deviceAddress"></span> <br/>
+	Advertisement: <span class="advertisement"></span> <br/>
+	Name: <span class="deviceName"></span> <br/>
+	rssi: <span class="deviceRssi"></span> <br/>
+
+	<div class="buttons">
+		<div class="mainButton pairButton">Connect</div>
+		<div class="mainButton disconnectButton">Disconnect</div>
+
+	</div>
+	<div class="close"></div>
 </div>
 
-<div class="template eachDescriptor">
-	Uuid: <span class="deviceUuid"></span> <br/>
-	Name: <span class="deviceName"></span> <br/>
-	Address: <span class="deviceAddress"></span> <br/>
-	<div class="mainButton connect">Receive Data</div>
+<div class="template eachCharacter">
+	DeviceId: <span class="deviceId"></span> <br/>
+	CharacterUuid: <span class="characterUuid"></span> <br/>
+	ServiceUuid: <span class="characterServices"></span> <br/>
+	Properties: <span class="characterProperties"></span><br/>
+	Descriptors: <span class="descriptors"></span> <br/>
+	Data: <span class="devicedata"></span> <br/>
+
+	<div class="buttons">
+		<div class="mainButton readData">Read</div>
+		<div class="mainButton notifyData">Notify</div>
+	</div>
+	<div class="close"></div>
 </div>
 
 <script type="text/javascript" src="../cordova.js"></script>

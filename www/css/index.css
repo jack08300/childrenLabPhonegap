@@ -27,7 +27,7 @@ body {
     background-color:#303030;
 
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:18px;
+    font-size:14px;
     height:100%;
     margin:0px;
     padding:0px;
@@ -123,6 +123,10 @@ div.navigater div.right { float: right; }
     -webkit-animation:fade 3000ms infinite;
 }
 
+.close {
+    clear: both;
+}
+
 .mainTitle {
     color: #2EB8B8;
     font-weight: bold;
@@ -160,6 +164,16 @@ div.navigater div.right { float: right; }
     color: black;
 }
 
+.buttons {
+    float: left;
+}
+
+div.devicedata {
+    display: none;
+    height: 90px;
+    overflow-y: auto;
+}
+
 div.signUpText{
     font-size: 14px;
 }
@@ -189,6 +203,8 @@ div.template {
     color: #2EB8B8;
     line-height: 28px;
 }
+
+
 
 div.bluetooth div.container {
     color: #2EB8B8;
