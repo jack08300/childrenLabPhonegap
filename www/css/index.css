@@ -180,7 +180,7 @@ div.mainError {
     font-size: 14px;
 }
 
-div.eachDevice {
+div.template {
     display: inline-block;
     display: none;
     border: 1px solid #ABE3E3;
@@ -188,4 +188,8 @@ div.eachDevice {
     padding: 5px;
     color: #2EB8B8;
     line-height: 28px;
+}
+
+div.bluetooth div.container {
+    color: #2EB8B8;
 }

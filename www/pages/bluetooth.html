@@ -18,7 +18,7 @@
     <div class="container">
 
         <div class="status">
-            Bluetooth: <span class="bluetoothStatus"></span><br/>
+            Bluetooth: <span class="bluetoothStatus">OFF</span><br/>
             Status: <span class="status"></span><br/>
         </div>
 
@@ -27,28 +27,35 @@
         </div>
 
         <div class="deviceList">
-            <div class="title">Unpaired Device</div>
+            <div class="title">Device</div>
             <div class="list"></div>
         </div>
 
-        <div class="pairedDevice">
-            <div class="title">Paired Device</div>
-            <div class="list"></div>
-        </div>
+				<div class="receivedData">
+					<div class="data"></div>
+				</div>
     </div>
 
 </div>
 
-<div class="eachDevice">
+<div class="template eachDevice">
     Address: <span class="deviceAddress"></span> <br/>
     Advertisement: <span class="advertisement"></span> <br/>
     Name: <span class="deviceName"></span> <br/>
-    <div class="mainButton pairButton">Pair</div>
+    <div class="mainButton pairButton">Connect</div>
+</div>
+
+<div class="template eachDescriptor">
+	Uuid: <span class="deviceUuid"></span> <br/>
+	Name: <span class="deviceName"></span> <br/>
+	Address: <span class="deviceAddress"></span> <br/>
+	<div class="mainButton connect">Receive Data</div>
 </div>
 
 <script type="text/javascript" src="../cordova.js"></script>
 <script type="text/javascript" src="../js/lib/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="../js/tools.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
 <script type="text/javascript" src="../js/bluetooth.js"></script>
 </body>
 </html>

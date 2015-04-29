@@ -16,19 +16,27 @@ Bluetooth.prototype.deviceReady = function(){
     this.$deviceList = $('div.deviceList');
     this.$unpairedList = $('div.list', this.$deviceList);
     this.$paredDevice = $('div.pairedDevice');
+		this.$receivedData = $('div.receivedData');
     this.$pairedList = $('div.list', this.$paredDevice);
+
+		app.addTopNavigater({
+			left: true,
+			right: false
+		});
 
     if(!bluetoothle.isInitialized()){
         bluetoothle.initialize(
             function(){
                 console.log("Bluetooth initialized");
+								self.$status.html("initialize blutoothle Success");
                 self.attachEvent();
             },
             function(){
+								self.$status.html("Bluetooth initialized fail");
                 console.error("Bluetooth initialized fail");
             },{
                 request: true,
-                statusReceiver: false
+                statusReceiver: true
             }
         );
     }
@@ -59,7 +67,7 @@ Bluetooth.prototype.enableBluetooth = function(){
                 self.searchDevice();
             },
             function(){
-                app.notification("Bluetooth Device", "Please enbale your bluetooth first");
+                app.notification("Bluetooth Device", "Please enbale your bluetooth first", null);
             }
         );
     }
@@ -68,20 +76,16 @@ Bluetooth.prototype.enableBluetooth = function(){
 
 Bluetooth.prototype.searchDevice = function(){
     var self = this;
-    this.runningOnSearch = true;
-    this.$unpairedList.empty();
-    console.log("searching device");
+		self.$bluetoothStatus.html("ON");
+		self.runningOnSearch = true;
+		self.$unpairedList.empty();
 
-    if(device.platform == "Android"){
-        //this.androidDescover();
         bluetoothle.startScan(
             function(data){
                 if(data.status == "scanStarted"){
                     self.$status.html("Searching device...");
                 }else if(data.status == "scanResult"){
-
                     self.displayDeviceList(data);
-
                 }
             },
             function(error){
@@ -90,9 +94,7 @@ Bluetooth.prototype.searchDevice = function(){
                 serviceUuids: [self.serviceUuid]
             }
         );
-    }else if(device.platform == "iOS"){
-        this.iosDescover();
-    }
+
 };
 
 Bluetooth.prototype.disableSearch = function(){
@@ -124,31 +126,20 @@ Bluetooth.prototype.enableAndSearch = function(){
                         },
                         function(){
                             //fail
-                            app.notification("Bluetooth Device", "Something wrong with your device.");
+                            app.notification("Bluetooth Device", "Something wrong with your device.", null);
 
                         }
                     );
                 }
+							self.$bluetoothStatus.html("OFF");
             }else{
+								self.$status.html("Bluetooth is On");
                 self.searchDevice();
             }
         });
 
     }
 
-};
-
-Bluetooth.prototype.androidPair = function(uuid){
-    bluetoothSerial.connect(uuid,
-        function(data){
-            console.log("success connect. ");
-            console.log(data);
-        },
-        function(data){
-            console.error("Fail to connect to device");
-            alert("Failed");
-        }
-    )
 };
 
 Bluetooth.prototype.displayDeviceList = function(data){
@@ -170,13 +161,12 @@ Bluetooth.prototype.displayDeviceList = function(data){
 
         this.$eachDevice.clone().appendTo(this.$unpairedList).attr("address", data.address).show();
 
-        this.$eachDevice.on("click", "div.pairButton", function(){
-            var uuid = $(this).parent().attr("uuid");
-            console.log("connecting to: " + uuid);
-            self.androidPair(uuid);
-        });
+			this.$unpairedList.on("click", "div.pairButton", function(){
+				self.isConnected(data);
 
-        this.$eachDevice.find('span.deviceAddress').html("");
+			});
+
+			this.$eachDevice.find('span.deviceAddress').html("");
         this.$eachDevice.find('span.deviceClass').html("");
         this.$eachDevice.find('span.deviceId').html("");
         this.$eachDevice.find('span.deviceName').html("");
@@ -185,88 +175,143 @@ Bluetooth.prototype.displayDeviceList = function(data){
         self.disableSearch();
     }
 
+};
 
+Bluetooth.prototype.isConnected = function(device){
+	var self = this;
+	bluetoothle.isConnected(
+		function(data){
+
+			if(data.isConnected){
+				self.services(data);
+			}else{
+				self.connect(device);
+			}
+		},{
+			address: device.address
+		}
+	)
+};
+
+Bluetooth.prototype.connect = function(device) {
+	var self = this;
+	console.log("connecting");
+
+	bluetoothle.connect(
+		function(data){
+			//success
+			if(data.status == "connecting"){
+				self.$status.html("Connecting to " + device.name);
+			}else if(data.status == "connected"){
+				self.$status.html("Connected to " + device.name);
+				self.services(data);
+			}else if(data.status == "disconnected") {
+				self.$status.html("Disconnected to " + device.name);
+			}
+
+
+		},
+		function(){
+			//fail
+			self.$status.html("Fail Connected to " + device.name);
+			console.error("Error on connecting to device");
+		},{
+			address: device.address
+		}
+	)
+};
+
+Bluetooth.prototype.services = function(device){
+	var self = this;
+
+	bluetoothle.services(
+		function(data){
+			if(data.status == "services"){
+				self.$unpairedList.empty();
+				self.$status.html("Discovered Services: " + device.name);
+				self.services_load(data);
+			}
+		},
+		function(){
+			self.$status.html("Fail discover services " + device.name);
+		}, {
+			address: device.address,
+			serviceUuids: [self.serviceUuid]
+		}
+	)
+};
+
+Bluetooth.prototype.services_load = function(data){
+	var self = this;
+	var $eachData = $('div.eachDescriptor');
+	for(var i =0;i<data.serviceUuids.length;i++){
+		$eachData.find('span.deviceUuid').html(data.serviceUuids[i]);
+		$eachData.find('span.deviceName').html(data.name);
+		$eachData.find('span.deviceAddress').html(data.address);
+		$eachData.clone().appendTo(this.$unpairedList).show();
+		this.$unpairedList.on('click', 'div.connect', function(){
+			self.characteristics(data, data.serviceUuids[i]);
+		});
+	}
 
 };
 
-Bluetooth.prototype.androidDescover = function(){
-    var self = this;
-    bluetoothSerial.discoverUnpaired(
-        function(deviceList){
-            console.log(deviceList);
-            for(var i=0; i<deviceList.length; i++){
-                self.$eachDevice.find('span.deviceAddress').html(deviceList[i].address);
-                self.$eachDevice.find('span.deviceClass').html(deviceList[i]["class"]);
-                self.$eachDevice.find('span.deviceId').html(deviceList[i]["id"]);
-                self.$eachDevice.find('span.deviceName').html(deviceList[i]["name"]);
+Bluetooth.prototype.characteristics = function(device, serviceUuid){
+	var self = this;
 
-                self.$eachDevice.clone().appendTo(self.$unpairedList).attr("uuid", deviceList[i].address).show();
-
-                self.$eachDevice.find('span.deviceAddress').html("");
-                self.$eachDevice.find('span.deviceClass').html("");
-                self.$eachDevice.find('span.deviceId').html("");
-                self.$eachDevice.find('span.deviceName').html("");
-
-
-            }
-            self.$status.html("Searching Complete");
-            self.runningOnSearch = false;
-        },
-        function(){
-            console.error("Search Device fail");
-        }
-    );
+	bluetoothle.characteristics(
+		function(data){
+			if(data.status == "characteristics"){
+				self.$unpairedList.empty();
+				self.$status.html("Discovered Characteristics: " + device.name);
+				self.characteristics_load(data);
+			}
+		},
+		function(data){
+			self.$status.html("Fail discover characteristics " + JSON.stringify(data));
+		}, {
+			address: device.address,
+			serviceUuid: serviceUuid
+		}
+	)
 };
 
-Bluetooth.prototype.iosDescover = function(){
-    var self = this;
-    bluetoothSerial.list(
-        function(deviceList){
-            console.log("List");
-            console.log(deviceList);
-            for(var i=0; i<deviceList.length; i++){
-                self.$eachDevice.find('span.deviceAddress').html(deviceList[i].address);
-                self.$eachDevice.find('span.deviceClass').html(deviceList[i]["class"]);
-                self.$eachDevice.find('span.deviceId').html(deviceList[i]["id"]);
-                self.$eachDevice.find('span.deviceName').html(deviceList[i]["name"]);
+Bluetooth.prototype.characteristics_load = function(data){
+	var $eachData = $('div.eachDescriptor');
+	for(var i =0;i<data.characteristics.length;i++){
+		$eachData.find('span.deviceUuid').html(data.characteristics[i].characteristicUuid);
+		$eachData.find('span.deviceAddress').html(data.characteristics[i].address);
+		$eachData.append("Properties<span>" + JSON.stringify(data.characteristics[i].properties) + "</span>");
+		$eachData.clone().appendTo(this.$unpairedList).show();
 
-                self.$eachDevice.clone().appendTo(self.$pairedList).show();
+	}
 
-                self.$eachDevice.find('span.deviceAddress').html("");
-                self.$eachDevice.find('span.deviceClass').html("");
-                self.$eachDevice.find('span.deviceId').html("");
-                self.$eachDevice.find('span.deviceName').html("");
-            }
-            self.$status.html("Searching Complete");
-            self.runningOnSearch = false;
-        },
-        function(){
-            console.error("Search Device fail");
-        }
-    );
 };
 
-Bluetooth.prototype.isConnected = function(){
-    var self = this;
+Bluetooth.prototype.subscribe = function(data){
+	var self = this;
 
-    bluetoothSerial.isConnected(
-        function(data){
-            console.log("Device is connected");
-            console.log(data);
-            self.$status.html("Connected!");
-            self.receiveData();
-        },
-        function(){
+	bluetoothle.subscribe(
+		function(result){
+			if(result.status == "subscribed"){
+				self.$status.html("Subscribed to " + result.name);
+			}else if(result.status == "subscribedResult"){
+				self.$status.html("Received subscribed result " + result.value);
+				self.$receivedData.append("<div class='eachReceived'>" + result.status + ", " + result.value + " </div>");
+			}
 
-        }
-    )
+		},
+		function(result){
+			app.notification("Bluetooth Device", "Error on subscribe. " + result, null);
+
+		},{
+			address: data.address,
+			serviceUuid: self.serviceUuid,
+			characteristicUuid: self.notificationUuid,
+			isNotification: true
+
+		});
 };
 
-Bluetooth.prototype.receiveData = function(){
-// the success callback is called whenever data is received
-    bluetoothSerial.subscribe('\n', function (data) {
-        console.log(data);
-    }, failure);
-};
 
 new Bluetooth().init();

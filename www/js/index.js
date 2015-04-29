@@ -171,14 +171,12 @@ var app = {
 
     notification: function(title, message, callback, button){
         if(navigator.notification){
-            window.alert = function(){
                 navigator.notification.alert(
-                    title,
-                    callback,
                     message,
-                    button
-                )
-            }
+                    callback || null,
+										title,
+                    button || "OK"
+                );
         }
     },
 
