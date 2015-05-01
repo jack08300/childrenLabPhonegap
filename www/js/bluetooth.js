@@ -6,6 +6,9 @@ Bluetooth.prototype.init = function () {
 	this.deviceId = "1B85999A-A964-F738-79CE-49DBD019C503";
 	this.serviceUuid = "91C10EDC-8616-4CBF-BC79-0BF54ED2FA17";
 	this.notificationUuid = "09A44002-CD70-4B7A-B46F-CC4CDBAB1BB4";
+	this.storageDeviceName = "ConnectedDevice";
+	this.storageDataName = "ConnectedData";
+
 	document.addEventListener('deviceready', function () {
 		self.deviceReady();
 	}, false);
@@ -26,6 +29,7 @@ Bluetooth.prototype.deviceReady = function () {
 		right: false
 	});
 
+
 	this.attachEvent();
 
 };
@@ -33,19 +37,34 @@ Bluetooth.prototype.deviceReady = function () {
 Bluetooth.prototype.attachEvent = function () {
 	var self = this;
 
+
+	this.$searchDevice.on('click', function () {
+		self.searchDevice();
+	});
+
 	ble.isEnabled(
 		function(){
-			self.searchDevice();
+			ble.isConnected(self.deviceId,
+				function(){
+					if(!window.localStorage.getItem(self.storageDeviceName) || !window.localStorage.getItem(self.storageDataName)){
+						self.searchDevice();
+					}else{
+						self.displayDeviceList(JSON.parse(window.localStorage.getItem(self.storageDeviceName)));
+						self.displayServices(JSON.parse(window.localStorage.getItem(self.storageDataName)));
+					}
+				},
+				function(){
+					self.searchDevice();
+				}
+			);
+
+
 		},
 		function(){
 			self.enableBluetooth();
 		}
 	);
 
-
-	this.$searchDevice.on('click', function () {
-		self.searchDevice();
-	});
 
 
 };
@@ -156,6 +175,8 @@ Bluetooth.prototype.connect = function (device) {
 	ble.connect(device.id,
 		function (data) {
 			//success
+				window.localStorage.setItem(self.storageDeviceName, JSON.stringify(device));
+				window.localStorage.setItem(self.storageDataName, JSON.stringify(data));
 				self.$status.html("Connected to " + device.name);
 				self.displayServices(data);
 		},
