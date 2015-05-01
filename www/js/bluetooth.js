@@ -17,11 +17,9 @@ Bluetooth.prototype.deviceReady = function () {
 	this.$bluetoothStatus = $('span.bluetoothStatus');
 	this.$status = $('span.status');
 	this.$eachDevice = $('div.eachDevice');
-	this.$deviceList = $('div.deviceList');
-	this.$unpairedList = $('div.list', this.$deviceList);
-	this.$paredDevice = $('div.pairedDevice');
-	this.$receivedData = $('div.receivedData');
-	this.$pairedList = $('div.list', this.$paredDevice);
+	this.$allList = $('div.list');
+	this.$unpairedList = $('div.deviceList', this.$allList);
+	this.$serviceList = $('div.serviceList', this.$allList);
 
 	app.addTopNavigater({
 		left: true,
@@ -186,7 +184,7 @@ Bluetooth.prototype.displayServices = function (data) {
 		$eachData.find('span.characterProperties').html(JSON.stringify(data.characteristics[i].properties));
 		$eachData.find('span.characterServices').html(data.characteristics[i].service);
 		$eachData.find('span.descriptors').html(JSON.stringify(data.characteristics[i].descriptors));
-		var $deviceData = $eachData.find('span.devicedata');
+
 
 		$readButton.on('click', function () {
 			self.$status.html("Reading... " + $(this).attr("id"), $(this).attr("serviceId"), $(this).attr("characterId"));
@@ -197,12 +195,31 @@ Bluetooth.prototype.displayServices = function (data) {
 				dataReceive: $(this).parent().parent().find('span.devicedata')
 			});
 		});
+
 		$notifyButton.on('click', function () {
-			self.$status.html("Notifying... " + $(this).attr("id"), $(this).attr("serviceId"), $(this).attr("characterId"));
-			self.notify($(this));
+			if($(this).html() == "NOTIFY OFF"){
+				self.$status.html("Notifying... " + $(this).attr("id"), $(this).attr("serviceId"), $(this).attr("characterId"));
+				$(this).html("NOTIFY ON");
+				self.notify({
+					deviceId: $(this).attr("deviceId"),
+					serviceId: $(this).attr("serviceId"),
+					characterId: $(this).attr("characterId"),
+					dataReceive: $(this).parent().parent().find('span.devicedata')
+				});
+			}else{
+				self.$status.html("Stop Notifying..." + $(this).attr("id"), $(this).attr("serviceId"), $(this).attr("characterId"));
+				self.stopNotify({
+					deviceId: $(this).attr("deviceId"),
+					serviceId: $(this).attr("serviceId"),
+					characterId: $(this).attr("characterId"),
+					dataReceive: $(this).parent().parent().find('span.devicedata'),
+					$button: $(this)
+				});
+			}
+
 		});
 
-		$eachData.clone(true).appendTo(this.$unpairedList).show();
+		$eachData.clone(true).appendTo(this.$serviceList).show();
 
 
 	}
@@ -217,7 +234,7 @@ Bluetooth.prototype.read = function (oArgs) {
 	ble.read(oArgs.deviceId, oArgs.serviceId, oArgs.characterId,
 		function(data){
 			var int = new Uint8Array(data);
-			self.$status.html(self.$status.html() + int[0]);
+			//self.$status.html(self.$status.html() + int[0]);
 
 			for(var i=0;i<int.length;i++){
 				oArgs.dataReceive.append("<br/>" + "Read: " + int[i]);
@@ -238,7 +255,7 @@ Bluetooth.prototype.notify = function (oArgs) {
 	ble.startNotification(oArgs.deviceId, oArgs.serviceId, oArgs.characterId,
 		function(data){
 			var int = new Uint8Array(data);
-			self.$status.html(self.$status.html() + int[0]);
+			//self.$status.html(self.$status.html() + int[0]);
 
 			for(var i=0;i<int.length;i++){
 				oArgs.dataReceive.append("<br/>Notified: " + int[i]);
@@ -246,6 +263,20 @@ Bluetooth.prototype.notify = function (oArgs) {
 		},
 		function(error){
 			self.$status.html("Fail to Notifying. " + JSON.stringify(error));
+		}
+	)
+};
+
+Bluetooth.prototype.stopNotify = function (oArgs) {
+	var self = this;
+	oArgs = oArgs || {};
+
+	ble.stopNotification(oArgs.deviceId, oArgs.serviceId, oArgs.characterId,
+		function(){
+			oArgs.$button.html("NOTIFY OFF");
+		},
+		function(error){
+			self.$status.html("Fail to Stop Notify. " + JSON.stringify(error));
 		}
 	)
 };
