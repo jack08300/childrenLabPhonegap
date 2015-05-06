@@ -30,5 +30,12 @@
             "url": "https://github.com/don/cordova-plugin-ble-central.git",
             "subdir": "."
         }
+    },
+    "nl.x-services.plugins.calendar": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Telerik-Verified-Plugins/Calendar",
+            "subdir": "."
+        }
     }
 }

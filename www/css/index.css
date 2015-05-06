@@ -30,7 +30,7 @@ body {
     font-size:14px;
     height:100%;
     margin:0px;
-    padding:0px;
+    padding:10px;
     text-transform:uppercase;
     width:100%;
 }
@@ -208,4 +208,28 @@ div.template {
 
 div.bluetooth div.container {
     color: #2EB8B8;
+}
+
+div.loginOption div.options div.option {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+div.loginOption div.options div.option div.ruleText {
+    position: relative;
+    top: 39%;
+    color: #424242;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+div.loginOption div.options div.option.parent {
+    float: left;
+    background-color: #01DF74;
+}
+
+div.loginOption div.options div.option.nanny {
+    float: right;
+    background-color: #01A9DB;
 }

@@ -22,6 +22,7 @@ var app = {
         serverBase: "http://www.childrenLab.com",
         signInAPI: "/api/login",
         mainMenu: "pages/mainMenu.html",
+				ruleMenu: "loginOption.html",
         validateTokenAPI: "/test/token",
         connectAPI: "/connect/device",
         tokenName: "x-auth-token"
@@ -135,7 +136,7 @@ var app = {
             window.localStorage.setItem("token", data.access_token);
             window.localStorage.setItem("email", data.username);
 
-            window.location = app.setting.mainMenu;
+            window.location = app.setting.ruleMenu;
         }else{
             window.location="index.html";
             app.receivedEvent('deviceready');
@@ -156,7 +157,7 @@ var app = {
     validateToken_load: function(data){
             console.log(data);
             if(data.success){
-                window.location = app.setting.mainMenu;
+                window.location = app.setting.ruleMenu;
             }
     },
 
