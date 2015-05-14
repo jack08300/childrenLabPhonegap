@@ -17,13 +17,6 @@
             "id": "org.apache.cordova.device"
         }
     },
-    "com.randdusing.bluetoothle": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/randdusing/BluetoothLE",
-            "subdir": "."
-        }
-    },
     "com.megster.cordova.ble": {
         "source": {
             "type": "git",
@@ -35,6 +28,27 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Telerik-Verified-Plugins/Calendar",
+            "subdir": "."
+        }
+    },
+    "com.plugin.datepicker": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/VitaliiBlagodir/cordova-plugin-datepicker",
+            "subdir": "."
+        }
+    },
+    "com.telerik.plugins.nativepagetransitions": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Telerik-Verified-Plugins/NativePageTransitions",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-splashscreen": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/apache/cordova-plugin-splashscreen.git",
             "subdir": "."
         }
     }

@@ -18,6 +18,12 @@
                             "xml": true,
                             "count": 1
                         }
+                    ],
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -37,6 +43,14 @@
                         {
                             "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"DatePicker\"><param name=\"ios-package\" value=\"DatePicker\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -51,6 +65,12 @@
             "PACKAGE_NAME": "com.childrenLab"
         },
         "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "com.plugin.datepicker": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.childrenLab"
         }
     },

@@ -24,14 +24,14 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#303030;
+    background-color: #ffffff;
 
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:14px;
     height:100%;
     margin:0px;
-    padding:10px;
-    text-transform:uppercase;
+    padding:0px;
+    //text-transform:uppercase;
     width:100%;
 }
 
@@ -43,7 +43,7 @@ input {
 .app {
     position:absolute;              /*position in the center of the screen*/
     left:50%;
-    top:50%;
+    top:30%;
     height:50px;                    /*text area height*/
     width:225px;                    /*text area width*/
     text-align:center;
@@ -66,7 +66,7 @@ input {
 
 h1 {
     font-size:24px;
-    font-weight:normal;
+    font-weight:bold;
     margin:0px;
     overflow:visible;
     padding:0px;
@@ -96,6 +96,22 @@ h1 {
     display:none;
 }
 
+.fleft {
+    float: left;
+}
+
+div.separateLine hr {
+    width: 42%;
+}
+
+div.separateLine hr.leftHr {
+    margin: 10px 5px 10px 0px;
+}
+
+div.separateLine hr.rightHr {
+    margin: 10px 0px 10px 5px;
+}
+
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
@@ -109,12 +125,16 @@ h1 {
 }
 
 div.navigater {
-    height: 50px;
-    color: #2EB8B8;
-    font-size: 32px;
-    margin: 5px 20px 5px 20px;
+    height: 35px;
+    color: darkgrey;
+    font-size: 24px;
+    background-color: lightgrey;
+    margin-top: 18px;
 }
 
+div.navigater > div {
+    margin-left: 5px;
+}
 div.navigater div.left { float: left; }
 div.navigater div.right { float: right; }
 
@@ -128,8 +148,8 @@ div.navigater div.right { float: right; }
 }
 
 .mainTitle {
-    color: #2EB8B8;
     font-weight: bold;
+    color: black;
     margin:20px;
 }
 
@@ -144,10 +164,18 @@ div.navigater div.right { float: right; }
 .mainEdit input{
     border: none;
     margin-bottom: 10px;
-    padding: 10px;
-    background-color: #303030;
+    background-color: white;
     border-bottom: solid 1px black;
-    color: #2EB8B8;
+    padding: 10px 0px 5px 5px;
+    width: 100%;
+}
+
+.mainRadio input {
+    border: none;
+    margin-bottom: 10px;
+    background-color: white;
+    border-bottom: solid 1px black;
+    padding: 10px 0px 5px 5px;
 }
 
 *:focus{
@@ -155,17 +183,33 @@ div.navigater div.right { float: right; }
 }
 
 .mainButton {
-    background-color: #2EB8B8;
-    display: inline-block;
+    background-color: black;
     padding: 5px;
     margin: 15px 0 15px 0;
     border-radius: 3px;
-    cursor: pointer;
+    color: white;
+}
+
+.secondaryButton {
+    background-color: white;
+    padding: 5px;
+    margin: 15px 0 15px 0;
+    border-radius: 3px;
     color: black;
+    border: 1px solid black;
 }
 
 .buttons {
     float: left;
+}
+
+div.signInButtons{
+    position: relative;
+    margin-top: 35px;
+}
+
+div.signInButton, div.facebookButton {
+    margin-bottom: -8px;
 }
 
 div.devicedata {
@@ -180,17 +224,20 @@ div.signUpText{
 
 #deviceready {
     text-align: center;
+    width: 100%;
 }
 div.login {
     display: inline-block;
+    width: 100%;
+
 }
 
 div.signUpPage {
-    margin:-236px 0px 0px -112px;
+    margin:-100px 0px 0px -112px;
 }
 
 div.mainError {
-    color: #ABE3E3;
+    color: palevioletred;
     font-size: 14px;
 }
 
@@ -210,10 +257,35 @@ div.bluetooth div.container {
     color: #2EB8B8;
 }
 
-div.loginOption div.options div.option {
-    border-radius: 50%;
+body.ruleOption {
+    background-color: black;
+}
+
+div.wrap {
+    border: 2px solid rgba(255, 255, 255, .5);
     height: 100px;
     width: 100px;
+    border-radius: 50%;
+}
+
+div.app.loginOption {
+    margin: 0px 0px 0px -112px;
+    top: 39%;
+}
+
+div.loginOption div.options div.option {
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    position: relative;
+    left: 5px;
+    top: 5px;
+}
+
+div.forgotpass {
+    position: relative;
+    font-size: 9px;
+    text-align: right;
 }
 
 div.loginOption div.options div.option div.ruleText {
@@ -224,12 +296,47 @@ div.loginOption div.options div.option div.ruleText {
     font-weight: bold;
 }
 
-div.loginOption div.options div.option.parent {
-    float: left;
-    background-color: #01DF74;
+div.loginOption div.options div.option {
+    background-color: white;
 }
 
-div.loginOption div.options div.option.nanny {
+div.loginOption div.options div.wrap.parent {
+    float: left;
+
+}
+
+div.loginOption div.options div.wrap.nanny {
     float: right;
-    background-color: #01A9DB;
+}
+
+div.inputBox {
+    background-color: white;
+    border-radius: 5px;
+}
+
+div.scheduleMenu {
+    padding: 10px;
+}
+
+div.closeBox {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 100px;
+    height: 150px;
+}
+
+/** Dailog **/
+div.dialog {
+    display: none;
+    position: absolute;
+    top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+}
+
+div.form div{
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

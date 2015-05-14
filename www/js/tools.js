@@ -19,4 +19,3 @@ Tools.prototype.ajax = function(params, oArgs){
         success: params.callback
     });
 };
-
