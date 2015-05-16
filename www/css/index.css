@@ -17,326 +17,313 @@
  * under the License.
  */
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
-}
+  -webkit-tap-highlight-color: transparent;
+  /* make transparent link selection, adjust last value opacity 0 to 1.0 */ }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color: #ffffff;
-
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:14px;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    //text-transform:uppercase;
-    width:100%;
-}
+  -webkit-touch-callout: none;
+  /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;
+  /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;
+  /* prevent copy paste, to allow, change 'none' to 'text' */
+  background-color: #ffffff;
+  font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  width: 100%; }
 
 input {
-    font-size: 14px;
-}
+  font-size: 14px; }
 
 /* Portrait layout (default) */
 .app {
-    position:absolute;              /*position in the center of the screen*/
-    left:50%;
-    top:30%;
-    height:50px;                    /*text area height*/
-    width:225px;                    /*text area width*/
-    text-align:center;
-    /* padding:180px 0px 0px 0px;      image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;   /*offset vertical: half of image height and text area height*/
-                                    /*offset horizontal: half of text area width*/
-
-
-}
+  position: absolute;
+  /*position in the center of the screen*/
+  left: 50%;
+  top: 30%;
+  height: 50px;
+  /*text area height*/
+  width: 225px;
+  /*text area width*/
+  text-align: center;
+  /* padding:180px 0px 0px 0px;      image height is 200px (bottom 20px are overlapped with text) */
+  margin: -115px 0px 0px -112px;
+  /*offset vertical: half of image height and text area height*/
+  /*offset horizontal: half of text area width*/ }
 
 /* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-        background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
-    }
-}
+@media screen and (min-aspect-ratio: 1/1) and (min-width: 400px) {
+  .app {
+    background-position: left center;
+    padding: 75px 0px 75px 170px;
+    /* padding-top + padding-bottom + text area = image height */
+    margin: -90px 0px 0px -198px;
+    /* offset vertical: half of image height */
+    /* offset horizontal: half of image width and text area width */ } }
 
 h1 {
-    font-size:24px;
-    font-weight:bold;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
-}
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0px;
+  overflow: visible;
+  padding: 0px;
+  text-align: center; }
 
 .none {
-    display: none;
-}
+  display: none; }
 
 .event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
-}
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  color: #FFFFFF;
+  font-size: 12px;
+  margin: 0px 30px;
+  padding: 2px 0px; }
 
 .event.listening {
-    background-color:#333333;
-    display:block;
-}
+  background-color: #333333;
+  display: block; }
 
 .event.received {
-    background-color:#4B946A;
-    display:none;
-}
+  background-color: #4B946A;
+  display: none; }
 
 .fleft {
-    float: left;
-}
+  float: left; }
 
-div.separateLine hr {
-    width: 42%;
-}
-
-div.separateLine hr.leftHr {
-    margin: 10px 5px 10px 0px;
-}
-
-div.separateLine hr.rightHr {
-    margin: 10px 0px 10px 5px;
-}
+.fright {
+  float: right; }
 
 @keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
- 
+  from {
+    opacity: 1.0; }
+  50% {
+    opacity: 0.4; }
+  to {
+    opacity: 1.0; } }
+
 @-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
-
-div.navigater {
-    height: 35px;
-    color: darkgrey;
-    font-size: 24px;
-    background-color: lightgrey;
-    margin-top: 18px;
-}
-
-div.navigater > div {
-    margin-left: 5px;
-}
-div.navigater div.left { float: left; }
-div.navigater div.right { float: right; }
+  from {
+    opacity: 1.0; }
+  50% {
+    opacity: 0.4; }
+  to {
+    opacity: 1.0; } }
 
 .blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
-}
+  animation: fade 3000ms infinite;
+  -webkit-animation: fade 3000ms infinite; }
+
+div.navigater {
+  height: 35px;
+  color: darkgrey;
+  font-size: 24px;
+  background-color: lightgrey;
+  margin-top: 18px; }
+  div.navigater > div {
+    margin-left: 5px; }
+  div.navigater div.left {
+    float: left; }
+  div.navigater div.right {
+    float: right; }
 
 .close {
-    clear: both;
-}
+  clear: both; }
 
 .mainTitle {
-    font-weight: bold;
-    color: black;
-    margin:20px;
-}
+  font-weight: bold;
+  color: black;
+  margin: 20px; }
 
 .mainText {
-    color: #2EB8B8;
-}
+  color: #2EB8B8; }
 
-.mainEdit label{
-    color: #2EB8B8;
-}
+.mainEdit label {
+  color: #2EB8B8; }
 
-.mainEdit input{
-    border: none;
-    margin-bottom: 10px;
-    background-color: white;
-    border-bottom: solid 1px black;
-    padding: 10px 0px 5px 5px;
-    width: 100%;
-}
+.mainEdit input {
+  border: none;
+  margin-bottom: 10px;
+  background-color: white;
+  border-bottom: solid 1px black;
+  padding: 10px 0px 5px 5px;
+  width: 100%; }
 
 .mainRadio input {
-    border: none;
-    margin-bottom: 10px;
-    background-color: white;
-    border-bottom: solid 1px black;
-    padding: 10px 0px 5px 5px;
-}
+  border: none;
+  margin-bottom: 10px;
+  background-color: white;
+  border-bottom: solid 1px black;
+  padding: 10px 0px 5px 5px; }
 
-*:focus{
-    outline: 0;
-}
+*:focus {
+  outline: 0; }
 
 .mainButton {
-    background-color: black;
-    padding: 5px;
-    margin: 15px 0 15px 0;
-    border-radius: 3px;
-    color: white;
-}
+  background-color: black;
+  padding: 5px;
+  margin: 15px 0 15px 0;
+  border-radius: 3px;
+  color: white; }
 
 .secondaryButton {
-    background-color: white;
-    padding: 5px;
-    margin: 15px 0 15px 0;
-    border-radius: 3px;
-    color: black;
-    border: 1px solid black;
-}
+  background-color: white;
+  padding: 5px;
+  margin: 15px 0 15px 0;
+  border-radius: 3px;
+  color: black;
+  border: 1px solid black; }
 
 .buttons {
-    float: left;
-}
+  float: left; }
 
-div.signInButtons{
-    position: relative;
-    margin-top: 35px;
-}
+div.inputBox {
+  background-color: white;
+  border-radius: 5px; }
 
-div.signInButton, div.facebookButton {
-    margin-bottom: -8px;
-}
+div.scheduleMenu {
+  padding: 10px; }
+
+div.closeBox {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 100px;
+  height: 150px; }
 
 div.devicedata {
-    display: none;
-    height: 90px;
-    overflow-y: auto;
-}
-
-div.signUpText{
-    font-size: 14px;
-}
+  display: none;
+  height: 90px;
+  overflow-y: auto; }
 
 #deviceready {
-    text-align: center;
-    width: 100%;
-}
-div.login {
-    display: inline-block;
-    width: 100%;
-
-}
+  text-align: center;
+  width: 100%; }
 
 div.signUpPage {
-    margin:-100px 0px 0px -112px;
-}
+  margin: -100px 0px 0px -112px; }
 
 div.mainError {
-    color: palevioletred;
-    font-size: 14px;
-}
+  color: palevioletred;
+  font-size: 14px; }
 
 div.template {
-    display: inline-block;
-    display: none;
-    border: 1px solid #ABE3E3;
-    margin: 10px 5px;
-    padding: 5px;
-    color: #2EB8B8;
-    line-height: 28px;
-}
-
-
+  display: inline-block;
+  display: none; }
 
 div.bluetooth div.container {
-    color: #2EB8B8;
-}
+  color: #2EB8B8; }
 
 body.ruleOption {
-    background-color: black;
-}
+  background-color: black; }
 
 div.wrap {
-    border: 2px solid rgba(255, 255, 255, .5);
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-}
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  height: 100px;
+  width: 100px;
+  border-radius: 50%; }
 
+/** Dailog **/
+div.dialog {
+  display: none;
+  position: absolute;
+  top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%; }
+
+div.form div {
+  margin-top: 5px;
+  margin-bottom: 5px; }
+
+/************ login page ***************/
+div.app.loginPage div.separateLine hr {
+  width: 42%; }
+  div.app.loginPage div.separateLine hr.leftHr {
+    margin: 10px 5px 10px 0px; }
+  div.app.loginPage div.separateLine hr.rightHr {
+    margin: 10px 0px 10px 5px; }
+
+div.app.loginPage div.signInButtons {
+  position: relative;
+  margin-top: 35px; }
+  div.app.loginPage div.signInButtons div.facebookButton {
+    margin-bottom: -8px; }
+  div.app.loginPage div.signInButtons div.signUpText {
+    font-size: 14px; }
+
+div.app.loginPage div.login {
+  display: inline-block;
+  width: 100%; }
+
+div.app.loginPage div.forgotpass {
+  position: relative;
+  font-size: 9px;
+  text-align: right; }
+
+/************ Login Option Page ***************/
 div.app.loginOption {
-    margin: 0px 0px 0px -112px;
-    top: 39%;
-}
-
-div.loginOption div.options div.option {
+  margin: 0px 0px 0px -112px;
+  top: 39%; }
+  div.app.loginOption div.options div.option {
     border-radius: 50%;
     height: 90px;
     width: 90px;
     position: relative;
     left: 5px;
     top: 5px;
-}
-
-div.forgotpass {
-    position: relative;
-    font-size: 9px;
-    text-align: right;
-}
-
-div.loginOption div.options div.option div.ruleText {
+    background-color: white; }
+  div.app.loginOption div.options div.ruleText {
     position: relative;
     top: 39%;
     color: #424242;
     font-size: 18px;
-    font-weight: bold;
-}
+    font-weight: bold; }
+  div.app.loginOption div.options div.wrap.parent {
+    float: left; }
+  div.app.loginOption div.options div.wrap.nanny {
+    float: right; }
 
-div.loginOption div.options div.option {
-    background-color: white;
-}
+/*************** Header ****************/
+div.header {
+  height: 35px;
+  background-color: #00aeef;
+  padding-top: 20px; }
+  div.header div.mainMenuButton {
+    position: relative;
+    width: 35px;
+    padding-top: 10px; }
+    div.header div.mainMenuButton div.whiteLine {
+      background-color: white;
+      width: 100%;
+      height: 3px;
+      margin-left: 10px;
+      margin-bottom: 3px; }
 
-div.loginOption div.options div.wrap.parent {
-    float: left;
+div.placeholder {
+  width: 100%;
+  text-align: center; }
+  div.placeholder.map {
+    height: 180px;
+    background-color: gainsboro; }
 
-}
-
-div.loginOption div.options div.wrap.nanny {
-    float: right;
-}
-
-div.inputBox {
-    background-color: white;
-    border-radius: 5px;
-}
-
-div.scheduleMenu {
-    padding: 10px;
-}
-
-div.closeBox {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 100px;
-    height: 150px;
-}
-
-/** Dailog **/
-div.dialog {
-    display: none;
-    position: absolute;
-    top: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
-    width: 100%;
-}
-
-div.form div{
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
+/*************** Device List ****************/
+div.deviceList div.eachDevice {
+  padding: 10px;
+  margin: 5px;
+  font-size: 12px;
+  line-height: 20px; }
+  div.deviceList div.eachDevice div.deviceIcon {
+    height: 60px;
+    background-color: gray;
+    width: 40px;
+    margin: 4px; }
+  div.deviceList div.eachDevice div.deviceInfo {
+    position: relative;
+    left: 50px; }
+  div.deviceList div.eachDevice div.battery {
+    position: relative;
+    top: 20px; }

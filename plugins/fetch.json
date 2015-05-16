@@ -51,5 +51,11 @@
             "url": "https://github.com/apache/cordova-plugin-splashscreen.git",
             "subdir": "."
         }
+    },
+    "org.apache.cordova.geolocation": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.geolocation"
+        }
     }
 }

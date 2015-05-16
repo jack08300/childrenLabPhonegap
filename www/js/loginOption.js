@@ -27,7 +27,7 @@ LoginOptions.prototype.attachEvent = function() {
 };
 
 LoginOptions.prototype.moveToMenuPage = function(){
-	window.location = app.setting.mainMenu;
+	window.location = app.setting.home;
 };
 
 new LoginOptions().init();

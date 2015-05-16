@@ -1,34 +1,28 @@
 var Bluetooth = function () {
 };
 
-Bluetooth.prototype.init = function () {
-	var self = this;
+Bluetooth.prototype.init = function (oArgs) {
+	oArgs = oArgs || {};
+
+
 	this.deviceId = "1B85999A-A964-F738-79CE-49DBD019C503";
 	this.serviceUuid = "91C10EDC-8616-4CBF-BC79-0BF54ED2FA17";
 	this.notificationUuid = "09A44002-CD70-4B7A-B46F-CC4CDBAB1BB4";
 	this.storageDeviceName = "ConnectedDevice";
 	this.storageDataName = "ConnectedData";
 
-	document.addEventListener('deviceready', function () {
-		self.deviceReady();
-	}, false);
-};
+	this.$eachDevice = oArgs.$template;
+	this.$deviceList = oArgs.$deviceList;
 
-Bluetooth.prototype.deviceReady = function () {
-	var self = this;
-	this.$searchDevice = $('div.searchDevice');
+
+
+/*	this.$searchDevice = $('div.searchDevice');
 	this.$bluetoothStatus = $('span.bluetoothStatus');
 	this.$status = $('span.status');
 	this.$eachDevice = $('div.eachDevice');
 	this.$allList = $('div.list');
 	this.$unpairedList = $('div.deviceList', this.$allList);
-	this.$serviceList = $('div.serviceList', this.$allList);
-
-	app.addTopNavigater({
-		left: true,
-		right: false
-	});
-
+	this.$serviceList = $('div.serviceList', this.$allList);*/
 
 	this.attachEvent();
 
@@ -38,11 +32,9 @@ Bluetooth.prototype.attachEvent = function () {
 	var self = this;
 
 
-	this.$searchDevice.on('click', function () {
-		self.searchDevice();
-	});
+	self.searchDevice();
 
-	ble.isEnabled(
+/*	ble.isEnabled(
 		function(){
 			ble.isConnected(self.deviceId,
 				function(){
@@ -63,7 +55,7 @@ Bluetooth.prototype.attachEvent = function () {
 		function(){
 			self.enableBluetooth();
 		}
-	);
+	);*/
 
 
 
@@ -85,10 +77,10 @@ Bluetooth.prototype.enableBluetooth = function () {
 
 Bluetooth.prototype.searchDevice = function () {
 	var self = this;
-	self.$bluetoothStatus.html("ON");
+	//self.$bluetoothStatus.html("ON");
 	self.runningOnSearch = true;
-	self.$unpairedList.empty();
-	self.$status.html("Scanning...");
+	this.$deviceList.empty();
+	//self.$status.html("Scanning...");
 
 	ble.startScan([self.serviceUuid],
 		function (device) {
@@ -119,26 +111,28 @@ Bluetooth.prototype.displayDeviceList = function (data) {
 
 	var exist = false;
 	for (var i = 0; i < this.deviceList.length; i++) {
-		if (this.deviceList[i].id == data.id) {
+		if (this.deviceList[i].data.id == data.id) {
 			exist = true;
 			break;
 		}
 	}
 
 	if (!exist) {
-		this.$eachDevice.attr("id", data.id);
-		this.$eachDevice.find('span.deviceAddress').html(data.id);
-		this.$eachDevice.find('span.deviceName').html(data.name);
-		this.$eachDevice.find('span.advertisement').html(data.advertising);
-		this.$eachDevice.find('span.deviceRssi').html(data.rssi);
-		this.$eachDevice.on("click", "div.pairButton", function () {
+		//this.$eachDevice.attr("id", data.id);
+		//this.$eachDevice.find('span.deviceAddress').html(data.id);
+		this.$eachDevice.find('div.name').html(data.name);
+		this.$eachDevice.find('div.status').html("Connecting...");
+		//this.$eachDevice.find('span.advertisement').html(data.advertising);
+		//this.$eachDevice.find('span.deviceRssi').html(data.rssi);
+/*		this.$eachDevice.on("click", "div.pairButton", function () {
 			self.isConnected(data);
 		});
 		this.$eachDevice.on("click", "div.disconnectButton", function () {
 			self.disconnect(data.id);
-		});
+		});*/
 
-		this.$eachDevice.clone(true).appendTo(this.$unpairedList).attr("address", data.address).show();
+		var $device = this.$eachDevice.clone(true).appendTo(this.$deviceList);
+		$device.attr("address", data.address).show();
 
 
 
@@ -147,42 +141,48 @@ Bluetooth.prototype.displayDeviceList = function (data) {
 		this.$eachDevice.find('span.deviceId').html("");
 		this.$eachDevice.find('span.deviceName').html("");
 
-		this.deviceList.push(data);
+		this.deviceList.push({
+			data: data,
+			$device: $device
+		});
+
+		this.isConnected(data, $device);
 
 		self.disableSearch();
 	}else{
-		$('#' + data.id).find('span.deviceRssi').html(data.rssi);
+		//$('#' + data.id).find('span.deviceRssi').html(data.rssi);
 	}
 
 };
 
-Bluetooth.prototype.isConnected = function (device) {
+Bluetooth.prototype.isConnected = function (device, $device) {
 	var self = this;
 	ble.isConnected(device.id,
 		function (data) {
-				self.$status.html("Connected to: " + JSON.stringify(data));
+				//self.$status.html("Connected to: " + JSON.stringify(data));
+			$device.find('div.status').html("Connected");
 		},
 		function(){
-			self.connect(device);
+			self.connect(device, $device);
 		}
 	)
 };
 
-Bluetooth.prototype.connect = function (device) {
+Bluetooth.prototype.connect = function (device, $device) {
 	var self = this;
 	console.log("connecting");
-	self.$status.html("Connecting to " + device.name);
+	$device.find('div.status').html("Connecting to " + device.name);
 	ble.connect(device.id,
 		function (data) {
 			//success
 				window.localStorage.setItem(self.storageDeviceName, JSON.stringify(device));
 				window.localStorage.setItem(self.storageDataName, JSON.stringify(data));
-				self.$status.html("Connected to " + device.name);
-				self.displayServices(data);
+				$device.find('div.status').html("Connected");
+				//self.displayServices(data);
 		},
 		function () {
 			//fail
-			self.$status.html("Fail Connected to " + device.name);
+			$device.find('div.status').html("Fail to connect");
 		}
 	)
 };
@@ -316,5 +316,3 @@ Bluetooth.prototype.disconnect = function (deviceId) {
 };
 
 
-
-new Bluetooth().init();

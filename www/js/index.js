@@ -21,7 +21,7 @@ var app = {
 	setting: {
 		serverBase: "http://www.childrenLab.com",
 
-		mainMenu: "pages/mainMenu.html",
+		home: "pages/home.html",
 		ruleMenu: "loginOption.html",
 		tokenName: "x-auth-token",
 
@@ -211,6 +211,19 @@ var app = {
 		this.$navigater.on('click', 'div.left', function () {
 			console.log("You got left");
 			history.go(-1);
+		});
+
+		$('body').prepend(this.$navigater);
+	},
+
+	addHeader: function (oArgs) {
+		oArgs = oArgs || {};
+		this.$navigater = $('<div class="header"></div>');
+		this.$mainMenuButton = $('<div class="mainMenuButton"><div class="whiteLine"></div><div class="whiteLine"></div><div class="whiteLine"></div></div>');
+		this.$navigater.append(this.$mainMenuButton);
+
+		this.$navigater.on('click', 'div.mainMenuButton', function () {
+			alert("clcked on main menu");
 		});
 
 		$('body').prepend(this.$navigater);
