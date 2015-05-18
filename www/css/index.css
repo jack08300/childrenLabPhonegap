@@ -194,11 +194,6 @@ div.closeBox {
   width: 100px;
   height: 150px; }
 
-div.devicedata {
-  display: none;
-  height: 90px;
-  overflow-y: auto; }
-
 #deviceready {
   text-align: center;
   width: 100%; }
@@ -295,7 +290,7 @@ div.header {
   div.header div.mainMenuButton {
     position: relative;
     width: 35px;
-    padding-top: 10px; }
+    padding-top: .9em; }
     div.header div.mainMenuButton div.whiteLine {
       background-color: white;
       width: 100%;
@@ -315,7 +310,10 @@ div.deviceList div.eachDevice {
   padding: 10px;
   margin: 5px;
   font-size: 12px;
-  line-height: 20px; }
+  line-height: 20px;
+  color: black; }
+  div.deviceList div.eachDevice a {
+    color: black; }
   div.deviceList div.eachDevice div.deviceIcon {
     height: 60px;
     background-color: gray;
@@ -327,3 +325,71 @@ div.deviceList div.eachDevice {
   div.deviceList div.eachDevice div.battery {
     position: relative;
     top: 20px; }
+
+/******************* Bluetooth *************/
+div.eachCharacter {
+  color: white;
+  margin: 10px; }
+  div.eachCharacter div.devicedata {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: 5px solid rgba(0, 0, 0, 0.7);
+    text-align: center;
+    font-size: 25px;
+    transition: border-color 1.5s; }
+    div.eachCharacter div.devicedata span {
+      position: relative;
+      top: 18px; }
+
+.ui-panel-wrapper {
+  min-height: 0; }
+
+.ui-content {
+  padding: 0; }
+
+.ui-panel-inner {
+  padding: 0; }
+
+a:link {
+  text-shadow: none;
+  color: #000000; }
+
+a:visited {
+  color: #000000; }
+
+a:hover {
+  color: #000000; }
+
+a:active {
+  color: #000000; }
+
+#deviceDetail {
+  background-color: #58585a; }
+
+/***************** Main Menu **************/
+#menuPanel {
+  background-color: #58585a;
+  color: white;
+  text-shadow: none;
+  line-height: 25px; }
+  #menuPanel div.menuHeader {
+    background-color: #6d6e71;
+    height: 13em;
+    text-align: center; }
+    #menuPanel div.menuHeader div.container {
+      display: inline-block;
+      padding-top: 2em; }
+      #menuPanel div.menuHeader div.container div.head {
+        width: 6em;
+        height: 6em;
+        border-radius: 50%;
+        background-color: white;
+        display: inline-block; }
+      #menuPanel div.menuHeader div.container div.viewAccount {
+        font-size: 10px; }
+  #menuPanel div.options {
+    padding: 2em;
+    line-height: 35px; }
+    #menuPanel div.options div.option {
+      font-size: 15px; }

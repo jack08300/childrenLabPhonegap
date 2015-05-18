@@ -7,12 +7,20 @@ Bluetooth.prototype.init = function (oArgs) {
 
 	this.deviceId = "1B85999A-A964-F738-79CE-49DBD019C503";
 	this.serviceUuid = "91C10EDC-8616-4CBF-BC79-0BF54ED2FA17";
-	this.notificationUuid = "09A44002-CD70-4B7A-B46F-CC4CDBAB1BB4";
+
 	this.storageDeviceName = "ConnectedDevice";
 	this.storageDataName = "ConnectedData";
 
 	this.$eachDevice = oArgs.$template;
 	this.$deviceList = oArgs.$deviceList;
+
+	this.characteristicList = [{
+		name: "light Sensor",
+		uuid: "09A44002-CD70-4B7A-B46F-CC4CDBAB1BB4"
+	}, {
+		name: "Audio",
+		uuid: "1D1AD056-5B5F-4652-B1B6-82F5E9504D5C"
+	}];
 
 
 
@@ -135,12 +143,6 @@ Bluetooth.prototype.displayDeviceList = function (data) {
 		$device.attr("address", data.address).show();
 
 
-
-		this.$eachDevice.find('span.deviceAddress').html("");
-		this.$eachDevice.find('span.deviceClass').html("");
-		this.$eachDevice.find('span.deviceId').html("");
-		this.$eachDevice.find('span.deviceName').html("");
-
 		this.deviceList.push({
 			data: data,
 			$device: $device
@@ -187,27 +189,37 @@ Bluetooth.prototype.connect = function (device, $device) {
 	)
 };
 
-Bluetooth.prototype.displayServices = function (data) {
+Bluetooth.prototype.displayServices = function (data, oArgs) {
 	var self = this;
+	oArgs = oArgs || {};
 	var $eachData = $('div.eachCharacter');
 	for (var i = 0; i < data.characteristics.length; i++) {
-		if(data.characteristics[i].service == "180A"){
+		if(data.characteristics[i].characteristic.length < 16){
 			continue;
 		}
-		var $readButton = $eachData.find('div.readData');
-		var $notifyButton = $eachData.find('div.notifyData');
+/*		var $readButton = $eachData.find('div.readData');
+		var $notifyButton = $eachData.find('div.notifyData');*/
 
+/*
 		$readButton.attr("id", data.characteristics[i].characteristic).attr("deviceId", data.id).attr("serviceId", data.characteristics[i].service).attr("characterId", data.characteristics[i].characteristic);
 		$notifyButton.attr("id", data.characteristics[i].characteristic).attr("deviceId", data.id).attr("serviceId", data.characteristics[i].service).attr("characterId", data.characteristics[i].characteristic);
+*/
 
-		$eachData.find('span.deviceId').html(data.id);
+		//$eachData.find('span.deviceId').html(data.id);
+		$eachData.attr("id", "eachData_" + i);
 		$eachData.find('span.characterUuid').html(data.characteristics[i].characteristic);
-		$eachData.find('span.characterProperties').html(JSON.stringify(data.characteristics[i].properties));
-		$eachData.find('span.characterServices').html(data.characteristics[i].service);
-		$eachData.find('span.descriptors').html(JSON.stringify(data.characteristics[i].descriptors));
 
+		$.each(this.characteristicList, function(j, item) {
+			if(self.characteristicList[j].uuid == data.characteristics[i].characteristic){
+				$eachData.find('span.name').html(self.characteristicList[j].name);
+			}
+		});
 
-		$readButton.on('click', function () {
+		//$eachData.find('span.characterProperties').html(JSON.stringify(data.characteristics[i].properties));
+		//$eachData.find('span.characterServices').html(data.characteristics[i].service);
+		//$eachData.find('span.descriptors').html(JSON.stringify(data.characteristics[i].descriptors));
+
+/*		$readButton.on('click', function () {
 			self.$status.html("Reading... " + $(this).attr("id"), $(this).attr("serviceId"), $(this).attr("characterId"));
 			self.read({
 				deviceId: $(this).attr("deviceId"),
@@ -238,9 +250,21 @@ Bluetooth.prototype.displayServices = function (data) {
 				});
 			}
 
-		});
+		});*/
 
-		$eachData.clone(true).appendTo(this.$serviceList).show();
+		$eachData.clone(true).appendTo(oArgs.appendTo).show();
+
+		$eachData.find('span.name').html("");
+		$eachData.find('span.characterUuid').html("");
+		$eachData.find('div.devicedata').find('span').html("0");
+		$eachData.removeAttr("id");
+
+		self.notify({
+			deviceId: data.id,
+			serviceId: data.characteristics[i].service,
+			characterId: data.characteristics[i].characteristic,
+			dataReceive: $('#eachData_' + i).find('div.devicedata')
+		});
 
 
 	}
@@ -276,10 +300,9 @@ Bluetooth.prototype.notify = function (oArgs) {
 	ble.startNotification(oArgs.deviceId, oArgs.serviceId, oArgs.characterId,
 		function(data){
 			var int = new Uint8Array(data);
-			//self.$status.html(self.$status.html() + int[0]);
-
 			for(var i=0;i<int.length;i++){
-				oArgs.dataReceive.append("<br/>Notified: " + int[i]);
+				oArgs.dataReceive.find('span').html(int[i]);
+				oArgs.dataReceive.css("border-color", "rgba(" + int[i] + ", 0, 0, 0.7)");
 			}
 		},
 		function(error){

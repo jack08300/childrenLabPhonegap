@@ -229,11 +229,7 @@ div.closeBox {
 }
 
 
-div.devicedata {
-	display: none;
-	height: 90px;
-	overflow-y: auto;
-}
+
 
 #deviceready {
 	text-align: center;
@@ -368,7 +364,7 @@ div.header {
 	div.mainMenuButton{
 		position: relative;
 		width: 35px;
-		padding-top: 10px;
+		padding-top: .9em;
 
 		div.whiteLine {
 			background-color: white;
@@ -398,6 +394,11 @@ div.deviceList {
 		margin: 5px;
 		font-size: 12px;
 		line-height: 20px;
+		color: black;
+
+		a {
+			color: black;
+		}
 
 
 		div.deviceIcon {
@@ -418,6 +419,90 @@ div.deviceList {
 			top: 20px;
 		}
 	}
+}
+
+/******************* Bluetooth *************/
+div.eachCharacter {
+	color: white;
+	margin: 10px;
+
+	div.devicedata {
+		height: 70px;
+		width: 70px;
+		border-radius: 50%;
+		border: 5px solid rgba(0, 0, 0, 0.7);
+		text-align: center;
+		font-size: 25px;
+		transition: border-color 1.5s;
+
+		span {
+			position: relative;
+			top: 18px;
+		}
+	}
+}
 
 
+.ui-panel-wrapper {
+	min-height: 0;
+}
+
+.ui-content {
+	padding: 0;
+}
+
+.ui-panel-inner {
+	padding: 0;
+}
+
+a:link {
+	text-shadow: none;
+	color: #000000;
+}
+a:visited{ color: #000000; }
+a:hover{ color: #000000; }
+a:active{ color: #000000; }
+
+#deviceDetail {
+	background-color: #58585a;
+}
+
+/***************** Main Menu **************/
+#menuPanel {
+	background-color: #58585a;
+	color: white;
+	text-shadow: none;
+	line-height: 25px;
+
+	div.menuHeader {
+		background-color: #6d6e71;
+		height: 13em;
+		text-align: center;
+
+		div.container {
+			display: inline-block;
+			padding-top: 2em;
+
+			div.head {
+				width: 6em;
+				height: 6em;
+				border-radius: 50%;
+				background-color: white;
+				display: inline-block;
+			}
+
+			div.viewAccount {
+				font-size: 10px;
+			}
+		}
+	}
+
+	div.options {
+		padding: 2em;
+		line-height: 35px;
+
+		div.option {
+			font-size: 15px;
+		}
+	}
 }

@@ -143,7 +143,6 @@ var app = {
 	},
 
 	signIn_load: function (data) {
-		console.log(data);
 		data = data || {};
 
 		if (data.access_token) {
@@ -218,15 +217,23 @@ var app = {
 
 	addHeader: function (oArgs) {
 		oArgs = oArgs || {};
-		this.$navigater = $('<div class="header"></div>');
-		this.$mainMenuButton = $('<div class="mainMenuButton"><div class="whiteLine"></div><div class="whiteLine"></div><div class="whiteLine"></div></div>');
-		this.$navigater.append(this.$mainMenuButton);
+		this.$navigater = $('<div class="header" data-role="header" data-theme="none" role="header"></div>');
 
-		this.$navigater.on('click', 'div.mainMenuButton', function () {
-			alert("clcked on main menu");
-		});
+		if(oArgs.mainMenu){
+			this.$mainMenuButton = $('<div class="mainMenuButton"><div class="whiteLine"></div><div class="whiteLine"></div><div class="whiteLine"></div></div>');
+			this.$navigater.append(this.$mainMenuButton);
 
-		$('body').prepend(this.$navigater);
+			this.$navigater.on('click', 'div.mainMenuButton', function () {
+				var $menu = $("#menuPanel");
+				$menu.find('div.name').html(window.localStorage.getItem("email"));
+				$menu.panel("open");
+			});
+		}
+
+
+		$(oArgs.appendTo).prepend(this.$navigater);
+
+
 	}
 };
 

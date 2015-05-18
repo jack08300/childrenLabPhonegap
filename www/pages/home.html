@@ -1,18 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<meta name="format-detection" content="telephone=no" />
-	<meta name="msapplication-tap-highlight" content="no" />
+	<meta charset="utf-8"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="msapplication-tap-highlight" content="no"/>
 	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-	<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	<meta name="viewport"
+				content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
+	<link rel="stylesheet" type="text/css" href="../css/lib/jquery.mobile-1.4.5.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/index.css"/>
 	<title>ChildrenLab</title>
 </head>
 <body>
-<div class="mainMenu">
+<div class="mainMenu" data-role="page">
 
-	<div class="container">
+
+	<!-- Left Menu Slider -->
+	<div class="panel left" data-role="panel" data-position="left" data-display="push" id="menuPanel">
+		<div class="menuHeader">
+			<div class="container">
+				<div class="head"></div>
+				<div class="name">jack08300@hotmail.com</div>
+				<div class="viewAccount">View Account</div>
+			</div>
+		</div>
+
+		<div class="options">
+			<div class="option Home">Home</div>
+			<div class="option Schedules">Schedules</div>
+			<div class="option Nearby">Nearby</div>
+			<div class="option Payment">Payment</div>
+			<div class="option Setting">Setting</div>
+			<div class="option Help">Help</div>
+			<div class="option About">About</div>
+		</div>
+
+
+	</div>
+
+	<!-- Right Device Slider -->
+	<div class="panel right" data-role="panel" data-position="right" data-display="push" id="deviceDetail">
+
+	</div>
+
+	<div class="container" data-role="content">
+
 
 		<div class="placeholder map" id="map">
 			MAP
@@ -21,11 +53,14 @@
 		<div class="deviceList">
 
 		</div>
-	</div>
 
+
+	</div>
 </div>
 
+
 <div class="template eachDevice">
+
 	<div class="deviceIcon fleft">
 		Icon
 	</div>
@@ -45,16 +80,28 @@
 	<div class="battery fright">Battery Power</div>
 
 	<div class="close"></div>
-
 	<hr/>
 </div>
 
+<div class="eachCharacter">
+	Name: <span class="name"></span> <br/>
+	CharacterUuid: <span class="characterUuid"></span> <br/>
+
+	<div class="devicedata">
+		<span>0</span>
+	</div>
+</div>
+
+
 <script type="text/javascript" src="../cordova.js"></script>
 <script type="text/javascript" src="../js/lib/jquery-1.11.2.min.js"></script>
+
 <script type="text/javascript" src="../js/tools.js"></script>
 <script type="text/javascript" src="../js/index.js"></script>
 <script type="text/javascript" src="../js/bluetooth.js"></script>
 <script type="text/javascript" src="../js/home.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhd95fthy0wvx68Bn4W6Nz7rudhElsoFs&sensor=true"></script>
+<script type="text/javascript" src="../js/lib/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript"
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhd95fthy0wvx68Bn4W6Nz7rudhElsoFs&sensor=true"></script>
 </body>
 </html>

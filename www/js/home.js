@@ -1,11 +1,30 @@
 var Home = function () {
 };
 
+var gapReady = $.Deferred();
+var jqmReady = $.Deferred();
+
 Home.prototype.init = function () {
+	console.log("test");
 	var self = this;
 	document.addEventListener('deviceready', function () {
-		self.deviceReady();
+		//self.deviceReady();
+		gapReady.resolve();
 	}, false);
+
+	$(document).one("mobileinit", function(){
+		app.addHeader({
+			mainMenu: true,
+			appendTo: "div.mainMenu"
+		});
+
+		jqmReady.resolve();
+	});
+
+	$.when(gapReady, jqmReady).then(function(){
+		self.deviceReady();
+	});
+
 	//self.deviceReady();
 	//this.bluetooth = new Bluetooth().init();
 
@@ -16,13 +35,14 @@ Home.prototype.deviceReady = function () {
 	var self = this;
 	this.$deviceTemplate = $('div.eachDevice');
 	this.$deviceList = $('div.deviceList');
+	this.$deviceDetail = $('#deviceDetail');
 
-	this.bluetooth = new Bluetooth().init({
+	this.bluetooth = new Bluetooth();
+
+	this.bluetooth.init({
 		$template: this.$deviceTemplate,
 		$deviceList: this.$deviceList
 	});
-	this.attachEvent();
-	app.addHeader();
 
 	navigator.geolocation.getCurrentPosition(
 		function(position){
@@ -30,8 +50,27 @@ Home.prototype.deviceReady = function () {
 		}, function(e){
 			self.onGetPositionError(e);
 		}
-
 	);
+	this.attachEvent();
+
+};
+
+Home.prototype.attachEvent = function () {
+	var self = this;
+	this.$deviceList.delegate("div.eachDevice" ,'click', function(){
+		if($(this).find('div.status').html() == "Connected"){
+			$( "#deviceDetail" ).panel( "open" );
+			self.$deviceDetail.html("");
+			self.bluetooth.displayServices(
+				JSON.parse(window.localStorage.getItem("ConnectedData")),
+				{ appendTo: "#deviceDetail" }
+			);
+		}else{
+			alert("Connecting...");
+		}
+
+
+	});
 };
 
 Home.prototype.currentPositionGet = function (position) {
@@ -47,16 +86,11 @@ Home.prototype.onGetPositionError = function (e) {
 	this.initMap();
 };
 
-Home.prototype.attachEvent = function () {
-
-
-};
-
 Home.prototype.initMap = function (oArgs) {
 	oArgs = oArgs || {};
 	var mapOptions = {
 		center: new google.maps.LatLng(oArgs.latitude || 40.7141667, oArgs.longitude || -74.0063889),
-		zoom: 8,
+		zoom: 11,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		panControl: false,
 		zoomControl: false,
