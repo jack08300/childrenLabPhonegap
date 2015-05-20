@@ -259,6 +259,10 @@ body.ruleOption {
 	background-color: black;
 }
 
+.textCenter {
+	text-align: center;
+}
+
 div.wrap {
 	border: 2px solid rgba(255, 255, 255, .5);
 	height: 100px;
@@ -455,6 +459,23 @@ div.eachCharacter {
 	padding: 0;
 }
 
+.ui-focus {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.ui-btn-active {
+	background-color: #3F3F3F !important;
+	border-color: #7C7C7C !important;
+	color: #fff !important;
+	text-shadow: 0 1px 0 #7C7C7C;
+}
+
+.ui-page-theme-a {
+	text-shadow: none !important;
+}
+
 a:link {
 	text-shadow: none;
 	color: #000000;
@@ -505,4 +526,54 @@ a:active{ color: #000000; }
 			font-size: 15px;
 		}
 	}
+}
+
+
+/******************* Near By ******************/
+div.nearbyPage{
+	//text-align: center;
+
+	div.topSlogan {
+		padding: 0 20px;
+		margin: 15px 0;
+
+		div.title {
+			font-weight: bold;
+		}
+	}
+
+	input.zipcode {
+		border: 1px solid grey;
+		padding: 10px;
+		margin: 10px;
+		background-color: transparent !important;
+	}
+
+	div.input {
+		border: 1px solid grey;
+		padding: 10px;
+		margin: 10px;
+	}
+
+	div.section{
+		//float: left;
+		padding: 0 1em;
+	}
+
+	div.mainButton {
+		display: inline-block;
+		width: 10em;
+	}
+
+	div.sexSelection {
+		fieldset div.ui-controlgroup-controls {
+			width: 100%;
+
+			div.ui-radio {
+				width: 50%;
+			}
+		}
+	}
+
+	.containing-element .ui-slider-switch { width: 9em }
 }

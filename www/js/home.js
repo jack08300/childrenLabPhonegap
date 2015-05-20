@@ -5,7 +5,6 @@ var gapReady = $.Deferred();
 var jqmReady = $.Deferred();
 
 Home.prototype.init = function () {
-	console.log("test");
 	var self = this;
 	document.addEventListener('deviceready', function () {
 		//self.deviceReady();
@@ -13,11 +12,6 @@ Home.prototype.init = function () {
 	}, false);
 
 	$(document).one("mobileinit", function(){
-		app.addHeader({
-			mainMenu: true,
-			appendTo: "div.mainMenu"
-		});
-
 		jqmReady.resolve();
 	});
 
@@ -51,6 +45,13 @@ Home.prototype.deviceReady = function () {
 			self.onGetPositionError(e);
 		}
 	);
+
+	app.addHeader({
+		mainMenu: true,
+		appendTo: "div.homePage",
+		body: $('body')
+	});
+
 	this.attachEvent();
 
 };
@@ -88,8 +89,9 @@ Home.prototype.onGetPositionError = function (e) {
 
 Home.prototype.initMap = function (oArgs) {
 	oArgs = oArgs || {};
+	var mapCenter = new google.maps.LatLng(oArgs.latitude || 40.7141667, oArgs.longitude || -74.0063889);
 	var mapOptions = {
-		center: new google.maps.LatLng(oArgs.latitude || 40.7141667, oArgs.longitude || -74.0063889),
+		center: mapCenter,
 		zoom: 11,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		panControl: false,
@@ -100,6 +102,7 @@ Home.prototype.initMap = function (oArgs) {
 		overviewMapControl: false
 	};
 	this.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	this.setMapMarker(mapCenter);
 };
 
 Home.prototype.setMapCenter = function(oArgs) {
@@ -111,5 +114,13 @@ Home.prototype.setMapCenter = function(oArgs) {
 	this.map.setCenter(options.position);
 };
 
+Home.prototype.setMapMarker = function(oArgs) {
+	oArgs = oArgs || {};
+	var marker=new google.maps.Marker({
+		position: oArgs.pointer
+	});
+
+	marker.setMap(this.map);
+};
 
 new Home().init();

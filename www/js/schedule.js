@@ -11,14 +11,6 @@ ScheduleMenu.prototype.init = function () {
 	this.endDateTime = "";
 	this.drawerOpened = false;
 
-	this.drawerOptions = {
-		"origin"         : "left", // 'left|right', open the drawer from this side of the view, default 'left'
-		"action"         : "open", // 'open|close', default 'open'
-		"duration"       :    300, // in milliseconds (ms), default 400
-		"iosdelay"       :     50, // ms to wait for the iOS webview to update before animation kicks in, default 60
-		"href"					 : "#pageslide"
-	};
-
 	app.addTopNavigater({
 		left: true,
 		right: false

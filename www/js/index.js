@@ -22,6 +22,7 @@ var app = {
 		serverBase: "http://www.childrenLab.com",
 
 		home: "pages/home.html",
+		nearby: "pages/nearby.html",
 		ruleMenu: "loginOption.html",
 		tokenName: "x-auth-token",
 
@@ -29,6 +30,7 @@ var app = {
 			connectAPI: "/connect/device",
 			validateTokenAPI: "/test/token",
 			signInAPI: "/api/login",
+			searchSchedule: "/schedule/search",
 			scheduleCreateAPI: "/schedule/create"
 		}
 	},
@@ -217,22 +219,57 @@ var app = {
 
 	addHeader: function (oArgs) {
 		oArgs = oArgs || {};
+		var self = this;
 		this.$navigater = $('<div class="header" data-role="header" data-theme="none" role="header"></div>');
 
 		if(oArgs.mainMenu){
 			this.$mainMenuButton = $('<div class="mainMenuButton"><div class="whiteLine"></div><div class="whiteLine"></div><div class="whiteLine"></div></div>');
 			this.$navigater.append(this.$mainMenuButton);
 
-			this.$navigater.on('click', 'div.mainMenuButton', function () {
+			$.get('../pages/mainMenu.html').success(function(html) {
+				var $html = $(html);
+				$(oArgs.appendTo).append($html).trigger('create');
+				app.attachMenuEvent($('#menuPanel'));
+			});
+
+			self.$navigater.on('click', 'div.mainMenuButton', function () {
 				var $menu = $("#menuPanel");
 				$menu.find('div.name').html(window.localStorage.getItem("email"));
 				$menu.panel("open");
 			});
 		}
-
-
 		$(oArgs.appendTo).prepend(this.$navigater);
 
+
+	},
+
+	attachMenuEvent: function($menuPanel) {
+		var self = this;
+		var $options = $menuPanel.find('div.options');
+		var currentPageClass = $.mobile.activePage.attr('class');
+
+		$options.on('click', 'div.Home', function(){
+			if(currentPageClass.indexOf('homePage') != -1){
+				$menuPanel.panel("close");
+				return;
+			}
+			window.location = "../pages/home.html";
+		});
+
+		$options.on('click', 'div.Nearby', function(){
+			if(currentPageClass.indexOf('nearbyPage') != -1){
+				$menuPanel.panel("close");
+				return;
+			}
+			window.location = "../pages/nearby.html";
+		});
+
+		$options.on('click', 'div.Logout', function(){
+			window.localStorage.removeItem("token");
+			window.localStorage.removeItem("email");
+
+			window.location = "../index.html";
+		});
 
 	}
 };
