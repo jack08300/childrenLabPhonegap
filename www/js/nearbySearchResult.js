@@ -146,8 +146,6 @@ NearbySearchResult.prototype.displayResult = function(oArgs){
 	var list = oArgs.scheduleList;
 	this.nannyList = list;
 	var total = oArgs.totalSize;
-	console.error(JSON.stringify(list));
-	console.error(list.length);
 
 	for(var i = 0; i < list.length;i++){
 		this.$eachResult.attr('data-id', i).attr('data-schedule', list[i].id);
