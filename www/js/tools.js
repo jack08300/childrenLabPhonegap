@@ -1,6 +1,7 @@
 var Tools = function(){};
 
 Tools.prototype.ajax = function(params, oArgs){
+		var self = this;
     params = params || {};
     oArgs = oArgs || {};
     $.ajax({
@@ -16,6 +17,30 @@ Tools.prototype.ajax = function(params, oArgs){
 
         },
         data: params.data,
-        success: params.callback
+        success: function(data, status, xhr) {
+					if(!params.callback) { return; }
+
+					params.context = params.context || this;
+					params.callback.call(params.context,data, params.oArgs || {});
+				},
+				error: function(data, status, xhr){
+					console.error(status);
+				},
+				statusCode: {
+					403: function(){
+						self.cleanAuthToken();
+						app.notification("Error", "Please check your email and password", null);
+						window.location = window.rootPath + "index.html";
+					}
+				}
     });
+};
+
+Tools.prototype.cleanAuthToken = function(oArgs){
+	oArgs = oArgs || {};
+	window.localStorage.removeItem("token");
+	if(oArgs.cleanEmail){
+		window.localStorage.removeItem("email");
+	}
+
 };

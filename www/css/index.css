@@ -125,10 +125,15 @@ div.navigater {
   margin-top: 18px; }
   div.navigater > div {
     margin-left: 5px; }
-  div.navigater div.left {
-    float: left; }
-  div.navigater div.right {
-    float: right; }
+
+div.previousPage {
+  background-color: lightgrey;
+  padding: 2px; }
+  div.previousPage div.left {
+    padding: 5px;
+    margin-top: 5px;
+    font-size: 25px;
+    font-weight: bolder; }
 
 .close {
   clear: both; }
@@ -161,6 +166,12 @@ div.navigater {
 
 *:focus {
   outline: 0; }
+
+* {
+  text-shadow: none !important; }
+
+.disable {
+  color: #ABABAB; }
 
 .mainButton {
   background-color: black;
@@ -198,8 +209,11 @@ div.closeBox {
   text-align: center;
   width: 100%; }
 
-div.signUpPage {
-  margin: -100px 0px 0px -112px; }
+div.signUpPage div.signUp {
+  padding: 0 2em; }
+
+div.signUpPage label {
+  display: inline-block; }
 
 div.mainError {
   color: palevioletred;
@@ -319,12 +333,12 @@ div.deviceList div.eachDevice {
     color: black; }
   div.deviceList div.eachDevice div.deviceIcon {
     height: 60px;
-    background-color: gray;
     width: 40px;
-    margin: 4px; }
+    margin: 4px;
+    padding-left: 10px; }
   div.deviceList div.eachDevice div.deviceInfo {
     position: relative;
-    left: 50px; }
+    left: 30px; }
   div.deviceList div.eachDevice div.battery {
     position: relative;
     top: 20px; }
@@ -366,7 +380,8 @@ div.eachCharacter {
   text-shadow: 0 1px 0 #7C7C7C; }
 
 .ui-page-theme-a {
-  text-shadow: none !important; }
+  text-shadow: none !important;
+  background-color: white !important; }
 
 a:link {
   text-shadow: none;
@@ -443,3 +458,104 @@ div.nearbyPage div.sexSelection fieldset div.ui-controlgroup-controls {
 
 div.nearbyPage .containing-element .ui-slider-switch {
   width: 9em; }
+
+/****************** Nearby search result **********************/
+div.scheduleSearchResult div.eachNearby {
+  position: relative;
+  padding: 15px; }
+  div.scheduleSearchResult div.eachNearby div.price {
+    text-align: center;
+    background-color: lightcoral;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 10px;
+    left: 7px; }
+    div.scheduleSearchResult div.eachNearby div.price span {
+      color: white;
+      top: 7px;
+      position: relative;
+      font-size: 12px; }
+  div.scheduleSearchResult div.eachNearby div.userProfile {
+    width: 80px;
+    height: 80px;
+    background-color: black;
+    float: left;
+    border-radius: 50%; }
+  div.scheduleSearchResult div.eachNearby div.userInfo {
+    float: left;
+    margin-left: 15px;
+    line-height: 25px; }
+  div.scheduleSearchResult div.eachNearby div.dateRange {
+    position: absolute;
+    right: 20px;
+    height: 75px;
+    color: white; }
+    div.scheduleSearchResult div.eachNearby div.dateRange > div {
+      border: 1px solid black;
+      padding: 3px;
+      font-size: 10px; }
+    div.scheduleSearchResult div.eachNearby div.dateRange div.startDate {
+      background-color: #00aeef; }
+    div.scheduleSearchResult div.eachNearby div.dateRange div.endDate {
+      bottom: 0;
+      position: absolute;
+      background-color: #3d81ef; }
+
+div.scheduleSearchResult #userDetail {
+  background-color: #f9f9f9; }
+  div.scheduleSearchResult #userDetail div.sectionBorder {
+    margin-top: 40px;
+    box-shadow: 0 8px 5px -2px lightgray; }
+  div.scheduleSearchResult #userDetail div.user {
+    position: relative;
+    padding: 10px; }
+    div.scheduleSearchResult #userDetail div.user div.userProfile {
+      width: 100px;
+      height: 100px;
+      background-color: black;
+      border-radius: 50%;
+      float: left; }
+    div.scheduleSearchResult #userDetail div.user div.userInfo {
+      float: left;
+      margin-left: 8px;
+      line-height: 24px; }
+    div.scheduleSearchResult #userDetail div.user div.price {
+      text-align: center;
+      background-color: lightcoral;
+      border-radius: 50%;
+      height: 30px;
+      width: 30px;
+      position: absolute;
+      top: 8px;
+      left: 3px; }
+      div.scheduleSearchResult #userDetail div.user div.price span {
+        color: white;
+        top: 7px;
+        position: relative;
+        font-size: 12px; }
+    div.scheduleSearchResult #userDetail div.user div.note {
+      word-wrap: break-word; }
+    div.scheduleSearchResult #userDetail div.user div.chat {
+      margin-top: 20px; }
+      div.scheduleSearchResult #userDetail div.user div.chat div.chatBox {
+        border: 1px solid #d3d3d3;
+        width: 100%;
+        height: 100px;
+        overflow-y: auto;
+        background-color: white;
+        padding: 5px 0; }
+        div.scheduleSearchResult #userDetail div.user div.chat div.chatBox div {
+          margin: 3px; }
+          div.scheduleSearchResult #userDetail div.user div.chat div.chatBox div span {
+            padding: 4px;
+            border-radius: 3px; }
+          div.scheduleSearchResult #userDetail div.user div.chat div.chatBox div.alignRight {
+            text-align: right; }
+            div.scheduleSearchResult #userDetail div.user div.chat div.chatBox div.alignRight span {
+              background-color: #00d4b4; }
+          div.scheduleSearchResult #userDetail div.user div.chat div.chatBox div.alignLeft span {
+            background-color: #61abd4; }
+      div.scheduleSearchResult #userDetail div.user div.chat div.submit {
+        text-align: center; }

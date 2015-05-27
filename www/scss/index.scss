@@ -95,6 +95,7 @@ h1 {
 	display: none;
 }
 
+
 .fleft {
 	float: left;
 }
@@ -141,12 +142,17 @@ div.navigater {
 	> div {
 		margin-left: 5px;
 	}
+}
+
+div.previousPage{
+	background-color: lightgrey;
+	padding: 2px;
 
 	div.left {
-		float: left;
-	}
-	div.right {
-		float: right;
+		padding: 5px;
+		margin-top: 5px;
+		font-size: 25px;
+		font-weight: bolder;
 	}
 }
 
@@ -177,16 +183,26 @@ div.navigater {
 	width: 100%;
 }
 
-.mainRadio input {
-	border: none;
-	margin-bottom: 10px;
-	background-color: white;
-	border-bottom: solid 1px black;
-	padding: 10px 0px 5px 5px;
+.mainRadio {
+	input {
+		border: none;
+		margin-bottom: 10px;
+		background-color: white;
+		border-bottom: solid 1px black;
+		padding: 10px 0px 5px 5px;
+	}
+
 }
 
 *:focus {
 	outline: 0;
+}
+* {
+	text-shadow: none !important;
+}
+
+.disable {
+	color: #ABABAB;
 }
 
 .mainButton {
@@ -237,7 +253,13 @@ div.closeBox {
 }
 
 div.signUpPage {
-	margin: -100px 0px 0px -112px;
+	div.signUp {
+		padding: 0 2em;
+	}
+
+	label {
+		display: inline-block;
+	}
 }
 
 div.mainError {
@@ -407,15 +429,15 @@ div.deviceList {
 
 		div.deviceIcon {
 			height: 60px;
-			background-color: gray;
 			width: 40px;
 			margin: 4px;
+			padding-left: 10px;
 		}
 
 
 		div.deviceInfo {
 			position: relative;
-			left: 50px;
+			left: 30px;
 		}
 
 		div.battery {
@@ -474,6 +496,7 @@ div.eachCharacter {
 
 .ui-page-theme-a {
 	text-shadow: none !important;
+	background-color: white !important;
 }
 
 a:link {
@@ -576,4 +599,155 @@ div.nearbyPage{
 	}
 
 	.containing-element .ui-slider-switch { width: 9em }
+}
+
+/****************** Nearby search result **********************/
+div.scheduleSearchResult{
+
+	div.eachNearby {
+		position: relative;
+		padding: 15px;
+
+		div.price {
+			text-align: center;
+			background-color: lightcoral;
+			border-radius: 50%;
+			height: 30px;
+			width: 30px;
+			position: absolute;
+			top: 10px;
+			left: 7px;
+
+			span {
+				color: white;
+				top: 7px;
+				position: relative;
+				font-size: 12px;
+			}
+		}
+
+		div.userProfile {
+			width: 80px;
+			height: 80px;
+			background-color: black;
+			float: left;
+			border-radius: 50%;
+
+		}
+
+		div.userInfo {
+			float: left;
+			margin-left: 15px;
+			line-height: 25px;
+		}
+
+		div.dateRange {
+			position: absolute;
+			right: 20px;
+			height: 75px;
+			color: white;
+
+			> div {
+				border: 1px solid black;
+				padding: 3px;
+				font-size: 10px;
+			}
+
+			div.startDate {
+				background-color: #00aeef;
+			}
+
+			div.endDate {
+				bottom: 0;
+				position: absolute;
+				background-color: #3d81ef;
+			}
+		}
+	}
+
+	#userDetail {
+
+		background-color: #f9f9f9;
+
+		div.sectionBorder {
+			margin-top: 40px;
+			box-shadow: 0 8px 5px -2px lightgray;
+		}
+		div.user {
+			position: relative;
+			padding: 10px;
+
+			div.userProfile {
+				width: 100px;
+				height: 100px;
+				background-color: black;
+				border-radius: 50%;
+				float: left;
+			}
+
+			div.userInfo {
+				float: left;
+				margin-left: 8px;
+				line-height: 24px;
+
+			}
+
+
+			div.price {
+				text-align: center;
+				background-color: lightcoral;
+				border-radius: 50%;
+				height: 30px;
+				width: 30px;
+				position: absolute;
+				top: 8px;
+				left: 3px;
+
+				span {
+					color: white;
+					top: 7px;
+					position: relative;
+					font-size: 12px;
+				}
+			}
+
+			div.note {
+				word-wrap: break-word;
+			}
+
+			div.chat {
+				margin-top: 20px;
+
+				div.chatBox {
+					border: 1px solid #d3d3d3;
+					width: 100%;
+					height: 100px;
+					overflow-y: auto;
+					background-color: white;
+					padding: 5px 0;
+
+					div {
+						margin: 3px;
+						span {
+							padding: 4px;
+							border-radius: 3px;
+						}
+
+						&.alignRight{
+							text-align: right;
+							span {background-color: #00d4b4;}
+						}
+						&.alignLeft {
+							span {background-color: #61abd4;}
+						}
+					}
+
+				}
+				div.submit {
+					text-align: center;
+				}
+			}
+		}
+
+	}
 }

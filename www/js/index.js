@@ -29,9 +29,12 @@ var app = {
 		api: {
 			connectAPI: "/connect/device",
 			validateTokenAPI: "/test/token",
-			signInAPI: "/api/login",
+			signUp: "/user/register",
+			signIn: "/api/login",
 			searchSchedule: "/schedule/search",
-			scheduleCreateAPI: "/schedule/create"
+			scheduleCreateAPI: "/schedule/create",
+			retrieveScheduleMessage: "/schedule/retrieveMessage",
+			submitScheduleMessage: "/schedule/leaveMessage"
 		}
 	},
 
@@ -53,6 +56,8 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
 	onDeviceReady: function () {
 		app.receivedEvent('deviceready');
+		var path = $.mobile.activePage[0].baseURI;
+		window.rootPath = path.substring(0, path.indexOf("www") + 4);
 
 	},
 	// Update DOM on a Received Event
@@ -73,18 +78,10 @@ var app = {
 		}
 
 		$('.signUpText').on('click', function () {
-			window.location = "signUp.html";
+			window.location = window.rootPath + "signUp.html";
 		});
 
 		$('div.signInButton').on('click', this.signInForm);
-
-		$(document).ajaxError(function (e, el) {
-			if (el.status == 403) {
-				app.$errorMessage.text("Please check your email and password");
-				window.localStorage.removeItem('token');
-			}
-
-		});
 
 		if (token) {
 			app.tool.ajax({
@@ -133,7 +130,7 @@ var app = {
 		params = params || {};
 
 		this.tool.ajax({
-			url: app.setting.serverBase + app.setting.api.signInAPI,
+			url: app.setting.serverBase + app.setting.api.signIn,
 			context: app,
 			data: {
 				email: params.email,
@@ -153,7 +150,7 @@ var app = {
 
 			window.location = app.setting.ruleMenu;
 		} else {
-			window.location = "index.html";
+			window.location = window.rootPath + "index.html";
 			app.receivedEvent('deviceready');
 		}
 
@@ -182,7 +179,7 @@ var app = {
 	},
 
 	validatePassword: function (password) {
-		console.error(password);
+
 		return password.length > 5;
 	},
 
@@ -220,26 +217,40 @@ var app = {
 	addHeader: function (oArgs) {
 		oArgs = oArgs || {};
 		var self = this;
-		this.$navigater = $('<div class="header" data-role="header" data-theme="none" role="header"></div>');
 
-		if(oArgs.mainMenu){
-			this.$mainMenuButton = $('<div class="mainMenuButton"><div class="whiteLine"></div><div class="whiteLine"></div><div class="whiteLine"></div></div>');
-			this.$navigater.append(this.$mainMenuButton);
 
-			$.get('../pages/mainMenu.html').success(function(html) {
-				var $html = $(html);
-				$(oArgs.appendTo).append($html).trigger('create');
-				app.attachMenuEvent($('#menuPanel'));
+		var $backButton;
+		if(oArgs.backButton){
+			$backButton = $('<div class="previousPage"><div class="left"><</div></div>');
+			$backButton.on('click', 'div.left', function () {
+				history.go(-1);
 			});
-
-			self.$navigater.on('click', 'div.mainMenuButton', function () {
-				var $menu = $("#menuPanel");
-				$menu.find('div.name').html(window.localStorage.getItem("email"));
-				$menu.panel("open");
-			});
+			$(oArgs.appendTo).prepend($backButton);
 		}
-		$(oArgs.appendTo).prepend(this.$navigater);
 
+
+
+		if(!oArgs.noHeader){
+			this.$navigater = $('<div class="header" data-role="header" data-theme="none" role="header"></div>');
+
+			if(oArgs.mainMenu){
+				this.$mainMenuButton = $('<div class="mainMenuButton"><div class="whiteLine"></div><div class="whiteLine"></div><div class="whiteLine"></div></div>');
+				this.$navigater.append(this.$mainMenuButton);
+
+				$.get(window.rootPath + 'pages/mainMenu.html').success(function(html) {
+					var $html = $(html);
+					$(oArgs.appendTo).append($html).trigger('create');
+					app.attachMenuEvent($('#menuPanel'));
+				});
+
+				this.$navigater.on('click', 'div.mainMenuButton', function () {
+					var $menu = $("#menuPanel");
+					$menu.find('div.name').html(window.localStorage.getItem("email"));
+					$menu.panel("open");
+				});
+			}
+			$(oArgs.appendTo).prepend(this.$navigater);
+		}
 
 	},
 
@@ -253,7 +264,7 @@ var app = {
 				$menuPanel.panel("close");
 				return;
 			}
-			window.location = "../pages/home.html";
+			window.location = window.rootPath + "pages/home.html";
 		});
 
 		$options.on('click', 'div.Nearby', function(){
@@ -261,14 +272,13 @@ var app = {
 				$menuPanel.panel("close");
 				return;
 			}
-			window.location = "../pages/nearby.html";
+			window.location = window.rootPath + "pages/nearby.html";
 		});
 
 		$options.on('click', 'div.Logout', function(){
-			window.localStorage.removeItem("token");
-			window.localStorage.removeItem("email");
+			app.tool.cleanAuthToken();
 
-			window.location = "../index.html";
+			window.location =  window.rootPath + "index.html";
 		});
 
 	}

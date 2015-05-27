@@ -35,7 +35,7 @@ Nearby.prototype.deviceReady = function() {
 	this.$nearbyInputs = $('div.nearbyInputs');
 	this.$startDate = $('div.startDate', this.$nearbyInputs);
 	this.$endDate = $('div.endDate', this.$nearbyInputs);
-	this.$price = $('#inputPrice', this.$nearbyInputs);
+	this.$price = $('div.price', this.$nearbyInputs);
 	this.$zipcode = $('input.zipcode', this.$nearbyInputs);
 	this.$sex = $('div.sexSelection', this.$nearbyInputs);
 	this.$button = $('div.submit', this.$nearbyInputs);
@@ -86,14 +86,15 @@ Nearby.prototype.showDateTimePicker = function($field, field) {
 Nearby.prototype.getParams = function() {
 	if(!this.startDateTime || !this.endDateTime){
 		app.notification("Search", "Please Select Start and End Date", null);
-		return;
+		return null;
 	}
 
 	var params = {};
 
 	params.startDate = moment(this.startDateTime).format("YYYY-MM-DD hh:mm");
 	params.endDate = moment(this.endDateTime).format("YYYY-MM-DD hh:mm");
-	params.price = this.$price.val();
+	params.startPrice = this.$price.find('input#startPrice').val();
+	params.endPrice = this.$price.find('input#endPrice').val();
 	params.zipcode = this.$zipcode.val();
 	params.gender = this.$sex.find('label.ui-radio-on').text();
 
@@ -102,17 +103,25 @@ Nearby.prototype.getParams = function() {
 
 Nearby.prototype.submitSearch = function() {
 	var params = this.getParams();
-	alert(JSON.stringify(params));
-	this.tool.ajax({
-		url: app.setting.serverBase + app.setting.api.searchSchedule,
-		context: this,
-		data: params,
-		callback: this.submitSearch_load
-	});
+
+	if(params){
+		this.tool.ajax({
+			url: app.setting.serverBase + app.setting.api.searchSchedule,
+			context: this,
+			data: params,
+			callback: this.submitSearch_load
+		});
+	}
+
 };
 
-Nearby.prototype.submitSearch_load = function(oArgs) {
-
+Nearby.prototype.submitSearch_load = function(data) {
+	if(data.success && data.scheduleList.length > 0){
+		window.localStorage.setItem('scheduleSearchResult', JSON.stringify(data));
+		window.location = window.rootPath + "pages/nearbySearchResult.html";
+	}else{
+		app.notification("Search", "No Result", null);
+	}
 };
 
 
