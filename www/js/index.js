@@ -220,8 +220,8 @@ var app = {
 
 		var $backButton;
 		if(oArgs.backButton){
-			$backButton = $('<div class="previousPage"><div class="left"><</div></div>');
-			$backButton.on('click', 'div.left', function () {
+			$backButton = $('<div class="previousPage"><div class="backButton"><div class="arrowLeft"><div class="block"></div></div></div></div>');
+			$backButton.on('click', 'div.backButton', function () {
 				history.go(-1);
 			});
 			$(oArgs.appendTo).prepend($backButton);

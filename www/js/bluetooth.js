@@ -378,6 +378,6 @@ Bluetooth.prototype.uploadData = function(){
 };
 
 Bluetooth.prototype.uploadData_load = function(result){
-
+	//alert(result + " uploaded");
 };
 

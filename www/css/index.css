@@ -126,15 +126,6 @@ div.navigater {
   div.navigater > div {
     margin-left: 5px; }
 
-div.previousPage {
-  background-color: lightgrey;
-  padding: 2px; }
-  div.previousPage div.left {
-    padding: 5px;
-    margin-top: 5px;
-    font-size: 25px;
-    font-weight: bolder; }
-
 .close {
   clear: both; }
 
@@ -226,9 +217,6 @@ div.template {
 div.bluetooth div.container {
   color: #2EB8B8; }
 
-body.ruleOption {
-  background-color: black; }
-
 .textCenter {
   text-align: center; }
 
@@ -250,6 +238,25 @@ div.dialog {
 div.form div {
   margin-top: 5px;
   margin-bottom: 5px; }
+
+div.previousPage {
+  background-color: lightgrey;
+  padding: 2px; }
+  div.previousPage div.backButton div.arrowLeft {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #a7a9ac;
+    margin: 40px 0 8px 10px; }
+    div.previousPage div.backButton div.arrowLeft div.block {
+      width: 40px;
+      height: 16px;
+      top: -8px;
+      left: 8px;
+      position: absolute;
+      background-color: #a7a9ac; }
 
 /************ login page ***************/
 div.app.loginPage div.separateLine hr {
@@ -277,6 +284,19 @@ div.app.loginPage div.forgotpass {
   text-align: right; }
 
 /************ Login Option Page ***************/
+body.ruleOption div.whiteCover {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); }
+
+body.ruleOption img {
+  width: 100%; }
+
 div.app.loginOption {
   margin: 0px 0px 0px -112px;
   top: 39%; }
@@ -319,7 +339,7 @@ div.placeholder {
   width: 100%;
   text-align: center; }
   div.placeholder.map {
-    height: 180px;
+    height: 240px;
     background-color: gainsboro; }
 
 /*************** Device List ****************/

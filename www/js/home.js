@@ -115,10 +115,10 @@ Home.prototype.setMapCenter = function(oArgs) {
 	this.map.setCenter(options.position);
 };
 
-Home.prototype.setMapMarker = function(oArgs) {
-	oArgs = oArgs || {};
+Home.prototype.setMapMarker = function(pointer) {
+
 	var marker=new google.maps.Marker({
-		position: oArgs.pointer
+		position: pointer
 	});
 
 	marker.setMap(this.map);

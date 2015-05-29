@@ -13,21 +13,11 @@ Nearby.prototype.init = function() {
 	}, false);
 
 	$(document).one("mobileinit", function(){
-		app.addHeader({
-			mainMenu: true,
-			appendTo: "div.mainMenu"
-		});
-
 		jqmReady.resolve();
 	});
 
 	$.when(gapReady, jqmReady).then(function(){
 		self.deviceReady();
-	});
-
-	app.addHeader({
-		mainMenu: true,
-		appendTo: "div.nearbyPage"
 	});
 };
 
@@ -43,6 +33,11 @@ Nearby.prototype.deviceReady = function() {
 	this.tool = new Tools();
 
 	this.attachEvent();
+
+	app.addHeader({
+		mainMenu: true,
+		appendTo: "div.nearbyPage"
+	});
 };
 
 Nearby.prototype.attachEvent = function() {

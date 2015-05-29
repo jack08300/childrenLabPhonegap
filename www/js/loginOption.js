@@ -8,6 +8,10 @@ LoginOptions.prototype.init = function () {
 	this.$parentButton = $('div.parent');
 	this.$nannyButton = $('div.nanny');
 
+	var $background = $('img');
+
+	$background.css('height', document.documentElement.clientHeight);
+
 	this.attachEvent();
 };
 

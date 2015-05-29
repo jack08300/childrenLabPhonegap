@@ -18,6 +18,7 @@ var Signup = function () {
 	$.when(gapReady, jqmReady).then(function(){
 		self.init();
 	});
+
 };
 
 Signup.prototype.init = function () {
