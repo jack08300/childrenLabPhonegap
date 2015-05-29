@@ -415,6 +415,7 @@ div.placeholder {
 
 /*************** Device List ****************/
 div.deviceList {
+	text-align: center;
 	div.eachDevice {
 		padding: 10px;
 		margin: 5px;
@@ -460,6 +461,7 @@ div.eachCharacter {
 		text-align: center;
 		font-size: 25px;
 		transition: border-color 1.5s;
+		margin-top: 3px;
 
 		span {
 			position: relative;
@@ -509,6 +511,13 @@ a:active{ color: #000000; }
 
 #deviceDetail {
 	background-color: #58585a;
+	color: white;
+
+	div.switch {
+		text-align: center;
+		padding: 15px 0 0 0;
+	}
+
 }
 
 /***************** Main Menu **************/

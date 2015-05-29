@@ -18,6 +18,18 @@
 	<!-- Right Device Slider -->
 	<div class="panel right" data-role="panel" data-position="right" data-display="push" id="deviceDetail">
 
+		<div class="switch">
+			<label for="uploadSwitch">Upload Data to Server(Every 5 sec):</label>
+			<select name="flip-1" id="uploadSwitch" data-role="slider">
+				<option value="off">Off</option>
+				<option value="on">On</option>
+			</select>
+		</div>
+
+
+		<div class="characterList">
+
+		</div>
 	</div>
 
 	<div class="container" data-role="content">
@@ -28,7 +40,7 @@
 		</div>
 
 		<div class="deviceList">
-
+			Searching Swing Watch....
 		</div>
 
 
@@ -64,9 +76,21 @@
 	Name: <span class="name"></span> <br/>
 	CharacterUuid: <span class="characterUuid"></span> <br/>
 
-	<div class="devicedata">
-		<span>0</span>
+	<div class="receiver">
+		<div class="devicedata" data-id="0">
+			<span>0</span>
+		</div>
+
+		<div class="template devicedata" data-id="1">
+			<span>0</span>
+		</div>
+
+		<div class="template devicedata" data-id="2">
+			<span>0</span>
+		</div>
 	</div>
+
+
 </div>
 
 

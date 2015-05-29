@@ -323,25 +323,27 @@ div.placeholder {
     background-color: gainsboro; }
 
 /*************** Device List ****************/
-div.deviceList div.eachDevice {
-  padding: 10px;
-  margin: 5px;
-  font-size: 12px;
-  line-height: 20px;
-  color: black; }
-  div.deviceList div.eachDevice a {
+div.deviceList {
+  text-align: center; }
+  div.deviceList div.eachDevice {
+    padding: 10px;
+    margin: 5px;
+    font-size: 12px;
+    line-height: 20px;
     color: black; }
-  div.deviceList div.eachDevice div.deviceIcon {
-    height: 60px;
-    width: 40px;
-    margin: 4px;
-    padding-left: 10px; }
-  div.deviceList div.eachDevice div.deviceInfo {
-    position: relative;
-    left: 30px; }
-  div.deviceList div.eachDevice div.battery {
-    position: relative;
-    top: 20px; }
+    div.deviceList div.eachDevice a {
+      color: black; }
+    div.deviceList div.eachDevice div.deviceIcon {
+      height: 60px;
+      width: 40px;
+      margin: 4px;
+      padding-left: 10px; }
+    div.deviceList div.eachDevice div.deviceInfo {
+      position: relative;
+      left: 30px; }
+    div.deviceList div.eachDevice div.battery {
+      position: relative;
+      top: 20px; }
 
 /******************* Bluetooth *************/
 div.eachCharacter {
@@ -354,7 +356,8 @@ div.eachCharacter {
     border: 5px solid rgba(0, 0, 0, 0.7);
     text-align: center;
     font-size: 25px;
-    transition: border-color 1.5s; }
+    transition: border-color 1.5s;
+    margin-top: 3px; }
     div.eachCharacter div.devicedata span {
       position: relative;
       top: 18px; }
@@ -397,7 +400,11 @@ a:active {
   color: #000000; }
 
 #deviceDetail {
-  background-color: #58585a; }
+  background-color: #58585a;
+  color: white; }
+  #deviceDetail div.switch {
+    text-align: center;
+    padding: 15px 0 0 0; }
 
 /***************** Main Menu **************/
 #menuPanel {

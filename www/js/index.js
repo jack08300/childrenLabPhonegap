@@ -34,7 +34,8 @@ var app = {
 			searchSchedule: "/schedule/search",
 			scheduleCreateAPI: "/schedule/create",
 			retrieveScheduleMessage: "/schedule/retrieveMessage",
-			submitScheduleMessage: "/schedule/leaveMessage"
+			submitScheduleMessage: "/schedule/leaveMessage",
+			uploadData: "/device/uploadData"
 		}
 	},
 
@@ -82,20 +83,6 @@ var app = {
 		});
 
 		$('div.signInButton').on('click', this.signInForm);
-
-		if (token) {
-			app.tool.ajax({
-				url: app.setting.serverBase + app.setting.api.connectAPI,
-				context: app,
-				data: {
-					model: device.model,
-					cordova: device.cordova,
-					platform: device.platform,
-					uuid: device.uuid,
-					version: device.version
-				}
-			});
-		}
 
 
 		console.log('Received Event: ' + id);
@@ -147,6 +134,18 @@ var app = {
 		if (data.access_token) {
 			window.localStorage.setItem("token", data.access_token);
 			window.localStorage.setItem("email", data.username);
+
+			app.tool.ajax({
+				url: app.setting.serverBase + app.setting.api.connectAPI,
+				context: app,
+				data: {
+					model: device.model,
+					cordova: device.cordova,
+					platform: device.platform,
+					phoneUuid: device.uuid,
+					version: device.version
+				}
+			});
 
 			window.location = app.setting.ruleMenu;
 		} else {

@@ -30,6 +30,7 @@ Home.prototype.deviceReady = function () {
 	this.$deviceTemplate = $('div.eachDevice');
 	this.$deviceList = $('div.deviceList');
 	this.$deviceDetail = $('#deviceDetail');
+	this.$deviceCharacterList = $('div.characterList', this.$deviceDetail);
 
 	this.bluetooth = new Bluetooth();
 
@@ -61,10 +62,10 @@ Home.prototype.attachEvent = function () {
 	this.$deviceList.delegate("div.eachDevice" ,'click', function(){
 		if($(this).find('div.status').html() == "Connected"){
 			$( "#deviceDetail" ).panel( "open" );
-			self.$deviceDetail.html("");
+			self.$deviceCharacterList.html("");
 			self.bluetooth.displayServices(
 				JSON.parse(window.localStorage.getItem("ConnectedData")),
-				{ appendTo: "#deviceDetail" }
+				{ appendTo: "div.characterList" }
 			);
 		}else{
 			alert("Connecting...");
