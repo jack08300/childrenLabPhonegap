@@ -449,7 +449,7 @@ a:active {
         font-size: 10px; }
   #menuPanel div.options {
     padding: 2em;
-    line-height: 35px; }
+    line-height: 40px; }
     #menuPanel div.options div.option {
       font-size: 15px; }
 
@@ -586,3 +586,18 @@ div.scheduleSearchResult #userDetail {
             background-color: #61abd4; }
       div.scheduleSearchResult #userDetail div.user div.chat div.submit {
         text-align: center; }
+
+/******************** Feedback ***********************/
+div.feedbackPage div.container {
+  margin-top: 10px;
+  padding: 10px; }
+  div.feedbackPage div.container div.title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 10px 0; }
+  div.feedbackPage div.container hr {
+    margin-top: 20px;
+    width: 90%; }
+  div.feedbackPage div.container div.mainButton {
+    display: inline-block; }

@@ -25,12 +25,14 @@ Tools.prototype.ajax = function(params, oArgs){
 				},
 				error: function(data, status, xhr){
 					console.error(status);
+					self.hideLoading();
 				},
 				statusCode: {
 					403: function(){
 						self.cleanAuthToken();
 						app.notification("Error", "Please check your email and password", null);
 						window.location = window.rootPath + "index.html";
+						self.hideLoading();
 					}
 				}
     });
@@ -43,4 +45,19 @@ Tools.prototype.cleanAuthToken = function(oArgs){
 		window.localStorage.removeItem("email");
 	}
 
+};
+
+Tools.prototype.showLoading = function(oArgs){
+	oArgs = oArgs || {};
+
+	$.mobile.loading( 'show', {
+		text: oArgs.text || 'Loading...',
+		textVisible: true,
+		theme: 'a',
+		html: ""
+	});
+};
+
+Tools.prototype.hideLoading = function(){
+	$.mobile.loading('hide');
 };

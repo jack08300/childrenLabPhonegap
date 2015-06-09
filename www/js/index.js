@@ -35,7 +35,8 @@ var app = {
 			scheduleCreateAPI: "/schedule/create",
 			retrieveScheduleMessage: "/schedule/retrieveMessage",
 			submitScheduleMessage: "/schedule/leaveMessage",
-			uploadData: "/device/uploadData"
+			uploadData: "/device/uploadData",
+			feedback: "/user/leaveFeedback"
 		}
 	},
 
@@ -272,6 +273,14 @@ var app = {
 				return;
 			}
 			window.location = window.rootPath + "pages/nearby.html";
+		});
+
+		$options.on('click', 'div.Feedback', function(){
+			if(currentPageClass.indexOf('feedbackPage') != -1){
+				$menuPanel.panel("close");
+				return;
+			}
+			window.location = window.rootPath + "pages/feedback.html";
 		});
 
 		$options.on('click', 'div.Logout', function(){

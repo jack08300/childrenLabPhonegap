@@ -1,6 +1,6 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.childrenLab" version="1.0.8">
-  <name>ChildrenLab</name>
-  <description>Hello World sample application that responds to the deviceready event.</description>
+  <name>Swing</name>
+  <description>Swing watch App.</description>
   <author href="http://www.childrenLab.com" email="jack08300@gmail.com">Jay</author>
   <content src="index.html"/>
   <preference name="permissions" value="none"/>

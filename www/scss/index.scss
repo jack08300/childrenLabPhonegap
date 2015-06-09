@@ -587,7 +587,7 @@ a:active{ color: #000000; }
 
 	div.options {
 		padding: 2em;
-		line-height: 35px;
+		line-height: 40px;
 
 		div.option {
 			font-size: 15px;
@@ -794,4 +794,31 @@ div.scheduleSearchResult{
 		}
 
 	}
+}
+
+/******************** Feedback ***********************/
+div.feedbackPage {
+
+	div.container {
+		margin-top: 10px;
+		padding: 10px;
+
+		div.title {
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			margin: 0 0 10px 0;
+
+		}
+
+		hr {
+			margin-top: 20px;
+			width: 90%;
+		}
+
+		div.mainButton {
+			display:inline-block;
+		}
+	}
+
 }
