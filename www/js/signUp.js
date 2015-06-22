@@ -31,7 +31,6 @@ Signup.prototype.init = function () {
 	this.$gender = $('input[name="sex"]:checked');
 	this.$errorMessage = $('div.errorMessage');
 	this.$button = $('div.signUpButton');
-	this.tool = new Tools();
 
 	this.attachEvent();
 
@@ -78,7 +77,7 @@ Signup.prototype.submitForm = function () {
 		this.$errorMessage.text("Please enter your phone number.");
 		return;
 	}
-	this.tool.ajax({
+	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.signUp,
 		context: this,
 		data: {
@@ -107,7 +106,7 @@ Signup.prototype.submitForm_load = function (data) {
 Signup.prototype.signin = function (params) {
 	params = params || {};
 
-	this.tool.ajax({
+	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.signIn,
 		context: app,
 		data: {

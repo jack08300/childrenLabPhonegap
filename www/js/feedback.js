@@ -27,8 +27,6 @@ Feedback.prototype.deviceReady = function() {
 	this.$feedbackText = $('div.feedbackText');
 	this.$feedbackTextArea = $('#feedbackTextArea');
 
-	this.tool = new Tools();
-
 	this.attachEvent();
 
 	app.addHeader({
@@ -56,14 +54,14 @@ Feedback.prototype.attachEvent = function() {
 };
 
 Feedback.prototype.submitFeedback = function() {
-	this.tool.showLoading({
+	app.tool.showLoading({
 		text: 'Submitting...'
 	});
 
 	var type = this.$selectType.val().toUpperCase();
 	var text = this.$feedbackTextArea.val().toUpperCase();
 
-	this.tool.ajax({
+	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.feedback,
 		context: this,
 		data: {
@@ -75,7 +73,7 @@ Feedback.prototype.submitFeedback = function() {
 };
 
 Feedback.prototype.submitFeedback_load = function(data) {
-	this.tool.hideLoading();
+	app.tool.hideLoading();
 	app.notification("Feedback", "Thanks for your feedback.");
 	window.location = window.rootPath + "pages/feedback.html";
 };

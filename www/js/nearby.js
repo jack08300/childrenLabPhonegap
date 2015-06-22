@@ -30,8 +30,6 @@ Nearby.prototype.deviceReady = function() {
 	this.$sex = $('div.sexSelection', this.$nearbyInputs);
 	this.$button = $('div.submit', this.$nearbyInputs);
 
-	this.tool = new Tools();
-
 	this.attachEvent();
 
 	app.addHeader({
@@ -97,10 +95,11 @@ Nearby.prototype.getParams = function() {
 };
 
 Nearby.prototype.submitSearch = function() {
+	app.tool.showLoading();
 	var params = this.getParams();
 
 	if(params){
-		this.tool.ajax({
+		app.tool.ajax({
 			url: app.setting.serverBase + app.setting.api.searchSchedule,
 			context: this,
 			data: params,
@@ -111,6 +110,7 @@ Nearby.prototype.submitSearch = function() {
 };
 
 Nearby.prototype.submitSearch_load = function(data) {
+	app.tool.hideLoading();
 	if(data.success && data.scheduleList.length > 0){
 		window.localStorage.setItem('scheduleSearchResult', JSON.stringify(data));
 		window.location = window.rootPath + "pages/nearbySearchResult.html";

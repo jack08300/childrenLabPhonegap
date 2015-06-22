@@ -196,6 +196,12 @@ div.closeBox {
   width: 100px;
   height: 150px; }
 
+.ui-overlay-a {
+  background-color: white;
+  border-color: white;
+  color: white;
+  text-shadow: none; }
+
 #deviceready {
   text-align: center;
   width: 100%; }
@@ -383,13 +389,15 @@ div.eachCharacter {
       top: 18px; }
 
 .ui-panel-wrapper {
-  min-height: 0; }
+  min-height: 0;
+  background-color: white; }
 
 .ui-content {
   padding: 0; }
 
 .ui-panel-inner {
-  padding: 0; }
+  padding: 0;
+  width: 100%; }
 
 .ui-focus {
   -moz-box-shadow: none !important;
@@ -439,12 +447,13 @@ a:active {
     #menuPanel div.menuHeader div.container {
       display: inline-block;
       padding-top: 2em; }
-      #menuPanel div.menuHeader div.container div.head {
-        width: 6em;
-        height: 6em;
-        border-radius: 50%;
-        background-color: white;
+      #menuPanel div.menuHeader div.container div.profileImage {
         display: inline-block; }
+        #menuPanel div.menuHeader div.container div.profileImage img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background-color: white; }
       #menuPanel div.menuHeader div.container div.viewAccount {
         font-size: 10px; }
   #menuPanel div.options {
@@ -601,3 +610,43 @@ div.feedbackPage div.container {
     width: 90%; }
   div.feedbackPage div.container div.mainButton {
     display: inline-block; }
+
+/******************** UpdateProfile Page ***********************/
+div.updateProfilePage label {
+  display: inline-block; }
+
+div.updateProfilePage div.container {
+  padding: 10px; }
+
+div.updateProfilePage div.mainRadio {
+  text-align: center; }
+
+div.updateProfilePage div.profileImageContainer {
+  text-align: center;
+  width: 100%; }
+  div.updateProfilePage div.profileImageContainer div.profileImage {
+    display: inline-block; }
+    div.updateProfilePage div.profileImageContainer div.profileImage img {
+      width: 10em;
+      height: 10em;
+      overflow: hidden;
+      border-radius: 50%;
+      background-color: white; }
+  div.updateProfilePage div.profileImageContainer div.viewAccount {
+    font-size: 10px; }
+
+div.updateProfilePage div.croppingImagePage {
+  text-align: center;
+  margin-top: 50px; }
+  div.updateProfilePage div.croppingImagePage div.zoom {
+    width: 10px;
+    height: 10px;
+    background-color: black; }
+
+div.updateProfilePage .ui-panel {
+  width: 20em !important; }
+
+div.updateProfilePage .ui-panel-animate.ui-panel-page-content-position-right {
+  -webkit-transform: translate3d(-20em, 0, 0) !important;
+  -moz-transform: translate3d(-20em, 0, 0) !important;
+  transform: translate3d(-20em, 0, 0) !important; }

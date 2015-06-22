@@ -28,7 +28,6 @@ NearbySearchResult.prototype.deviceReady = function(){
 	this.$resultList = $('div.resultList');
 	this.$userDetail = $('#userDetail');
 	this.$chatBox = $('div.chatBox', this.$userDetail);
-	this.tool = new Tools();
 
 	var searchResult = window.localStorage.getItem('scheduleSearchResult');
 
@@ -74,7 +73,8 @@ NearbySearchResult.prototype.attachEvent = function(){
 };
 
 NearbySearchResult.prototype.submitMessage = function(message, scheduleId){
-	this.tool.ajax({
+	app.tool.showLoading();
+	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.submitScheduleMessage,
 		context: this,
 		data: {
@@ -89,6 +89,7 @@ NearbySearchResult.prototype.submitMessage = function(message, scheduleId){
 };
 
 NearbySearchResult.prototype.submitMessage_load = function(result, oArgs){
+	app.tool.hideLoading();
 	result = result || {};
 	oArgs = oArgs || {};
 
@@ -101,7 +102,7 @@ NearbySearchResult.prototype.submitMessage_load = function(result, oArgs){
 };
 
 NearbySearchResult.prototype.retrieveMessage = function(scheduleId){
-	this.tool.ajax({
+	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.retrieveScheduleMessage,
 		context: this,
 		data: {

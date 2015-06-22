@@ -7,7 +7,6 @@ Dialog.prototype.init = function(oArgs){
 	oArgs = oArgs || {};
 
 	this.$dialog = $.load('/page/dialog.html');
-	this.tool = new Tools();
 
 	this.generateScheduleForm(oArgs);
 
@@ -33,7 +32,7 @@ Dialog.prototype.submitForm = function(){
 	var self = this;
 	var data = this.$form.serializeArray();
 
-	this.tool.ajax({
+	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.scheduleCreateAPI,
 		context: self,
 		data: data,

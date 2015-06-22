@@ -16,8 +16,6 @@ Bluetooth.prototype.init = function (oArgs) {
 	this.$deviceList = oArgs.$deviceList;
 	this.sensorData = {macId: ''};
 
-	this.tool = new Tools();
-
 	this.characteristicList = [{
 		name: "Light",
 		uuid: "09A44002-CD70-4B7A-B46F-CC4CDBAB1BB4"
@@ -369,7 +367,7 @@ Bluetooth.prototype.disconnect = function (deviceId, oArgs) {
 };
 
 Bluetooth.prototype.uploadData = function(){
-	this.tool.ajax({
+	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.uploadData,
 		context: this,
 		data: this.sensorData,

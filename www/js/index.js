@@ -36,7 +36,10 @@ var app = {
 			retrieveScheduleMessage: "/schedule/retrieveMessage",
 			submitScheduleMessage: "/schedule/leaveMessage",
 			uploadData: "/device/uploadData",
-			feedback: "/user/leaveFeedback"
+			feedback: "/user/leaveFeedback",
+			updateProfile: "/user/updateProfile",
+			uploadAvatar: "/avatar/uploadProfileImage",
+			retrieveUserProfile: "/user/retrieveUserProfile"
 		}
 	},
 
@@ -44,13 +47,28 @@ var app = {
 	initialize: function () {
 		this.bindEvents();
 
+
 	},
 	// Bind Event Listeners
 	//
 	// Bind any events that are required on startup. Common events are:
 	// 'load', 'deviceready', 'offline', and 'online'.
 	bindEvents: function () {
-		document.addEventListener('deviceready', this.onDeviceReady, false);
+		var gapReady = $.Deferred();
+		var jqmReady = $.Deferred();
+		document.addEventListener('deviceready', function () {
+			//self.deviceReady();
+			gapReady.resolve();
+		}, false);
+
+		$(document).one("mobileinit", function(){
+			jqmReady.resolve();
+		});
+
+		$.when(gapReady, jqmReady).then(function(){
+			app.onDeviceReady();
+		});
+
 	},
 	// deviceready Event Handler
 	//
@@ -64,99 +82,12 @@ var app = {
 	},
 	// Update DOM on a Received Event
 	receivedEvent: function (id) {
-		app.tool = new Tools();
-		app.$email = $('input[name="email"]');
-		app.$password = $('input[name="password"]');
-		app.$errorMessage = $('div.errorMessage');
-
-		var token = window.localStorage.getItem('token');
-
-		if (token && token != "") {
-			app.validateToken();
-		}
-
-		if (window.localStorage.getItem('email')) {
-			app.$email.val(window.localStorage.getItem('email'));
-		}
-
-		$('.signUpText').on('click', function () {
-			window.location = window.rootPath + "signUp.html";
-		});
-
-		$('div.signInButton').on('click', this.signInForm);
-
-
+		this.tool = new Tools();
 		console.log('Received Event: ' + id);
 	},
 
-	signInForm: function () {
-		app.$errorMessage.text("");
-		console.log('sign in');
-
-		var email = app.$email.val();
-		var password = app.$password.val();
-
-		if (!app.validateEmail(email)) {
-			app.$errorMessage.text("Please check your email format.");
-			return;
-		}
-
-		if (!app.validatePassword(password)) {
-			app.$errorMessage.text("Password length must be more than 5..");
-			return;
-		}
-
-		app.signIn({
-			email: email,
-			password: password
-		});
-
-		console.log('email ' + email + " password: " + password);
-	},
-
-	signIn: function (params) {
-		params = params || {};
-
-		this.tool.ajax({
-			url: app.setting.serverBase + app.setting.api.signIn,
-			context: app,
-			data: {
-				email: params.email,
-				password: params.password
-			},
-			callback: app.signIn_load
-		});
-
-	},
-
-	signIn_load: function (data) {
-		data = data || {};
-
-		if (data.access_token) {
-			window.localStorage.setItem("token", data.access_token);
-			window.localStorage.setItem("email", data.username);
-
-			app.tool.ajax({
-				url: app.setting.serverBase + app.setting.api.connectAPI,
-				context: app,
-				data: {
-					model: device.model,
-					cordova: device.cordova,
-					platform: device.platform,
-					phoneUuid: device.uuid,
-					version: device.version
-				}
-			});
-
-			window.location = app.setting.ruleMenu;
-		} else {
-			window.location = window.rootPath + "index.html";
-			app.receivedEvent('deviceready');
-		}
-
-	},
-
 	validateToken: function () {
+		app.tool.showLoading();
 		this.tool.ajax({
 			url: app.setting.serverBase + app.setting.api.validateTokenAPI,
 			type: 'post',
@@ -166,16 +97,12 @@ var app = {
 	},
 
 	validateToken_load: function (data) {
+		app.tool.hideLoading();
 		if (data.success) {
 			window.location = app.setting.ruleMenu;
 		} else {
 			window.localStorage.removeItem('token');
 		}
-	},
-
-	validateEmail: function (email) {
-		var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		return re.test(email);
 	},
 
 	validatePassword: function (password) {
@@ -240,6 +167,11 @@ var app = {
 				$.get(window.rootPath + 'pages/mainMenu.html').success(function(html) {
 					var $html = $(html);
 					$(oArgs.appendTo).append($html).trigger('create');
+					var profileImage = window.localStorage.getItem("profile");
+					if(profileImage){
+						$html.find('img').attr('src', 'http://avatar.childrenlab.com/' + profileImage);
+					}
+
 					app.attachMenuEvent($('#menuPanel'));
 				});
 
@@ -257,6 +189,8 @@ var app = {
 	attachMenuEvent: function($menuPanel) {
 		var self = this;
 		var $options = $menuPanel.find('div.options');
+		var $photo = $menuPanel.find('div.menuHeader');
+		var $inputFile = $menuPanel.find('input[type=file]');
 		var currentPageClass = $.mobile.activePage.attr('class');
 
 		$options.on('click', 'div.Home', function(){
@@ -287,6 +221,15 @@ var app = {
 			app.tool.cleanAuthToken();
 
 			window.location =  window.rootPath + "index.html";
+		});
+
+		$photo.on('click', function(){
+			if(currentPageClass.indexOf('updateProfilePage') != -1){
+				$menuPanel.panel("close");
+				return;
+			}
+			window.location = window.rootPath + "pages/updateProfile.html";
+
 		});
 
 	}

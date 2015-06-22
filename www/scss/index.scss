@@ -233,6 +233,13 @@ div.closeBox {
 	height: 150px;
 }
 
+.ui-overlay-a{
+	 background-color: white;
+	 border-color: white;
+	 color: white;
+	 text-shadow: none;
+}
+
 
 
 
@@ -508,6 +515,7 @@ div.eachCharacter {
 
 .ui-panel-wrapper {
 	min-height: 0;
+	background-color: white;
 }
 
 .ui-content {
@@ -516,6 +524,7 @@ div.eachCharacter {
 
 .ui-panel-inner {
 	padding: 0;
+	width: 100%;
 }
 
 .ui-focus {
@@ -571,12 +580,14 @@ a:active{ color: #000000; }
 			display: inline-block;
 			padding-top: 2em;
 
-			div.head {
-				width: 6em;
-				height: 6em;
-				border-radius: 50%;
-				background-color: white;
+			div.profileImage {
 				display: inline-block;
+				img {
+					width: 100px;
+					height: 100px;
+					border-radius: 50%;
+					background-color: white;
+				}
 			}
 
 			div.viewAccount {
@@ -820,5 +831,69 @@ div.feedbackPage {
 			display:inline-block;
 		}
 	}
+
+}
+
+
+/******************** UpdateProfile Page ***********************/
+div.updateProfilePage{
+
+	label {
+		display: inline-block;
+	}
+
+	div.container {
+		padding: 10px;
+	}
+
+	div.mainRadio {
+		text-align: center;
+	}
+
+	div.profileImageContainer {
+		text-align:center;
+		width: 100%;
+
+		div.profileImage {
+			display: inline-block;
+
+			img {
+				width: 10em;
+				height: 10em;
+				overflow: hidden;
+				border-radius: 50%;
+				background-color: white;
+			}
+		}
+
+		div.viewAccount {
+			font-size: 10px;
+		}
+	}
+
+	div.croppingImagePage {
+		text-align: center;
+		margin-top: 50px;
+
+		div.previewImage {
+		}
+
+		div.zoom{
+			width: 10px;
+			height: 10px;
+			background-color: black;
+		}
+	}
+
+	.ui-panel {
+		width: 20em !important;
+	}
+
+	.ui-panel-animate.ui-panel-page-content-position-right {
+		-webkit-transform: translate3d(-20em,0,0) !important;
+		-moz-transform: translate3d(-20em,0,0) !important;
+		transform: translate3d(-20em,0,0) !important;
+	}
+
 
 }

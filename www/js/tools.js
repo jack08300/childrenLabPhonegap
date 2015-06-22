@@ -4,6 +4,7 @@ Tools.prototype.ajax = function(params, oArgs){
 		var self = this;
     params = params || {};
     oArgs = oArgs || {};
+
     $.ajax({
         url: params.url,
         type: 'POST',
@@ -25,6 +26,8 @@ Tools.prototype.ajax = function(params, oArgs){
 				},
 				error: function(data, status, xhr){
 					console.error(status);
+					console.error(data);
+					console.error(xhr);
 					self.hideLoading();
 				},
 				statusCode: {
@@ -60,4 +63,18 @@ Tools.prototype.showLoading = function(oArgs){
 
 Tools.prototype.hideLoading = function(){
 	$.mobile.loading('hide');
+};
+
+Tools.prototype.validateEmail = function (email) {
+	var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+	return re.test(email);
+};
+
+Tools.prototype.validatePassword = function (password) {
+	return password.length > 5;
+};
+
+Tools.prototype.updateProfileImage = function () {
+	var profile = window.localStorage.getItem("profile");
+	$('div.profileImage').find('img').attr('src', 'http://avatar.childrenlab.com/' + profile + '?v=1');
 };
