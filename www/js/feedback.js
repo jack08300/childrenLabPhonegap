@@ -19,6 +19,7 @@ Feedback.prototype.init = function() {
 	$.when(gapReady, jqmReady).then(function(){
 		self.deviceReady();
 	});
+
 };
 
 Feedback.prototype.deviceReady = function() {
@@ -33,6 +34,8 @@ Feedback.prototype.deviceReady = function() {
 		mainMenu: true,
 		appendTo: "div.feedbackPage"
 	});
+
+	app.addMenuBar();
 };
 
 Feedback.prototype.attachEvent = function() {

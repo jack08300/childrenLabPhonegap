@@ -186,6 +186,71 @@ var app = {
 
 	},
 
+	addMenuBar: function(oArgs){
+		oArgs = oArgs || {};
+
+		this.$menu = $("<div class='menu bottom'></div>");
+		this.$map = $("<div class='mapPageIcon icon'></div>");
+		this.$calendar = $("<div class='calendarPageIcon icon'></div>");
+		this.$chart = $("<div class='chartPageIcon icon'></div>");
+		this.$mail = $("<div class='mailPageIcon icon'></div>");
+		this.$profile = $("<div class='profilePageIcon icon'></div>");
+
+
+		this.$menu.append(this.$map).append(this.$calendar).append(this.$chart).append(this.$mail).append(this.$profile);
+
+		var currentPageClass = $.mobile.activePage.attr('class').split(' ')[0];
+		this.$menu.find('div.' + currentPageClass + 'Icon').addClass('active');
+
+
+		oArgs.appendTo = oArgs.appendTo || 'body';
+		$(oArgs.appendTo).append(this.$menu);
+
+		this.attachMenuClickEvent();
+	},
+
+	attachMenuClickEvent: function(){
+		var self = this;
+		var currentPageClass = $.mobile.activePage.attr('class');
+
+		this.$map.on('click', function(){
+			if(currentPageClass.indexOf('homePage') != -1){
+				return;
+			}
+			window.location = window.rootPath + "pages/home.html";
+		});
+
+		this.$calendar.on('click', function(){
+			if(currentPageClass.indexOf('calendarPage') != -1){
+				return;
+			}
+			window.location = window.rootPath + "pages/calendar.html";
+		});
+
+		this.$chart.on('click', function(){
+
+		});
+
+		this.$mail.on('click', function(){
+
+		});
+
+		this.$profile.on('click', function(){
+			if(currentPageClass.indexOf('updateProfilePage') != -1){
+				return;
+			}
+			window.location = window.rootPath + "pages/updateProfile.html";
+		});
+
+	},
+
+	addHeaderBar: function(oArgs) {
+		oArgs = oArgs || {};
+
+		var $header = $("<div class='headerBar' id='headerBar'>" + oArgs.title + "</div>");
+		$('body>div').prepend($header);
+	},
+
 	attachMenuEvent: function($menuPanel) {
 		var self = this;
 		var $options = $menuPanel.find('div.options');
@@ -230,6 +295,14 @@ var app = {
 			}
 			window.location = window.rootPath + "pages/updateProfile.html";
 
+		});
+
+		$options.on('click', 'div.Setting', function(){
+			if(currentPageClass.indexOf('settingPage') != -1){
+				$menuPanel.panel("close");
+				return;
+			}
+			window.location =  window.rootPath + "pages/setting.html";
 		});
 
 	}

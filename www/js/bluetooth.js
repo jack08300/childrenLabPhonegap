@@ -92,7 +92,12 @@ Bluetooth.prototype.bleIsEnabled = function () {
 					}
 				},
 				function(){
-					self.searchDevice();
+					if(!window.localStorage.getItem(self.storageDeviceName) || !window.localStorage.getItem(self.storageDataName)){
+						self.searchDevice();
+					}else{
+						self.displayDeviceList(JSON.parse(window.localStorage.getItem(self.storageDeviceName)));
+						//self.displayServices(JSON.parse(window.localStorage.getItem(self.storageDataName)));
+					}
 				}
 			);
 
@@ -176,6 +181,8 @@ Bluetooth.prototype.displayDeviceList = function (data) {
 			data: data,
 			$device: $device
 		});
+
+
 
 		this.isConnected(data, $device);
 

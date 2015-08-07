@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.childrenLab" version="1.1.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.childrenLab" version="1.1.1">
   <name>Swing</name>
   <description>Swing watch App.</description>
   <author href="http://www.childrenLab.com" email="jack08300@gmail.com">Jay</author>

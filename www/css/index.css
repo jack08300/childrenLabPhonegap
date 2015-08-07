@@ -64,6 +64,10 @@ input {
     /* offset vertical: half of image height */
     /* offset horizontal: half of image width and text area width */ } }
 
+@font-face {
+  font-family: vaground;
+  src: url(font/vaground.ttf); }
+
 h1 {
   font-size: 24px;
   font-weight: bold;
@@ -326,6 +330,14 @@ div.app.loginOption {
     float: right; }
 
 /*************** Header ****************/
+#headerBar {
+  background-color: #fafafa;
+  border-bottom: 1px solid #979697;
+  font-family: vaground, Georgia, "Times New Roman", serif;
+  text-align: center;
+  padding: 23px 0 8px 0;
+  font-size: 18px; }
+
 div.header {
   height: 35px;
   background-color: #00aeef;
@@ -347,6 +359,39 @@ div.placeholder {
   div.placeholder.map {
     height: 240px;
     background-color: gainsboro; }
+
+/*************** Bottom Menu ****************/
+div.menu.bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fafafa;
+  z-index: 1000;
+  border-top: 1px solid #979697; }
+  div.menu.bottom > div {
+    float: left;
+    height: 50px;
+    width: 20%; }
+    div.menu.bottom > div.mapPageIcon {
+      background: url("../img/menu/navi_icons_map.svg") no-repeat 50%; }
+    div.menu.bottom > div.calendarPageIcon {
+      background: url("../img/menu/navi_icons_calendar.svg") no-repeat 50%; }
+    div.menu.bottom > div.chartPageIcon {
+      background: url("../img/menu/navi_icons_chart.svg") no-repeat 50%; }
+    div.menu.bottom > div.mailPageIcon {
+      background: url("../img/menu/navi_icons_mail.svg") no-repeat 50%; }
+    div.menu.bottom > div.profilePageIcon {
+      background: url("../img/menu/navi_icons_profile.svg") no-repeat 50%; }
+    div.menu.bottom > div.mapPageIcon.active {
+      background: #191638 url("../img/menu/navi_icons_map_selected.svg") no-repeat 50%; }
+    div.menu.bottom > div.calendarPageIcon.active {
+      background: #191638 url("../img/menu/navi_icons_calendar_selected.svg") no-repeat 50%; }
+    div.menu.bottom > div.chartPageIcon.active {
+      background: #191638 url("../img/menu/navi_icons_chart_selected.svg") no-repeat 50%; }
+    div.menu.bottom > div.mailPageIcon.active {
+      background: #191638 url("../img/menu/navi_icons_mail_selected.svg") no-repeat 50%; }
+    div.menu.bottom > div.profilePageIcon.active {
+      background: #191638 url("../img/menu/navi_icons_profile_selected.svg") no-repeat 50%; }
 
 /*************** Device List ****************/
 div.deviceList {
@@ -441,7 +486,6 @@ a:active {
   text-shadow: none;
   line-height: 25px; }
   #menuPanel div.menuHeader {
-    background-color: #6d6e71;
     height: 13em;
     text-align: center; }
     #menuPanel div.menuHeader div.container {
@@ -612,41 +656,48 @@ div.feedbackPage div.container {
     display: inline-block; }
 
 /******************** UpdateProfile Page ***********************/
-div.updateProfilePage label {
+div.profilePage label {
   display: inline-block; }
 
-div.updateProfilePage div.container {
+div.profilePage div.container {
   padding: 10px; }
 
-div.updateProfilePage div.mainRadio {
+div.profilePage div.mainRadio {
   text-align: center; }
 
-div.updateProfilePage div.profileImageContainer {
+div.profilePage div.profileImageContainer {
   text-align: center;
   width: 100%; }
-  div.updateProfilePage div.profileImageContainer div.profileImage {
+  div.profilePage div.profileImageContainer div.profileImage {
     display: inline-block; }
-    div.updateProfilePage div.profileImageContainer div.profileImage img {
+    div.profilePage div.profileImageContainer div.profileImage img {
       width: 10em;
       height: 10em;
       overflow: hidden;
       border-radius: 50%;
       background-color: white; }
-  div.updateProfilePage div.profileImageContainer div.viewAccount {
+  div.profilePage div.profileImageContainer div.viewAccount {
     font-size: 10px; }
 
-div.updateProfilePage div.croppingImagePage {
+div.profilePage div.croppingImagePage {
   text-align: center;
   margin-top: 50px; }
-  div.updateProfilePage div.croppingImagePage div.zoom {
+  div.profilePage div.croppingImagePage div.zoom {
     width: 10px;
     height: 10px;
     background-color: black; }
 
-div.updateProfilePage .ui-panel {
+div.profilePage .ui-panel {
   width: 20em !important; }
 
-div.updateProfilePage .ui-panel-animate.ui-panel-page-content-position-right {
+div.profilePage .ui-panel-animate.ui-panel-page-content-position-right {
   -webkit-transform: translate3d(-20em, 0, 0) !important;
   -moz-transform: translate3d(-20em, 0, 0) !important;
   transform: translate3d(-20em, 0, 0) !important; }
+
+div.profilePage div.ui-panel-wrapper {
+  margin-bottom: 80px; }
+
+/******************** Setting Page ***********************/
+div.settingPage div.container {
+  padding: 30px 10px 0 10px; }

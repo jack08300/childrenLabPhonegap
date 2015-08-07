@@ -18,7 +18,6 @@ var UpdateProfile = function () {
 	$.when(gapReady, jqmReady).then(function(){
 		self.init();
 	});
-
 };
 
 UpdateProfile.prototype.init = function () {
@@ -42,10 +41,14 @@ UpdateProfile.prototype.init = function () {
 		this.$profileImage.find('img').attr('src', 'http://avatar.childrenlab.com/' + profileImage);
 	}
 
-	app.addHeader({
+/*	app.addHeader({
 		mainMenu: true,
 		appendTo: "div.updateProfilePage"
-	});
+	});*/
+
+	app.addHeaderBar({title: 'Profile'});
+
+	app.addMenuBar();
 
 	this.retrieveUserProfile();
 };

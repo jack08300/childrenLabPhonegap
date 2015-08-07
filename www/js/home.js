@@ -19,10 +19,6 @@ Home.prototype.init = function () {
 		self.deviceReady();
 	});
 
-	//self.deviceReady();
-	//this.bluetooth = new Bluetooth().init();
-
-
 };
 
 Home.prototype.deviceReady = function () {
@@ -47,11 +43,15 @@ Home.prototype.deviceReady = function () {
 		}
 	);
 
-	app.addHeader({
+/*	app.addHeader({
 		mainMenu: true,
 		appendTo: "div.homePage",
 		body: $('body')
-	});
+	});*/
+
+	app.addHeaderBar({title: 'Map'});
+
+	app.addMenuBar();
 
 	this.attachEvent();
 

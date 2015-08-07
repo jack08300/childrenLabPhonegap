@@ -63,6 +63,11 @@ input {
 	}
 }
 
+@font-face {
+	font-family: vaground;
+	src: url(font/vaground.ttf);
+}
+
 h1 {
 	font-size: 24px;
 	font-weight: bold;
@@ -424,6 +429,17 @@ div.app.loginOption {
 }
 
 /*************** Header ****************/
+#headerBar {
+	background-color: #fafafa;
+	border-bottom: 1px solid #979697;
+	font-family: vaground, Georgia, "Times New Roman", serif;
+	text-align: center;
+	padding: 23px 0 8px 0;
+	font-size: 18px;
+
+}
+
+
 div.header {
 	height: 35px;
 	background-color: #00aeef;
@@ -454,6 +470,35 @@ div.placeholder {
 		background-color: gainsboro;
 	}
 }
+
+/*************** Bottom Menu ****************/
+div.menu.bottom {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #fafafa;
+	z-index: 1000;
+	border-top: 1px solid #979697;
+
+	>	div {
+		float: left;
+		height: 50px;
+		width: 20%;
+
+		&.mapPageIcon { background: url('../img/menu/navi_icons_map.svg') no-repeat 50%; }
+		&.calendarPageIcon { background: url('../img/menu/navi_icons_calendar.svg') no-repeat 50%; }
+		&.chartPageIcon { background: url('../img/menu/navi_icons_chart.svg') no-repeat 50%; }
+		&.mailPageIcon { background: url('../img/menu/navi_icons_mail.svg') no-repeat 50%; }
+		&.profilePageIcon { background: url('../img/menu/navi_icons_profile.svg') no-repeat 50%; }
+
+		&.mapPageIcon.active { background: #191638 url('../img/menu/navi_icons_map_selected.svg') no-repeat 50% }
+		&.calendarPageIcon.active { background: #191638 url('../img/menu/navi_icons_calendar_selected.svg') no-repeat 50% }
+		&.chartPageIcon.active { background: #191638 url('../img/menu/navi_icons_chart_selected.svg') no-repeat 50% }
+		&.mailPageIcon.active { background: #191638 url('../img/menu/navi_icons_mail_selected.svg') no-repeat 50% }
+		&.profilePageIcon.active { background: #191638 url('../img/menu/navi_icons_profile_selected.svg') no-repeat 50% }
+	}
+}
+
 
 /*************** Device List ****************/
 div.deviceList {
@@ -572,7 +617,6 @@ a:active{ color: #000000; }
 	line-height: 25px;
 
 	div.menuHeader {
-		background-color: #6d6e71;
 		height: 13em;
 		text-align: center;
 
@@ -836,7 +880,7 @@ div.feedbackPage {
 
 
 /******************** UpdateProfile Page ***********************/
-div.updateProfilePage{
+div.profilePage{
 
 	label {
 		display: inline-block;
@@ -895,5 +939,16 @@ div.updateProfilePage{
 		transform: translate3d(-20em,0,0) !important;
 	}
 
+	div.ui-panel-wrapper{
+		margin-bottom: 80px;
+	}
 
+
+}
+
+/******************** Setting Page ***********************/
+div.settingPage {
+	div.container {
+		padding: 30px 10px 0 10px;
+	}
 }
