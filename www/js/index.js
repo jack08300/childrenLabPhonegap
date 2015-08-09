@@ -30,6 +30,7 @@ var app = {
 			connectAPI: "/connect/device",
 			validateTokenAPI: "/test/token",
 			signUp: "/user/register",
+			emailRegistered: "/user/isEmailRegistered",
 			signIn: "/api/login",
 			searchSchedule: "/schedule/search",
 			scheduleCreateAPI: "/schedule/create",
@@ -197,7 +198,7 @@ var app = {
 		this.$profile = $("<div class='profilePageIcon icon'></div>");
 
 
-		this.$menu.append(this.$map).append(this.$calendar).append(this.$chart).append(this.$mail).append(this.$profile);
+		this.$menu.append(this.$chart).append(this.$calendar).append(this.$map).append(this.$mail).append(this.$profile);
 
 		var currentPageClass = $.mobile.activePage.attr('class').split(' ')[0];
 		this.$menu.find('div.' + currentPageClass + 'Icon').addClass('active');
@@ -305,7 +306,36 @@ var app = {
 			window.location =  window.rootPath + "pages/setting.html";
 		});
 
+	},
+
+	loadTemplate: function(oArgs){
+		oArgs = oArgs || {};
+
+		//Path = 'pages/mainMenu.html'
+		$.get(window.rootPath + oArgs.path).success(function(html) {
+			var $html = $(html);
+			$(oArgs.appendTo).append($html).trigger('create');
+
+			oArgs.context = oArgs.context || this;
+			oArgs.callback.call(oArgs.context);
+		});
+	},
+
+	pageSwitch: function(oArgs){
+		oArgs = oArgs || {};
+
+		$(oArgs.pageOut).animate({
+			left: '-150%'
+		});
+		$(oArgs.pageIn).animate({
+			left: '0'
+		});
+
+		$('div.indexPage').animate({
+			'background-position-x': '-250px'
+		});
 	}
+
 };
 
 app.initialize();

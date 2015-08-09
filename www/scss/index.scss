@@ -24,7 +24,7 @@ body {
 	-webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
 	-webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
 	-webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
-	background-color: #ffffff;
+	background-color: #fcfcfc;
 
 	font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
 	font-size: 14px;
@@ -35,8 +35,14 @@ body {
 	width: 100%;
 }
 
+body.ui-overlay-a {
+	background-color: #fcfcfc;
+	border-color: #fcfcfc;
+	color: black;
+}
+
 input {
-	font-size: 14px;
+	font-size: 16px;
 }
 
 /* Portrait layout (default) */
@@ -171,7 +177,6 @@ div.navigater {
 .mainEdit input {
 	border: none;
 	margin-bottom: 10px;
-	background-color: white;
 	border-bottom: solid 1px black;
 	padding: 10px 0px 5px 5px;
 	width: 100%;
@@ -181,7 +186,6 @@ div.navigater {
 	input {
 		border: none;
 		margin-bottom: 10px;
-		background-color: white;
 		border-bottom: solid 1px black;
 		padding: 10px 0px 5px 5px;
 	}
@@ -200,11 +204,12 @@ div.navigater {
 }
 
 .mainButton {
-	background-color: black;
+	background-color: #1a1738;
 	padding: 5px;
 	margin: 15px 0 15px 0;
-	border-radius: 3px;
+	border-radius: 5px;
 	color: white;
+	font-size: 16px;
 }
 
 .secondaryButton {
@@ -253,16 +258,6 @@ div.closeBox {
 	width: 100%;
 }
 
-div.signUpPage {
-	div.signUp {
-		padding: 0 2em;
-	}
-
-	label {
-		display: inline-block;
-	}
-}
-
 div.mainError {
 	color: palevioletred;
 	font-size: 14px;
@@ -289,6 +284,22 @@ div.wrap {
 	height: 100px;
 	width: 100px;
 	border-radius: 50%;
+}
+
+/*
+input::-webkit-input-placeholder {
+	color: rgba(0,5,143,.8);
+}
+*/
+
+input.mainInput {
+	border: none;
+	border-radius: 5px;
+	padding: 6px 10px;
+	background-color: #1a1738;
+	color: white;
+	width: 92%;
+	margin: 8px 0;
 }
 
 /** Dailog **/
@@ -336,19 +347,43 @@ div.previousPage{
 
 
 
-/************ login page ***************/
+/************ Index page ***************/
 
-div.app.loginPage {
-	div.separateLine hr {
-		width: 42%;
+div.indexPage {
+	background: #fcfcfc url("../img/background/city.jpg") -150px 100% no-repeat;
+	background-size: 600px;
 
-		&.leftHr {
-			margin: 10px 5px 10px 0px;
+	div.indexOptions{
+		position: relative;
+		> div{
+			padding:20px 30px;
+			text-align: center;
+		}
+	}
+
+	div.separateLine{
+		div.text {
+			position:absolute;
+			left:46.5%;
 		}
 
-		&.rightHr {
-			margin: 10px 0px 10px 5px;
+		hr {
+			width: 25%;
+
+			&.leftHr {
+				margin: 10px 5px 10px 20px;
+			}
+
+			&.rightHr {
+				margin: 10px 20px 10px 5px;
+				float: right;
+			}
 		}
+	}
+
+	div.pageCover {
+		position: absolute;
+		top: 0;
 	}
 
 	div.signInButtons {
@@ -364,15 +399,22 @@ div.app.loginPage {
 		}
 	}
 
-	div.login {
-		display: inline-block;
-		width: 100%;
+	div.signButtons {
+		position: relative;
 	}
 
-	div.forgotpass {
+	div.signInUp {
 		position: relative;
-		font-size: 9px;
-		text-align: right;
+		top: 0;
+		left: 150%;
+	}
+
+	/********* Sign Up ***********/
+
+	div.signUp {
+		position: relative;
+		top: 0;
+		left: 150%;
 	}
 
 }
@@ -399,7 +441,7 @@ body.ruleOption {
 	};
 }
 
-div.app.loginOption {
+div.loginOption {
 	margin: 0px 0px 0px -112px;
 	top: 39%;
 

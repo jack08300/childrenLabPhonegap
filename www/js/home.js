@@ -49,7 +49,7 @@ Home.prototype.deviceReady = function () {
 		body: $('body')
 	});*/
 
-	app.addHeaderBar({title: 'Map'});
+	app.addHeaderBar({title: 'Nearby'});
 
 	app.addMenuBar();
 

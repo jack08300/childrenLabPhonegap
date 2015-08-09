@@ -12,7 +12,8 @@ Tools.prototype.ajax = function(params, oArgs){
         context: params.context,
         beforeSend: function (request)
         {
-					if(params.url.indexOf("register") == -1 && params.url.indexOf("login") == -1){
+					if(params.url.indexOf("isEmailRegistered") == -1 && params.url.indexOf("register") == -1 && params.url.indexOf("login") == -1){
+						console.error("setting token");
 						request.setRequestHeader(app.setting.tokenName, window.localStorage.getItem('token'));
 					}
 
