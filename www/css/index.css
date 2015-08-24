@@ -16,6 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+@font-face {
+  font-family: vaground;
+  src: url(font/vaground.ttf); }
+
+@font-face {
+  font-family: avenir;
+  src: url(font/AvenirNextLTPro-Regular.otf); }
+
 * {
   -webkit-tap-highlight-color: transparent;
   /* make transparent link selection, adjust last value opacity 0 to 1.0 */ }
@@ -28,7 +36,7 @@ body {
   -webkit-user-select: none;
   /* prevent copy paste, to allow, change 'none' to 'text' */
   background-color: #fcfcfc;
-  font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  font-family: avenir, Georgia, "Times New Roman", serif;
   font-size: 14px;
   height: 100%;
   margin: 0px;
@@ -68,10 +76,6 @@ input {
     margin: -90px 0px 0px -198px;
     /* offset vertical: half of image height */
     /* offset horizontal: half of image width and text area width */ } }
-
-@font-face {
-  font-family: vaground;
-  src: url(font/vaground.ttf); }
 
 h1 {
   font-size: 24px;
@@ -172,12 +176,21 @@ div.navigater {
   color: #ABABAB; }
 
 .mainButton {
+  font-family: avenir, Georgia, "Times New Roman", serif;
   background-color: #1a1738;
   padding: 5px;
   margin: 15px 0 15px 0;
   border-radius: 5px;
   color: white;
   font-size: 16px; }
+
+.backButton {
+  font-family: vaground, Georgia, "Times New Roman", serif;
+  color: #1a1738;
+  font-size: 20px;
+  position: absolute;
+  top: 30px;
+  left: 10px; }
 
 .secondaryButton {
   background-color: white;
@@ -282,9 +295,10 @@ div.previousPage {
 
 /************ Index page ***************/
 div.indexPage {
-  background: #fcfcfc url("../img/background/city.jpg") -150px 100% no-repeat;
-  background-size: 600px;
-  /********* Sign Up ***********/ }
+  background: #fcfcfc url("../img/background/city_trans-01.png") 0 100% repeat-x;
+  background-size: 800px;
+  margin-top: 80px;
+  /********* Role Choose ***********/ }
   div.indexPage div.indexOptions {
     position: relative; }
     div.indexPage div.indexOptions > div {
@@ -312,14 +326,21 @@ div.indexPage {
       font-size: 14px; }
   div.indexPage div.signButtons {
     position: relative; }
-  div.indexPage div.signInUp {
+  div.indexPage div.hideToRight {
     position: relative;
     top: 0;
     left: 150%; }
-  div.indexPage div.signUp {
-    position: relative;
-    top: 0;
-    left: 150%; }
+  div.indexPage div.chooseRole {
+    width: 250px; }
+    div.indexPage div.chooseRole div.pageTitle {
+      font-size: 20px;
+      font-family: vaground, Georgia, "Times New Roman", serif; }
+    div.indexPage div.chooseRole div.separateLine hr {
+      width: 23%;
+      margin-top: 8px; }
+    div.indexPage div.chooseRole div.separateLine div.text {
+      font-size: 12px;
+      left: 36.5%; }
 
 /************ Login Option Page ***************/
 body.ruleOption div.whiteCover {

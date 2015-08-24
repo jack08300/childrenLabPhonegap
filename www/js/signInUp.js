@@ -24,23 +24,10 @@ var SignInUp = function () {
 SignInUp.prototype.init = function () {
 
 	this.$signButton = $('div.signButton');
-	this.isRegistered = false;
+	this.isRegistered = true;
 
-/*
-	this.$email = $('input[name="email"]');
-	this.$password = $('input[name="password"]');
-	this.$errorMessage = $('div.errorMessage');
 
-	var token = window.localStorage.getItem('token');
-
-	if (token && token != "") {
-		app.validateToken();
-	}
-
-	if (window.localStorage.getItem('email')) {
-		this.$email.val(window.localStorage.getItem('email'));
-	}
-*/
+	app.animateBackground({ background: 'div.indexPage' });
 
 	this.attachEvent();
 
@@ -57,15 +44,6 @@ SignInUp.prototype.attachEvent = function () {
 		}
 
 	});
-
-/*	$('.signUpText').on('click', function () {
-		window.location = window.rootPath + "signUp.html";
-	});
-
-	$('div.signInButton').on('click', function(){
-		self.signInForm();
-	});*/
-
 };
 
 SignInUp.prototype.loadSignForm = function() {
@@ -74,7 +52,14 @@ SignInUp.prototype.loadSignForm = function() {
 		appendTo: 'div.indexOptions',
 		context: this,
 		callback: this.loadSignForm_load
-	})
+	});
+
+/*	app.loadTemplate({
+		path: 'template/chooseRole.html',
+		appendTo: 'div.indexOptions',
+		context: this,
+		callback: this.loadSignForm_load
+	});*/
 };
 
 SignInUp.prototype.loadSignForm_load = function(){
@@ -88,7 +73,7 @@ SignInUp.prototype.loadSignForm_load = function(){
 
 	this.$email = $('input[name="email"]');
 	this.$password = $('input[name="password"]');
-	this.$rePassword =$('input[name="rePassword"]');
+	this.$rePassword = $('input[name="rePassword"]');
 	this.$errorMessage = $('div.errorMessage');
 
 	this.$email.on('focusout', function(){
@@ -126,7 +111,10 @@ SignInUp.prototype.checkEmailRegistered = function(){
 };
 
 SignInUp.prototype.checkEmailRegistered_load = function(data){
-	if(!data.emailRegistered){
+
+	data = data || {};
+
+	if(!data.registered){
 		this.isRegistered = false;
 		this.$rePassword.show();
 	}else{
@@ -145,8 +133,6 @@ SignInUp.prototype.onSubmit = function() {
 		this.$errorMessage.html("Password length must be longer than 5.");
 		return false;
 	}
-
-
 
 	if(!this.isRegistered){
 		if(this.$password.val() != this.$rePassword.val()){
@@ -169,8 +155,8 @@ SignInUp.prototype.onSubmit = function() {
 			url: app.setting.serverBase + app.setting.api.signIn,
 			context: this,
 			data: {
-				email: params.email,
-				password: params.password
+				email: this.$email.val(),
+				password: this.$password.val()
 			},
 			callback: this.signIn_load
 		});
@@ -181,48 +167,177 @@ SignInUp.prototype.onSubmit = function() {
 };
 
 SignInUp.prototype.signUp_load = function() {
-	app.tool.hideLoading();
+
+	app.tool.ajax({
+		url: app.setting.serverBase + app.setting.api.signIn,
+		context: this,
+		data: {
+			email: this.$email.val(),
+			password: this.$password.val()
+		},
+		callback: this.userInfoAsset
+	});
+};
+
+SignInUp.prototype.userInfoAsset = function() {
 	app.loadTemplate({
 		path: 'template/signUpInfo.html',
 		appendTo: 'div.indexOptions',
 		context: this,
-		callback: this.signUpInfo_load
+		callback: this.userInfoAsset_load
 	});
 };
 
-SignInUp.prototype.signUpInfo_load = function() {
+SignInUp.prototype.userInfoAsset_load = function() {
+	app.tool.hideLoading();
 	app.pageSwitch({
 		pageOut: 'div.signInUp',
 		pageIn: 'div.signUp'
 	});
 
+	var self = this;
+	this.$firstName = $('input[name="firstName"]');
+	this.$lastName = $('input[name="lastName"]');
+	this.$phoneNumber = $('input[name="phoneNumber"]');
+	this.$zipCode = $('input[name="zipCode"]');
+
+	this.$firstName.keypress(function(e){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if ( (code==13) || (code==10)){
+			self.onSubmitInfo();
+		}
+	});
+
+	this.$lastName.keypress(function(e){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if ( (code==13) || (code==10)){
+			self.onSubmitInfo();
+		}
+	});
+
+	this.$phoneNumber.keypress(function(e){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if ( (code==13) || (code==10)){
+			self.onSubmitInfo();
+		}
+	});
+
+	this.$zipCode.keypress(function(e){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if ( (code==13) || (code==10)){
+			self.onSubmitInfo();
+		}
+	});
 };
 
-SignInUp.prototype.signIn_load = function (data) {
-	data = data || {};
-	app.tool.hideLoading();
-	if (data.access_token) {
-		window.localStorage.setItem("token", data.access_token);
-		window.localStorage.setItem("email", data.email);
-		window.localStorage.setItem("profile", data.profileImage);
+SignInUp.prototype.onSubmitInfo = function () {
 
-		app.tool.ajax({
-			url: app.setting.serverBase + app.setting.api.connectAPI,
-			context: app,
-			data: {
-				model: device.model,
-				cordova: device.cordova,
-				platform: device.platform,
-				phoneUuid: device.uuid,
-				version: device.version
-			}
-		});
-
-		window.location = app.setting.ruleMenu;
-	} else {
-		window.location = window.rootPath + "index.html";
+	if(this.$firstName.val().length < 1 || this.$lastName.val().length < 1){
+		this.$errorMessage.html("Please enter your name.");
+		return false;
 	}
 
+/*	if(this.$phoneNumber.val().length < 1){
+		this.$errorMessage.html("Please enter your phone number.");
+		return false;
+	}*/
+
+	if(this.$zipCode.val().length < 1){
+		this.$errorMessage.html("Please enter your zip code.");
+		return false;
+	}
+
+	app.tool.showLoading();
+	app.tool.ajax({
+		url: app.setting.serverBase + app.setting.api.updateProfile,
+		context: this,
+		data: {
+			firstName: this.$firstName.val(),
+			lastName: this.$lastName.val(),
+			phoneNumber: this.$phoneNumber.val(),
+			zipCode: this.$zipCode.val()
+		},
+		callback: this.onSubmitInfo_load
+	});
+};
+
+SignInUp.prototype.onSubmitInfo_load = function(data){
+	app.tool.hideLoading();
+	if(data.success){
+		app.loadTemplate({
+			path: 'template/chooseRole.html',
+			appendTo: 'div.indexOptions',
+			context: this,
+			callback: this.rolePageAssets_load
+		});
+
+	}else{
+		return;
+	}
+
+
+
+	//update device information
+	app.tool.ajax({
+		url: app.setting.serverBase + app.setting.api.connectAPI,
+		context: this,
+		data: {
+			model: device.model,
+			cordova: device.cordova,
+			platform: device.platform,
+			phoneUuid: device.uuid,
+			version: device.version
+		}
+	});
+};
+
+SignInUp.prototype.rolePageAssets_load = function () {
+	app.pageSwitch({
+		pageOut: 'div.signUp',
+		pageIn: 'div.chooseRole'
+	});
+
+	var self = this;
+	this.$parentButton = $('div.parentButton');
+	this.$nannyButton = $('div.nannyButton');
+
+	this.$parentButton.on('click', function(){
+		self.setUserRole("parent");
+	});
+
+	this.$nannyButton.on('click', function(){
+		self.setUserRole("nanny");
+	});
+
+
+};
+
+SignInUp.prototype.setUserRole = function (role) {
+	app.tool.showLoading();
+	app.tool.ajax({
+		url: app.setting.serverBase + app.setting.api.updateRole,
+		context: this,
+		data: {
+			role: role
+		},
+		callback: this.setUserRole_load
+	});
+};
+
+SignInUp.prototype.setUserRole_load = function (data) {
+	if(data.success){
+		this.signIn_load();
+	}else{
+		alert("Please try again.");
+	}
+
+	app.tool.hideLoading();
+};
+
+
+SignInUp.prototype.signIn_load = function () {
+	window.location = app.setting.home;
+	app.tool.hideLoading();
 };
 
 

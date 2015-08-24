@@ -13,13 +13,16 @@ Tools.prototype.ajax = function(params, oArgs){
         beforeSend: function (request)
         {
 					if(params.url.indexOf("isEmailRegistered") == -1 && params.url.indexOf("register") == -1 && params.url.indexOf("login") == -1){
-						console.error("setting token");
 						request.setRequestHeader(app.setting.tokenName, window.localStorage.getItem('token'));
 					}
 
         },
         data: params.data,
         success: function(data, status, xhr) {
+					if(params.url.indexOf("login") != -1){
+						window.localStorage.setItem("token", data.access_token);
+						window.localStorage.setItem("email", data.email);
+					}
 					if(!params.callback) { return; }
 
 					params.context = params.context || this;
@@ -60,6 +63,10 @@ Tools.prototype.showLoading = function(oArgs){
 		theme: 'a',
 		html: ""
 	});
+
+	if(!oArgs.noHideKeyboard){
+		this.hideKeyboard();
+	}
 };
 
 Tools.prototype.hideLoading = function(){
@@ -78,4 +85,18 @@ Tools.prototype.validatePassword = function (password) {
 Tools.prototype.updateProfileImage = function () {
 	var profile = window.localStorage.getItem("profile");
 	$('div.profileImage').find('img').attr('src', 'http://avatar.childrenlab.com/' + profile + '?v=1');
+};
+
+Tools.prototype.hideKeyboard = function () {
+	document.activeElement.blur();
+	var inputs = document.querySelectorAll('input');
+	for(var i=0; i < inputs.length; i++) {
+		inputs[i].blur();
+	}
+};
+
+Tools.prototype.center = function (page) {
+	$(document).on('pageshow', page, function(e,data){
+		$('#index-content').css('margin-top',($(window).height() - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#index-content').outerHeight())/2);
+	});
 };

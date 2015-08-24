@@ -20,6 +20,7 @@ var app = {
 
 	setting: {
 		serverBase: "http://www.childrenLab.com",
+		//serverBase: "http://111.185.13.44:60/childrenLab",
 
 		home: "pages/home.html",
 		nearby: "pages/nearby.html",
@@ -40,7 +41,8 @@ var app = {
 			feedback: "/user/leaveFeedback",
 			updateProfile: "/user/updateProfile",
 			uploadAvatar: "/avatar/uploadProfileImage",
-			retrieveUserProfile: "/user/retrieveUserProfile"
+			retrieveUserProfile: "/user/retrieveUserProfile",
+			updateRole: "/user/updateUserRole"
 		}
 	},
 
@@ -198,7 +200,7 @@ var app = {
 		this.$profile = $("<div class='profilePageIcon icon'></div>");
 
 
-		this.$menu.append(this.$chart).append(this.$calendar).append(this.$map).append(this.$mail).append(this.$profile);
+		this.$menu.append(this.$map).append(this.$chart).append(this.$calendar).append(this.$mail).append(this.$profile);
 
 		var currentPageClass = $.mobile.activePage.attr('class').split(' ')[0];
 		this.$menu.find('div.' + currentPageClass + 'Icon').addClass('active');
@@ -331,9 +333,22 @@ var app = {
 			left: '0'
 		});
 
-		$('div.indexPage').animate({
-			'background-position-x': '-250px'
-		});
+
+	},
+
+
+	animateBackground: function(oArgs){
+		var self = this;
+
+		oArgs = oArgs || {};
+		if(oArgs.background){
+			var backgroundDev = $(oArgs.background);
+			backgroundDev.transition({
+				'backgroundPosition-x': ((backgroundDev.css('backgroundPosition-x') ? parseInt(backgroundDev.css('backgroundPosition-x').replace('px', '')) : 0) - 2000) + 'px'
+			}, 350000, 'linear', function(){
+				self.animateBackground(oArgs)
+			});
+		}
 	}
 
 };
