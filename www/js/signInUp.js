@@ -24,6 +24,7 @@ var SignInUp = function () {
 SignInUp.prototype.init = function () {
 
 	this.$signButton = $('div.signButton');
+	this.$facebookButton = $('div.facebookButton');
 	this.isRegistered = true;
 
 
@@ -31,6 +32,50 @@ SignInUp.prototype.init = function () {
 
 	this.attachEvent();
 
+};
+
+SignInUp.prototype.testFacebook = function() {
+	var permission = ["public_profile", "email", "user_birthday"];
+	facebookConnectPlugin.login(permission, this.testFacebook_success, this.testFacebook_error)
+
+};
+
+SignInUp.prototype.testFacebook_success = function(data) {
+	console.error(data);
+
+	var auth = data.authResponse;
+
+	this.facebookData = data;
+
+	app.tool.ajax({
+		url: app.setting.serverBase + "/user/socialLogin",
+		context: this,
+		data: {
+			facebook: data
+		},
+		callback: this.facebookLogin_load,
+		noToken: true
+	});
+};
+
+SignInUp.prototype.testFacebook_me = function(error) {
+	facebookConnectPlugin.api("me?fields=id,first_name,last_name,gender,birthday,email", ["public_profile","user_birthday","email"],
+		function(meData){
+			console.error(meData)
+		}
+		,
+		function(meError){
+			console.error(meError);
+		}
+	);
+};
+
+SignInUp.prototype.testFacebook_error = function(error) {
+	alert(error);
+};
+
+SignInUp.prototype.facebookLogin_load = function(data) {
+	alert(data);
 };
 
 SignInUp.prototype.attachEvent = function () {
@@ -43,6 +88,10 @@ SignInUp.prototype.attachEvent = function () {
 			self.loadSignForm();
 		}
 
+	});
+
+	this.$facebookButton.on('click', function(){
+		self.testFacebook();
 	});
 };
 
@@ -75,6 +124,7 @@ SignInUp.prototype.loadSignForm_load = function(){
 	this.$password = $('input[name="password"]');
 	this.$rePassword = $('input[name="rePassword"]');
 	this.$errorMessage = $('div.errorMessage');
+
 
 	this.$email.on('focusout', function(){
 		if(app.tool.validateEmail(self.$email.val())){

@@ -20,7 +20,7 @@ var app = {
 
 	setting: {
 		serverBase: "http://www.childrenLab.com",
-		//serverBase: "http://111.185.13.44:60/childrenLab",
+		//serverBase: "http://111.185.13.44:8070/childrenLab",
 
 		home: "pages/home.html",
 		nearby: "pages/nearby.html",
