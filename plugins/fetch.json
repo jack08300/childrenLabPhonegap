@@ -17,13 +17,6 @@
             "id": "org.apache.cordova.device"
         }
     },
-    "com.megster.cordova.ble": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/don/cordova-plugin-ble-central.git",
-            "subdir": "."
-        }
-    },
     "nl.x-services.plugins.calendar": {
         "source": {
             "type": "git",
@@ -92,15 +85,12 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.phonegap.plugins.facebookconnect": {
+    "cordova-plugin-ble-central": {
         "source": {
-            "type": "local",
-            "path": "../phonegap-facebook-plugin"
+            "type": "registry",
+            "id": "cordova-plugin-ble-central"
         },
         "is_top_level": true,
-        "variables": {
-            "APP_ID": "701955773243464",
-            "APP_NAME": "ChildrenLab"
-        }
+        "variables": {}
     }
 }

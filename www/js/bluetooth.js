@@ -6,8 +6,8 @@ Bluetooth.prototype.init = function (oArgs) {
 
 	this.uploadTimer = 5000;
 
-	this.deviceId = "1B85999A-A964-F738-79CE-49DBD019C503";
-	this.serviceUuid = "91C10EDC-8616-4CBF-BC79-0BF54ED2FA17";
+	this.deviceId = "39A1A2DF-B6E7-8DCE-4EC8-02F1838998FE";
+	this.serviceUuid = ['1803', '1802', '1804'];
 
 	this.storageDeviceName = "ConnectedDevice";
 	this.storageDataName = "ConnectedData";
@@ -15,6 +15,8 @@ Bluetooth.prototype.init = function (oArgs) {
 	this.$eachDevice = oArgs.$template;
 	this.$deviceList = oArgs.$deviceList;
 	this.sensorData = {macId: ''};
+
+	this.$debug = oArgs.$debug;
 
 	this.characteristicList = [{
 		name: "Light",
@@ -96,7 +98,6 @@ Bluetooth.prototype.bleIsEnabled = function () {
 						self.searchDevice();
 					}else{
 						self.displayDeviceList(JSON.parse(window.localStorage.getItem(self.storageDeviceName)));
-						//self.displayServices(JSON.parse(window.localStorage.getItem(self.storageDataName)));
 					}
 				}
 			);
@@ -126,6 +127,7 @@ Bluetooth.prototype.enableBluetooth = function () {
 };
 
 Bluetooth.prototype.searchDevice = function () {
+	this.$debug.append("<div>Searching Device....</div>");
 	var self = this;
 	//self.$bluetoothStatus.html("ON");
 	self.runningOnSearch = true;
@@ -133,8 +135,10 @@ Bluetooth.prototype.searchDevice = function () {
 	this.$deviceList.empty();
 	//self.$status.html("Scanning...");
 
-	ble.startScan([self.serviceUuid],
+	ble.startScan(self.serviceUuid,
 		function (device) {
+			self.$debug.append("<div>Finished Scan....</div>");
+			self.$debug.append("<div>" + JSON.stringify(device) + "</div>");
 			self.displayDeviceList(device);
 		},
 		function (error) {
@@ -269,9 +273,6 @@ Bluetooth.prototype.displayServices = function (data, oArgs) {
 				dataReceive: $('#eachData_' + i).find('div.devicedata')
 			});
 		}
-
-
-
 	}
 
 };

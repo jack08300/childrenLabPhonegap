@@ -33,6 +33,7 @@ var app = {
 			signUp: "/user/register",
 			emailRegistered: "/user/isEmailRegistered",
 			signIn: "/api/login",
+			submitKidInfo: "/kids/add",
 			searchSchedule: "/schedule/search",
 			scheduleCreateAPI: "/schedule/create",
 			retrieveScheduleMessage: "/schedule/retrieveMessage",

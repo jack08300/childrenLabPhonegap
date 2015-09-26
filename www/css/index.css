@@ -298,7 +298,8 @@ div.indexPage {
   background: #fcfcfc url("../img/background/city_trans-01.png") 0 100% repeat-x;
   background-size: 800px;
   margin-top: 80px;
-  /********* Role Choose ***********/ }
+  /********* Role Choose ***********/
+  /************ Searching **********/ }
   div.indexPage div.indexOptions {
     position: relative; }
     div.indexPage div.indexOptions > div {
@@ -330,17 +331,28 @@ div.indexPage {
     position: relative;
     top: 0;
     left: 150%; }
-  div.indexPage div.chooseRole {
+  div.indexPage div.chooseRole, div.indexPage div.swingWatch, div.indexPage div.purchaseWatch {
     width: 250px; }
-    div.indexPage div.chooseRole div.pageTitle {
+    div.indexPage div.chooseRole div.pageTitle, div.indexPage div.swingWatch div.pageTitle, div.indexPage div.purchaseWatch div.pageTitle {
       font-size: 20px;
       font-family: vaground, Georgia, "Times New Roman", serif; }
-    div.indexPage div.chooseRole div.separateLine hr {
+    div.indexPage div.chooseRole div.separateLine hr, div.indexPage div.swingWatch div.separateLine hr, div.indexPage div.purchaseWatch div.separateLine hr {
       width: 23%;
       margin-top: 8px; }
-    div.indexPage div.chooseRole div.separateLine div.text {
+    div.indexPage div.chooseRole div.separateLine div.text, div.indexPage div.swingWatch div.separateLine div.text, div.indexPage div.purchaseWatch div.separateLine div.text {
       font-size: 12px;
       left: 36.5%; }
+  div.indexPage div.purchaseWatch {
+    top: -150px; }
+  div.indexPage div.searchingPage div.hideToRight {
+    width: 250px; }
+  div.indexPage div.searchingPage div.pageTitle {
+    font-size: 20px;
+    font-family: vaground, Georgia, "Times New Roman", serif; }
+  div.indexPage div.searching {
+    margin-top: 50px; }
+  div.indexPage div.noFoundDevice {
+    margin-top: -50px; }
 
 /************ Login Option Page ***************/
 body.ruleOption div.whiteCover {

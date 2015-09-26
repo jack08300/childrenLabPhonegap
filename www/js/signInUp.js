@@ -31,7 +31,6 @@ SignInUp.prototype.init = function () {
 	app.animateBackground({ background: 'div.indexPage' });
 
 	this.attachEvent();
-
 };
 
 SignInUp.prototype.testFacebook = function() {
@@ -104,12 +103,27 @@ SignInUp.prototype.loadSignForm = function() {
 	});
 
 /*	app.loadTemplate({
-		path: 'template/chooseRole.html',
+		path: 'template/deviceInfo.html',
 		appendTo: 'div.indexOptions',
 		context: this,
-		callback: this.loadSignForm_load
+		callback: this.loadDeviceInfo_load
 	});*/
+
 };
+
+/*SignInUp.prototype.loadDeviceInfo_load = function() {
+	app.pageSwitch({
+		pageOut: 'div.signButtons',
+		pageIn: 'div.deviceInfo'
+	});
+
+	var bluetooth = new Bluetooth;
+	bluetooth.init({
+		$template: $('div.deviceInformation'),
+		$deviceList: $('div.deviceList')
+	});
+
+};*/
 
 SignInUp.prototype.loadSignForm_load = function(){
 	var self = this;
@@ -325,8 +339,6 @@ SignInUp.prototype.onSubmitInfo_load = function(data){
 		return;
 	}
 
-
-
 	//update device information
 	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.connectAPI,
@@ -376,13 +388,168 @@ SignInUp.prototype.setUserRole = function (role) {
 
 SignInUp.prototype.setUserRole_load = function (data) {
 	if(data.success){
-		this.signIn_load();
+		//First Run: asking for swing watch
+
+		app.loadTemplate({
+			path: 'template/swingWatchOption.html',
+			appendTo: 'div.indexOptions',
+			context: this,
+			callback: this.swingWatchPage
+		});
+
 	}else{
 		alert("Please try again.");
 	}
 
+};
+
+SignInUp.prototype.swingWatchPage = function () {
+	app.pageSwitch({
+		pageOut: 'div.chooseRole',
+		pageIn: 'div.swingWatch'
+	});
+
+	var self = this;
+	this.$yesButton = $('div.yes');
+	this.$noButton = $('div.no');
+
+	this.$yesButton.on('click', function(){
+		self.searchDevice();
+	});
+
+	this.$noButton.on('click', function(){
+		self.noDevice();
+	});
+
 	app.tool.hideLoading();
 };
+
+SignInUp.prototype.noDevice = function () {
+	var self = this;
+
+	app.pageSwitch({
+		pageOut: 'div.swingWatch',
+		pageIn: 'div.purchaseWatch'
+	});
+
+
+	this.$noPurchase = $('div.noPurchase');
+
+	this.$noPurchase.on('click', function(){
+		self.signIn_load();
+	});
+};
+
+SignInUp.prototype.searchDevice = function () {
+	app.loadTemplate({
+		path: 'template/searching.html',
+		appendTo: 'div.indexOptions',
+		context: this,
+		callback: this.searchDevice_load
+	});
+};
+
+SignInUp.prototype.searchDevice_load = function () {
+	var self = this;
+
+	app.pageSwitch({
+		pageOut: 'div.swingWatch',
+		pageIn: 'div.searching'
+	});
+
+
+	setTimeout(function(){
+		self.findDevice();
+	}, 2000);
+
+};
+
+SignInUp.prototype.findDevice = function () {
+	var self = this;
+	this.bluetooth = new Bluetooth;
+	this.bluetooth.init({
+		//$debug: $('#deviceDebug'),
+		callback: this.findDevice_load,
+		context: this
+	});
+
+	//Search Timeout
+	setTimeout(function(){
+		if(!self.callbacked){
+			self.bluetooth.stopScan();
+			self.findDevice_load();
+		}
+
+	}, 5000);
+};
+
+SignInUp.prototype.findDevice_load = function () {
+	this.callbacked = true;
+	this.bluetooth.stopScan();
+	var deviceList = this.bluetooth.getConnectedDevice();
+
+	if(deviceList.length > 0){
+		app.loadTemplate({
+			path: 'template/deviceInfo.html',
+			appendTo: 'div.indexOptions',
+			context: this,
+			callback: this.loadDeviceInfoPage
+		});
+	}else{
+		this.noFindDevice();
+	}
+
+};
+
+SignInUp.prototype.loadDeviceInfoPage = function () {
+	var self = this;
+
+	app.pageSwitch({
+		pageOut: 'div.searching',
+		pageIn: 'div.deviceInfo'
+	});
+
+	$('input', 'div.deviceInfo').keypress(function(e){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if ( (code==13) || (code==10)){
+			self.submitDeviceInfo();
+		}
+	});
+};
+
+SignInUp.prototype.submitDeviceInfo = function () {
+	app.tool.ajax({
+		url: app.setting.serverBase + app.setting.api.submitKidInfo,
+		context: this,
+		data: {
+			firstName: $('input[name="kidFirstName"]').val(),
+			lastName: $('input[name="kidLastName"]').val(),
+			nickName: $('input[name="kidNickName"]').val()
+		},
+		callback: this.submitDeviceInfo_load
+	});
+};
+
+SignInUp.prototype.submitDeviceInfo_load = function (data) {
+	this.signIn_load();
+};
+
+SignInUp.prototype.noFindDevice = function () {
+	var self = this;
+
+	app.pageSwitch({
+		pageOut: 'div.searching',
+		pageIn: 'div.noFoundDevice'
+	});
+
+	this.$loginAnyway = $('div.loginAnyway');
+
+	this.$loginAnyway.on('click', function(){
+		self.signIn_load();
+	});
+};
+
+
 
 
 SignInUp.prototype.signIn_load = function () {

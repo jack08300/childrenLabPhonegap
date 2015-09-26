@@ -41,30 +41,6 @@
                         {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
                             "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"android-package\" value=\"org.apache.cordova.facebook.ConnectPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://m.facebook.com\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://graph.facebook.com\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://api.facebook.com\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://*.fbcdn.net\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://*.akamaihd.net\" />",
-                            "count": 1
                         }
                     ]
                 }
@@ -73,19 +49,15 @@
                 "parents": {
                     "/manifest": [
                         {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
                             "xml": "<uses-permission android:name=\"android.permission.BLUETOOTH\" />",
                             "count": 1
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-sdk android:minSdkVersion=\"18\" android:targetSdkVersion=\"19\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 1
                         }
                     ],
@@ -109,38 +81,17 @@
                             "count": 1
                         }
                     ],
-                    "application": [
-                        {
-                            "xml": "<meta-data android:name=\"com.facebook.sdk.ApplicationId\" android:value=\"@string/fb_app_id\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<activity android:label=\"@string/fb_app_name\" android:name=\"com.facebook.LoginActivity\" android:theme=\"@android:style/Theme.Translucent.NoTitleBar\" />",
-                            "count": 1
-                        }
-                    ]
+                    "application": []
                 }
             },
             "res/values/facebookconnect.xml": {
                 "parents": {
-                    "/*": [
-                        {
-                            "xml": "<string name=\"fb_app_id\">701955773243464</string>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<string name=\"fb_app_name\">ChildrenLab</string>",
-                            "count": 1
-                        }
-                    ]
+                    "/*": []
                 }
             }
         }
     },
     "installed_plugins": {
-        "com.megster.cordova.ble": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
         "com.plugin.datepicker": {
             "PACKAGE_NAME": "com.childrenLab"
         },
@@ -165,9 +116,7 @@
         "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "com.childrenLab"
         },
-        "com.phonegap.plugins.facebookconnect": {
-            "APP_ID": "701955773243464",
-            "APP_NAME": "ChildrenLab",
+        "cordova-plugin-ble-central": {
             "PACKAGE_NAME": "com.childrenLab"
         }
     },

@@ -428,7 +428,7 @@ div.indexPage {
 	}
 
 	/********* Role Choose ***********/
-	div.chooseRole {
+	div.chooseRole, div.swingWatch, div.purchaseWatch {
 		width: 250px;
 
 		div.pageTitle {
@@ -449,7 +449,29 @@ div.indexPage {
 		}
 	}
 
+	div.purchaseWatch {
+		top: -150px;
+	}
 
+	/************ Searching **********/
+
+	div.searchingPage {
+		div.hideToRight { width: 250px; }
+		div.pageTitle {
+			font-size:20px;
+			font-family: vaground, Georgia, "Times New Roman", serif;
+		}
+	}
+
+
+	div.searching {
+		margin-top: 50px;
+	}
+
+	div.noFoundDevice {
+		margin-top: -50px;
+
+	}
 
 }
 
