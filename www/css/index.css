@@ -300,6 +300,9 @@ div.indexPage {
   margin-top: 80px;
   /********* Role Choose ***********/
   /************ Searching **********/ }
+  div.indexPage div.pageTitle {
+    font-size: 20px;
+    font-family: vaground, Georgia, "Times New Roman", serif; }
   div.indexPage div.indexOptions {
     position: relative; }
     div.indexPage div.indexOptions > div {
@@ -333,9 +336,6 @@ div.indexPage {
     left: 150%; }
   div.indexPage div.chooseRole, div.indexPage div.swingWatch, div.indexPage div.purchaseWatch {
     width: 250px; }
-    div.indexPage div.chooseRole div.pageTitle, div.indexPage div.swingWatch div.pageTitle, div.indexPage div.purchaseWatch div.pageTitle {
-      font-size: 20px;
-      font-family: vaground, Georgia, "Times New Roman", serif; }
     div.indexPage div.chooseRole div.separateLine hr, div.indexPage div.swingWatch div.separateLine hr, div.indexPage div.purchaseWatch div.separateLine hr {
       width: 23%;
       margin-top: 8px; }
@@ -346,9 +346,6 @@ div.indexPage {
     top: -150px; }
   div.indexPage div.searchingPage div.hideToRight {
     width: 250px; }
-  div.indexPage div.searchingPage div.pageTitle {
-    font-size: 20px;
-    font-family: vaground, Georgia, "Times New Roman", serif; }
   div.indexPage div.searching {
     margin-top: 50px; }
   div.indexPage div.noFoundDevice {

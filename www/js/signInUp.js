@@ -139,6 +139,9 @@ SignInUp.prototype.loadSignForm_load = function(){
 	this.$rePassword = $('input[name="rePassword"]');
 	this.$errorMessage = $('div.errorMessage');
 
+	var emailCache = window.localStorage.getItem("email");
+
+	if(emailCache) this.$email.val(emailCache);
 
 	this.$email.on('focusout', function(){
 		if(app.tool.validateEmail(self.$email.val())){

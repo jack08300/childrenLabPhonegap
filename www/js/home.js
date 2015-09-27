@@ -23,17 +23,6 @@ Home.prototype.init = function () {
 
 Home.prototype.deviceReady = function () {
 	var self = this;
-	this.$deviceTemplate = $('div.eachDevice');
-	this.$deviceList = $('div.deviceList');
-	this.$deviceDetail = $('#deviceDetail');
-	this.$deviceCharacterList = $('div.characterList', this.$deviceDetail);
-
-	this.bluetooth = new Bluetooth();
-
-	this.bluetooth.init({
-		$template: this.$deviceTemplate,
-		$deviceList: this.$deviceList
-	});
 
 	navigator.geolocation.getCurrentPosition(
 		function(position){
@@ -59,20 +48,7 @@ Home.prototype.deviceReady = function () {
 
 Home.prototype.attachEvent = function () {
 	var self = this;
-	this.$deviceList.delegate("div.eachDevice" ,'click', function(){
-		if($(this).find('div.status').html() == "Connected"){
-			$( "#deviceDetail" ).panel( "open" );
-			self.$deviceCharacterList.html("");
-			self.bluetooth.displayServices(
-				JSON.parse(window.localStorage.getItem("ConnectedData")),
-				{ appendTo: "div.characterList" }
-			);
-		}else{
-			alert("Connecting...");
-		}
 
-
-	});
 };
 
 Home.prototype.currentPositionGet = function (position) {
