@@ -535,8 +535,8 @@ div.loginOption {
 	border-bottom: 1px solid #979697;
 	font-family: avenir_bold, Georgia, "Times New Roman", serif;
 	text-align: center;
-	padding: 23px 0 8px 0;
-	font-size: 1.3em;
+	padding: 7vw 0 2vw 0;
+	font-size: 5vw;
 
 }
 
@@ -567,7 +567,7 @@ div.placeholder {
 	text-align: center;
 
 	&.map {
-		height: 42em;
+		height: 148vw;
 		background-color: gainsboro;
 	}
 }
@@ -583,7 +583,7 @@ div.menu.bottom {
 
 	>	div {
 		float: left;
-		height: 50px;
+		height: 14vw;
 		width: 20%;
 
 		&.mapPageIcon { background: url('../img/menu/navi_icons_map.svg') no-repeat 50%; }
@@ -1065,7 +1065,7 @@ div.dashboardPage{
 		width: 100%;
 		height: 100%;
 		text-align: center;
-		padding-top: 2em;
+		padding-top: 5vw;
 
 
 		&.bad {
@@ -1074,24 +1074,23 @@ div.dashboardPage{
 			color: #7573c0;
 
 			div.dashboardIcon {
-				background: url("../img/dashboard/monster-purple.png") no-repeat 0;
-				background-size: 90%;
+				background: url("../img/dashboard/monster-purple.png") no-repeat 8vw;
+				background-size: 60vw;
 				width: 100%;
-				height: 20em;
+				height: 60vw;
 				display:inline-block;
-				margin: 1em 0
 			}
 			div.uvButton {
-				background: url("../img/dashboard/uv_button.png") no-repeat 8px;
-				background-size: 35px;
+				background: url("../img/dashboard/uv_button.png") no-repeat 2.7vw;
+				background-size: 3.3em;
 			}
 			div.activityButton {
-				background: url("../img/dashboard/activity_button.png") no-repeat 8px;
-				background-size: 35px;
+				background: url("../img/dashboard/activity_button.png") no-repeat 2.7vw;
+				background-size: 3.3em;
 			}
 			div.weatherButton {
-				background: url("../img/dashboard/sunglass_button.png") no-repeat 8px;
-				background-size: 35px;
+				background: url("../img/dashboard/sunglass_button.png") no-repeat 2.7vw;
+				background-size: 3.3em;
 			}
 		}
 
@@ -1101,24 +1100,23 @@ div.dashboardPage{
 			color: #00c4b3;
 
 			div.dashboardIcon {
-				background: url("../img/dashboard/monster-bluegreen.png") no-repeat 0;
-				background-size: 90%;
+				background: url("../img/dashboard/monster-bluegreen.png") no-repeat 8vw;
+				background-size: 60vw;
 				width: 100%;
-				height: 20em;
+				height: 60vw;
 				display:inline-block;
-				margin: 1em 0
 			}
 			div.uvButton {
-				background: url("../img/dashboard/blue_uv_button.png") no-repeat 8px;
-				background-size: 35px;
+				background: url("../img/dashboard/blue_uv_button.png") no-repeat 2.7vw;
+				background-size: 3.3em;
 			}
 			div.activityButton {
-				background: url("../img/dashboard/blue_activity_button.png") no-repeat 8px;
-				background-size: 35px;
+				background: url("../img/dashboard/blue_activity_button.png") no-repeat 2.7vw;
+				background-size: 3.3em;
 			}
 			div.weatherButton {
-				background: url("../img/dashboard/blue_sunglass_button.png") no-repeat 8px;
-				background-size: 35px;
+				background: url("../img/dashboard/blue_sunglass_button.png") no-repeat 2.7vw;
+				background-size: 3.3em;
 			}
 		}
 
@@ -1128,24 +1126,23 @@ div.dashboardPage{
 			color: #ff7231;
 
 			div.dashboardIcon {
-				background: url("../img/dashboard/monster-yellow.png") no-repeat 0;
-				background-size: 90%;
+				background: url("../img/dashboard/monster-yellow.png") no-repeat 8vw;
+				background-size: 60vw;
 				width: 100%;
-				height: 20em;
+				height: 60vw;
 				display:inline-block;
-				margin: 1em 0
 			}
 			div.uvButton {
-				background: url("../img/dashboard/orange_uv_button.png") no-repeat 8px;
-				background-size: 35px;
+				background: url("../img/dashboard/orange_uv_button.png") no-repeat 2.7vw;
+				background-size: 10vw;
 			}
 			div.activityButton {
-				background: url("../img/dashboard/orange_activity_button.png") no-repeat 8px;
-				background-size: 35px;
+				background: url("../img/dashboard/orange_activity_button.png") no-repeat 2.7vw;
+				background-size: 10vw;
 			}
 			div.weatherButton {
-				background: url("../img/dashboard/orange_weather_button.png") no-repeat 8px;
-				background-size: 35px;
+				background: url("../img/dashboard/orange_weather_button.png") no-repeat 2.7vw;
+				background-size: 10vw;
 			}
 		}
 	}
@@ -1154,25 +1151,24 @@ div.dashboardPage{
 		width: 80%;
 		display: inline-block;
 
-		div.title { font-size: 25px; }
-		div.status { font-size: 25px; }
+		div.title,div.status { font-size: 7vw; }
 
 		div.dashboardButtons {
 			position:absolute;
-			bottom:14em;
+			bottom: 40vw;
 
 			> div {
-				width:50px;
-				height: 50px;
+				width: 15vw;
+				height: 15vw;
 				background-color: white;
 				border-radius: 50%;
 				float: left;
-				margin-left: 1.5em;
-				margin-right: 1.5em;
+				margin-left: 5vw;
+				margin-right: 5vw;
 
 				>div {
-					width: 50px;
-					height:50px;
+					width: 15vw;
+					height: 15vw;
 				}
 			}
 
@@ -1180,4 +1176,150 @@ div.dashboardPage{
 
 
 	}
+}
+
+
+/******************** Weather Page ***********************/
+
+div.weatherPage {
+	color: #ff7231;
+
+	div.description {
+		font-family: avenir, Georgia, "Times New Roman", serif;
+		position:relative;
+		top: 18vw;
+	}
+
+	div.weatherOverlay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: transparent url("../img/dashboard/dashboard-bg-weather-01.png") 0 -3vw no-repeat;
+		background-size: 100%;
+		z-index:1;
+	}
+	div.backgroundOverlay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: transparent url("../img/background/city-01-overall.png") 0 70vw no-repeat;
+		background-size: 500px;
+		z-index: 2;
+	}
+
+	div.container {
+		text-align: center;
+
+		div.location {
+			color: #999899;
+			margin-top: 5vw;
+			font-size: 6vw
+		}
+
+		div.circle{
+			position: absolute;
+			border: 3vw solid #ff7231;
+			border-radius: 50%;
+			width: 60vw;
+			height: 60vw;
+			color: #ff7231;
+			font-size: 7vw;
+			margin-top: 5vw;
+			font-family: avenir_bold, Georgia, "Times New Roman", serif;
+			left: 18vw;
+			z-index: 2;
+
+			div.info {
+				margin-top: 17vw;
+
+				div.title:after {
+					content: 'Temperature';
+				}
+
+				div.temperature { font-size: 16vw; }
+			}
+		}
+	}
+}
+
+/******************** Weather Page - Humidity ***********************/
+div.weatherPage.humidity {
+
+	div.weatherOverlay {
+		background: transparent url("../img/dashboard/dashboard-bg-weather-02.png") -1vw -5vw no-repeat;
+		background-size: 100%;
+	}
+	div.container{
+		div.circle{
+			border: 3vw solid #4dc1df;
+			color: #4dc1df;
+
+			div.info div.title:after {
+				content: 'Humidity';
+			}
+		}
+	}
+
+}
+
+/******************** UV index ***********************/
+div.uvPage {
+	text-align: center;
+
+	div.uvOverlay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: transparent url("../img/dashboard/dashboard-bg-UV-01.png") 0 -3vw no-repeat;
+		background-size: 100%;
+		z-index:1;
+	}
+	div.backgroundOverlay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: transparent url("../img/background/city-01-overall.png") 0 70vw no-repeat;
+		background-size: 500px;
+		z-index: 2;
+	}
+
+	div.container {
+		text-align: center;
+		margin-top: 7vw;
+
+		div.circle {
+			position: absolute;
+			border: 3vw solid transparent;
+			border-radius: 50%;
+			width: 30vw;
+			height: 30vw;
+			//color: #4eb400;
+			font-size: 7vw;
+			margin-top: 5vw;
+			font-family: avenir_bold, Georgia, "Times New Roman", serif;
+			left: 31vw;
+			z-index: 2;
+
+			div.uvIndex {
+				font-size: 15vw;
+				position:relative;
+				top: 5vw;
+			}
+
+
+		}
+	}
+
+	div.text {
+		font-family: avenir_bold, Georgia, "Times New Roman", serif;
+		font-size: 5vw;
+		position:relative;
+		top: 47vw;
+		z-index:2;
+		width: 75vw;
+		//color: #4eb400;
+		display:inline-block;
+	}
+
+
 }

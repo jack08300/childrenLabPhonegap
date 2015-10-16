@@ -23,12 +23,18 @@ Dashboard.prototype.deviceReady = function() {
 
 	app.addHeaderBar({title: 'Dashboard'});
 	app.addMenuBar();
-
 };
 
 Dashboard.prototype.attachEvent = function() {
 	var self = this;
 
+	$('div.weatherButton').on('click', function(){
+		window.location = window.rootPath + "pages/temperature.html";
+	});
+
+	$('div.uvButton').on('click', function(){
+		window.location = window.rootPath + "pages/uv.html";
+	});
 };
 
 
