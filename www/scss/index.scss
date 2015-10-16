@@ -18,13 +18,13 @@
  */
 
 @font-face {
-	font-family: vaground;
-	src: url(font/vaground.ttf);
+	font-family: avenir_bold;
+	src: url(font/Avenir-bold.ttf);
 }
 
 @font-face {
 	font-family: avenir;
-	src: url(font/AvenirNextLTPro-Regular.otf);
+	src: url(font/Avenir-Book.otf);
 }
 
 * {
@@ -212,7 +212,7 @@ div.navigater {
 
 .mainButton {
 	font-family: avenir, Georgia, "Times New Roman", serif;
-	background-color: #1a1738;
+	background-color: #ff7231;
 	padding: 5px;
 	margin: 15px 0 15px 0;
 	border-radius: 5px;
@@ -221,8 +221,8 @@ div.navigater {
 }
 
 .backButton {
-	font-family: vaground, Georgia, "Times New Roman", serif;
-	color: #1a1738;
+	font-family: avenir_bold, Georgia, "Times New Roman", serif;
+	color: #4dc1df;
 	font-size: 20px;
 	position: absolute;
 	top: 30px;
@@ -313,10 +313,13 @@ input.mainInput {
 	border: none;
 	border-radius: 5px;
 	padding: 6px 10px;
-	background-color: #1a1738;
+	background-color: #ff7231;
 	color: white;
 	width: 92%;
 	margin: 8px 0;
+}
+::-webkit-input-placeholder {
+	color: white;
 }
 
 /** Dailog **/
@@ -367,13 +370,14 @@ div.previousPage{
 /************ Index page ***************/
 
 div.indexPage {
-	background: #fcfcfc url("../img/background/city_trans-01.png") 0 100% repeat-x;
+	background: #fcfcfc url("../img/background/city-01-overall.png") 0 100% repeat-x;
 	background-size: 800px;
 	margin-top: 80px;
+	color: #ff7231;
 
 	div.pageTitle {
 		font-size:20px;
-		font-family: vaground, Georgia, "Times New Roman", serif;
+		font-family: avenir_bold, Georgia, "Times New Roman", serif;
 	}
 
 	div.indexOptions{
@@ -385,6 +389,7 @@ div.indexPage {
 	}
 
 	div.separateLine{
+		color: #999899;
 		div.text {
 			position:absolute;
 			left:46.5%;
@@ -437,6 +442,7 @@ div.indexPage {
 		width: 250px;
 
 		div.separateLine {
+			color: #999899;
 			hr {
 				width: 23%;
 				margin-top: 8px;
@@ -467,6 +473,7 @@ div.indexPage {
 	div.noFoundDevice {
 		margin-top: -50px;
 
+		div.text { color:  #999899; }
 	}
 
 }
@@ -524,12 +531,12 @@ div.loginOption {
 
 /*************** Header ****************/
 #headerBar {
-	background-color: #fafafa;
+	color: #ff7231;
 	border-bottom: 1px solid #979697;
-	font-family: vaground, Georgia, "Times New Roman", serif;
+	font-family: avenir_bold, Georgia, "Times New Roman", serif;
 	text-align: center;
 	padding: 23px 0 8px 0;
-	font-size: 18px;
+	font-size: 1.3em;
 
 }
 
@@ -560,7 +567,7 @@ div.placeholder {
 	text-align: center;
 
 	&.map {
-		height: 240px;
+		height: 42em;
 		background-color: gainsboro;
 	}
 }
@@ -570,9 +577,9 @@ div.menu.bottom {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
-	background-color: #fafafa;
 	z-index: 1000;
 	border-top: 1px solid #979697;
+	background-color: #fcfcfc;
 
 	>	div {
 		float: left;
@@ -581,15 +588,15 @@ div.menu.bottom {
 
 		&.mapPageIcon { background: url('../img/menu/navi_icons_map.svg') no-repeat 50%; }
 		&.calendarPageIcon { background: url('../img/menu/navi_icons_calendar.svg') no-repeat 50%; }
-		&.chartPageIcon { background: url('../img/menu/navi_icons_chart.svg') no-repeat 50%; }
+		&.dashboardPageIcon { background: url('../img/menu/navi_icons_chart.svg') no-repeat 50%; }
 		&.mailPageIcon { background: url('../img/menu/navi_icons_mail.svg') no-repeat 50%; }
 		&.profilePageIcon { background: url('../img/menu/navi_icons_profile.svg') no-repeat 50%; }
 
-		&.mapPageIcon.active { background: #191638 url('../img/menu/navi_icons_map_selected.svg') no-repeat 50% }
-		&.calendarPageIcon.active { background: #191638 url('../img/menu/navi_icons_calendar_selected.svg') no-repeat 50% }
-		&.chartPageIcon.active { background: #191638 url('../img/menu/navi_icons_chart_selected.svg') no-repeat 50% }
-		&.mailPageIcon.active { background: #191638 url('../img/menu/navi_icons_mail_selected.svg') no-repeat 50% }
-		&.profilePageIcon.active { background: #191638 url('../img/menu/navi_icons_profile_selected.svg') no-repeat 50% }
+		&.mapPageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_map_selected.svg') no-repeat 50% }
+		&.calendarPageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_calendar_selected.svg') no-repeat 50% }
+		&.dashboardPageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_chart_selected.svg') no-repeat 50% }
+		&.mailPageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_mail_selected.svg') no-repeat 50% }
+		&.profilePageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_profile_selected.svg') no-repeat 50% }
 	}
 }
 
@@ -1044,5 +1051,133 @@ div.profilePage{
 div.settingPage {
 	div.container {
 		padding: 30px 10px 0 10px;
+	}
+}
+
+
+/******************** Dashboard Page ***********************/
+div.dashboardPage{
+
+	div.title, div.status {	font-family: avenir_bold, Georgia, "Times New Roman", serif; }
+
+	div.container {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		padding-top: 2em;
+
+
+		&.bad {
+			background: url('../img/dashboard/dashboard-bg-bad.png') no-repeat;
+			background-size: 100% 100%;
+			color: #7573c0;
+
+			div.dashboardIcon {
+				background: url("../img/dashboard/monster-purple.png") no-repeat 0;
+				background-size: 90%;
+				width: 100%;
+				height: 20em;
+				display:inline-block;
+				margin: 1em 0
+			}
+			div.uvButton {
+				background: url("../img/dashboard/uv_button.png") no-repeat 8px;
+				background-size: 35px;
+			}
+			div.activityButton {
+				background: url("../img/dashboard/activity_button.png") no-repeat 8px;
+				background-size: 35px;
+			}
+			div.weatherButton {
+				background: url("../img/dashboard/sunglass_button.png") no-repeat 8px;
+				background-size: 35px;
+			}
+		}
+
+		&.soso {
+			background: url('../img/dashboard/dashboard-bg-soso.png') no-repeat;
+			background-size: 100% 100%;
+			color: #00c4b3;
+
+			div.dashboardIcon {
+				background: url("../img/dashboard/monster-bluegreen.png") no-repeat 0;
+				background-size: 90%;
+				width: 100%;
+				height: 20em;
+				display:inline-block;
+				margin: 1em 0
+			}
+			div.uvButton {
+				background: url("../img/dashboard/blue_uv_button.png") no-repeat 8px;
+				background-size: 35px;
+			}
+			div.activityButton {
+				background: url("../img/dashboard/blue_activity_button.png") no-repeat 8px;
+				background-size: 35px;
+			}
+			div.weatherButton {
+				background: url("../img/dashboard/blue_sunglass_button.png") no-repeat 8px;
+				background-size: 35px;
+			}
+		}
+
+		&.excellent {
+			background: url('../img/dashboard/dashboard-bg-excellent.png') no-repeat;
+			background-size: 100% 100%;
+			color: #ff7231;
+
+			div.dashboardIcon {
+				background: url("../img/dashboard/monster-yellow.png") no-repeat 0;
+				background-size: 90%;
+				width: 100%;
+				height: 20em;
+				display:inline-block;
+				margin: 1em 0
+			}
+			div.uvButton {
+				background: url("../img/dashboard/orange_uv_button.png") no-repeat 8px;
+				background-size: 35px;
+			}
+			div.activityButton {
+				background: url("../img/dashboard/orange_activity_button.png") no-repeat 8px;
+				background-size: 35px;
+			}
+			div.weatherButton {
+				background: url("../img/dashboard/orange_weather_button.png") no-repeat 8px;
+				background-size: 35px;
+			}
+		}
+	}
+
+	#dashboard {
+		width: 80%;
+		display: inline-block;
+
+		div.title { font-size: 25px; }
+		div.status { font-size: 25px; }
+
+		div.dashboardButtons {
+			position:absolute;
+			bottom:14em;
+
+			> div {
+				width:50px;
+				height: 50px;
+				background-color: white;
+				border-radius: 50%;
+				float: left;
+				margin-left: 1.5em;
+				margin-right: 1.5em;
+
+				>div {
+					width: 50px;
+					height:50px;
+				}
+			}
+
+		}
+
+
 	}
 }

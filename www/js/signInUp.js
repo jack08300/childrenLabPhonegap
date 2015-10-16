@@ -556,7 +556,7 @@ SignInUp.prototype.noFindDevice = function () {
 
 
 SignInUp.prototype.signIn_load = function () {
-	window.location = app.setting.home;
+	window.location = app.setting.dashboard;
 	app.tool.hideLoading();
 };
 

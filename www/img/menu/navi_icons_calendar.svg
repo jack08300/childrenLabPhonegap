@@ -5,12 +5,12 @@
 	 viewBox="0 0 212 178" enable-background="new 0 0 212 178" xml:space="preserve">
 <rect x="-11" y="-9.3" fill="#FCFCFC" width="237.1" height="197.3"/>
 <g>
-	<path fill="#FCFCFC" stroke="#191638" stroke-width="2.661" stroke-miterlimit="10" d="M140.8,134.5H71.6c-8.3,0-15-6.8-15-15V66.4
-		c0-8.2,6.8-15,15-15h69.2c8.3,0,15,6.8,15,15v53.1C155.8,127.8,149,134.5,140.8,134.5z"/>
-	<line fill="#FCFCFC" stroke="#191638" stroke-width="2.661" stroke-miterlimit="10" x1="57.4" y1="76.6" x2="155.9" y2="76.6"/>
-	<line fill="#FCFCFC" stroke="#191638" stroke-width="2.661" stroke-miterlimit="10" x1="58.4" y1="104.7" x2="153.9" y2="104.7"/>
-	<line fill="#FCFCFC" stroke="#191638" stroke-width="2.661" stroke-miterlimit="10" x1="81.2" y1="78.6" x2="81.2" y2="132.9"/>
-	<line fill="#FCFCFC" stroke="#191638" stroke-width="2.661" stroke-miterlimit="10" x1="106.3" y1="77.6" x2="106.3" y2="132.9"/>
-	<line fill="#FCFCFC" stroke="#191638" stroke-width="2.661" stroke-miterlimit="10" x1="131.4" y1="78.6" x2="131.4" y2="134.9"/>
+	<path fill="#4DC1DF" d="M140.8,134.5H71.6c-8.3,0-15-6.8-15-15V66.4c0-8.2,6.8-15,15-15h69.2c8.3,0,15,6.8,15,15v53.1
+		C155.8,127.8,149,134.5,140.8,134.5z"/>
+	<line fill="#4DC1DF" stroke="#FCFCFC" stroke-width="2.661" stroke-miterlimit="10" x1="57.4" y1="76.6" x2="155.9" y2="76.6"/>
+	<line fill="#4DC1DF" stroke="#FCFCFC" stroke-width="2.661" stroke-miterlimit="10" x1="58.4" y1="104.7" x2="153.9" y2="104.7"/>
+	<line fill="#4DC1DF" stroke="#FCFCFC" stroke-width="2.661" stroke-miterlimit="10" x1="81.2" y1="78.6" x2="81.2" y2="132.9"/>
+	<line fill="#4DC1DF" stroke="#FCFCFC" stroke-width="2.661" stroke-miterlimit="10" x1="106.3" y1="77.6" x2="106.3" y2="132.9"/>
+	<line fill="#4DC1DF" stroke="#FCFCFC" stroke-width="2.661" stroke-miterlimit="10" x1="131.4" y1="78.6" x2="131.4" y2="134.9"/>
 </g>
 </svg>

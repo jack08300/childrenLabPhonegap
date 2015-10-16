@@ -24,6 +24,7 @@ var app = {
 
 		home: "pages/home.html",
 		nearby: "pages/nearby.html",
+		dashboard: "pages/dashboard.html",
 		ruleMenu: "loginOption.html",
 		tokenName: "x-auth-token",
 
@@ -196,12 +197,12 @@ var app = {
 		this.$menu = $("<div class='menu bottom'></div>");
 		this.$map = $("<div class='mapPageIcon icon'></div>");
 		this.$calendar = $("<div class='calendarPageIcon icon'></div>");
-		this.$chart = $("<div class='chartPageIcon icon'></div>");
+		this.$dashboard = $("<div class='dashboardPageIcon icon'></div>");
 		this.$mail = $("<div class='mailPageIcon icon'></div>");
 		this.$profile = $("<div class='profilePageIcon icon'></div>");
 
 
-		this.$menu.append(this.$map).append(this.$chart).append(this.$calendar).append(this.$mail).append(this.$profile);
+		this.$menu.append(this.$map).append(this.$calendar).append(this.$dashboard).append(this.$mail).append(this.$profile);
 
 		var currentPageClass = $.mobile.activePage.attr('class').split(' ')[0];
 		this.$menu.find('div.' + currentPageClass + 'Icon').addClass('active');
@@ -231,8 +232,11 @@ var app = {
 			window.location = window.rootPath + "pages/calendar.html";
 		});
 
-		this.$chart.on('click', function(){
-
+		this.$dashboard.on('click', function(){
+			if(currentPageClass.indexOf('dashboardPage') != -1){
+				return;
+			}
+			window.location = window.rootPath + "pages/dashboard.html";
 		});
 
 		this.$mail.on('click', function(){

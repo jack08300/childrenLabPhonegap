@@ -17,12 +17,12 @@
  * under the License.
  */
 @font-face {
-  font-family: vaground;
-  src: url(font/vaground.ttf); }
+  font-family: avenir_bold;
+  src: url(font/Avenir-bold.ttf); }
 
 @font-face {
   font-family: avenir;
-  src: url(font/AvenirNextLTPro-Regular.otf); }
+  src: url(font/Avenir-Book.otf); }
 
 * {
   -webkit-tap-highlight-color: transparent;
@@ -177,7 +177,7 @@ div.navigater {
 
 .mainButton {
   font-family: avenir, Georgia, "Times New Roman", serif;
-  background-color: #1a1738;
+  background-color: #ff7231;
   padding: 5px;
   margin: 15px 0 15px 0;
   border-radius: 5px;
@@ -185,8 +185,8 @@ div.navigater {
   font-size: 16px; }
 
 .backButton {
-  font-family: vaground, Georgia, "Times New Roman", serif;
-  color: #1a1738;
+  font-family: avenir_bold, Georgia, "Times New Roman", serif;
+  color: #4dc1df;
   font-size: 20px;
   position: absolute;
   top: 30px;
@@ -256,10 +256,13 @@ input.mainInput {
   border: none;
   border-radius: 5px;
   padding: 6px 10px;
-  background-color: #1a1738;
+  background-color: #ff7231;
   color: white;
   width: 92%;
   margin: 8px 0; }
+
+::-webkit-input-placeholder {
+  color: white; }
 
 /** Dailog **/
 div.dialog {
@@ -295,29 +298,32 @@ div.previousPage {
 
 /************ Index page ***************/
 div.indexPage {
-  background: #fcfcfc url("../img/background/city_trans-01.png") 0 100% repeat-x;
+  background: #fcfcfc url("../img/background/city-01-overall.png") 0 100% repeat-x;
   background-size: 800px;
   margin-top: 80px;
+  color: #ff7231;
   /********* Role Choose ***********/
   /************ Searching **********/ }
   div.indexPage div.pageTitle {
     font-size: 20px;
-    font-family: vaground, Georgia, "Times New Roman", serif; }
+    font-family: avenir_bold, Georgia, "Times New Roman", serif; }
   div.indexPage div.indexOptions {
     position: relative; }
     div.indexPage div.indexOptions > div {
       padding: 20px 30px;
       text-align: center; }
-  div.indexPage div.separateLine div.text {
-    position: absolute;
-    left: 46.5%; }
-  div.indexPage div.separateLine hr {
-    width: 25%; }
-    div.indexPage div.separateLine hr.leftHr {
-      margin: 10px 5px 10px 20px; }
-    div.indexPage div.separateLine hr.rightHr {
-      margin: 10px 20px 10px 5px;
-      float: right; }
+  div.indexPage div.separateLine {
+    color: #999899; }
+    div.indexPage div.separateLine div.text {
+      position: absolute;
+      left: 46.5%; }
+    div.indexPage div.separateLine hr {
+      width: 25%; }
+      div.indexPage div.separateLine hr.leftHr {
+        margin: 10px 5px 10px 20px; }
+      div.indexPage div.separateLine hr.rightHr {
+        margin: 10px 20px 10px 5px;
+        float: right; }
   div.indexPage div.pageCover {
     position: absolute;
     top: 0; }
@@ -336,12 +342,14 @@ div.indexPage {
     left: 150%; }
   div.indexPage div.chooseRole, div.indexPage div.swingWatch, div.indexPage div.purchaseWatch {
     width: 250px; }
-    div.indexPage div.chooseRole div.separateLine hr, div.indexPage div.swingWatch div.separateLine hr, div.indexPage div.purchaseWatch div.separateLine hr {
-      width: 23%;
-      margin-top: 8px; }
-    div.indexPage div.chooseRole div.separateLine div.text, div.indexPage div.swingWatch div.separateLine div.text, div.indexPage div.purchaseWatch div.separateLine div.text {
-      font-size: 12px;
-      left: 36.5%; }
+    div.indexPage div.chooseRole div.separateLine, div.indexPage div.swingWatch div.separateLine, div.indexPage div.purchaseWatch div.separateLine {
+      color: #999899; }
+      div.indexPage div.chooseRole div.separateLine hr, div.indexPage div.swingWatch div.separateLine hr, div.indexPage div.purchaseWatch div.separateLine hr {
+        width: 23%;
+        margin-top: 8px; }
+      div.indexPage div.chooseRole div.separateLine div.text, div.indexPage div.swingWatch div.separateLine div.text, div.indexPage div.purchaseWatch div.separateLine div.text {
+        font-size: 12px;
+        left: 36.5%; }
   div.indexPage div.purchaseWatch {
     top: -150px; }
   div.indexPage div.searchingPage div.hideToRight {
@@ -350,6 +358,8 @@ div.indexPage {
     margin-top: 50px; }
   div.indexPage div.noFoundDevice {
     margin-top: -50px; }
+    div.indexPage div.noFoundDevice div.text {
+      color: #999899; }
 
 /************ Login Option Page ***************/
 body.ruleOption div.whiteCover {
@@ -389,12 +399,12 @@ div.loginOption {
 
 /*************** Header ****************/
 #headerBar {
-  background-color: #fafafa;
+  color: #ff7231;
   border-bottom: 1px solid #979697;
-  font-family: vaground, Georgia, "Times New Roman", serif;
+  font-family: avenir_bold, Georgia, "Times New Roman", serif;
   text-align: center;
   padding: 23px 0 8px 0;
-  font-size: 18px; }
+  font-size: 1.3em; }
 
 div.header {
   height: 35px;
@@ -415,7 +425,7 @@ div.placeholder {
   width: 100%;
   text-align: center; }
   div.placeholder.map {
-    height: 240px;
+    height: 42em;
     background-color: gainsboro; }
 
 /*************** Bottom Menu ****************/
@@ -423,9 +433,9 @@ div.menu.bottom {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #fafafa;
   z-index: 1000;
-  border-top: 1px solid #979697; }
+  border-top: 1px solid #979697;
+  background-color: #fcfcfc; }
   div.menu.bottom > div {
     float: left;
     height: 50px;
@@ -434,22 +444,22 @@ div.menu.bottom {
       background: url("../img/menu/navi_icons_map.svg") no-repeat 50%; }
     div.menu.bottom > div.calendarPageIcon {
       background: url("../img/menu/navi_icons_calendar.svg") no-repeat 50%; }
-    div.menu.bottom > div.chartPageIcon {
+    div.menu.bottom > div.dashboardPageIcon {
       background: url("../img/menu/navi_icons_chart.svg") no-repeat 50%; }
     div.menu.bottom > div.mailPageIcon {
       background: url("../img/menu/navi_icons_mail.svg") no-repeat 50%; }
     div.menu.bottom > div.profilePageIcon {
       background: url("../img/menu/navi_icons_profile.svg") no-repeat 50%; }
     div.menu.bottom > div.mapPageIcon.active {
-      background: #191638 url("../img/menu/navi_icons_map_selected.svg") no-repeat 50%; }
+      background: #fcfcfc url("../img/menu/navi_icons_map_selected.svg") no-repeat 50%; }
     div.menu.bottom > div.calendarPageIcon.active {
-      background: #191638 url("../img/menu/navi_icons_calendar_selected.svg") no-repeat 50%; }
-    div.menu.bottom > div.chartPageIcon.active {
-      background: #191638 url("../img/menu/navi_icons_chart_selected.svg") no-repeat 50%; }
+      background: #fcfcfc url("../img/menu/navi_icons_calendar_selected.svg") no-repeat 50%; }
+    div.menu.bottom > div.dashboardPageIcon.active {
+      background: #fcfcfc url("../img/menu/navi_icons_chart_selected.svg") no-repeat 50%; }
     div.menu.bottom > div.mailPageIcon.active {
-      background: #191638 url("../img/menu/navi_icons_mail_selected.svg") no-repeat 50%; }
+      background: #fcfcfc url("../img/menu/navi_icons_mail_selected.svg") no-repeat 50%; }
     div.menu.bottom > div.profilePageIcon.active {
-      background: #191638 url("../img/menu/navi_icons_profile_selected.svg") no-repeat 50%; }
+      background: #fcfcfc url("../img/menu/navi_icons_profile_selected.svg") no-repeat 50%; }
 
 /*************** Device List ****************/
 div.deviceList {
@@ -759,3 +769,96 @@ div.profilePage div.ui-panel-wrapper {
 /******************** Setting Page ***********************/
 div.settingPage div.container {
   padding: 30px 10px 0 10px; }
+
+/******************** Dashboard Page ***********************/
+div.dashboardPage div.title, div.dashboardPage div.status {
+  font-family: avenir_bold, Georgia, "Times New Roman", serif; }
+
+div.dashboardPage div.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 2em; }
+  div.dashboardPage div.container.bad {
+    background: url("../img/dashboard/dashboard-bg-bad.png") no-repeat;
+    background-size: 100% 100%;
+    color: #7573c0; }
+    div.dashboardPage div.container.bad div.dashboardIcon {
+      background: url("../img/dashboard/monster-purple.png") no-repeat 0;
+      background-size: 90%;
+      width: 100%;
+      height: 20em;
+      display: inline-block;
+      margin: 1em 0; }
+    div.dashboardPage div.container.bad div.uvButton {
+      background: url("../img/dashboard/uv_button.png") no-repeat 8px;
+      background-size: 35px; }
+    div.dashboardPage div.container.bad div.activityButton {
+      background: url("../img/dashboard/activity_button.png") no-repeat 8px;
+      background-size: 35px; }
+    div.dashboardPage div.container.bad div.weatherButton {
+      background: url("../img/dashboard/sunglass_button.png") no-repeat 8px;
+      background-size: 35px; }
+  div.dashboardPage div.container.soso {
+    background: url("../img/dashboard/dashboard-bg-soso.png") no-repeat;
+    background-size: 100% 100%;
+    color: #00c4b3; }
+    div.dashboardPage div.container.soso div.dashboardIcon {
+      background: url("../img/dashboard/monster-bluegreen.png") no-repeat 0;
+      background-size: 90%;
+      width: 100%;
+      height: 20em;
+      display: inline-block;
+      margin: 1em 0; }
+    div.dashboardPage div.container.soso div.uvButton {
+      background: url("../img/dashboard/blue_uv_button.png") no-repeat 8px;
+      background-size: 35px; }
+    div.dashboardPage div.container.soso div.activityButton {
+      background: url("../img/dashboard/blue_activity_button.png") no-repeat 8px;
+      background-size: 35px; }
+    div.dashboardPage div.container.soso div.weatherButton {
+      background: url("../img/dashboard/blue_sunglass_button.png") no-repeat 8px;
+      background-size: 35px; }
+  div.dashboardPage div.container.excellent {
+    background: url("../img/dashboard/dashboard-bg-excellent.png") no-repeat;
+    background-size: 100% 100%;
+    color: #ff7231; }
+    div.dashboardPage div.container.excellent div.dashboardIcon {
+      background: url("../img/dashboard/monster-yellow.png") no-repeat 0;
+      background-size: 90%;
+      width: 100%;
+      height: 20em;
+      display: inline-block;
+      margin: 1em 0; }
+    div.dashboardPage div.container.excellent div.uvButton {
+      background: url("../img/dashboard/orange_uv_button.png") no-repeat 8px;
+      background-size: 35px; }
+    div.dashboardPage div.container.excellent div.activityButton {
+      background: url("../img/dashboard/orange_activity_button.png") no-repeat 8px;
+      background-size: 35px; }
+    div.dashboardPage div.container.excellent div.weatherButton {
+      background: url("../img/dashboard/orange_weather_button.png") no-repeat 8px;
+      background-size: 35px; }
+
+div.dashboardPage #dashboard {
+  width: 80%;
+  display: inline-block; }
+  div.dashboardPage #dashboard div.title {
+    font-size: 25px; }
+  div.dashboardPage #dashboard div.status {
+    font-size: 25px; }
+  div.dashboardPage #dashboard div.dashboardButtons {
+    position: absolute;
+    bottom: 14em; }
+    div.dashboardPage #dashboard div.dashboardButtons > div {
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      border-radius: 50%;
+      float: left;
+      margin-left: 1.5em;
+      margin-right: 1.5em; }
+      div.dashboardPage #dashboard div.dashboardButtons > div > div {
+        width: 50px;
+        height: 50px; }
