@@ -35,6 +35,10 @@ Dashboard.prototype.attachEvent = function() {
 	$('div.uvButton').on('click', function(){
 		window.location = window.rootPath + "pages/uv.html";
 	});
+
+	$('div.activityButton').on('click', function(){
+		window.location = window.rootPath + "pages/activity.html";
+	});
 };
 
 

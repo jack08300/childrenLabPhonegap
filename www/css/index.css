@@ -958,3 +958,44 @@ div.uvPage {
     z-index: 2;
     width: 75vw;
     display: inline-block; }
+
+/******************** Activity index ***********************/
+div.activityPage div.activityOverlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent url("../img/dashboard/dashboard-bg-bg-activity-02.png") 0 -3vw no-repeat;
+  background-size: 100%;
+  z-index: 1; }
+
+div.activityPage div.backgroundOverlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent url("../img/background/city-01-overall.png") 0 70vw no-repeat;
+  background-size: 500px;
+  z-index: 2; }
+
+div.activityPage div.container {
+  font-family: avenir_bold, Georgia, "Times New Roman", serif;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  color: #1fc4b4;
+  text-align: center;
+  margin-top: 7vw; }
+  div.activityPage div.container div.title {
+    font-size: 7vw; }
+  div.activityPage div.container div.bars {
+    text-align: left;
+    color: white;
+    margin-top: 10vw; }
+    div.activityPage div.container div.bars > div {
+      position: relative;
+      padding: 2vw;
+      margin: 5vw;
+      background-color: #1fc4b4; }
+      div.activityPage div.container div.bars > div > span {
+        position: absolute;
+        top: 2vw;
+        left: 45vw; }

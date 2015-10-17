@@ -7,7 +7,7 @@ Bluetooth.prototype.init = function (oArgs) {
 	this.uploadTimer = 5000;
 
 	this.deviceId = "39A1A2DF-B6E7-8DCE-4EC8-02F1838998FE";
-	this.serviceUuid = ['1803', '1802', '1804'];
+	this.serviceUuid = ['1803', '1802', '1804', '180F', 'FFA0', 'FFE0'];
 
 	this.storageDeviceName = "ConnectedDevice";
 	this.storageDataName = "ConnectedData";
@@ -66,7 +66,7 @@ Bluetooth.prototype.bleIsEnabled = function () {
 
 	ble.isEnabled(
 		function(){
-			if(!window.localStorage.getItem(self.storageDeviceName) || !window.localStorage.getItem(self.storageDataName)){
+			if(true){//if(!window.localStorage.getItem(self.storageDeviceName) || !window.localStorage.getItem(self.storageDataName)){
 				self.searchDevice();
 			}else{
 				self.$debug.append("<div>" + window.localStorage.getItem(self.storageDataName)  + "</div>");
@@ -208,3 +208,121 @@ Bluetooth.prototype.updateConnectedDevice = function(device){
 		}
 	}
 };
+
+
+Bluetooth.prototype.read = function (oArgs) {
+	var self = this;
+	oArgs = oArgs || {};
+
+	ble.read(oArgs.deviceId, oArgs.serviceId, oArgs.characterId,
+		function(data){
+			var int = new Uint8Array(data);
+			//self.$status.html(self.$status.html() + int[0]);
+
+			for(var i=0;i<int.length;i++){
+				//oArgs.dataReceive.append("<br/>" + "Read: " + int[i]);
+
+				if(oArgs.type == "MAC_ID"){
+					self.sensorData.macId += int[i].toString();
+				}
+
+			}
+
+			if(oArgs.type == "MAC_ID" && self.sensorData.macId.length > 12){
+				self.sensorData.macId = self.sensorData.macId.substring(0, 12);
+				oArgs.dataReceive.append("Mac ID: " + self.sensorData.macId);
+			}
+
+		},
+		function(error){
+			app.notification("Fail to Read", JSON.stringify(error));
+		}
+	)
+};
+
+Bluetooth.prototype.write = function (oArgs) {
+	var self = this;
+	oArgs = oArgs || {};
+
+	var data = new Uint8Array(1);
+	data[0] = oArgs.value;
+
+	ble.write(this.deviceId, oArgs.serviceId, oArgs.characterId,
+		data.buffer,
+		function(){
+			if(oArgs.callback){
+				oArgs.callback.call(oArgs.context, oArgs, {});
+			}
+		},
+		function(error){
+			app.notification("Fail to Write", JSON.stringify(error));
+		}
+	)
+};
+
+Bluetooth.prototype.successWrite = function () {
+	alert("yes");
+};
+
+
+Bluetooth.prototype.notify = function (oArgs) {
+	var self = this;
+	oArgs = oArgs || {};
+
+	ble.startNotification(this.deviceId, oArgs.serviceId, oArgs.characterId,
+		function(data){
+			var int = new Uint8Array(data);
+
+			var value = int.length == 1 ? "" : {};
+
+			for(var i=0;i<int.length;i++){
+				if(int.length == 1){
+					value = int[i];
+				}else{
+					value[i] = int[i];
+				}
+
+				if(oArgs.debug){
+					oArgs.debug.append(value);
+				}
+			}
+
+			self.storeValue(oArgs.type, value);
+		},
+		function(error){
+			alert("Fail to Notifying. " + JSON.stringify(error));
+		}
+	)
+};
+
+Bluetooth.prototype.storeValue = function (type, value) {
+	var originalValue = parseInt(window.localStorage.getItem(type));
+	if(type == "Light"){
+		this.sensorData.light = value;
+	}else if(type == "Audio"){
+		this.sensorData.audio = value;
+	}else if(type == "Activity"){
+		this.sensorData.activityX = value[0];
+		this.sensorData.activityY = value[1];
+		this.sensorData.activityZ = value[2];
+	}else if(type == "activityX"){
+
+	}
+
+	window.localStorage.setItem(type, (originalValue ? originalValue : 0) + parseInt(value));
+};
+
+
+// ASCII only
+function stringToBytes(string) {
+	var array = new Uint8Array(string.length);
+	for (var i = 0, l = string.length; i < l; i++) {
+		array[i] = string.charCodeAt(i);
+	}
+	return array.buffer;
+}
+
+// ASCII only
+function bytesToString(buffer) {
+	return String.fromCharCode.apply(null, new Uint8Array(buffer));
+}

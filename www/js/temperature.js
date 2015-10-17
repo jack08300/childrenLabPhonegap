@@ -55,7 +55,7 @@ Temperature.prototype.currentPositionGet = function(position) {
 	var self = this;
 
 	$.ajax({
-		url: "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='taiwan')&format=json",
+		url: "http://api.worldweatheronline.com/free/v2/weather.ashx?q=Taipei&format=json&num_of_days=1&key=29e2cef2e5823da0db09d11a307ba",
 		success: function(data){
 			self.updateTemperature(data);
 		}
@@ -74,23 +74,23 @@ Temperature.prototype.attachEvent = function () {
 	});
 };
 
-Temperature.prototype.updateTemperature = function (data) {
-	this.weatherResult = data.query.results.channel;
+Temperature.prototype.updateTemperature = function (result) {
+	this.weatherResult = result.data.current_condition[0];
 
-	this.$temperature.html(this.weatherResult.item.condition.temp + "&deg;F");
-	this.$location.html(this.weatherResult.location.city);
-	this.$description.html(this.weatherResult.item.condition.text);
+	this.$temperature.html(this.weatherResult.temp_F + "&deg;F");
+	this.$location.html(result.data.request[0].query);
+	this.$description.html(this.weatherResult.weatherDesc[0].value);
 };
 
 Temperature.prototype.switchHumidity = function () {
 	this.$weatherPage.addClass('humidity');
-	this.$temperature.html(this.weatherResult.atmosphere.humidity + "%");
+	this.$temperature.html(this.weatherResult.humidity + "%");
 	this.$description.html("");
 };
 
 Temperature.prototype.switchTemperature = function () {
 	this.$weatherPage.removeClass('humidity');
-	this.$temperature.html(this.weatherResult.item.condition.temp + "&deg;F");
+	this.$temperature.html(this.weatherResult.temp_F + "&deg;F");
 };
 
 

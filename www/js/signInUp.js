@@ -28,7 +28,7 @@ SignInUp.prototype.init = function () {
 	this.isRegistered = true;
 
 
-	app.animateBackground({ background: 'div.indexPage' });
+	//app.animateBackground({ background: 'div.indexPage' });
 
 	this.attachEvent();
 };
@@ -102,28 +102,8 @@ SignInUp.prototype.loadSignForm = function() {
 		callback: this.loadSignForm_load
 	});
 
-/*	app.loadTemplate({
-		path: 'template/deviceInfo.html',
-		appendTo: 'div.indexOptions',
-		context: this,
-		callback: this.loadDeviceInfo_load
-	});*/
-
 };
 
-/*SignInUp.prototype.loadDeviceInfo_load = function() {
-	app.pageSwitch({
-		pageOut: 'div.signButtons',
-		pageIn: 'div.deviceInfo'
-	});
-
-	var bluetooth = new Bluetooth;
-	bluetooth.init({
-		$template: $('div.deviceInformation'),
-		$deviceList: $('div.deviceList')
-	});
-
-};*/
 
 SignInUp.prototype.loadSignForm_load = function(){
 	var self = this;
