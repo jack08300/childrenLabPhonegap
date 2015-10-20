@@ -971,10 +971,11 @@ div.activityPage div.activityOverlay {
 div.activityPage div.backgroundOverlay {
   position: absolute;
   width: 100%;
-  height: 100%;
-  background: transparent url("../img/background/city-01-overall.png") 0 70vw no-repeat;
+  height: 50vw;
+  background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
   background-size: 500px;
-  z-index: 2; }
+  z-index: 2;
+  bottom: 5vw; }
 
 div.activityPage div.container {
   font-family: avenir_bold, Georgia, "Times New Roman", serif;
@@ -994,8 +995,33 @@ div.activityPage div.container {
       position: relative;
       padding: 2vw;
       margin: 5vw;
-      background-color: #1fc4b4; }
+      background-color: #1fc4b4;
+      transition: all 1s; }
       div.activityPage div.container div.bars > div > span {
         position: absolute;
         top: 2vw;
         left: 45vw; }
+
+div.activityPage div.bottomButtons {
+  position: absolute;
+  bottom: 18vw;
+  z-index: 3;
+  width: 100%;
+  text-align: center; }
+  div.activityPage div.bottomButtons div.center {
+    display: inline-block; }
+    div.activityPage div.bottomButtons div.center > div {
+      margin: 0 5vw;
+      float: left;
+      background-color: white;
+      position: relative; }
+      div.activityPage div.bottomButtons div.center > div > div {
+        background-color: white;
+        color: #1fc4b4;
+        position: relative;
+        padding: 0.8vw 9vw;
+        border-radius: 5px;
+        transition: all 1s; }
+        div.activityPage div.bottomButtons div.center > div > div.active {
+          background-color: #1fc4b4;
+          color: white; }

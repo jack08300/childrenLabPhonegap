@@ -80,7 +80,6 @@ input {
 	}
 }
 
-
 h1 {
 	font-size: 24px;
 	font-weight: bold;
@@ -113,10 +112,10 @@ h1 {
 	display: none;
 }
 
-
 .fleft {
 	float: left;
 }
+
 .fright {
 	float: right;
 }
@@ -162,7 +161,6 @@ div.navigater {
 	}
 }
 
-
 .close {
 	clear: both;
 }
@@ -202,6 +200,7 @@ div.navigater {
 *:focus {
 	outline: 0;
 }
+
 * {
 	text-shadow: none !important;
 }
@@ -226,7 +225,7 @@ div.navigater {
 	font-size: 20px;
 	position: absolute;
 	top: 30px;
-	left:10px
+	left: 10px
 }
 
 .secondaryButton {
@@ -241,7 +240,6 @@ div.navigater {
 .buttons {
 	float: left;
 }
-
 
 div.inputBox {
 	background-color: white;
@@ -260,15 +258,12 @@ div.closeBox {
 	height: 150px;
 }
 
-.ui-overlay-a{
-	 background-color: white;
-	 border-color: white;
-	 color: white;
-	 text-shadow: none;
+.ui-overlay-a {
+	background-color: white;
+	border-color: white;
+	color: white;
+	text-shadow: none;
 }
-
-
-
 
 #deviceready {
 	text-align: center;
@@ -285,12 +280,9 @@ div.template {
 	display: none;
 }
 
-
 div.bluetooth div.container {
 	color: #2EB8B8;
 }
-
-
 
 .textCenter {
 	text-align: center;
@@ -318,6 +310,7 @@ input.mainInput {
 	width: 92%;
 	margin: 8px 0;
 }
+
 ::-webkit-input-placeholder {
 	color: white;
 }
@@ -337,8 +330,7 @@ div.form div {
 	margin-bottom: 5px;
 }
 
-
-div.previousPage{
+div.previousPage {
 	background-color: lightgrey;
 	padding: 2px;
 
@@ -364,9 +356,6 @@ div.previousPage{
 
 }
 
-
-
-
 /************ Index page ***************/
 
 div.indexPage {
@@ -376,23 +365,23 @@ div.indexPage {
 	color: #ff7231;
 
 	div.pageTitle {
-		font-size:20px;
+		font-size: 20px;
 		font-family: avenir_bold, Georgia, "Times New Roman", serif;
 	}
 
-	div.indexOptions{
+	div.indexOptions {
 		position: relative;
-		> div{
-			padding:20px 30px;
+		> div {
+			padding: 20px 30px;
 			text-align: center;
 		}
 	}
 
-	div.separateLine{
+	div.separateLine {
 		color: #999899;
 		div.text {
-			position:absolute;
-			left:46.5%;
+			position: absolute;
+			left: 46.5%;
 		}
 
 		hr {
@@ -462,9 +451,10 @@ div.indexPage {
 	/************ Searching **********/
 
 	div.searchingPage {
-		div.hideToRight { width: 250px; }
+		div.hideToRight {
+			width: 250px;
+		}
 	}
-
 
 	div.searching {
 		margin-top: 50px;
@@ -473,31 +463,33 @@ div.indexPage {
 	div.noFoundDevice {
 		margin-top: -50px;
 
-		div.text { color:  #999899; }
+		div.text {
+			color: #999899;
+		}
 	}
 
 }
-
 
 /************ Login Option Page ***************/
 body.ruleOption {
 
 	div.whiteCover {
-		position:fixed;
-		padding:0;
-		margin:0;
+		position: fixed;
+		padding: 0;
+		margin: 0;
 
-		top:0;
-		left:0;
+		top: 0;
+		left: 0;
 
 		width: 100%;
 		height: 100%;
-		background:rgba(0,0,0,0.3);
+		background: rgba(0, 0, 0, 0.3);
 	}
 
 	img {
 		width: 100%;
-	};
+	}
+;
 }
 
 div.loginOption {
@@ -523,8 +515,12 @@ div.loginOption {
 			font-weight: bold;
 		}
 
-		div.wrap.parent { float: left; }
-		div.wrap.nanny { float: right; }
+		div.wrap.parent {
+			float: left;
+		}
+		div.wrap.nanny {
+			float: right;
+		}
 	}
 
 }
@@ -540,13 +536,12 @@ div.loginOption {
 
 }
 
-
 div.header {
 	height: 35px;
 	background-color: #00aeef;
 	padding-top: 20px;
 
-	div.mainMenuButton{
+	div.mainMenuButton {
 		position: relative;
 		width: 35px;
 		padding-top: .9em;
@@ -581,25 +576,44 @@ div.menu.bottom {
 	border-top: 1px solid #979697;
 	background-color: #fcfcfc;
 
-	>	div {
+	> div {
 		float: left;
 		height: 14vw;
 		width: 20%;
 
-		&.mapPageIcon { background: url('../img/menu/navi_icons_map.svg') no-repeat 50%; }
-		&.calendarPageIcon { background: url('../img/menu/navi_icons_calendar.svg') no-repeat 50%; }
-		&.dashboardPageIcon { background: url('../img/menu/navi_icons_chart.svg') no-repeat 50%; }
-		&.mailPageIcon { background: url('../img/menu/navi_icons_mail.svg') no-repeat 50%; }
-		&.profilePageIcon { background: url('../img/menu/navi_icons_profile.svg') no-repeat 50%; }
+		&.mapPageIcon {
+			background: url('../img/menu/navi_icons_map.svg') no-repeat 50%;
+		}
+		&.calendarPageIcon {
+			background: url('../img/menu/navi_icons_calendar.svg') no-repeat 50%;
+		}
+		&.dashboardPageIcon {
+			background: url('../img/menu/navi_icons_chart.svg') no-repeat 50%;
+		}
+		&.mailPageIcon {
+			background: url('../img/menu/navi_icons_mail.svg') no-repeat 50%;
+		}
+		&.profilePageIcon {
+			background: url('../img/menu/navi_icons_profile.svg') no-repeat 50%;
+		}
 
-		&.mapPageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_map_selected.svg') no-repeat 50% }
-		&.calendarPageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_calendar_selected.svg') no-repeat 50% }
-		&.dashboardPageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_chart_selected.svg') no-repeat 50% }
-		&.mailPageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_mail_selected.svg') no-repeat 50% }
-		&.profilePageIcon.active { background: #fcfcfc url('../img/menu/navi_icons_profile_selected.svg') no-repeat 50% }
+		&.mapPageIcon.active {
+			background: #fcfcfc url('../img/menu/navi_icons_map_selected.svg') no-repeat 50%
+		}
+		&.calendarPageIcon.active {
+			background: #fcfcfc url('../img/menu/navi_icons_calendar_selected.svg') no-repeat 50%
+		}
+		&.dashboardPageIcon.active {
+			background: #fcfcfc url('../img/menu/navi_icons_chart_selected.svg') no-repeat 50%
+		}
+		&.mailPageIcon.active {
+			background: #fcfcfc url('../img/menu/navi_icons_mail_selected.svg') no-repeat 50%
+		}
+		&.profilePageIcon.active {
+			background: #fcfcfc url('../img/menu/navi_icons_profile_selected.svg') no-repeat 50%
+		}
 	}
 }
-
 
 /*************** Device List ****************/
 div.deviceList {
@@ -615,14 +629,12 @@ div.deviceList {
 			color: black;
 		}
 
-
 		div.deviceIcon {
 			height: 60px;
 			width: 40px;
 			margin: 4px;
 			padding-left: 10px;
 		}
-
 
 		div.deviceInfo {
 			position: relative;
@@ -657,7 +669,6 @@ div.eachCharacter {
 		}
 	}
 }
-
 
 .ui-panel-wrapper {
 	min-height: 0;
@@ -695,9 +706,18 @@ a:link {
 	text-shadow: none;
 	color: #000000;
 }
-a:visited{ color: #000000; }
-a:hover{ color: #000000; }
-a:active{ color: #000000; }
+
+a:visited {
+	color: #000000;
+}
+
+a:hover {
+	color: #000000;
+}
+
+a:active {
+	color: #000000;
+}
 
 #deviceDetail {
 	background-color: #58585a;
@@ -751,9 +771,8 @@ a:active{ color: #000000; }
 	}
 }
 
-
 /******************* Near By ******************/
-div.nearbyPage{
+div.nearbyPage {
 	//text-align: center;
 
 	div.topSlogan {
@@ -778,7 +797,7 @@ div.nearbyPage{
 		margin: 10px;
 	}
 
-	div.section{
+	div.section {
 		//float: left;
 		padding: 0 1em;
 	}
@@ -798,11 +817,13 @@ div.nearbyPage{
 		}
 	}
 
-	.containing-element .ui-slider-switch { width: 9em }
+	.containing-element .ui-slider-switch {
+		width: 9em
+	}
 }
 
 /****************** Nearby search result **********************/
-div.scheduleSearchResult{
+div.scheduleSearchResult {
 
 	div.eachNearby {
 		position: relative;
@@ -892,7 +913,6 @@ div.scheduleSearchResult{
 
 			}
 
-
 			div.price {
 				text-align: center;
 				background-color: lightcoral;
@@ -933,12 +953,16 @@ div.scheduleSearchResult{
 							border-radius: 3px;
 						}
 
-						&.alignRight{
+						&.alignRight {
 							text-align: right;
-							span {background-color: #00d4b4;}
+							span {
+								background-color: #00d4b4;
+							}
 						}
 						&.alignLeft {
-							span {background-color: #61abd4;}
+							span {
+								background-color: #61abd4;
+							}
 						}
 					}
 
@@ -973,15 +997,14 @@ div.feedbackPage {
 		}
 
 		div.mainButton {
-			display:inline-block;
+			display: inline-block;
 		}
 	}
 
 }
 
-
 /******************** UpdateProfile Page ***********************/
-div.profilePage{
+div.profilePage {
 
 	label {
 		display: inline-block;
@@ -996,7 +1019,7 @@ div.profilePage{
 	}
 
 	div.profileImageContainer {
-		text-align:center;
+		text-align: center;
 		width: 100%;
 
 		div.profileImage {
@@ -1023,7 +1046,7 @@ div.profilePage{
 		div.previewImage {
 		}
 
-		div.zoom{
+		div.zoom {
 			width: 10px;
 			height: 10px;
 			background-color: black;
@@ -1035,15 +1058,14 @@ div.profilePage{
 	}
 
 	.ui-panel-animate.ui-panel-page-content-position-right {
-		-webkit-transform: translate3d(-20em,0,0) !important;
-		-moz-transform: translate3d(-20em,0,0) !important;
-		transform: translate3d(-20em,0,0) !important;
+		-webkit-transform: translate3d(-20em, 0, 0) !important;
+		-moz-transform: translate3d(-20em, 0, 0) !important;
+		transform: translate3d(-20em, 0, 0) !important;
 	}
 
-	div.ui-panel-wrapper{
+	div.ui-panel-wrapper {
 		margin-bottom: 80px;
 	}
-
 
 }
 
@@ -1054,11 +1076,12 @@ div.settingPage {
 	}
 }
 
-
 /******************** Dashboard Page ***********************/
-div.dashboardPage{
+div.dashboardPage {
 
-	div.title, div.status {	font-family: avenir_bold, Georgia, "Times New Roman", serif; }
+	div.title, div.status {
+		font-family: avenir_bold, Georgia, "Times New Roman", serif;
+	}
 
 	div.container {
 		position: absolute;
@@ -1066,7 +1089,6 @@ div.dashboardPage{
 		height: 100%;
 		text-align: center;
 		padding-top: 5vw;
-
 
 		&.bad {
 			background: url('../img/dashboard/dashboard-bg-bad.png') no-repeat;
@@ -1078,7 +1100,7 @@ div.dashboardPage{
 				background-size: 60vw;
 				width: 100%;
 				height: 60vw;
-				display:inline-block;
+				display: inline-block;
 			}
 			div.uvButton {
 				background: url("../img/dashboard/uv_button.png") no-repeat 2.7vw;
@@ -1104,7 +1126,7 @@ div.dashboardPage{
 				background-size: 60vw;
 				width: 100%;
 				height: 60vw;
-				display:inline-block;
+				display: inline-block;
 			}
 			div.uvButton {
 				background: url("../img/dashboard/blue_uv_button.png") no-repeat 2.7vw;
@@ -1130,7 +1152,7 @@ div.dashboardPage{
 				background-size: 60vw;
 				width: 100%;
 				height: 60vw;
-				display:inline-block;
+				display: inline-block;
 			}
 			div.uvButton {
 				background: url("../img/dashboard/orange_uv_button.png") no-repeat 2.7vw;
@@ -1151,10 +1173,12 @@ div.dashboardPage{
 		width: 80%;
 		display: inline-block;
 
-		div.title,div.status { font-size: 7vw; }
+		div.title, div.status {
+			font-size: 7vw;
+		}
 
 		div.dashboardButtons {
-			position:absolute;
+			position: absolute;
 			bottom: 40vw;
 
 			> div {
@@ -1166,7 +1190,7 @@ div.dashboardPage{
 				margin-left: 5vw;
 				margin-right: 5vw;
 
-				>div {
+				> div {
 					width: 15vw;
 					height: 15vw;
 				}
@@ -1174,10 +1198,8 @@ div.dashboardPage{
 
 		}
 
-
 	}
 }
-
 
 /******************** Weather Page ***********************/
 
@@ -1186,7 +1208,7 @@ div.weatherPage {
 
 	div.description {
 		font-family: avenir, Georgia, "Times New Roman", serif;
-		position:relative;
+		position: relative;
 		top: 18vw;
 	}
 
@@ -1196,7 +1218,7 @@ div.weatherPage {
 		height: 100%;
 		background: transparent url("../img/dashboard/dashboard-bg-weather-01.png") 0 -3vw no-repeat;
 		background-size: 100%;
-		z-index:1;
+		z-index: 1;
 	}
 	div.backgroundOverlay {
 		position: absolute;
@@ -1216,7 +1238,7 @@ div.weatherPage {
 			font-size: 6vw
 		}
 
-		div.circle{
+		div.circle {
 			position: absolute;
 			border: 3vw solid #ff7231;
 			border-radius: 50%;
@@ -1236,7 +1258,9 @@ div.weatherPage {
 					content: 'Temperature';
 				}
 
-				div.temperature { font-size: 16vw; }
+				div.temperature {
+					font-size: 16vw;
+				}
 			}
 		}
 	}
@@ -1249,8 +1273,8 @@ div.weatherPage.humidity {
 		background: transparent url("../img/dashboard/dashboard-bg-weather-02.png") -1vw -5vw no-repeat;
 		background-size: 100%;
 	}
-	div.container{
-		div.circle{
+	div.container {
+		div.circle {
 			border: 3vw solid #4dc1df;
 			color: #4dc1df;
 
@@ -1272,7 +1296,7 @@ div.uvPage {
 		height: 100%;
 		background: transparent url("../img/dashboard/dashboard-bg-UV-01.png") 0 -3vw no-repeat;
 		background-size: 100%;
-		z-index:1;
+		z-index: 1;
 	}
 	div.backgroundOverlay {
 		position: absolute;
@@ -1302,10 +1326,9 @@ div.uvPage {
 
 			div.uvIndex {
 				font-size: 15vw;
-				position:relative;
+				position: relative;
 				top: 5vw;
 			}
-
 
 		}
 	}
@@ -1313,14 +1336,13 @@ div.uvPage {
 	div.text {
 		font-family: avenir_bold, Georgia, "Times New Roman", serif;
 		font-size: 5vw;
-		position:relative;
+		position: relative;
 		top: 47vw;
-		z-index:2;
+		z-index: 2;
 		width: 75vw;
 		//color: #4eb400;
-		display:inline-block;
+		display: inline-block;
 	}
-
 
 }
 
@@ -1332,27 +1354,28 @@ div.activityPage {
 		height: 100%;
 		background: transparent url("../img/dashboard/dashboard-bg-bg-activity-02.png") 0 -3vw no-repeat;
 		background-size: 100%;
-		z-index:1;
+		z-index: 1;
 	}
 	div.backgroundOverlay {
 		position: absolute;
 		width: 100%;
-		height: 100%;
-		background: transparent url("../img/background/city-01-overall.png") 0 70vw no-repeat;
+		height: 50vw;
+		background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
 		background-size: 500px;
 		z-index: 2;
+		bottom: 5vw;
 	}
 
 	div.container {
 		font-family: avenir_bold, Georgia, "Times New Roman", serif;
-		position:absolute;
+		position: absolute;
 		z-index: 2;
 		width: 100%;
 		color: #1fc4b4;
 		text-align: center;
 		margin-top: 7vw;
 
-		div.title{
+		div.title {
 			font-size: 7vw;
 		}
 
@@ -1366,14 +1389,51 @@ div.activityPage {
 				padding: 2vw;
 				margin: 5vw;
 				background-color: #1fc4b4;
+				transition: all 1s;
 
-				>span {
-					position:absolute;
+				> span {
+					position: absolute;
 					top: 2vw;
 					left: 45vw;
 				}
 			}
 		}
+
 	}
 
+	div.bottomButtons {
+		position: absolute;
+		bottom: 18vw;
+		z-index: 3;
+		width:100%;
+		text-align:center;
+
+		div.center {
+			display:inline-block;
+			> div {
+				margin: 0 5vw;
+				float: left;
+				background-color: white;
+				position: relative;
+
+				> div {
+					background-color: white;
+					color: #1fc4b4;
+					position: relative;
+					padding: 0.8vw 9vw;
+					border-radius: 5px;
+					transition: all 1s;
+
+					&.active {
+						background-color: #1fc4b4;
+						color: white;
+					}
+
+				}
+
+			}
+		}
+
+
+	}
 }

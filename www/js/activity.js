@@ -1,4 +1,32 @@
 var Activity = function () {
+	/* Face Data */
+	this.indoorData = [
+		{
+			name: 'steps',
+			value: 42
+		},{
+			name: 'walking',
+			value: 59
+		}, {
+			name: 'flights',
+			value: 63
+		}
+
+	];
+
+	this.outdoorData = [
+		{
+			name: 'steps',
+			value: 34
+		},{
+			name: 'walking',
+			value: 80
+		}, {
+			name: 'flights',
+			value: 44
+		}
+
+	];
 };
 
 var gapReady = $.Deferred();
@@ -26,6 +54,8 @@ Activity.prototype.deviceReady = function () {
 
 	this.$activityPage = $('div.activityPage');
 	this.$steps = $('div.steps');
+	this.$indoor = $('div.indoor');
+	this.$outdoor = $('div.outdoor');
 
 
 	app.addHeaderBar({title: 'Activity'});
@@ -34,13 +64,17 @@ Activity.prototype.deviceReady = function () {
 
 	this.attachEvent();
 
-	this.bluetooth = new Bluetooth;
+/*	this.bluetooth = new Bluetooth;
 	this.bluetooth.init({
 		//$debug: $('#deviceDebug'),
 		callback: this.findDevice_load,
 		context: this
-	});
+	});*/
 
+
+	/* Face Data */
+	this.updateBar(this.indoorData);
+	/* Face Data */
 };
 
 Activity.prototype.findDevice_load = function () {
@@ -83,13 +117,43 @@ Activity.prototype.turnSensorOn = function () {
 		type: 'activityZ'
 	});
 
+	/* Face Data */
+	this.indoorData = [
+		{
+			name: 'steps',
+			value: 42
+		},{
+			name: 'walking',
+			value: 59
+		}, {
+			name: 'flights',
+			value: 63
+		}
+
+	];
+
+	this.updateBar(data);
+	/* Face Data */
+
+/*
 	setInterval(function(){
 		var activityValue = parseInt(window.localStorage.getItem('activityX')) + parseInt(window.localStorage.getItem('activityY')) + parseInt(window.localStorage.getItem('activityZ'));
 		activityValue = activityValue / 4000;
 		if(activityValue > 100) activityValue = 100;
 		self.$steps.find('span').html(activityValue.toFixed(2) + "%");
 		self.$steps.css('width', activityValue + "%");
-	}, 1000);
+	}, 1000);*/
+
+};
+
+Activity.prototype.updateBar = function(data) {
+
+	for(var i = 0 ; i<data.length;i++){
+		var $bar = $('div.' + data[i].name);
+		if(data[i].value > 100) data[i].value = 100;
+		$bar.find('span').html(data[i].value.toFixed(2) + "%");
+		$bar.css('width', data[i].value + "%");
+	}
 
 };
 
@@ -101,6 +165,18 @@ Activity.prototype.attachEvent = function () {
 		window.localStorage.removeItem('activityY');
 		window.localStorage.removeItem('activityZ');
 		self.$steps.find('span').html("0.00%");
+	});
+
+	this.$indoor.on('click', function(){
+		self.$outdoor.find('div').removeClass('active');
+		$(this).find('div').addClass('active');
+		self.updateBar(self.indoorData);
+	});
+
+	this.$outdoor.on('click', function(){
+		self.$indoor.find('div').removeClass('active');
+		$(this).find('div').addClass('active');
+		self.updateBar(self.outdoorData);
 	});
 };
 
