@@ -55,7 +55,7 @@ UvIndex.prototype.currentPositionGet = function(position) {
 	var self = this;
 
 	$.ajax({
-		url: "http://api.worldweatheronline.com/free/v2/weather.ashx?q=Taipei&format=json&num_of_days=1&key=29e2cef2e5823da0db09d11a307ba",
+		url: "http://api.worldweatheronline.com/free/v2/weather.ashx?q=Hong Kong&format=json&num_of_days=1&key=29e2cef2e5823da0db09d11a307ba",
 		success: function(data){
 			self.updateUvIndex(data);
 		}
@@ -68,7 +68,6 @@ UvIndex.prototype.attachEvent = function () {
 };
 
 UvIndex.prototype.updateUvIndex = function(result) {
-	console.error(result);
 	this.weather = result.data.weather;
 
 	var uvIndex = this.weather[0].uvIndex;
@@ -98,7 +97,7 @@ UvIndex.prototype.updateUvIndex = function(result) {
 		'color': color,
 		'border-color': color
 	});
-	this.$location.html(result.data.request[0].query);
+	this.$location.html("Hong Kong");
 };
 
 

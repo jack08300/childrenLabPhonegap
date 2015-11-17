@@ -29,6 +29,9 @@ Calendar.prototype.deviceReady = function() {
 Calendar.prototype.attachEvent = function() {
 	var self = this;
 
+	$('div.container').on('click', function() {
+		$(this).toggleClass("second");
+	});
 };
 
 

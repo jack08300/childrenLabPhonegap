@@ -875,10 +875,11 @@ div.weatherPage {
   div.weatherPage div.backgroundOverlay {
     position: absolute;
     width: 100%;
-    height: 100%;
-    background: transparent url("../img/background/city-01-overall.png") 0 70vw no-repeat;
+    height: 50vw;
+    background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
     background-size: 500px;
-    z-index: 2; }
+    z-index: 2;
+    bottom: 5vw; }
   div.weatherPage div.container {
     text-align: center; }
     div.weatherPage div.container div.location {
@@ -928,10 +929,11 @@ div.uvPage {
   div.uvPage div.backgroundOverlay {
     position: absolute;
     width: 100%;
-    height: 100%;
-    background: transparent url("../img/background/city-01-overall.png") 0 70vw no-repeat;
+    height: 50vw;
+    background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
     background-size: 500px;
-    z-index: 2; }
+    z-index: 2;
+    bottom: 5vw; }
   div.uvPage div.container {
     text-align: center;
     margin-top: 7vw; }
@@ -1025,3 +1027,14 @@ div.activityPage div.bottomButtons {
         div.activityPage div.bottomButtons div.center > div > div.active {
           background-color: #1fc4b4;
           color: white; }
+
+/******************** Calendar ***********************/
+div.calendarPage div.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #cdeef6 url("../img/calendar/swing_app_calendar-22-01.png") 0 -10vw no-repeat;
+  background-size: 100vw; }
+  div.calendarPage div.container.second {
+    background: #cdeef6 url("../img/calendar/swing_app_calendar-22-02.png") 0 -10vw no-repeat;
+    background-size: 100vw; }
