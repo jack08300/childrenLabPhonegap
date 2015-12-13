@@ -108,9 +108,6 @@
         "com.synconset.imagepicker": {
             "PACKAGE_NAME": "com.childrenLab"
         },
-        "cordova-plugin-ble-central": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.childrenLab"
         },
@@ -127,6 +124,9 @@
             "PACKAGE_NAME": "com.childrenLab"
         },
         "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-ble-central": {
             "PACKAGE_NAME": "com.childrenLab"
         }
     },

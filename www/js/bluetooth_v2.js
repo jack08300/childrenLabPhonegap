@@ -7,7 +7,7 @@ Bluetooth.prototype.init = function (oArgs) {
 	this.uploadTimer = 5000;
 
 	this.deviceId = "39A1A2DF-B6E7-8DCE-4EC8-02F1838998FE";
-	this.serviceUuid = ['1803', '1802', '1804', '180F', 'FFA0', 'FFE0'];
+	this.serviceUuid = ['180A', '1803', '1802', '1804', '180F', 'FFA0', 'FFE0'];
 
 	this.storageDeviceName = "ConnectedDevice";
 	this.storageDataName = "ConnectedData";
@@ -94,7 +94,7 @@ Bluetooth.prototype.searchDevice = function () {
 	self.runningOnSearch = true;
 	this.deviceList = [];
 
-	ble.startScan(self.serviceUuid,
+	ble.startScan(this.serviceUuid,
 		function (device) {
 			if(self.debug) self.$debug.append("<div>Finished Scan....</div>");
 			if(self.debug) self.$debug.append("<div style='position:relative; width:100%;'>" + JSON.stringify(device) + "</div>");
@@ -107,6 +107,7 @@ Bluetooth.prototype.searchDevice = function () {
 
 Bluetooth.prototype.foundDevice = function (data) {
 	this.deviceList = this.deviceList || [];
+	this.stopScan();
 
 	var exist = false;
 	for (var i = 0; i < this.deviceList.length; i++) {
@@ -138,6 +139,8 @@ Bluetooth.prototype.isConnected = function (device) {
 	ble.isConnected(device.id,
 		function (data) {
 			if(self.debug) self.$debug.append("<div>Connected: " + device.name + "</div>");
+
+			ble.stopScan();
 			self.updateConnectedDevice(device);
 
 			if(self.callback){
@@ -158,6 +161,8 @@ Bluetooth.prototype.connect = function (device) {
 
 	ble.connect(device.id,
 		function (data) {
+			//TODO It's for debug
+			//app.notification("Fail to Data", JSON.stringify(data));
 			//success
 			self.storeDeviceData(device, data);
 			if(self.debug) self.$debug.append("<div>Connected</div>");
@@ -258,6 +263,15 @@ Bluetooth.prototype.write = function (oArgs) {
 			app.notification("Fail to Write", JSON.stringify(error));
 		}
 	)
+
+	// ASCII only
+	function stringToBytes(string) {
+		var array = new Uint8Array(string.length);
+		for (var i = 0, l = string.length; i < l; i++) {
+			array[i] = string.charCodeAt(i);
+		}
+		return array.buffer;
+	}
 };
 
 Bluetooth.prototype.successWrite = function () {
@@ -283,11 +297,18 @@ Bluetooth.prototype.notify = function (oArgs) {
 				}
 
 				if(oArgs.debug){
-					oArgs.debug.append(value);
+					oArgs.debug.prepend("ActivityX : " + value + "<br/>");
+					oArgs.debug.prepend( "ActivityY : " + value + "<br/>");
+					oArgs.debug.prepend("ActivityZ : " + value + "<br/>");
+					oArgs.debug.prepend("<br/>");
 				}
+
+				//oArgs.callback.call(oArgs.context, {type: oArgs.type, value: value}, {});
 			}
 
-			self.storeValue(oArgs.type, value);
+
+
+			//self.storeValue(oArgs.type, value);
 		},
 		function(error){
 			alert("Fail to Notifying. " + JSON.stringify(error));

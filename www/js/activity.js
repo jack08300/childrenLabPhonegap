@@ -29,6 +29,7 @@ var Activity = function () {
 	];
 };
 
+
 var gapReady = $.Deferred();
 var jqmReady = $.Deferred();
 
@@ -64,12 +65,12 @@ Activity.prototype.deviceReady = function () {
 
 	this.attachEvent();
 
-/*	this.bluetooth = new Bluetooth;
+	this.bluetooth = new Bluetooth;
 	this.bluetooth.init({
 		//$debug: $('#deviceDebug'),
 		callback: this.findDevice_load,
 		context: this
-	});*/
+	});
 
 
 	/* Face Data */
@@ -84,7 +85,7 @@ Activity.prototype.findDevice_load = function () {
 		this.bluetooth.write({
 			serviceId: 'FFA0',
 			characterId: 'FFA1',
-			value: 1,
+			value: '1',
 			callback: this.turnSensorOn,
 			context: this
 		});
@@ -93,32 +94,38 @@ Activity.prototype.findDevice_load = function () {
 };
 
 Activity.prototype.turnSensorOn = function () {
-	this.writing = false;
+	//this.writing = false;
 	var self = this;
 
 	this.bluetooth.notify({
 		serviceId: 'FFA0',
 		characterId: 'FFA3',
 		debug: $('div.debug'),
-		type: 'activityX'
+		context: this,
+		type: 'activityX',
+		callback: self.uploadData
 	});
 
 	this.bluetooth.notify({
 		serviceId: 'FFA0',
 		characterId: 'FFA4',
-		debug: $('div.debug2'),
-		type: 'activityY'
+		debug: $('div.debug'),
+		context: this,
+		type: 'activityY',
+		callback: self.uploadData
 	});
 
 	this.bluetooth.notify({
 		serviceId: 'FFA0',
 		characterId: 'FFA5',
-		debug: $('div.debug3'),
-		type: 'activityZ'
+		debug: $('div.debug'),
+		context: this,
+		type: 'activityZ',
+		callback: self.uploadData
 	});
 
 	/* Face Data */
-	this.indoorData = [
+/*	this.indoorData = [
 		{
 			name: 'steps',
 			value: 42
@@ -132,17 +139,16 @@ Activity.prototype.turnSensorOn = function () {
 
 	];
 
-	this.updateBar(data);
+	this.updateBar(data);*/
 	/* Face Data */
 
-/*
-	setInterval(function(){
+/*	setInterval(function(){
 		var activityValue = parseInt(window.localStorage.getItem('activityX')) + parseInt(window.localStorage.getItem('activityY')) + parseInt(window.localStorage.getItem('activityZ'));
 		activityValue = activityValue / 4000;
 		if(activityValue > 100) activityValue = 100;
 		self.$steps.find('span').html(activityValue.toFixed(2) + "%");
 		self.$steps.css('width', activityValue + "%");
-	}, 1000);*/
+	}, 500);*/
 
 };
 
@@ -179,6 +185,38 @@ Activity.prototype.attachEvent = function () {
 		self.updateBar(self.outdoorData);
 	});
 };
+
+Activity.prototype.uploadData = function (oArgs) {
+	oArgs = oArgs || {};
+
+	var data = {};
+	data[oArgs.type] = oArgs.value;
+
+
+	$.ajax({
+		url: app.setting.serverBase + app.setting.api.uploadData,
+		type: 'POST',
+		crossDomain: true,
+		context: this,
+		data: data,
+		success: function(data, status, xhr) {
+			alert(data);
+		}
+	});
+
+/*	app.tool.ajax({
+		url: app.setting.serverBase + app.setting.api.uploadData,
+		type: 'post',
+		context: this,
+		data: data,
+		callback: this.uploadData_load
+	});*/
+};
+
+Activity.prototype.uploadData_load = function () {
+
+};
+
 
 
 new Activity().init();
