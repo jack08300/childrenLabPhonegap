@@ -30,7 +30,7 @@ SignInUp.prototype.init = function () {
 
 	//app.animateBackground({ background: 'div.indexPage' });
 	//HACK:
-	window.location = window.rootPath + "pages/dashboard.html";
+	//window.location = window.rootPath + "pages/dashboard.html";
 	this.attachEvent();
 };
 

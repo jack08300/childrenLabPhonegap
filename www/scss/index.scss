@@ -17,6 +17,14 @@
  * under the License.
  */
 
+$lightBlue: #4DC1DF;
+$orange: #FF7231;
+$grey: #999899;
+$yellow: #FFD03E;
+$purple: #7573C0;
+$green: #00C4B3;
+$pink: #F54B7F;
+
 @font-face {
 	font-family: avenir_bold;
 	src: url(font/Avenir-bold.ttf);
@@ -54,6 +62,7 @@ body.ui-overlay-a {
 
 input {
 	font-size: 16px;
+	font-family: avenir, Georgia, "Times New Roman", serif;
 }
 
 /* Portrait layout (default) */
@@ -211,7 +220,7 @@ div.navigater {
 
 .mainButton {
 	font-family: avenir, Georgia, "Times New Roman", serif;
-	background-color: #ff7231;
+	background-color: $orange;
 	padding: 5px;
 	margin: 15px 0 15px 0;
 	border-radius: 5px;
@@ -221,7 +230,7 @@ div.navigater {
 
 .backButton {
 	font-family: avenir_bold, Georgia, "Times New Roman", serif;
-	color: #4dc1df;
+	color: $lightBlue;
 	font-size: 20px;
 	position: absolute;
 	top: 30px;
@@ -305,7 +314,7 @@ input.mainInput {
 	border: none;
 	border-radius: 5px;
 	padding: 6px 10px;
-	background-color: #ff7231;
+	background-color: $orange;
 	color: white;
 	width: 92%;
 	margin: 8px 0;
@@ -362,7 +371,7 @@ div.indexPage {
 	background: #fcfcfc url("../img/background/city-01-overall.png") 0 100% repeat-x;
 	background-size: 800px;
 	margin-top: 80px;
-	color: #ff7231;
+	color: $orange;
 
 	div.pageTitle {
 		font-size: 20px;
@@ -378,7 +387,7 @@ div.indexPage {
 	}
 
 	div.separateLine {
-		color: #999899;
+		color: $grey;
 		div.text {
 			position: absolute;
 			left: 46.5%;
@@ -431,7 +440,7 @@ div.indexPage {
 		width: 250px;
 
 		div.separateLine {
-			color: #999899;
+			color: $grey;
 			hr {
 				width: 23%;
 				margin-top: 8px;
@@ -464,7 +473,7 @@ div.indexPage {
 		margin-top: -50px;
 
 		div.text {
-			color: #999899;
+			color: $grey;
 		}
 	}
 
@@ -527,12 +536,13 @@ div.loginOption {
 
 /*************** Header ****************/
 #headerBar {
-	color: #ff7231;
+	color: $orange;
 	border-bottom: 1px solid #979697;
 	font-family: avenir_bold, Georgia, "Times New Roman", serif;
 	text-align: center;
 	padding: 7vw 0 2vw 0;
 	font-size: 5vw;
+	background-color: white;
 
 }
 
@@ -1093,7 +1103,7 @@ div.dashboardPage {
 		&.bad {
 			background: url('../img/dashboard/dashboard-bg-bad.png') no-repeat;
 			background-size: 100% 100%;
-			color: #7573c0;
+			color: $purple;
 
 			div.dashboardIcon {
 				background: url("../img/dashboard/monster-purple.png") no-repeat 8vw;
@@ -1119,7 +1129,7 @@ div.dashboardPage {
 		&.soso {
 			background: url('../img/dashboard/dashboard-bg-soso.png') no-repeat;
 			background-size: 100% 100%;
-			color: #00c4b3;
+			color: $green;
 
 			div.dashboardIcon {
 				background: url("../img/dashboard/monster-bluegreen.png") no-repeat 8vw;
@@ -1145,7 +1155,7 @@ div.dashboardPage {
 		&.excellent {
 			background: url('../img/dashboard/dashboard-bg-excellent.png') no-repeat;
 			background-size: 100% 100%;
-			color: #ff7231;
+			color: $orange;
 
 			div.dashboardIcon {
 				background: url("../img/dashboard/monster-yellow.png") no-repeat 8vw;
@@ -1204,7 +1214,7 @@ div.dashboardPage {
 /******************** Weather Page ***********************/
 
 div.weatherPage {
-	color: #ff7231;
+	color: $orange;
 
 	div.description {
 		font-family: avenir, Georgia, "Times New Roman", serif;
@@ -1234,18 +1244,18 @@ div.weatherPage {
 		text-align: center;
 
 		div.location {
-			color: #999899;
+			color: $grey;
 			margin-top: 5vw;
 			font-size: 6vw
 		}
 
 		div.circle {
 			position: absolute;
-			border: 3vw solid #ff7231;
+			border: 3vw solid $orange;
 			border-radius: 50%;
 			width: 60vw;
 			height: 60vw;
-			color: #ff7231;
+			color: $orange;
 			font-size: 7vw;
 			margin-top: 5vw;
 			font-family: avenir_bold, Georgia, "Times New Roman", serif;
@@ -1276,8 +1286,8 @@ div.weatherPage.humidity {
 	}
 	div.container {
 		div.circle {
-			border: 3vw solid #4dc1df;
-			color: #4dc1df;
+			border: 3vw solid $lightBlue;
+			color: $lightBlue;
 
 			div.info div.title:after {
 				content: 'Humidity';
@@ -1440,20 +1450,346 @@ div.activityPage {
 	}
 }
 
+div.addButton {
+	position: absolute;
+	width: 6vw;
+	height: 6vw;
+	right: 4vw;
+	top: 6vw;
+
+
+	> div {
+		background-color: $lightBlue;
+		position: relative;
+	}
+
+	div.line {
+		width: 100%;
+		height: 1vw;
+		top: 3.5vw;
+	}
+	div.pipe {
+		height: 100%;
+		width: 1vw;
+		left:2.5vw;
+	}
+}
+
+div.backButton {
+	position: absolute;
+	width: 6vw;
+	height: 6vw;
+	left: 4vw;
+	top: 6vw;
+
+	> div {
+		color: $lightBlue;
+		position: relative;
+		font-size:7vw;
+		font-family: avenir, Georgia, "Times New Roman", serif;
+	}
+
+}
+
 
 /******************** Calendar ***********************/
 div.calendarPage {
-	div.container {
-		position: absolute;;
+	overflow: hidden !important;
+	background-color: #cdeef6 !important;
+
+	div.calendarOverlay{
+		position: absolute;
 		width: 100%;
 		height: 100%;
-		background: #cdeef6 url("../img/calendar/swing_app_calendar-22-01.png") 0 -10vw no-repeat;
-		background-size:100vw;
-
-
-		&.second {
-			background: #cdeef6 url("../img/calendar/swing_app_calendar-22-02.png") 0 -10vw no-repeat;
-			background-size:100vw;
-		}
+		background-color: #cdeef6;
+		z-index: 0;
 	}
+
+	div.container {
+		z-index:2;
+		position:relative;
+	}
+
+	div.backgroundOverlay {
+		position: absolute;
+		width: 100%;
+		height: 50vw;
+		background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
+		background-size: 500px;
+		z-index: 2;
+		bottom: 7vw;
+	}
+
+	.arrow-right {
+		width: 0;
+		height: 0;
+		border-top: 3vw solid transparent;
+		border-bottom: 3vw solid transparent;
+		border-left: 3vw solid #6d858b;
+	}
+
+	.arrow-left {
+		width: 0;
+		height: 0;
+		border-top: 3vw solid transparent;
+		border-bottom: 3vw solid transparent;
+		border-right: 3vw solid #6d858b;
+	}
+
+	#calendar {
+		text-align: center;
+		padding-top: 10vw;
+
+		div.calendarHeader {
+			width: 100%;
+
+			>div {
+				display: inline-block;
+
+				> div {
+					margin: 0 5vw;
+					padding: 0 1vw;
+				}
+
+				.monthYear {
+					color: #fd713a;
+					font-size: 5vw;
+					font-family: avenir_bold, Georgia, "Times New Roman", serif;
+				}
+			}
+		}
+
+		div.calendarContent{
+			margin-top: 10vw;
+
+			div.week {
+				display: inline-flex;
+				font-size: 4vw;
+				width: 100%;
+
+				> div {
+					text-align: center;
+					width: inherit;
+
+					>div {
+						width:5vw;
+						height:5vw;
+						border-radius:5vw;
+						padding: 1vw;
+						display: inline-block;
+
+						&.active {
+							background-color: $orange;
+							color: white;
+						}
+					}
+
+				}
+			}
+
+			div.mainEvent {
+				div.eventCircle{
+					height:55vw;
+					width:55vw;
+					display:inline-block;
+					border-radius:55vw;
+					margin-top:5vw;
+					border:2vw solid white;
+				}
+
+				div.eventContent {
+					color: $orange;
+					margin-top:15vw;
+
+					div.eventTime {
+						font-family: avenir_bold, Georgia, "Times New Roman", serif;
+						font-size:10vw;
+					}
+
+					div.eventName {
+						font-size: 5vw;
+					}
+				}
+
+				div.seeFullButton {
+					width: 50vw;
+					display: inline-block;
+					margin-top:10vw;
+				}
+			}
+
+			div.eventList {
+				text-align: left;
+				margin-top:2vw;
+				color: white;
+				font-family: avenir_bold, Georgia, "Times New Roman", serif;
+
+				div.eachEvent {
+					padding:5vw 0;
+
+					span {
+						position:relative;
+						left: 8vw;
+					}
+
+					span.eventName{
+						left: 10vw;
+					}
+				}
+			}
+
+			div.days {
+				display: inline-block;
+				margin-top: 7vw;
+
+
+				> div {
+					float: left;
+					font-size: 3.5vw;
+					width: 14.2vw;
+					height: 11vw;
+					position: relative;
+
+					&.today span {
+						color: #fd713a;
+						font-size: 5vw;
+						top: -1vw;
+						position: relative;
+					}
+
+					span.event {
+						position: absolute;
+						height: 1.5vw;
+						width: 1.5vw;
+						padding: 0;
+						margin:0;
+						top: 4.5vw;
+						left: 5vw;
+					}
+				}
+
+			}
+		}
+
+	}
+
+	div.addCalendar {
+		//background-color: #cdeef6;
+		div.fields {
+			padding: 4vw 0;
+			margin: 0 4vw;
+			text-align: center;
+
+			> div.input {
+				transition: height .5s;
+				border: none;
+				color: #c0bfc1;
+				background-color: white;
+				text-align: left;
+				font-size: 16px;
+				padding: 1.5vw;
+				border-radius: 5px;
+				width: 92%;
+				margin-top: 1.5vw;
+				margin-bottom: 1.5vw;
+				display:inline-block;
+				height: 6vw;
+				overflow-y:hidden;
+
+				&.open {
+					height: 15vw;
+				}
+
+				>span {
+					position: absolute;
+					right: 8vw;
+					margin: 0 !important;
+				}
+			}
+
+
+
+			div.selection, div.colorSelection {
+				>span {
+					display: inline-block;
+					width: 6vw;
+					height: 6vw;
+					border-radius: 6vw;
+					margin: 3vw 1vw 1vw 2vw;
+				}
+			}
+
+			> input {
+				border: none;
+				margin:1.5vw 0;
+				width: 90%;
+				color: black;
+
+			  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+					color:    #c0bfc1;
+				}
+				&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+					color:    #c0bfc1;
+					opacity:  1;
+				}
+				&::-moz-placeholder { /* Mozilla Firefox 19+ */
+					color:    #c0bfc1;
+					opacity:  1;
+				}
+				&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+					color:    #c0bfc1;
+				}
+			}
+
+			> textarea {
+				border: none;
+				width: 94%;
+				height:25vw;
+				margin-top:1.5vw;
+
+				&::-webkit-input-placeholder {
+					color: #c0bfc1;
+				}
+				&:-moz-placeholder {
+					color: #c0bfc1;
+				}
+				&:-ms-input-placeholder {
+					color: #c0bfc1;
+				}
+			}
+
+		}
+
+		div.button{
+			text-align: center;
+
+			div.mainButton {
+				display:inline-block;
+				width: 30vw;
+				text-align:center;
+
+			}
+		}
+
+	}
+
+	.yellow {
+		background-color: #fad04e;
+	}
+	.purple {
+		background-color: mediumpurple;
+	}
+	.green {
+		background-color: mediumspringgreen;
+	}
+	.pink {
+		background-color: deeppink;
+	}
+	.orange {
+		background-color: orangered;
+	}
+	.grey {
+		background-color: grey;
+	}
+
 }

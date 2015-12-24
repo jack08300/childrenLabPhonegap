@@ -49,7 +49,8 @@ body.ui-overlay-a {
   color: black; }
 
 input {
-  font-size: 16px; }
+  font-size: 16px;
+  font-family: avenir, Georgia, "Times New Roman", serif; }
 
 /* Portrait layout (default) */
 .app {
@@ -177,7 +178,7 @@ div.navigater {
 
 .mainButton {
   font-family: avenir, Georgia, "Times New Roman", serif;
-  background-color: #ff7231;
+  background-color: #FF7231;
   padding: 5px;
   margin: 15px 0 15px 0;
   border-radius: 5px;
@@ -186,7 +187,7 @@ div.navigater {
 
 .backButton {
   font-family: avenir_bold, Georgia, "Times New Roman", serif;
-  color: #4dc1df;
+  color: #4DC1DF;
   font-size: 20px;
   position: absolute;
   top: 30px;
@@ -256,7 +257,7 @@ input.mainInput {
   border: none;
   border-radius: 5px;
   padding: 6px 10px;
-  background-color: #ff7231;
+  background-color: #FF7231;
   color: white;
   width: 92%;
   margin: 8px 0; }
@@ -301,7 +302,7 @@ div.indexPage {
   background: #fcfcfc url("../img/background/city-01-overall.png") 0 100% repeat-x;
   background-size: 800px;
   margin-top: 80px;
-  color: #ff7231;
+  color: #FF7231;
   /********* Role Choose ***********/
   /************ Searching **********/ }
   div.indexPage div.pageTitle {
@@ -399,12 +400,13 @@ div.loginOption {
 
 /*************** Header ****************/
 #headerBar {
-  color: #ff7231;
+  color: #FF7231;
   border-bottom: 1px solid #979697;
   font-family: avenir_bold, Georgia, "Times New Roman", serif;
   text-align: center;
   padding: 7vw 0 2vw 0;
-  font-size: 5vw; }
+  font-size: 5vw;
+  background-color: white; }
 
 div.header {
   height: 35px;
@@ -783,7 +785,7 @@ div.dashboardPage div.container {
   div.dashboardPage div.container.bad {
     background: url("../img/dashboard/dashboard-bg-bad.png") no-repeat;
     background-size: 100% 100%;
-    color: #7573c0; }
+    color: #7573C0; }
     div.dashboardPage div.container.bad div.dashboardIcon {
       background: url("../img/dashboard/monster-purple.png") no-repeat 8vw;
       background-size: 60vw;
@@ -802,7 +804,7 @@ div.dashboardPage div.container {
   div.dashboardPage div.container.soso {
     background: url("../img/dashboard/dashboard-bg-soso.png") no-repeat;
     background-size: 100% 100%;
-    color: #00c4b3; }
+    color: #00C4B3; }
     div.dashboardPage div.container.soso div.dashboardIcon {
       background: url("../img/dashboard/monster-bluegreen.png") no-repeat 8vw;
       background-size: 60vw;
@@ -821,7 +823,7 @@ div.dashboardPage div.container {
   div.dashboardPage div.container.excellent {
     background: url("../img/dashboard/dashboard-bg-excellent.png") no-repeat;
     background-size: 100% 100%;
-    color: #ff7231; }
+    color: #FF7231; }
     div.dashboardPage div.container.excellent div.dashboardIcon {
       background: url("../img/dashboard/monster-yellow.png") no-repeat 8vw;
       background-size: 60vw;
@@ -860,7 +862,7 @@ div.dashboardPage #dashboard {
 
 /******************** Weather Page ***********************/
 div.weatherPage {
-  color: #ff7231; }
+  color: #FF7231; }
   div.weatherPage div.description {
     font-family: avenir, Georgia, "Times New Roman", serif;
     position: relative;
@@ -888,11 +890,11 @@ div.weatherPage {
       font-size: 6vw; }
     div.weatherPage div.container div.circle {
       position: absolute;
-      border: 3vw solid #ff7231;
+      border: 3vw solid #FF7231;
       border-radius: 50%;
       width: 60vw;
       height: 60vw;
-      color: #ff7231;
+      color: #FF7231;
       font-size: 7vw;
       margin-top: 5vw;
       font-family: avenir_bold, Georgia, "Times New Roman", serif;
@@ -911,8 +913,8 @@ div.weatherPage.humidity div.weatherOverlay {
   background-size: 100%; }
 
 div.weatherPage.humidity div.container div.circle {
-  border: 3vw solid #4dc1df;
-  color: #4dc1df; }
+  border: 3vw solid #4DC1DF;
+  color: #4DC1DF; }
   div.weatherPage.humidity div.container div.circle div.info div.title:after {
     content: 'Humidity'; }
 
@@ -1028,13 +1030,230 @@ div.activityPage div.bottomButtons {
           background-color: #1fc4b4;
           color: white; }
 
-/******************** Calendar ***********************/
-div.calendarPage div.container {
+div.addButton {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #cdeef6 url("../img/calendar/swing_app_calendar-22-01.png") 0 -10vw no-repeat;
-  background-size: 100vw; }
-  div.calendarPage div.container.second {
-    background: #cdeef6 url("../img/calendar/swing_app_calendar-22-02.png") 0 -10vw no-repeat;
-    background-size: 100vw; }
+  width: 6vw;
+  height: 6vw;
+  right: 4vw;
+  top: 6vw; }
+  div.addButton > div {
+    background-color: #4DC1DF;
+    position: relative; }
+  div.addButton div.line {
+    width: 100%;
+    height: 1vw;
+    top: 3.5vw; }
+  div.addButton div.pipe {
+    height: 100%;
+    width: 1vw;
+    left: 2.5vw; }
+
+div.backButton {
+  position: absolute;
+  width: 6vw;
+  height: 6vw;
+  left: 4vw;
+  top: 6vw; }
+  div.backButton > div {
+    color: #4DC1DF;
+    position: relative;
+    font-size: 7vw;
+    font-family: avenir, Georgia, "Times New Roman", serif; }
+
+/******************** Calendar ***********************/
+div.calendarPage {
+  overflow: hidden !important;
+  background-color: #cdeef6 !important; }
+  div.calendarPage div.calendarOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #cdeef6;
+    z-index: 0; }
+  div.calendarPage div.container {
+    z-index: 2;
+    position: relative; }
+  div.calendarPage div.backgroundOverlay {
+    position: absolute;
+    width: 100%;
+    height: 50vw;
+    background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
+    background-size: 500px;
+    z-index: 2;
+    bottom: 7vw; }
+  div.calendarPage .arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 3vw solid transparent;
+    border-bottom: 3vw solid transparent;
+    border-left: 3vw solid #6d858b; }
+  div.calendarPage .arrow-left {
+    width: 0;
+    height: 0;
+    border-top: 3vw solid transparent;
+    border-bottom: 3vw solid transparent;
+    border-right: 3vw solid #6d858b; }
+  div.calendarPage #calendar {
+    text-align: center;
+    padding-top: 10vw; }
+    div.calendarPage #calendar div.calendarHeader {
+      width: 100%; }
+      div.calendarPage #calendar div.calendarHeader > div {
+        display: inline-block; }
+        div.calendarPage #calendar div.calendarHeader > div > div {
+          margin: 0 5vw;
+          padding: 0 1vw; }
+        div.calendarPage #calendar div.calendarHeader > div .monthYear {
+          color: #fd713a;
+          font-size: 5vw;
+          font-family: avenir_bold, Georgia, "Times New Roman", serif; }
+    div.calendarPage #calendar div.calendarContent {
+      margin-top: 10vw; }
+      div.calendarPage #calendar div.calendarContent div.week {
+        display: inline-flex;
+        font-size: 4vw;
+        width: 100%; }
+        div.calendarPage #calendar div.calendarContent div.week > div {
+          text-align: center;
+          width: inherit; }
+          div.calendarPage #calendar div.calendarContent div.week > div > div {
+            width: 5vw;
+            height: 5vw;
+            border-radius: 5vw;
+            padding: 1vw;
+            display: inline-block; }
+            div.calendarPage #calendar div.calendarContent div.week > div > div.active {
+              background-color: #FF7231;
+              color: white; }
+      div.calendarPage #calendar div.calendarContent div.mainEvent div.eventCircle {
+        height: 55vw;
+        width: 55vw;
+        display: inline-block;
+        border-radius: 55vw;
+        margin-top: 5vw;
+        border: 2vw solid white; }
+      div.calendarPage #calendar div.calendarContent div.mainEvent div.eventContent {
+        color: #FF7231;
+        margin-top: 15vw; }
+        div.calendarPage #calendar div.calendarContent div.mainEvent div.eventContent div.eventTime {
+          font-family: avenir_bold, Georgia, "Times New Roman", serif;
+          font-size: 10vw; }
+        div.calendarPage #calendar div.calendarContent div.mainEvent div.eventContent div.eventName {
+          font-size: 5vw; }
+      div.calendarPage #calendar div.calendarContent div.mainEvent div.seeFullButton {
+        width: 50vw;
+        display: inline-block;
+        margin-top: 10vw; }
+      div.calendarPage #calendar div.calendarContent div.eventList {
+        text-align: left;
+        margin-top: 2vw;
+        color: white;
+        font-family: avenir_bold, Georgia, "Times New Roman", serif; }
+        div.calendarPage #calendar div.calendarContent div.eventList div.eachEvent {
+          padding: 5vw 0; }
+          div.calendarPage #calendar div.calendarContent div.eventList div.eachEvent span {
+            position: relative;
+            left: 8vw; }
+          div.calendarPage #calendar div.calendarContent div.eventList div.eachEvent span.eventName {
+            left: 10vw; }
+      div.calendarPage #calendar div.calendarContent div.days {
+        display: inline-block;
+        margin-top: 7vw; }
+        div.calendarPage #calendar div.calendarContent div.days > div {
+          float: left;
+          font-size: 3.5vw;
+          width: 14.2vw;
+          height: 11vw;
+          position: relative; }
+          div.calendarPage #calendar div.calendarContent div.days > div.today span {
+            color: #fd713a;
+            font-size: 5vw;
+            top: -1vw;
+            position: relative; }
+          div.calendarPage #calendar div.calendarContent div.days > div span.event {
+            position: absolute;
+            height: 1.5vw;
+            width: 1.5vw;
+            padding: 0;
+            margin: 0;
+            top: 4.5vw;
+            left: 5vw; }
+  div.calendarPage div.addCalendar div.fields {
+    padding: 4vw 0;
+    margin: 0 4vw;
+    text-align: center; }
+    div.calendarPage div.addCalendar div.fields > div.input {
+      transition: height 0.5s;
+      border: none;
+      color: #c0bfc1;
+      background-color: white;
+      text-align: left;
+      font-size: 16px;
+      padding: 1.5vw;
+      border-radius: 5px;
+      width: 92%;
+      margin-top: 1.5vw;
+      margin-bottom: 1.5vw;
+      display: inline-block;
+      height: 6vw;
+      overflow-y: hidden; }
+      div.calendarPage div.addCalendar div.fields > div.input.open {
+        height: 15vw; }
+      div.calendarPage div.addCalendar div.fields > div.input > span {
+        position: absolute;
+        right: 8vw;
+        margin: 0 !important; }
+    div.calendarPage div.addCalendar div.fields div.selection > span, div.calendarPage div.addCalendar div.fields div.colorSelection > span {
+      display: inline-block;
+      width: 6vw;
+      height: 6vw;
+      border-radius: 6vw;
+      margin: 3vw 1vw 1vw 2vw; }
+    div.calendarPage div.addCalendar div.fields > input {
+      border: none;
+      margin: 1.5vw 0;
+      width: 90%;
+      color: black; }
+      div.calendarPage div.addCalendar div.fields > input::-webkit-input-placeholder {
+        /* WebKit, Blink, Edge */
+        color: #c0bfc1; }
+      div.calendarPage div.addCalendar div.fields > input:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: #c0bfc1;
+        opacity: 1; }
+      div.calendarPage div.addCalendar div.fields > input::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: #c0bfc1;
+        opacity: 1; }
+      div.calendarPage div.addCalendar div.fields > input:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #c0bfc1; }
+    div.calendarPage div.addCalendar div.fields > textarea {
+      border: none;
+      width: 94%;
+      height: 25vw;
+      margin-top: 1.5vw; }
+      div.calendarPage div.addCalendar div.fields > textarea::-webkit-input-placeholder {
+        color: #c0bfc1; }
+      div.calendarPage div.addCalendar div.fields > textarea:-moz-placeholder {
+        color: #c0bfc1; }
+      div.calendarPage div.addCalendar div.fields > textarea:-ms-input-placeholder {
+        color: #c0bfc1; }
+  div.calendarPage div.addCalendar div.button {
+    text-align: center; }
+    div.calendarPage div.addCalendar div.button div.mainButton {
+      display: inline-block;
+      width: 30vw;
+      text-align: center; }
+  div.calendarPage .yellow {
+    background-color: #fad04e; }
+  div.calendarPage .purple {
+    background-color: mediumpurple; }
+  div.calendarPage .green {
+    background-color: mediumspringgreen; }
+  div.calendarPage .pink {
+    background-color: deeppink; }
+  div.calendarPage .orange {
+    background-color: orangered; }
+  div.calendarPage .grey {
+    background-color: grey; }

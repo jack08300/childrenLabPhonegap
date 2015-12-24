@@ -44,7 +44,9 @@ var app = {
 			updateProfile: "/user/updateProfile",
 			uploadAvatar: "/avatar/uploadProfileImage",
 			retrieveUserProfile: "/user/retrieveUserProfile",
-			updateRole: "/user/updateUserRole"
+			updateRole: "/user/updateUserRole",
+			createEvent: "/calendarEvent/addEvent",
+			getCalendarEvent: "/calendarEvent/getEventsByUser"
 		}
 	},
 
@@ -160,8 +162,6 @@ var app = {
 			$(oArgs.appendTo).prepend($backButton);
 		}
 
-
-
 		if(!oArgs.noHeader){
 			this.$navigater = $('<div class="header" data-role="header" data-theme="none" role="header"></div>');
 
@@ -256,7 +256,23 @@ var app = {
 		oArgs = oArgs || {};
 
 		var $header = $("<div class='headerBar' id='headerBar'>" + oArgs.title + "</div>");
-		$('body>div').prepend($header);
+
+		if(oArgs.backButton){
+			var $backButton = $('<div class="backButton ' + oArgs.backButton.name + '"> <div> < </div> </div>');
+
+			$header.append($backButton);
+		}
+
+		if(oArgs.addButton){
+
+			var $addButton = $('<div class="addButton ' + oArgs.addButton.name + '"> <div class="line"></div> <div class="pipe"></div> </div>').on('click', function(){
+				oArgs.addButton.callback.call(oArgs.context);
+			});
+
+			$header.append($addButton);
+		}
+
+		$('body > div').prepend($header);
 	},
 
 	attachMenuEvent: function($menuPanel) {
@@ -321,10 +337,15 @@ var app = {
 		//Path = 'pages/mainMenu.html'
 		$.get(window.rootPath + oArgs.path).success(function(html) {
 			var $html = $(html);
-			$(oArgs.appendTo).append($html).trigger('create');
+			if(oArgs.cleanPage){
+				$(oArgs.appendTo).html($html).trigger('create');
+			}else{
+				$(oArgs.appendTo).append($html).trigger('create');
+			}
+
 
 			oArgs.context = oArgs.context || this;
-			oArgs.callback.call(oArgs.context);
+			oArgs.callback.call(oArgs.context, oArgs.data);
 		});
 	},
 

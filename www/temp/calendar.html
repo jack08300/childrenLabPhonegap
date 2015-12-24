@@ -1,0 +1,80 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+</head>
+<body>
+<div class="calendarPage">
+	<div id="calendar">
+		<div class="calendarHeader">
+			<div>
+				<div class="arrow-left fleft"></div>
+				<div class="monthYear fleft"></div>
+				<div class="arrow-right fleft"></div>
+			</div>
+
+		</div>
+
+		<div class="calendarContent">
+
+			<div class="week">
+				<div>S</div>
+				<div>M</div>
+				<div>T</div>
+				<div>W</div>
+				<div>T</div>
+				<div>F</div>
+				<div>S</div>
+			</div>
+
+			<div class="days">
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<script src="../js/lib/jquery-1.11.2.min.js"></script>
+<script src="../js/lib/moment-with-locales.min.js"></script>
+<script>
+	(function(){
+		var now = moment();
+		var endOfMonth = now.endOf('month').date();
+		var startOfDay = now.startOf('month').day();
+		now = moment();
+		var today = now.get('date');
+		var $days = $('div.days');
+		var $monthYear = $('div.monthYear');
+		$monthYear.html(now.format("MMMM") + " " + now.year());
+
+		var $day = $('<div class="day"></div>');
+
+
+		var $tempDay;
+		//Create blank space
+		for(var i = 0; i < startOfDay; i++){
+			$tempDay = $day.clone();
+			$days.append($tempDay);
+		}
+
+		for(i = 1; i <= endOfMonth ; i ++){
+			$tempDay = $day.html('<span>'+ i + '</span>').clone();
+			if(today == i){
+				$tempDay.addClass('today');
+			}
+			$days.append($tempDay);
+		}
+
+		$('div.arrow-left').on('click', function(){
+			console.error("test");
+		});
+
+	})();
+</script>
+
+</body>
+
+
+
+</html>
