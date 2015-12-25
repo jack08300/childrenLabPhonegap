@@ -91,6 +91,24 @@
             },
             "*-Info.plist": {
                 "parents": {
+                    "UISupportedInterfaceOrientations": [
+                        {
+                            "xml": "<array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>",
+                            "count": 1
+                        }
+                    ],
+                    "UISupportedInterfaceOrientations~ipad": [
+                        {
+                            "xml": "<array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationPortraitUpsideDown</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>",
+                            "count": 1
+                        }
+                    ],
+                    "UIRequiresFullScreen": [
+                        {
+                            "xml": "<string>YES</string>",
+                            "count": 1
+                        }
+                    ],
                     "NSLocationWhenInUseUsageDescription": [
                         {
                             "xml": "<string />",
@@ -106,6 +124,12 @@
             "PACKAGE_NAME": "com.childrenLab"
         },
         "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-ble-central": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-ipad-multitasking": {
             "PACKAGE_NAME": "com.childrenLab"
         },
         "cordova-plugin-splashscreen": {
@@ -124,9 +148,6 @@
             "PACKAGE_NAME": "com.childrenLab"
         },
         "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
-        "cordova-plugin-ble-central": {
             "PACKAGE_NAME": "com.childrenLab"
         }
     },

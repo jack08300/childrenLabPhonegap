@@ -404,7 +404,7 @@ div.loginOption {
   border-bottom: 1px solid #979697;
   font-family: avenir_bold, Georgia, "Times New Roman", serif;
   text-align: center;
-  padding: 7vw 0 2vw 0;
+  padding: 9vw 0 2vw 0;
   font-size: 5vw;
   background-color: white; }
 
@@ -1035,7 +1035,7 @@ div.addButton {
   width: 6vw;
   height: 6vw;
   right: 4vw;
-  top: 6vw; }
+  top: 8vw; }
   div.addButton > div {
     background-color: #4DC1DF;
     position: relative; }
@@ -1053,7 +1053,7 @@ div.backButton {
   width: 6vw;
   height: 6vw;
   left: 4vw;
-  top: 6vw; }
+  top: 8vw; }
   div.backButton > div {
     color: #4DC1DF;
     position: relative;
@@ -1103,7 +1103,7 @@ div.calendarPage {
         div.calendarPage #calendar div.calendarHeader > div > div {
           margin: 0 5vw;
           padding: 0 1vw; }
-        div.calendarPage #calendar div.calendarHeader > div .monthYear {
+        div.calendarPage #calendar div.calendarHeader > div .monthYear, div.calendarPage #calendar div.calendarHeader > div .dayMonth {
           color: #fd713a;
           font-size: 5vw;
           font-family: avenir_bold, Georgia, "Times New Roman", serif; }
@@ -1183,12 +1183,12 @@ div.calendarPage {
     margin: 0 4vw;
     text-align: center; }
     div.calendarPage div.addCalendar div.fields > div.input {
-      transition: height 0.5s;
+      transition: height 0.2s;
       border: none;
       color: #c0bfc1;
       background-color: white;
       text-align: left;
-      font-size: 16px;
+      font-size: 5vw;
       padding: 1.5vw;
       border-radius: 5px;
       width: 92%;
@@ -1203,17 +1203,20 @@ div.calendarPage {
         position: absolute;
         right: 8vw;
         margin: 0 !important; }
-    div.calendarPage div.addCalendar div.fields div.selection > span, div.calendarPage div.addCalendar div.fields div.colorSelection > span {
-      display: inline-block;
-      width: 6vw;
-      height: 6vw;
-      border-radius: 6vw;
-      margin: 3vw 1vw 1vw 2vw; }
+    div.calendarPage div.addCalendar div.fields div.selection, div.calendarPage div.addCalendar div.fields div.colorSelection {
+      font-size: 5vw; }
+      div.calendarPage div.addCalendar div.fields div.selection > span, div.calendarPage div.addCalendar div.fields div.colorSelection > span {
+        display: inline-block;
+        width: 6vw;
+        height: 6vw;
+        border-radius: 6vw;
+        margin: 3vw 1vw 1vw 2vw; }
     div.calendarPage div.addCalendar div.fields > input {
       border: none;
       margin: 1.5vw 0;
       width: 90%;
-      color: black; }
+      color: black;
+      font-size: 5vw; }
       div.calendarPage div.addCalendar div.fields > input::-webkit-input-placeholder {
         /* WebKit, Blink, Edge */
         color: #c0bfc1; }
@@ -1232,7 +1235,8 @@ div.calendarPage {
       border: none;
       width: 94%;
       height: 25vw;
-      margin-top: 1.5vw; }
+      margin-top: 1.5vw;
+      font-size: 5vw; }
       div.calendarPage div.addCalendar div.fields > textarea::-webkit-input-placeholder {
         color: #c0bfc1; }
       div.calendarPage div.addCalendar div.fields > textarea:-moz-placeholder {

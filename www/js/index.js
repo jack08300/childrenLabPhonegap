@@ -338,7 +338,7 @@ var app = {
 		$.get(window.rootPath + oArgs.path).success(function(html) {
 			var $html = $(html);
 			if(oArgs.cleanPage){
-				$(oArgs.appendTo).html($html).trigger('create');
+				$(oArgs.appendTo).empty().html($html).trigger('create');
 			}else{
 				$(oArgs.appendTo).append($html).trigger('create');
 			}

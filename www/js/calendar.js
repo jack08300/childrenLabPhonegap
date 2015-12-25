@@ -27,11 +27,19 @@ Calendar.prototype.deviceReady = function() {
 	app.addHeaderBar({title: 'Calendar', context: this, addButton: {name: 'calendar', callback: this.loadAddCalendarPage}, backButton: {name: 'calendar none'}});
 	app.addMenuBar();
 
+	this.$backButton = $('div.backButton');
+	this.$backButton.on('click', function(){
+		window.location = window.rootPath + "pages/calendar.html";
+	});
+
 	this.$body = $('body');
+	this.$calendarPage = $('#calendarPage');
 	this.$calendarHeader = $('div.calendarHeader');
 	this.$calendarContent = $('div.calendarContent');
 	this.$days = $('div.days', this.$calendarContent);
 	this.$monthYear = $('div.monthYear', this.$calendarHeader);
+	this.$arrowLeft = $('div.arrow-left', this.$calendarPage);
+	this.$arrowRight = $('div.arrow-right', this.$calendarPage);
 	this.$body.attr('data', 'month');
 	this.getCalendarEvents();
 
@@ -114,18 +122,28 @@ Calendar.prototype.attachEvent = function() {
 		$(this).toggleClass("second");
 	});
 
-	$('div.arrow-left').on('click', this.$calendarHeader,function(){
+	this.$arrowLeft.on('click', this.$calendarHeader,function(){
 		self.updateTempDate($(this), -1);
 	});
-	$('div.arrow-right').on('click', this.$calendarHeader,function(){
+	this.$arrowRight.on('click', this.$calendarHeader,function(){
 		self.updateTempDate($(this), +1);
 	});
 
 	$('div.day.hasEvent').on('click', this.$days, function(){
-		self.renderEventPage($(this));
+		self.renderEventPage({$day: $(this)});
 	});
 
 
+	var mc = new Hammer(document.getElementsByClassName('calendarPage')[0]);
+
+	mc.on("swipeleft swiperight", function(ev){
+		mc.off("swipeleft swiperight");
+		if(ev.type == "swiperight"){
+			self.updateTempDate($(this), -1);
+		} else if(ev.type == "swipeleft") {
+			self.updateTempDate($(this), +1);
+		}
+	});
 };
 
 
@@ -160,6 +178,9 @@ Calendar.prototype.renderAddCalendar = function() {
 	this.$option = $('span', this.$colorOption);
 	this.$submit = $('div.submit', this.$container);
 
+	//var temp = moment().set({'year': this.tempDate.year(), 'month': this.tempDate.month(), 'date': this.selectedDay});
+	//this.$startDate.html(temp.format("YYYY/MM/DD hh:mm:ss"));
+
 	this.$startDate.on('click', function(e){
 		e.preventDefault();
 		self.showDateTimePicker($(this), "start");
@@ -186,6 +207,8 @@ Calendar.prototype.renderAddCalendar = function() {
 	this.$submit.on('click', function() {
 		self.submitEvent();
 	});
+
+	this.$backButton.show();
 
 };
 
@@ -262,10 +285,14 @@ Calendar.prototype.submitEvent_load = function(data) {
 	app.tool.hideLoading();
 };
 
-Calendar.prototype.renderEventPage = function($day) {
+Calendar.prototype.renderEventPage = function(oArgs) {
+	oArgs = oArgs || {};
 	app.tool.showLoading();
 
-	this.selectedDay = $day.attr('data');
+	if(oArgs.$day){
+		this.selectedDay = oArgs.$day.attr('data')
+	}
+
 	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.getCalendarEvent,
 		type: 'POST',
@@ -317,14 +344,15 @@ Calendar.prototype.renderEventPage_load = function() {
 
 	this.$week = $('div.week');
 	this.$mainEvent = $('div.mainEvent');
-	this.$monthYear = $('div.monthYear');
-	this.$backButton = $('div.backButton');
+	this.$dayMonth = $('div.dayMonth');
 	this.$eventTime = $('div.eventTime');
 	this.$eventName = $('div.eventName');
 	this.$fullSchedule = $('div.seeFullButton');
+	this.$arrowLeft = $('div.arrow-left');
+	this.$arrowRight = $('div.arrow-right');
 	this.$backButton.show();
 
-	this.$monthYear.html(temp.format("MMMM") + " " + temp.year());
+	this.$dayMonth.html(temp.format("dddd") + " / " + temp.format("DD"));
 
 	var weekday = this.$week.find('[data-day="' + temp.day() + '"]');
 
@@ -335,14 +363,29 @@ Calendar.prototype.renderEventPage_load = function() {
 
 		this.$eventTime.html(firstEventTime.format("HH:mm:ss"));
 		this.$eventName.html(this.eventList[0].eventName);
+		this.$fullSchedule.show();
+	}else{
+		this.$eventTime.html("No Event");
+		this.$eventName.html("");
+		this.$fullSchedule.hide();
 	}
 
+	this.$arrowLeft.off("click");
+	this.$arrowLeft.on('click', function(){
+		temp.set({date: parseInt(self.selectedDay)-1});
+		self.selectedDay = temp.date();
+		self.renderEventPage();
+	});
 
-	this.$backButton.on('click', function(){
-		window.location = window.rootPath + "pages/calendar.html";
+	this.$arrowRight.off("click");
+	this.$arrowRight.on('click', function(){
+		temp.set({date: parseInt(self.selectedDay)+1});
+		self.selectedDay = temp.date();
+		self.renderEventPage();
 	});
 
 
+	this.$fullSchedule.off('click');
 	this.$fullSchedule.on('click', function(){
 		self.showEventList();
 	});
@@ -355,6 +398,7 @@ Calendar.prototype.showEventList = function() {
 	this.$mainEvent.addClass("none");
 
 	this.$eventList = $('div.eventList');
+	this.$eventList.empty();
 
 	for(var i = 0;i<this.eventList.length; i++){
 		var startTime =  moment(this.eventList[i].startDate, "YYYY-MM-DD HH:mm:ss");

@@ -118,6 +118,9 @@
         },
         "cordova-plugin-ble-central": {
             "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-ipad-multitasking": {
+            "PACKAGE_NAME": "com.childrenLab"
         }
     },
     "dependent_plugins": {}

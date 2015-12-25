@@ -540,7 +540,7 @@ div.loginOption {
 	border-bottom: 1px solid #979697;
 	font-family: avenir_bold, Georgia, "Times New Roman", serif;
 	text-align: center;
-	padding: 7vw 0 2vw 0;
+	padding: 9vw 0 2vw 0;
 	font-size: 5vw;
 	background-color: white;
 
@@ -1455,7 +1455,7 @@ div.addButton {
 	width: 6vw;
 	height: 6vw;
 	right: 4vw;
-	top: 6vw;
+	top: 8vw;
 
 
 	> div {
@@ -1480,7 +1480,7 @@ div.backButton {
 	width: 6vw;
 	height: 6vw;
 	left: 4vw;
-	top: 6vw;
+	top: 8vw;
 
 	> div {
 		color: $lightBlue;
@@ -1551,7 +1551,7 @@ div.calendarPage {
 					padding: 0 1vw;
 				}
 
-				.monthYear {
+				.monthYear,.dayMonth {
 					color: #fd713a;
 					font-size: 5vw;
 					font-family: avenir_bold, Georgia, "Times New Roman", serif;
@@ -1681,12 +1681,12 @@ div.calendarPage {
 			text-align: center;
 
 			> div.input {
-				transition: height .5s;
+				transition: height .2s;
 				border: none;
 				color: #c0bfc1;
 				background-color: white;
 				text-align: left;
-				font-size: 16px;
+				font-size:5vw;
 				padding: 1.5vw;
 				border-radius: 5px;
 				width: 92%;
@@ -1695,6 +1695,7 @@ div.calendarPage {
 				display:inline-block;
 				height: 6vw;
 				overflow-y:hidden;
+
 
 				&.open {
 					height: 15vw;
@@ -1710,6 +1711,7 @@ div.calendarPage {
 
 
 			div.selection, div.colorSelection {
+				font-size:5vw;
 				>span {
 					display: inline-block;
 					width: 6vw;
@@ -1724,6 +1726,7 @@ div.calendarPage {
 				margin:1.5vw 0;
 				width: 90%;
 				color: black;
+				font-size:5vw;
 
 			  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
 					color:    #c0bfc1;
@@ -1746,6 +1749,7 @@ div.calendarPage {
 				width: 94%;
 				height:25vw;
 				margin-top:1.5vw;
+				font-size:5vw;
 
 				&::-webkit-input-placeholder {
 					color: #c0bfc1;
