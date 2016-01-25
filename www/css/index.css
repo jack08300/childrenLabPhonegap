@@ -48,7 +48,7 @@ body.ui-overlay-a {
   border-color: #fcfcfc;
   color: black; }
 
-input {
+input, textarea {
   font-size: 16px;
   font-family: avenir, Georgia, "Times New Roman", serif; }
 
@@ -773,82 +773,87 @@ div.settingPage div.container {
   padding: 30px 10px 0 10px; }
 
 /******************** Dashboard Page ***********************/
-div.dashboardPage div.title, div.dashboardPage div.status {
-  font-family: avenir_bold, Georgia, "Times New Roman", serif; }
-
-div.dashboardPage div.container {
-  position: absolute;
-  width: 100%;
+div.dashboardPage {
+  overflow: hidden;
   height: 100%;
-  text-align: center;
-  padding-top: 5vw; }
-  div.dashboardPage div.container.bad {
-    background: url("../img/dashboard/dashboard-bg-bad.png") no-repeat;
-    background-size: 100% 100%;
-    color: #7573C0; }
-    div.dashboardPage div.container.bad div.dashboardIcon {
-      background: url("../img/dashboard/monster-purple.png") no-repeat 8vw;
-      background-size: 60vw;
-      width: 100%;
-      height: 60vw;
-      display: inline-block; }
-    div.dashboardPage div.container.bad div.uvButton {
-      background: url("../img/dashboard/uv_button.png") no-repeat 2.7vw;
-      background-size: 3.3em; }
-    div.dashboardPage div.container.bad div.activityButton {
-      background: url("../img/dashboard/activity_button.png") no-repeat 2.7vw;
-      background-size: 3.3em; }
-    div.dashboardPage div.container.bad div.weatherButton {
-      background: url("../img/dashboard/sunglass_button.png") no-repeat 2.7vw;
-      background-size: 3.3em; }
-  div.dashboardPage div.container.soso {
-    background: url("../img/dashboard/dashboard-bg-soso.png") no-repeat;
-    background-size: 100% 100%;
-    color: #00C4B3; }
-    div.dashboardPage div.container.soso div.dashboardIcon {
-      background: url("../img/dashboard/monster-bluegreen.png") no-repeat 8vw;
-      background-size: 60vw;
-      width: 100%;
-      height: 60vw;
-      display: inline-block; }
-    div.dashboardPage div.container.soso div.uvButton {
-      background: url("../img/dashboard/blue_uv_button.png") no-repeat 2.7vw;
-      background-size: 3.3em; }
-    div.dashboardPage div.container.soso div.activityButton {
-      background: url("../img/dashboard/blue_activity_button.png") no-repeat 2.7vw;
-      background-size: 3.3em; }
-    div.dashboardPage div.container.soso div.weatherButton {
-      background: url("../img/dashboard/blue_sunglass_button.png") no-repeat 2.7vw;
-      background-size: 3.3em; }
-  div.dashboardPage div.container.excellent {
-    background: url("../img/dashboard/dashboard-bg-excellent.png") no-repeat;
-    background-size: 100% 100%;
-    color: #FF7231; }
-    div.dashboardPage div.container.excellent div.dashboardIcon {
-      background: url("../img/dashboard/monster-yellow.png") no-repeat 8vw;
-      background-size: 60vw;
-      width: 100%;
-      height: 60vw;
-      display: inline-block; }
-    div.dashboardPage div.container.excellent div.uvButton {
-      background: url("../img/dashboard/orange_uv_button.png") no-repeat 2.7vw;
-      background-size: 10vw; }
-    div.dashboardPage div.container.excellent div.activityButton {
-      background: url("../img/dashboard/orange_activity_button.png") no-repeat 2.7vw;
-      background-size: 10vw; }
-    div.dashboardPage div.container.excellent div.weatherButton {
-      background: url("../img/dashboard/orange_weather_button.png") no-repeat 2.7vw;
-      background-size: 10vw; }
-
-div.dashboardPage #dashboard {
-  width: 80%;
-  display: inline-block; }
-  div.dashboardPage #dashboard div.title, div.dashboardPage #dashboard div.status {
-    font-size: 7vw; }
-  div.dashboardPage #dashboard div.dashboardButtons {
+  min-height: 0; }
+  div.dashboardPage div.title, div.dashboardPage div.status {
+    font-family: avenir_bold, Georgia, "Times New Roman", serif; }
+  div.dashboardPage div.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 5vw; }
+    div.dashboardPage div.container div.content {
+      position: absolute; }
+    div.dashboardPage div.container.bad {
+      background: url("../img/dashboard/dashboard-bg-bad.png") no-repeat;
+      background-size: 100% 100%;
+      color: #7573C0; }
+      div.dashboardPage div.container.bad div.dashboardIcon {
+        background: url("../img/dashboard/monster-purple.png") no-repeat 8vw;
+        background-size: 60vw;
+        width: 100%;
+        height: 60vw;
+        display: inline-block; }
+      div.dashboardPage div.container.bad div.uvButton {
+        background: url("../img/dashboard/uv_button.png") no-repeat 2.7vw;
+        background-size: 3.3em; }
+      div.dashboardPage div.container.bad div.activityButton {
+        background: url("../img/dashboard/activity_button.png") no-repeat 2.7vw;
+        background-size: 3.3em; }
+      div.dashboardPage div.container.bad div.weatherButton {
+        background: url("../img/dashboard/sunglass_button.png") no-repeat 2.7vw;
+        background-size: 3.3em; }
+    div.dashboardPage div.container.soso {
+      background: url("../img/dashboard/dashboard-bg-soso.png") no-repeat;
+      background-size: 100% 100%;
+      color: #00C4B3; }
+      div.dashboardPage div.container.soso div.dashboardIcon {
+        background: url("../img/dashboard/monster-bluegreen.png") no-repeat 8vw;
+        background-size: 60vw;
+        width: 100%;
+        height: 60vw;
+        display: inline-block; }
+      div.dashboardPage div.container.soso div.uvButton {
+        background: url("../img/dashboard/blue_uv_button.png") no-repeat 2.7vw;
+        background-size: 3.3em; }
+      div.dashboardPage div.container.soso div.activityButton {
+        background: url("../img/dashboard/blue_activity_button.png") no-repeat 2.7vw;
+        background-size: 3.3em; }
+      div.dashboardPage div.container.soso div.weatherButton {
+        background: url("../img/dashboard/blue_sunglass_button.png") no-repeat 2.7vw;
+        background-size: 3.3em; }
+    div.dashboardPage div.container.excellent {
+      background: url("../img/dashboard/dashboard-bg-excellent.png") no-repeat;
+      background-size: 100% 100%;
+      color: #FF7231; }
+      div.dashboardPage div.container.excellent div.dashboardIcon {
+        background: url("../img/dashboard/monster-yellow.png") no-repeat;
+        background-position-y: -5vw;
+        background-size: 57vw;
+        width: 55vw;
+        height: 60vw;
+        display: inline-block; }
+      div.dashboardPage div.container.excellent div.uvButton {
+        background: url("../img/dashboard/orange_uv_button.png") no-repeat 2.7vw;
+        background-size: 10vw; }
+      div.dashboardPage div.container.excellent div.activityButton {
+        background: url("../img/dashboard/orange_activity_button.png") no-repeat 2.7vw;
+        background-size: 10vw; }
+      div.dashboardPage div.container.excellent div.weatherButton {
+        background: url("../img/dashboard/orange_weather_button.png") no-repeat 2.7vw;
+        background-size: 10vw; }
+  div.dashboardPage #dashboard {
+    width: 80%;
+    display: inline-block; }
+    div.dashboardPage #dashboard div.title, div.dashboardPage #dashboard div.status {
+      font-size: 7vw; }
+  div.dashboardPage div.dashboardButtons {
     position: absolute;
     bottom: 40vw; }
-    div.dashboardPage #dashboard div.dashboardButtons > div {
+    div.dashboardPage div.dashboardButtons > div {
       width: 15vw;
       height: 15vw;
       background-color: white;
@@ -856,7 +861,7 @@ div.dashboardPage #dashboard {
       float: left;
       margin-left: 5vw;
       margin-right: 5vw; }
-      div.dashboardPage #dashboard div.dashboardButtons > div > div {
+      div.dashboardPage div.dashboardButtons > div > div {
         width: 15vw;
         height: 15vw; }
 
@@ -1057,8 +1062,7 @@ div.backButton {
   div.backButton > div {
     color: #4DC1DF;
     position: relative;
-    font-size: 7vw;
-    font-family: avenir, Georgia, "Times New Roman", serif; }
+    font-size: 7vw; }
 
 /******************** Calendar ***********************/
 div.calendarPage {

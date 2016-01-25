@@ -128,13 +128,18 @@ SignInUp.prototype.loadSignForm_load = function(){
 		if(app.tool.validateEmail(self.$email.val())){
 			self.checkEmailRegistered();
 		}
-
 	});
 
 
 	this.$password.keypress(function(e){
 		var code = (e.keyCode ? e.keyCode : e.which);
 		if ( (code==13) || (code==10)){
+			self.onSubmit();
+		}
+	});
+
+	this.$password.on('focusout', function(){
+		if(self.isRegistered){
 			self.onSubmit();
 		}
 	});

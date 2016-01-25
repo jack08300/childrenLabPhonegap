@@ -4,7 +4,7 @@ var Activity = function () {
 		{
 			name: 'steps',
 			value: 42
-		},{
+		}, {
 			name: 'walking',
 			value: 59
 		}, {
@@ -18,7 +18,7 @@ var Activity = function () {
 		{
 			name: 'steps',
 			value: 34
-		},{
+		}, {
 			name: 'walking',
 			value: 80
 		}, {
@@ -27,6 +27,8 @@ var Activity = function () {
 		}
 
 	];
+
+	this.localDataName = "ActivityData";
 };
 
 
@@ -40,11 +42,11 @@ Activity.prototype.init = function () {
 		gapReady.resolve();
 	}, false);
 
-	$(document).one("mobileinit", function(){
+	$(document).one("mobileinit", function () {
 		jqmReady.resolve();
 	});
 
-	$.when(gapReady, jqmReady).then(function(){
+	$.when(gapReady, jqmReady).then(function () {
 		self.deviceReady();
 	});
 
@@ -57,6 +59,7 @@ Activity.prototype.deviceReady = function () {
 	this.$steps = $('div.steps');
 	this.$indoor = $('div.indoor');
 	this.$outdoor = $('div.outdoor');
+	this.$debug = $('div.debug');
 
 
 	app.addHeaderBar({title: 'Activity'});
@@ -66,97 +69,159 @@ Activity.prototype.deviceReady = function () {
 	this.attachEvent();
 
 	this.bluetooth = new Bluetooth;
+
 	this.bluetooth.init({
-		//$debug: $('#deviceDebug'),
-		callback: this.findDevice_load,
-		context: this
+		$debug: this.$debug,
+		callback: this.initialBluetooth_load,
+		disconnectCallback: {
+			callback: this.uploadLocalData,
+			context: this
+		},
+		context: this,
+		startScanArgs: {
+			callback: this.findDevice_load,
+			context: this
+		}
 	});
 
+	//this.findDevice_load();
 
 	/* Face Data */
 	this.updateBar(this.indoorData);
 	/* Face Data */
 };
 
-Activity.prototype.findDevice_load = function () {
 
-	if(!this.writing || this.writing == false){
-		this.writing = true;
-		this.bluetooth.write({
-			serviceId: 'FFA0',
-			characterId: 'FFA1',
-			value: '1',
-			callback: this.turnSensorOn,
-			context: this
-		});
-	}
+Activity.prototype.initialBluetooth_load = function () {
+
+	this.bluetooth.startScan({
+		callback: this.findDevice_load,
+		context: this
+	});
+};
+
+
+Activity.prototype.findDevice_load = function () {
+	this.bluetooth.write({
+		serviceId: "FFA0",
+		characterId: "FFA1",
+		data: '1',
+		callback: this.writeTimeToDevice,
+		context: this
+	});
 
 };
 
-Activity.prototype.turnSensorOn = function () {
-	//this.writing = false;
-	var self = this;
-
-	this.bluetooth.notify({
+Activity.prototype.writeTimeToDevice = function () {
+	var time = moment().unix().toString();
+	$('div.debug').append("<div>writing time: " + time + "</div>");
+	this.bluetooth.write({
 		serviceId: 'FFA0',
 		characterId: 'FFA3',
-		debug: $('div.debug'),
-		context: this,
-		type: 'activityX',
-		callback: self.uploadData
+		data: time.substring(0, 4),
+		callback: this.getMacAddress,
+		context: this
 	});
+};
 
-	this.bluetooth.notify({
+Activity.prototype.getMacAddress = function () {
+
+	this.bluetooth.read({
 		serviceId: 'FFA0',
-		characterId: 'FFA4',
-		debug: $('div.debug'),
-		context: this,
-		type: 'activityY',
-		callback: self.uploadData
+		characterId: 'FFA6',
+		type: 'MAC_ID',
+		callback: this.getMacAddress_load,
+		context: this
+	});
+};
+
+
+Activity.prototype.getMacAddress_load = function () {
+	this.macId = window.localStorage.getItem("MAC_ID");
+	this.bluetooth.isConnected({
+		callback: this.checkToLoadData,
+		context: this
 	});
 
-	this.bluetooth.notify({
-		serviceId: 'FFA0',
-		characterId: 'FFA5',
-		debug: $('div.debug'),
-		context: this,
-		type: 'activityZ',
-		callback: self.uploadData
-	});
-
-	/* Face Data */
-/*	this.indoorData = [
-		{
-			name: 'steps',
-			value: 42
-		},{
-			name: 'walking',
-			value: 59
-		}, {
-			name: 'flights',
-			value: 63
-		}
-
-	];
-
-	this.updateBar(data);*/
-	/* Face Data */
-
-/*	setInterval(function(){
-		var activityValue = parseInt(window.localStorage.getItem('activityX')) + parseInt(window.localStorage.getItem('activityY')) + parseInt(window.localStorage.getItem('activityZ'));
-		activityValue = activityValue / 4000;
-		if(activityValue > 100) activityValue = 100;
-		self.$steps.find('span').html(activityValue.toFixed(2) + "%");
-		self.$steps.css('width', activityValue + "%");
-	}, 500);*/
 
 };
 
-Activity.prototype.updateBar = function(data) {
+Activity.prototype.checkToLoadData = function (oArgs, data) {
+	var self = this;
 
-	for(var i = 0 ; i<data.length;i++){
+	if (data) {
+		this.bluetooth.read({
+			serviceId: 'FFA0',
+			characterId: 'FFA3',
+			callback: this.getSizeOfData,
+			context: this
+		});
+
+	} else {
+		setTimeout(function () {
+			self.initialBluetooth_load();
+		}, 30000);
+	}
+};
+
+Activity.prototype.getSizeOfData = function () {
+
+	this.bluetooth.read({
+		serviceId: 'FFA0',
+		characterId: 'FFA5',
+		callback: this.getSizeOfData_load,
+		context: this
+	});
+};
+/*
+
+ Activity.prototype.isDeviceConnectedForReceiveData = function () {
+ this.bluetooth.isConnected({
+ callback: this.isDeviceConnected_load,
+ context: this
+ });
+ };
+ */
+
+Activity.prototype.isDeviceConnected_load = function () {
+	var self = this;
+
+
+	setTimeout(function () {
+		self.getDataFromDevice();
+	}, 100);
+
+};
+
+Activity.prototype.getSizeOfData_load = function (oArgs, data) {
+	this.sizeOfData = parseInt(data);
+
+	this.getDataFromDevice();
+};
+
+Activity.prototype.getDataFromDevice = function () {
+
+
+	this.bluetooth.read({
+		serviceId: 'FFA0',
+		characterId: 'FFA4',
+		callback: this.getDataFromDevice_load,
+		context: this
+	});
+
+};
+
+Activity.prototype.getDataFromDevice_load = function (oArgs, data) {
+	this.sizeOfData = this.sizeOfData || 0;
+	//this.sizeOfData -= 1;
+	this.storeData(data);
+};
+
+Activity.prototype.updateBar = function (data) {
+
+	for (var i = 0; i < data.length; i++) {
 		var $bar = $('div.' + data[i].name);
-		if(data[i].value > 100) data[i].value = 100;
+		if (data[i].value > 100) data[i].value = 100;
 		$bar.find('span').html(data[i].value.toFixed(2) + "%");
 		$bar.css('width', data[i].value + "%");
 	}
@@ -166,57 +231,86 @@ Activity.prototype.updateBar = function(data) {
 Activity.prototype.attachEvent = function () {
 	var self = this;
 
-	this.$steps.on('click', function(){
+	this.$steps.on('click', function () {
 		window.localStorage.removeItem('activityX');
 		window.localStorage.removeItem('activityY');
 		window.localStorage.removeItem('activityZ');
 		self.$steps.find('span').html("0.00%");
 	});
 
-	this.$indoor.on('click', function(){
+	this.$indoor.on('click', function () {
 		self.$outdoor.find('div').removeClass('active');
 		$(this).find('div').addClass('active');
 		self.updateBar(self.indoorData);
 	});
 
-	this.$outdoor.on('click', function(){
+	this.$outdoor.on('click', function () {
 		self.$indoor.find('div').removeClass('active');
 		$(this).find('div').addClass('active');
 		self.updateBar(self.outdoorData);
 	});
 };
 
-Activity.prototype.uploadData = function (oArgs) {
-	oArgs = oArgs || {};
+Activity.prototype.storeData = function (data) {
+	var localData = window.localStorage.getItem(this.localDataName) || '';
+	data = data.substring(1);
 
-	var data = {};
-	data[oArgs.type] = oArgs.value;
+	localData += "|" + data;
 
+	window.localStorage.setItem(this.localDataName, localData);
+};
 
-	$.ajax({
-		url: app.setting.serverBase + app.setting.api.uploadData,
-		type: 'POST',
-		crossDomain: true,
-		context: this,
-		data: data,
-		success: function(data, status, xhr) {
-			alert(data);
+Activity.prototype.uploadLocalData = function () {
+	var localData = window.localStorage.getItem(this.localDataName) || '';
+
+	if(!localData || localData == '') { return false; }
+
+	var dataArray = localData.split("|");
+
+		if(dataArray[0] == '') {
+			dataArray.splice(0);
 		}
-	});
 
-/*	app.tool.ajax({
+
+	if(dataArray[0]){
+		var uploadedData = dataArray[0];
+		dataArray.splice(0);
+
+		var array = '';
+		for(var i =0;i<dataArray.length;i++){
+			array += "|" +  dataArray[i];
+		}
+		window.localStorage.setItem(this.localDataName, array);
+
+		this.uploadData(uploadedData);
+	}
+
+};
+
+Activity.prototype.uploadData = function (data) {
+
+	var activity = data.split(",");
+	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.uploadData,
 		type: 'post',
 		context: this,
-		data: data,
+		data: {
+			macId: this.macId,
+			x: activity[0],
+			y: activity[1],
+			z: activity[2],
+			u: activity[3],
+			v: activity[4]
+		},
 		callback: this.uploadData_load
-	});*/
+	});
+
+
 };
 
 Activity.prototype.uploadData_load = function () {
-
+	this.uploadLocalData();
 };
-
 
 
 new Activity().init();

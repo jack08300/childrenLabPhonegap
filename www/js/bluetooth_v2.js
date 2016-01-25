@@ -6,8 +6,8 @@ Bluetooth.prototype.init = function (oArgs) {
 
 	this.uploadTimer = 5000;
 
-	this.deviceId = "39A1A2DF-B6E7-8DCE-4EC8-02F1838998FE";
-	this.serviceUuid = ['180A', '1803', '1802', '1804', '180F', 'FFA0', 'FFE0'];
+	this.deviceId = "8D804989-EED6-B482-8367-6B1E074C0FF5";
+	this.serviceUuid = ['1803', '1802', '1804'];
 
 	this.storageDeviceName = "ConnectedDevice";
 	this.storageDataName = "ConnectedData";
@@ -172,13 +172,28 @@ Bluetooth.prototype.connect = function (device) {
 		function () {
 			//fail
 			if(self.debug) self.$debug.append("<div>Fail to connect</div>");
-			self.searchDevice();
+			//self.searchDevice();
+		}
+	)
+};
+
+Bluetooth.prototype.disconnect = function (device) {
+	ble.disconnect(this.deviceId,
+		function(){
+			//oArgs.dataReceive.find('span').html("Disconnect to " + deviceId);
+		},
+		function(){
+			//oArgs.dataReceive.find('span').html("Failed disconnect to " + deviceId);
 		}
 	)
 };
 
 Bluetooth.prototype.getConnectedDevice = function () {
 	var connectedDevice = [];
+
+	if(!this.deviceList){
+		return [];
+	}
 
 	for(var i=0;i<this.deviceList.length;i++){
 		if(this.deviceList[i].connected){
@@ -216,26 +231,43 @@ Bluetooth.prototype.updateConnectedDevice = function(device){
 
 
 Bluetooth.prototype.read = function (oArgs) {
-	var self = this;
 	oArgs = oArgs || {};
-
-	ble.read(oArgs.deviceId, oArgs.serviceId, oArgs.characterId,
+	var self = this;
+	oArgs.$debug.append("Reading...");
+	ble.read(this.deviceId, oArgs.serviceId, oArgs.characterId,
 		function(data){
-			var int = new Uint8Array(data);
-			//self.$status.html(self.$status.html() + int[0]);
 
+			var int;
+
+			if(oArgs.unit == 32){
+				int = new Uint32Array(data);
+			}else{
+				int = new Uint8Array(data);
+			}
+
+
+			oArgs.$debug.append("<div>Got data: " + int + "</div>");
+			if(oArgs.type == 'MAC_ID') { self.sensorData.macId = ''; }
+			var received = '';
+			oArgs.$debug.append("<div>" + "ReadLength: " + int.length + "</div>");
 			for(var i=0;i<int.length;i++){
-				//oArgs.dataReceive.append("<br/>" + "Read: " + int[i]);
+				oArgs.$debug.append("<br/>" + "Read: " + int[i].toString(16));
+				received += int[i];
 
 				if(oArgs.type == "MAC_ID"){
-					self.sensorData.macId += int[i].toString();
+					self.sensorData.macId += int[i].toString(16);
 				}
 
 			}
 
-			if(oArgs.type == "MAC_ID" && self.sensorData.macId.length > 12){
+			if(oArgs.type == "MAC_ID"){
 				self.sensorData.macId = self.sensorData.macId.substring(0, 12);
-				oArgs.dataReceive.append("Mac ID: " + self.sensorData.macId);
+				oArgs.$debug.append("Mac ID: " + self.sensorData.macId);
+				window.localStorage.setItem("MAC_ID", self.sensorData.macId);
+			}
+
+			if(oArgs.callback){
+				oArgs.callback.call(oArgs.context, oArgs, received);
 			}
 
 		},
@@ -249,12 +281,25 @@ Bluetooth.prototype.write = function (oArgs) {
 	var self = this;
 	oArgs = oArgs || {};
 
-	var data = new Uint8Array(1);
-	data[0] = oArgs.value;
+	var data;
+	if(oArgs.value.length > 5){
+		data = new Uint32Array(1);
+	}else{
+		data = new Uint8Array(1);
+	}
+	//data = new Uint8Array(oArgs.value.length);
+	//for (var i = 0, l = oArgs.value.length; i < l; i++) {
+		data[0] = oArgs.value;
+	//}
+
+
+
+	oArgs.$debug.append("<div>Start to write: " + oArgs.value + "; Length: " + oArgs.value.length + "</div>");
 
 	ble.write(this.deviceId, oArgs.serviceId, oArgs.characterId,
 		data.buffer,
 		function(){
+			oArgs.$debug.append("Wrote to Device:- ");
 			if(oArgs.callback){
 				oArgs.callback.call(oArgs.context, oArgs, {});
 			}
@@ -262,16 +307,7 @@ Bluetooth.prototype.write = function (oArgs) {
 		function(error){
 			app.notification("Fail to Write", JSON.stringify(error));
 		}
-	)
-
-	// ASCII only
-	function stringToBytes(string) {
-		var array = new Uint8Array(string.length);
-		for (var i = 0, l = string.length; i < l; i++) {
-			array[i] = string.charCodeAt(i);
-		}
-		return array.buffer;
-	}
+	);
 };
 
 Bluetooth.prototype.successWrite = function () {

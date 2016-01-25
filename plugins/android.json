@@ -116,10 +116,10 @@
         "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "com.childrenLab"
         },
-        "cordova-plugin-ble-central": {
+        "cordova-plugin-ipad-multitasking": {
             "PACKAGE_NAME": "com.childrenLab"
         },
-        "cordova-plugin-ipad-multitasking": {
+        "cordova-plugin-ble-central": {
             "PACKAGE_NAME": "com.childrenLab"
         }
     },

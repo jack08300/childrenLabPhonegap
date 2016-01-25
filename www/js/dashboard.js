@@ -23,20 +23,44 @@ Dashboard.prototype.deviceReady = function() {
 
 	app.addHeaderBar({title: 'Dashboard'});
 	app.addMenuBar();
+
+	this.dashboardPage = $('div.dashboardPage');
+	this.dashboardButtons = $('div.dashboardButtons');
+	this.container = $('div.container', this.dashboardPage);
+	this.menu = $('div.menu');
+
+
+	var width = this.dashboardPage.width();
+
+	var centerWidth = (width / 2) - (this.dashboardButtons.width() / 2);
+	this.dashboardButtons.css('left', centerWidth);
+
+	this.content = $('div.content', this.dashboardPage);
+	var height = this.container.height();
+
+	var centerHeight = ((height - (this.menu.height()+80)) / 2) - (this.content.height() / 2);
+	console.error("Menu Height " + this.menu.height());
+	console.error("Container " + this.container.height());
+	console.error("Content " + this.content.height());
+	centerWidth = (width/2) - (this.content.width() / 2);
+	this.content.css({
+		left: centerWidth,
+		top: centerHeight
+	});
 };
 
 Dashboard.prototype.attachEvent = function() {
 	var self = this;
 
-	$('div.weatherButton').on('click', function(){
+	$('div.weatherButton').on('click', this.dashboardButtons, function(){
 		window.location = window.rootPath + "pages/temperature.html";
 	});
 
-	$('div.uvButton').on('click', function(){
+	$('div.uvButton').on('click', this.dashboardButtons, function(){
 		window.location = window.rootPath + "pages/uv.html";
 	});
 
-	$('div.activityButton').on('click', function(){
+	$('div.activityButton').on('click', this.dashboardButtons, function(){
 		window.location = window.rootPath + "pages/activity.html";
 	});
 };

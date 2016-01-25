@@ -60,7 +60,7 @@ body.ui-overlay-a {
 	color: black;
 }
 
-input {
+input, textarea {
 	font-size: 16px;
 	font-family: avenir, Georgia, "Times New Roman", serif;
 }
@@ -1088,6 +1088,9 @@ div.settingPage {
 
 /******************** Dashboard Page ***********************/
 div.dashboardPage {
+	overflow: hidden;
+	height: 100%;
+	min-height: 0;
 
 	div.title, div.status {
 		font-family: avenir_bold, Georgia, "Times New Roman", serif;
@@ -1099,6 +1102,8 @@ div.dashboardPage {
 		height: 100%;
 		text-align: center;
 		padding-top: 5vw;
+
+		div.content { position: absolute; }
 
 		&.bad {
 			background: url('../img/dashboard/dashboard-bg-bad.png') no-repeat;
@@ -1158,9 +1163,10 @@ div.dashboardPage {
 			color: $orange;
 
 			div.dashboardIcon {
-				background: url("../img/dashboard/monster-yellow.png") no-repeat 8vw;
-				background-size: 60vw;
-				width: 100%;
+				background: url("../img/dashboard/monster-yellow.png") no-repeat;
+				background-position-y:-5vw;
+				background-size: 57vw;
+				width: 55vw;
 				height: 60vw;
 				display: inline-block;
 			}
@@ -1187,25 +1193,26 @@ div.dashboardPage {
 			font-size: 7vw;
 		}
 
-		div.dashboardButtons {
-			position: absolute;
-			bottom: 40vw;
+
+
+	}
+	div.dashboardButtons {
+		position: absolute;
+		bottom: 40vw;
+
+		> div {
+			width: 15vw;
+			height: 15vw;
+			background-color: white;
+			border-radius: 50%;
+			float: left;
+			margin-left: 5vw;
+			margin-right: 5vw;
 
 			> div {
 				width: 15vw;
 				height: 15vw;
-				background-color: white;
-				border-radius: 50%;
-				float: left;
-				margin-left: 5vw;
-				margin-right: 5vw;
-
-				> div {
-					width: 15vw;
-					height: 15vw;
-				}
 			}
-
 		}
 
 	}
@@ -1486,7 +1493,6 @@ div.backButton {
 		color: $lightBlue;
 		position: relative;
 		font-size:7vw;
-		font-family: avenir, Georgia, "Times New Roman", serif;
 	}
 
 }
