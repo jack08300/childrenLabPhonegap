@@ -52,6 +52,7 @@ body {
 	padding: 0px;
 	//text-transform:uppercase;
 	width: 100%;
+	overflow: hidden;
 }
 
 body.ui-overlay-a {
@@ -1367,6 +1368,8 @@ div.uvPage {
 
 /******************** Activity index ***********************/
 div.activityPage {
+	overflow-y: hidden !important;
+
 	div.activityOverlay {
 		position: absolute;
 		width: 100%;
@@ -1454,6 +1457,30 @@ div.activityPage {
 		}
 
 
+	}
+
+	#activityStatus {
+		text-align: right;
+		> div {
+			float: right;
+			width: 30px;
+			height: 30px;
+			border-radius: 30px;
+			text-align: center;
+			color: $green;
+			background-color: $grey;
+			margin : 4px;
+
+			>span {
+				position:relative;
+				top:6px;
+			}
+
+			&.active {
+				background-color: $green;
+				color: white;
+			}
+		}
 	}
 }
 

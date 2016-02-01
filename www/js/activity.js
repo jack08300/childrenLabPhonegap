@@ -29,6 +29,13 @@ var Activity = function () {
 	];
 
 	this.localDataName = "ActivityData";
+	this.initialName = "initialDevice";
+	this.isUploadingData = false;
+	this.isReceivingData = false;
+
+	this.receivedTime = 0;
+
+	//window.localStorage.setItem(this.localDataName, "");
 };
 
 
@@ -60,6 +67,8 @@ Activity.prototype.deviceReady = function () {
 	this.$indoor = $('div.indoor');
 	this.$outdoor = $('div.outdoor');
 	this.$debug = $('div.debug');
+	this.$cloudStatus = $('div#cloudStatus');
+	this.$deviceStatus = $('div#deviceStatus');
 
 
 	app.addHeaderBar({title: 'Activity'});
@@ -74,7 +83,7 @@ Activity.prototype.deviceReady = function () {
 		$debug: this.$debug,
 		callback: this.initialBluetooth_load,
 		disconnectCallback: {
-			callback: this.uploadLocalData,
+			callback: this.disconnectDevice,
 			context: this
 		},
 		context: this,
@@ -89,6 +98,27 @@ Activity.prototype.deviceReady = function () {
 	/* Face Data */
 	this.updateBar(this.indoorData);
 	/* Face Data */
+
+	this.watchStatus();
+};
+
+Activity.prototype.watchStatus = function(){
+	var self = this;
+
+	setInterval(function(){
+		if(self.isReceivingData){
+			self.$deviceStatus.addClass("active");
+
+		}else{
+			self.$deviceStatus.removeClass("active");
+		}
+
+		if(self.isUploadingData){
+			self.$cloudStatus.addClass("active");
+		}else{
+			self.$cloudStatus.removeClass("active");
+		}
+	}, 500);
 };
 
 
@@ -113,12 +143,14 @@ Activity.prototype.findDevice_load = function () {
 };
 
 Activity.prototype.writeTimeToDevice = function () {
-	var time = moment().unix().toString();
-	$('div.debug').append("<div>writing time: " + time + "</div>");
+	var time = moment().unix();
+
+	this.bluetooth.debugger("W time: " + this.longToByteArray(time));
+
 	this.bluetooth.write({
 		serviceId: 'FFA0',
 		characterId: 'FFA3',
-		data: time.substring(0, 4),
+		data: this.longToByteArray(time),
 		callback: this.getMacAddress,
 		context: this
 	});
@@ -164,7 +196,13 @@ Activity.prototype.checkToLoadData = function (oArgs, data) {
 	}
 };
 
-Activity.prototype.getSizeOfData = function () {
+Activity.prototype.getSizeOfData = function (oArgs, data) {
+	this.bluetooth.debugger("ReceivedTime: " + data);
+
+	if(data){
+		var byteArray = data.split(",");
+		this.receivedTime = this.byteArrayToLong(byteArray);
+	}
 
 	this.bluetooth.read({
 		serviceId: 'FFA0',
@@ -201,7 +239,6 @@ Activity.prototype.getSizeOfData_load = function (oArgs, data) {
 
 Activity.prototype.getDataFromDevice = function () {
 
-
 	this.bluetooth.read({
 		serviceId: 'FFA0',
 		characterId: 'FFA4',
@@ -212,13 +249,12 @@ Activity.prototype.getDataFromDevice = function () {
 };
 
 Activity.prototype.getDataFromDevice_load = function (oArgs, data) {
-	this.sizeOfData = this.sizeOfData || 0;
+	//this.sizeOfData = this.sizeOfData || 0;
 	//this.sizeOfData -= 1;
 	this.storeData(data);
 };
 
 Activity.prototype.updateBar = function (data) {
-
 	for (var i = 0; i < data.length; i++) {
 		var $bar = $('div.' + data[i].name);
 		if (data[i].value > 100) data[i].value = 100;
@@ -252,64 +288,129 @@ Activity.prototype.attachEvent = function () {
 };
 
 Activity.prototype.storeData = function (data) {
-	var localData = window.localStorage.getItem(this.localDataName) || '';
-	data = data.substring(1);
+	this.isReceivingData = true;
 
-	localData += "|" + data;
+	var localData = window.localStorage.getItem(this.localDataName) || '';
+
+	this.receivedTime += 0.5;
+	localData += "|" + window.localStorage.getItem("MAC_ID") + "," + data + "," + Math.floor(this.receivedTime);
 
 	window.localStorage.setItem(this.localDataName, localData);
+
+	this.getDataFromDevice();
+
+};
+
+Activity.prototype.disconnectDevice = function(){
+	if(window.localStorage.getItem("MAC_ID")){
+		window.localStorage.setItem(this.initialName, window.localStorage.getItem("MAC_ID"));
+	}
+	this.isReceivingData = false;
+	this.uploadLocalData();
 };
 
 Activity.prototype.uploadLocalData = function () {
 	var localData = window.localStorage.getItem(this.localDataName) || '';
 
-	if(!localData || localData == '') { return false; }
 
-	var dataArray = localData.split("|");
-
-		if(dataArray[0] == '') {
-			dataArray.splice(0);
-		}
-
-
-	if(dataArray[0]){
-		var uploadedData = dataArray[0];
-		dataArray.splice(0);
-
-		var array = '';
-		for(var i =0;i<dataArray.length;i++){
-			array += "|" +  dataArray[i];
-		}
-		window.localStorage.setItem(this.localDataName, array);
-
-		this.uploadData(uploadedData);
+	if(!localData || localData == '') {
+		this.bluetooth.debugger("----------- No Local Data --------");
+		this.isUploadingData = false;
+		return false;
 	}
+
+	window.localStorage.setItem(this.localDataName, "");
+	this.isUploadingData = true;
+
+	/*
+
+		var dataArray = localData.split("|");
+
+			if(dataArray[0] == '') {
+				dataArray.splice(0, 1);
+			}
+
+
+		if(dataArray[0]){
+			var uploadedData = dataArray[0];
+			dataArray.splice(0, 1);
+			var array = '';
+			for(var i =0;i<dataArray.length;i++){
+				array += "|" +  dataArray[i];
+			}
+			window.localStorage.setItem(this.localDataName, array);
+
+			this.uploadData(uploadedData);
+		}
+	*/
+
+	this.uploadData(localData); //Upload raw data
 
 };
 
 Activity.prototype.uploadData = function (data) {
 
+	this.bluetooth.debugger("Uploading Raw Data....");
+/*
 	var activity = data.split(",");
+	this.bluetooth.debugger("Uploading....");
 	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.uploadData,
 		type: 'post',
 		context: this,
 		data: {
-			macId: this.macId,
-			x: activity[0],
-			y: activity[1],
-			z: activity[2],
-			u: activity[3],
-			v: activity[4]
+			macId: activity[0],
+			x: activity[1],
+			y: activity[2],
+			z: activity[3],
+			u: activity[4],
+			v: activity[5]
+		},
+		callback: this.uploadData_load
+	});
+*/
+
+	app.tool.ajax({
+		url: app.setting.serverBase + app.setting.api.uploadRawData,
+		type: 'post',
+		context: this,
+		data: {
+			activityRawData: data
 		},
 		callback: this.uploadData_load
 	});
 
-
 };
 
 Activity.prototype.uploadData_load = function () {
-	this.uploadLocalData();
+	var self = this;
+	this.bluetooth.debugger("Complete!");
+	setTimeout(function(){
+		self.uploadLocalData();
+	}, 500);
+
+};
+
+Activity.prototype.byteArrayToLong = function(byteArray) {
+	var value = 0;
+	for ( var i = byteArray.length - 1; i >= 0; i--) {
+		value = (value * 256) + parseInt(byteArray[i]);
+	}
+
+	return value;
+};
+
+
+Activity.prototype.longToByteArray = function(long) {
+	var byteArray = [0, 0, 0, 0];
+
+	for ( var index = 0; index < byteArray.length; index ++ ) {
+		var byte = long & 0xff;
+		byteArray [ index ] = byte;
+		long = (long - byte) / 256 ;
+	}
+
+	return byteArray;
 };
 
 

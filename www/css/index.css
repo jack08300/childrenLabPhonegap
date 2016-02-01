@@ -41,7 +41,8 @@ body {
   height: 100%;
   margin: 0px;
   padding: 0px;
-  width: 100%; }
+  width: 100%;
+  overflow: hidden; }
 
 body.ui-overlay-a {
   background-color: #fcfcfc;
@@ -969,71 +970,87 @@ div.uvPage {
     display: inline-block; }
 
 /******************** Activity index ***********************/
-div.activityPage div.activityOverlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: transparent url("../img/dashboard/dashboard-bg-bg-activity-02.png") 0 -3vw no-repeat;
-  background-size: 100%;
-  z-index: 1; }
-
-div.activityPage div.backgroundOverlay {
-  position: absolute;
-  width: 100%;
-  height: 50vw;
-  background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
-  background-size: 500px;
-  z-index: 2;
-  bottom: 5vw; }
-
-div.activityPage div.container {
-  font-family: avenir_bold, Georgia, "Times New Roman", serif;
-  position: absolute;
-  z-index: 2;
-  width: 100%;
-  color: #1fc4b4;
-  text-align: center;
-  margin-top: 7vw; }
-  div.activityPage div.container div.title {
-    font-size: 7vw; }
-  div.activityPage div.container div.bars {
-    text-align: left;
-    color: white;
-    margin-top: 10vw; }
-    div.activityPage div.container div.bars > div {
-      position: relative;
-      padding: 2vw;
-      margin: 5vw;
-      background-color: #1fc4b4;
-      transition: all 1s; }
-      div.activityPage div.container div.bars > div > span {
-        position: absolute;
-        top: 2vw;
-        left: 45vw; }
-
-div.activityPage div.bottomButtons {
-  position: absolute;
-  bottom: 18vw;
-  z-index: 3;
-  width: 100%;
-  text-align: center; }
-  div.activityPage div.bottomButtons div.center {
-    display: inline-block; }
-    div.activityPage div.bottomButtons div.center > div {
-      margin: 0 5vw;
-      float: left;
-      background-color: white;
-      position: relative; }
-      div.activityPage div.bottomButtons div.center > div > div {
-        background-color: white;
-        color: #1fc4b4;
+div.activityPage {
+  overflow-y: hidden !important; }
+  div.activityPage div.activityOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent url("../img/dashboard/dashboard-bg-bg-activity-02.png") 0 -3vw no-repeat;
+    background-size: 100%;
+    z-index: 1; }
+  div.activityPage div.backgroundOverlay {
+    position: absolute;
+    width: 100%;
+    height: 50vw;
+    background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
+    background-size: 500px;
+    z-index: 2;
+    bottom: 5vw; }
+  div.activityPage div.container {
+    font-family: avenir_bold, Georgia, "Times New Roman", serif;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    color: #1fc4b4;
+    text-align: center;
+    margin-top: 7vw; }
+    div.activityPage div.container div.title {
+      font-size: 7vw; }
+    div.activityPage div.container div.bars {
+      text-align: left;
+      color: white;
+      margin-top: 10vw; }
+      div.activityPage div.container div.bars > div {
         position: relative;
-        padding: 0.8vw 9vw;
-        border-radius: 5px;
+        padding: 2vw;
+        margin: 5vw;
+        background-color: #1fc4b4;
         transition: all 1s; }
-        div.activityPage div.bottomButtons div.center > div > div.active {
-          background-color: #1fc4b4;
-          color: white; }
+        div.activityPage div.container div.bars > div > span {
+          position: absolute;
+          top: 2vw;
+          left: 45vw; }
+  div.activityPage div.bottomButtons {
+    position: absolute;
+    bottom: 18vw;
+    z-index: 3;
+    width: 100%;
+    text-align: center; }
+    div.activityPage div.bottomButtons div.center {
+      display: inline-block; }
+      div.activityPage div.bottomButtons div.center > div {
+        margin: 0 5vw;
+        float: left;
+        background-color: white;
+        position: relative; }
+        div.activityPage div.bottomButtons div.center > div > div {
+          background-color: white;
+          color: #1fc4b4;
+          position: relative;
+          padding: 0.8vw 9vw;
+          border-radius: 5px;
+          transition: all 1s; }
+          div.activityPage div.bottomButtons div.center > div > div.active {
+            background-color: #1fc4b4;
+            color: white; }
+  div.activityPage #activityStatus {
+    text-align: right; }
+    div.activityPage #activityStatus > div {
+      float: right;
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+      text-align: center;
+      color: #00C4B3;
+      background-color: #999899;
+      margin: 4px; }
+      div.activityPage #activityStatus > div > span {
+        position: relative;
+        top: 6px; }
+      div.activityPage #activityStatus > div.active {
+        background-color: #00C4B3;
+        color: white; }
 
 div.addButton {
   position: absolute;

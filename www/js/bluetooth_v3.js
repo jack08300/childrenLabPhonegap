@@ -21,7 +21,7 @@ Bluetooth.prototype.init = function (oArgs) {
 	this.callback = oArgs.callback;
 	this.context = oArgs.context;
 	this.scanArgs = oArgs.startScanArgs;
-	this.disconnectedCallback = oArgs.disconnectedCallback;
+	this.disconnectCallback = oArgs.disconnectCallback;
 
 	this.$debug = oArgs.$debug;
 
@@ -127,10 +127,10 @@ Bluetooth.prototype.connect = function (oArgs, device) {
 		},
 		function (error) {
 			self.debugger("Disconnect");
+			self.callbackMethod(self.disconnectCallback);
 
 			if(self.deviceInit){
-				self.callbackMethod(self.disconnectedCallback);
-
+				self.debugger("Sleep for 3 minutes before reconnect again.");
 				setTimeout(function(){
 					self.startScan(self.scanArgs);
 				}, 300000);
@@ -161,6 +161,10 @@ Bluetooth.prototype.read = function (oArgs) {
 
 			}
 
+			if(received != '' && received.substring(0, 1) == ","){
+				received = received.substring(1);
+			}
+
 
 			if (oArgs.type == "MAC_ID") {
 				self.macId = received.substring(0, 12);
@@ -169,7 +173,7 @@ Bluetooth.prototype.read = function (oArgs) {
 				self.debugger("Initial Setup was success, Mac ID: " + self.macId);
 			}
 
-			self.debugger("Received Data: " + received);
+			self.debugger("Received From :" + oArgs.characterId + " Data: " + received);
 			self.callbackMethod(oArgs, received);
 
 		},
@@ -185,14 +189,17 @@ Bluetooth.prototype.write = function (oArgs) {
 
 	var data = oArgs.data;
 
-	var array = new Uint8Array(data.length);
-
-	for (var i = 0, l = data.length; i < l; i++) {
-		array[i] = data[i];
+	if(!(data instanceof Uint8Array)){
+		var array = new Uint8Array(data.length);
+		for (var i = 0, l = data.length; i < l; i++) {
+			array[i] = data[i];
+		}
+	}else{
+		array = data;
 	}
 
 
-	this.debugger("Writing to: " + oArgs.serviceId + "  " + oArgs.characterId + " " + array.length + " " + array[0]);
+	this.debugger("Writing to: " + oArgs.serviceId + "  " + oArgs.characterId + " " + array.length + " " + array);
 
 	ble.write(this.deviceId, oArgs.serviceId, oArgs.characterId, array.buffer,
 		function () {

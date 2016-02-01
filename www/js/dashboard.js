@@ -39,9 +39,6 @@ Dashboard.prototype.deviceReady = function() {
 	var height = this.container.height();
 
 	var centerHeight = ((height - (this.menu.height()+80)) / 2) - (this.content.height() / 2);
-	console.error("Menu Height " + this.menu.height());
-	console.error("Container " + this.container.height());
-	console.error("Content " + this.content.height());
 	centerWidth = (width/2) - (this.content.width() / 2);
 	this.content.css({
 		left: centerWidth,

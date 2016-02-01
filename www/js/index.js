@@ -40,6 +40,7 @@ var app = {
 			retrieveScheduleMessage: "/schedule/retrieveMessage",
 			submitScheduleMessage: "/schedule/leaveMessage",
 			uploadData: "/device/uploadData",
+			uploadRawData: '/device/uploadRawData',
 			feedback: "/user/leaveFeedback",
 			updateProfile: "/user/updateProfile",
 			uploadAvatar: "/avatar/uploadProfileImage",
