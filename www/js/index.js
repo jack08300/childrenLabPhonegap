@@ -196,14 +196,14 @@ var app = {
 		oArgs = oArgs || {};
 
 		this.$menu = $("<div class='menu bottom'></div>");
-		this.$map = $("<div class='mapPageIcon icon'></div>");
+		this.$watch = $("<div class='watchPageIcon icon'></div>");
 		this.$calendar = $("<div class='calendarPageIcon icon'></div>");
 		this.$dashboard = $("<div class='dashboardPageIcon icon'></div>");
 		this.$mail = $("<div class='mailPageIcon icon'></div>");
 		this.$profile = $("<div class='profilePageIcon icon'></div>");
 
 
-		this.$menu.append(this.$map).append(this.$calendar).append(this.$dashboard).append(this.$mail).append(this.$profile);
+		this.$menu.append(this.$watch).append(this.$calendar).append(this.$dashboard).append(this.$mail).append(this.$profile);
 
 		var currentPageClass = $.mobile.activePage.attr('class').split(' ')[0];
 		this.$menu.find('div.' + currentPageClass + 'Icon').addClass('active');
@@ -219,11 +219,11 @@ var app = {
 		var self = this;
 		var currentPageClass = $.mobile.activePage.attr('class');
 
-		this.$map.on('click', function(){
-			if(currentPageClass.indexOf('homePage') != -1){
+		this.$watch.on('click', function(){
+			if(currentPageClass.indexOf('watchPage') != -1){
 				return;
 			}
-			window.location = window.rootPath + "pages/home.html";
+			window.location = window.rootPath + "pages/watch.html";
 		});
 
 		this.$calendar.on('click', function(){

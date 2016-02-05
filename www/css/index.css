@@ -43,6 +43,8 @@ body {
   padding: 0px;
   width: 100%;
   overflow: hidden; }
+  body > div {
+    overflow-y: hidden !important; }
 
 body.ui-overlay-a {
   background-color: #fcfcfc;
@@ -443,7 +445,7 @@ div.menu.bottom {
     float: left;
     height: 14vw;
     width: 20%; }
-    div.menu.bottom > div.mapPageIcon {
+    div.menu.bottom > div.watchPageIcon {
       background: url("../img/menu/navi_icons_map.svg") no-repeat 50%; }
     div.menu.bottom > div.calendarPageIcon {
       background: url("../img/menu/navi_icons_calendar.svg") no-repeat 50%; }
@@ -453,7 +455,7 @@ div.menu.bottom {
       background: url("../img/menu/navi_icons_mail.svg") no-repeat 50%; }
     div.menu.bottom > div.profilePageIcon {
       background: url("../img/menu/navi_icons_profile.svg") no-repeat 50%; }
-    div.menu.bottom > div.mapPageIcon.active {
+    div.menu.bottom > div.watchPageIcon.active {
       background: #fcfcfc url("../img/menu/navi_icons_map_selected.svg") no-repeat 50%; }
     div.menu.bottom > div.calendarPageIcon.active {
       background: #fcfcfc url("../img/menu/navi_icons_calendar_selected.svg") no-repeat 50%; }
@@ -1282,3 +1284,103 @@ div.calendarPage {
     background-color: orangered; }
   div.calendarPage .grey {
     background-color: grey; }
+
+/******************** My Watch ***********************/
+div.watchPage div.title {
+  color: #FF7231;
+  font-size: 7.4vw;
+  font-family: avenir_bold, Georgia, "Times New Roman", serif;
+  text-align: center;
+  padding: 3vw 10vw; }
+
+div.watchPage div.container {
+  z-index: 2;
+  position: relative; }
+
+div.watchPage div.watchOverlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent url("../img/dashboard/dashboard-bg-bg-activity-02.png") 0 -3vw no-repeat;
+  background-size: 100%;
+  z-index: 1; }
+
+div.watchPage div.backgroundOverlay {
+  position: absolute;
+  width: 100%;
+  height: 50vw;
+  background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
+  background-size: 500px;
+  z-index: 2;
+  bottom: 7vw; }
+
+div.watchPage div.findNow {
+  text-align: center; }
+  div.watchPage div.findNow div {
+    display: inline-block;
+    margin-top: 3.7vw;
+    transition: border 0.5s ease-out; }
+    div.watchPage div.findNow div.circle {
+      border: 0.8vw solid white; }
+  div.watchPage div.findNow > div.circle {
+    border-width: 0.8vw;
+    border-radius: 60vw;
+    width: 60vw;
+    height: 60vw; }
+    div.watchPage div.findNow > div.circle > div {
+      border-width: 0.8vw;
+      border-radius: 50vw;
+      width: 50vw;
+      height: 50vw; }
+      div.watchPage div.findNow > div.circle > div > div {
+        border-width: 1.5vw;
+        border-radius: 40vw;
+        width: 40vw;
+        height: 40vw; }
+        div.watchPage div.findNow > div.circle > div > div > div {
+          border-width: 1.5vw;
+          border-radius: 30vw;
+          width: 30vw;
+          height: 30vw; }
+          div.watchPage div.findNow > div.circle > div > div > div > div {
+            border: 1.5vw solid white;
+            border-radius: 30vw;
+            width: 20vw;
+            height: 20vw;
+            background-color: #FF7231;
+            font-family: avenir_bold, Georgia, "Times New Roman", serif;
+            font-size: 5vw;
+            color: white; }
+            div.watchPage div.findNow > div.circle > div > div > div > div > span {
+              position: relative;
+              top: 3.5vw; }
+
+div.watchPage div.battery {
+  text-align: center; }
+  div.watchPage div.battery div {
+    display: inline-block;
+    margin-top: 3.7vw; }
+    div.watchPage div.battery div.circle {
+      border: 2vw solid #FF7231;
+      border-radius: 60vw;
+      width: 65vw;
+      height: 65vw; }
+    div.watchPage div.battery div div.title {
+      font-size: 10vw;
+      padding: 8vw;
+      margin-left: 4vw; }
+
+div.watchPage div.pageDot {
+  position: relative;
+  z-index: 2;
+  display: inline-block; }
+  div.watchPage div.pageDot > div {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    background-color: white;
+    transition: background-color 0.5s;
+    float: left;
+    margin: 5vw 2vw 1vw 2vw; }
+    div.watchPage div.pageDot > div.active {
+      background-color: #999899; }

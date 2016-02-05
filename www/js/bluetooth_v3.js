@@ -25,8 +25,6 @@ Bluetooth.prototype.init = function (oArgs) {
 
 	this.$debug = oArgs.$debug;
 
-	this.bleEnabled = false;
-
 	window.localStorage.removeItem(this.storageDeviceName);
 	window.localStorage.removeItem(this.storageDataName);
 
@@ -71,9 +69,28 @@ Bluetooth.prototype.startScan = function (oArgs) {
 
 	ble.startScan(this.serviceUuid,
 		function (device) {
-
 			self.stopScan();
 			self.isConnected(oArgs, device);
+		},
+		function (error) {
+			app.notification("Bluetooth Device", "Couldn't scan bluetooth devices. " + JSON.stringify(error), null);
+		}
+	)
+};
+
+Bluetooth.prototype.watchRange = function (oArgs) {
+	var self = this;
+	oArgs = oArgs || {};
+
+	ble.startScan(this.serviceUuid,
+		function (device) {
+			self.stopScan();
+			var rssi = device.rssi;
+			self.callbackMethod(oArgs, rssi);
+
+			setTimeout(function(){
+				self.watchRange(oArgs);
+			}, 500);
 		},
 		function (error) {
 			app.notification("Bluetooth Device", "Couldn't scan bluetooth devices. " + JSON.stringify(error), null);
@@ -246,4 +263,15 @@ Bluetooth.prototype.debugger = function (message) {
 		this.$debug.scrollTop(this.$debug.height()+this.$debug.scrollTop());
 	}
 
+};
+
+Bluetooth.prototype.disconnect = function(oArgs){
+	var self = this;
+	ble.disconnect(this.deviceId,
+	function(){
+		self.debugger("Disconnect success");
+	},
+	function(e){
+		self.debugger("Disconnect Error " + e);
+	});
 };

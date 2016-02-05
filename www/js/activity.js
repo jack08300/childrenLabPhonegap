@@ -297,11 +297,19 @@ Activity.prototype.storeData = function (data) {
 
 	window.localStorage.setItem(this.localDataName, localData);
 
-	this.getDataFromDevice();
+	if(localData.length > 8000){
+		this.uploadLocalData({
+			callback: this.getDataFromDevice
+		})
+	}else{
+		this.getDataFromDevice();
+	}
+
 
 };
 
 Activity.prototype.disconnectDevice = function(){
+
 	if(window.localStorage.getItem("MAC_ID")){
 		window.localStorage.setItem(this.initialName, window.localStorage.getItem("MAC_ID"));
 	}
@@ -309,7 +317,9 @@ Activity.prototype.disconnectDevice = function(){
 	this.uploadLocalData();
 };
 
-Activity.prototype.uploadLocalData = function () {
+Activity.prototype.uploadLocalData = function (oArgs) {
+	oArgs = oArgs || {};
+
 	var localData = window.localStorage.getItem(this.localDataName) || '';
 
 
@@ -321,54 +331,15 @@ Activity.prototype.uploadLocalData = function () {
 
 	window.localStorage.setItem(this.localDataName, "");
 	this.isUploadingData = true;
-
-	/*
-
-		var dataArray = localData.split("|");
-
-			if(dataArray[0] == '') {
-				dataArray.splice(0, 1);
-			}
-
-
-		if(dataArray[0]){
-			var uploadedData = dataArray[0];
-			dataArray.splice(0, 1);
-			var array = '';
-			for(var i =0;i<dataArray.length;i++){
-				array += "|" +  dataArray[i];
-			}
-			window.localStorage.setItem(this.localDataName, array);
-
-			this.uploadData(uploadedData);
-		}
-	*/
-
-	this.uploadData(localData); //Upload raw data
+	this.uploadData(localData, oArgs); //Upload raw data
 
 };
 
-Activity.prototype.uploadData = function (data) {
+Activity.prototype.uploadData = function (data, oArgs) {
 
 	this.bluetooth.debugger("Uploading Raw Data....");
-/*
-	var activity = data.split(",");
-	this.bluetooth.debugger("Uploading....");
-	app.tool.ajax({
-		url: app.setting.serverBase + app.setting.api.uploadData,
-		type: 'post',
-		context: this,
-		data: {
-			macId: activity[0],
-			x: activity[1],
-			y: activity[2],
-			z: activity[3],
-			u: activity[4],
-			v: activity[5]
-		},
-		callback: this.uploadData_load
-	});
-*/
+
+	var callback = oArgs.callback || this.uploadData_load;
 
 	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.uploadRawData,
@@ -377,7 +348,7 @@ Activity.prototype.uploadData = function (data) {
 		data: {
 			activityRawData: data
 		},
-		callback: this.uploadData_load
+		callback: callback
 	});
 
 };
