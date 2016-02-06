@@ -123,7 +123,7 @@ Bluetooth.prototype.isConnected = function (oArgs, device) {
 		},
 		function () {
 			self.debugger("Not connected: " + device.id);
-			if(!this.deviceInit){
+			if(!this.deviceInit && !oArgs.noConnect){
 				self.connect(oArgs, device);
 			}else{
 				self.callbackMethod(oArgs, false);
@@ -270,6 +270,7 @@ Bluetooth.prototype.disconnect = function(oArgs){
 	ble.disconnect(this.deviceId,
 	function(){
 		self.debugger("Disconnect success");
+		self.callbackMethod(oArgs, false);
 	},
 	function(e){
 		self.debugger("Disconnect Error " + e);

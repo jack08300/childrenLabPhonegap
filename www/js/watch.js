@@ -36,6 +36,7 @@ Watch.prototype.deviceReady = function () {
 	this.$findNowButton = $('div.button', this.$findNow);
 	this.switchTemplate(this.$findNowTemplate, 'findNow');
 	this.$pageDot = $('div.pageDot');
+	this.$debugRssi = $('div.debugRssi');
 
 	app.addHeaderBar({title: 'My Watch'});
 
@@ -92,6 +93,7 @@ Watch.prototype.attachEvent = function(){
 Watch.prototype.initialBluetooth_load = function(){
 
 	this.attachEvent();
+
 	this.scan();
 };
 
@@ -119,9 +121,9 @@ Watch.prototype.getBatteryLife_load = function(oArgs, data){
 
 Watch.prototype.updateRange = function(oArgs, rssi){
 	//set -70 to -100
-
-	var min = 70;
-	var max = 110;
+	this.$debugRssi.html(rssi);
+	var min = 37;
+	var max = 90;
 
 	var percent = Math.abs((Math.abs(rssi) - min) / (max - min) - 1).toFixed(2);
 
