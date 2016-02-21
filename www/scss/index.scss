@@ -1938,7 +1938,7 @@ div.watchPage{
 			margin-top: 3.7vw;
 
 			&.circle {
-				border: 2vw solid $orange;
+				border: 3vw solid $orange;
 				border-radius: 60vw;
 				width: 65vw;
 				height: 65vw;
@@ -1946,9 +1946,18 @@ div.watchPage{
 
 			div.title {
 				font-size: 10vw;
-				padding: 8vw;
-				margin-left: 4vw;
+				padding: 0;
+				margin-top: 10vw;
+				margin-left:0;
 			}
+		}
+		div.batteryImage{
+			background: url('../img/batteryIcon.png') no-repeat;
+			width: 42.1vw;
+			height: 31vw;
+			background-size: 42vw;
+			position: relative;
+			top: 7.7vw;
 		}
 	}
 

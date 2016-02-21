@@ -1361,14 +1361,22 @@ div.watchPage div.battery {
     display: inline-block;
     margin-top: 3.7vw; }
     div.watchPage div.battery div.circle {
-      border: 2vw solid #FF7231;
+      border: 3vw solid #FF7231;
       border-radius: 60vw;
       width: 65vw;
       height: 65vw; }
     div.watchPage div.battery div div.title {
       font-size: 10vw;
-      padding: 8vw;
-      margin-left: 4vw; }
+      padding: 0;
+      margin-top: 10vw;
+      margin-left: 0; }
+  div.watchPage div.battery div.batteryImage {
+    background: url("../img/batteryIcon.png") no-repeat;
+    width: 42.1vw;
+    height: 31vw;
+    background-size: 42vw;
+    position: relative;
+    top: 7.7vw; }
 
 div.watchPage div.pageDot {
   position: relative;

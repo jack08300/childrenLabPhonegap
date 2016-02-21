@@ -79,6 +79,15 @@ Watch.prototype.attachEvent = function(){
 		}
 	});
 
+	$('div').on('click', this.$pageDot, function(){
+		console.error("test");
+		if($(this).hasClass('dot_findNow')){
+			self.switchTemplate(self.$findNowTemplate, 'findNow');
+		}else{
+			self.switchTemplate(self.$batteryTemplate, 'battery');
+		}
+	});
+
 	this.$findNowButton.on('click', function(){
 		if(!self.searchOn){
 			self.searchOn = true;

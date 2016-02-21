@@ -176,7 +176,6 @@ Activity.prototype.findDevice_load = function () {
 Activity.prototype.writeTimeToDevice = function () {
 	var time = moment().unix();
 
-	this.bluetooth.debugger("W time: " + this.longToByteArray(time));
 	this.$debugTime.find("#sentTime").html(moment.unix(time).format("YYYY/MM/DD HH:mm:ss") + " | " + this.longToByteArray(time));
 	this.bluetooth.write({
 		serviceId: 'FFA0',
@@ -324,11 +323,10 @@ Activity.prototype.attachEvent = function () {
 Activity.prototype.storeData = function (data) {
 	this.isReceivingData = true;
 	this.receivingDataCount += 1;
-	this.bluetooth.debugger("Count: " + this.receivingDataCount);
 
 	var localData = window.localStorage.getItem(this.localDataName) || '';
 
-	window.localStorage.setItem(this.deviceTimeName, parseInt(window.localStorage.getItem(this.deviceTimeName)) + 0.5);
+	window.localStorage.setItem(this.deviceTimeName, parseFloat(window.localStorage.getItem(this.deviceTimeName)) + 0.5);
 	localData += "|" + window.localStorage.getItem("MAC_ID") + "," + data + "," + Math.floor(window.localStorage.getItem(this.deviceTimeName));
 
 	window.localStorage.setItem(this.localDataName, localData);
