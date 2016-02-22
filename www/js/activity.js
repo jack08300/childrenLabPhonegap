@@ -335,12 +335,10 @@ Activity.prototype.storeData = function (data) {
 		this.uploadLocalData({
 			callback: this.getDataFromDevice,
 			context: this
-		})
+		});
 	}else{
 		this.getDataFromDevice();
 	}
-
-
 };
 
 Activity.prototype.disconnectDevice = function(){

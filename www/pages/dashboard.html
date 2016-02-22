@@ -11,7 +11,13 @@
 <div class="dashboardPage" data-role="page" style="overflow: hidden;">
 
 	<div class="container excellent">
+
+
+	</div>
+
+	<div class="template dashboardTemplate">
 		<div id="dashboard">
+
 			<div class="title">
 				How are you doing today?
 			</div>
@@ -26,28 +32,26 @@
 				</div>
 			</div>
 
+			<div class="dashboardButtons">
+				<div class="buttonCover">
+					<div class="uvButton"></div>
+				</div>
+				<div class="buttonCover">
+					<div class="activityButton"></div>
+				</div>
 
+				<div class="buttonCover">
+					<div class="weatherButton"></div>
+				</div>
 
-
+			</div>
 		</div>
 
-		<div class="dashboardButtons">
-			<div class="buttonCover">
-				<div class="uvButton"></div>
-			</div>
-			<div class="buttonCover">
-				<div class="activityButton"></div>
-			</div>
 
-			<div class="buttonCover">
-				<div class="weatherButton"></div>
-			</div>
-
-		</div>
 	</div>
 
 
-	<div class="template syncDevice">
+	<div class="template syncTemplate">
 		<div class="title">
 			<div class="deviceIcon"></div>
 			<div class="name">Kacen</div>
@@ -59,19 +63,34 @@
 
 		<div class="buttons">
 			<div class="mainButton sync">Yes, Please</div>
-			<div class="mainButton noSync">NO, go to dashboard</div>
+			<div class="mainButton noSync">No, go to dashboard</div>
 		</div>
 	</div>
+
+	<div class="template searchTemplate">
+		<div class="circle">
+			<div class="searchInfo">
+				Searching for your device!
+			</div>
+			<div class="background">
+
+			</div>
+		</div>
+		<div class="mainButton gotoDashboard none">Go to Dashboard</div>
+	</div>
+
+
 
 </div>
 
 
-
 <script type="text/javascript" src="../cordova.js"></script>
 <script type="text/javascript" src="../js/lib/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="../js/lib/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/tools.js"></script>
 <script type="text/javascript" src="../js/index.js"></script>
 <script type="text/javascript" src="../js/dashboard.js"></script>
+<script type="text/javascript" src="../js/bluetooth_v3.js"></script>
 <script type="text/javascript" src="../js/lib/jquery.mobile-1.4.5.min.js"></script>
 </body>
 </html>
