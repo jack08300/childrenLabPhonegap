@@ -1,4 +1,7 @@
-var Tools = function(){};
+var Tools = function(){
+	//enable push notification
+	//this.pushNotification();
+};
 
 Tools.prototype.ajax = function(params, oArgs){
 		var self = this;
@@ -68,6 +71,39 @@ Tools.prototype.showLoading = function(oArgs){
 	if(!oArgs.noHideKeyboard){
 		this.hideKeyboard();
 	}
+};
+
+Tools.prototype.pushNotification = function(){
+
+	var push = PushNotification.init({
+		"ios": {
+			"sound": true,
+			"vibration": true,
+			"badge": true
+		}
+	});
+
+	PushNotification.hasPermission(function(data) {
+		if (data.isEnabled) {
+			console.log("Push notification is enabled");
+		}
+	});
+
+	push.on('registration', function(data) {
+		console.log(data.registrationId);
+	});
+
+	push.on('notification', function(data) {
+		app.notification(data.title, data.message);
+
+		push.finish(function() {
+			console.log("processing of push data is finished");
+		});
+	});
+
+	push.on('error', function(e) {
+		console.log(e.message);
+	});
 };
 
 Tools.prototype.hideLoading = function(){

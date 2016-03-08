@@ -331,6 +331,8 @@ div.indexPage {
   div.indexPage div.pageCover {
     position: absolute;
     top: 0; }
+    div.indexPage div.pageCover.rolePage {
+      width: 82%; }
   div.indexPage div.signInButtons {
     position: relative;
     margin-top: 35px; }
@@ -553,6 +555,14 @@ a:active {
     padding: 15px 0 0 0; }
 
 /***************** Main Menu **************/
+div.profileImage {
+  display: inline-block; }
+  div.profileImage img {
+    width: 40vw;
+    height: 40vw;
+    border-radius: 50%;
+    background-color: white; }
+
 #menuPanel {
   background-color: #58585a;
   color: white;
@@ -564,13 +574,6 @@ a:active {
     #menuPanel div.menuHeader div.container {
       display: inline-block;
       padding-top: 2em; }
-      #menuPanel div.menuHeader div.container div.profileImage {
-        display: inline-block; }
-        #menuPanel div.menuHeader div.container div.profileImage img {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          background-color: white; }
       #menuPanel div.menuHeader div.container div.viewAccount {
         font-size: 10px; }
   #menuPanel div.options {
@@ -853,7 +856,7 @@ div.dashboardPage {
     width: 80%;
     display: inline-block; }
     div.dashboardPage #dashboard div.title, div.dashboardPage #dashboard div.status {
-      font-size: 7vw; }
+      font-size: 9vw; }
   div.dashboardPage div.dashboardButtons {
     position: absolute;
     bottom: 40vw; }
@@ -873,7 +876,7 @@ div.dashboardPage {
     div.dashboardPage div.syncTemplate .buttons div.mainButton {
       font-family: avenir_bold, Georgia, "Times New Roman", serif;
       margin: 5vw 8vw;
-      font-size: 6vw; }
+      font-size: 5vw; }
   div.dashboardPage div.syncTemplate div.deviceIcon {
     width: 30vw;
     height: 30vw;
@@ -886,7 +889,7 @@ div.dashboardPage {
     margin: 2vw 0 5vw 0;
     color: #00C4B3; }
   div.dashboardPage div.syncTemplate div.title {
-    font-size: 10vw;
+    font-size: 7vw;
     margin-bottom: 5vw; }
   div.dashboardPage div.searchTemplate div.circle {
     position: relative;
@@ -1226,6 +1229,9 @@ div.calendarPage {
             left: 8vw; }
           div.calendarPage #calendar div.calendarContent div.eventList div.eachEvent span.eventName {
             left: 10vw; }
+          div.calendarPage #calendar div.calendarContent div.eventList div.eachEvent div.description {
+            position: relative;
+            margin: 1vw 8vw; }
       div.calendarPage #calendar div.calendarContent div.days {
         display: inline-block;
         margin-top: 7vw; }

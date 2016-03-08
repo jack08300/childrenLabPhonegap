@@ -4,120 +4,7 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"DatePicker\"><param name=\"ios-package\" value=\"DatePicker\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"ImagePicker\"><param name=\"ios-package\" value=\"SOSPicker\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
-                            "count": 1
-                        }
-                    ],
-                    "/widget": [
-                        {
-                            "xml": "<feature name=\"BLE\"><param name=\"ios-package\" onload=\"true\" value=\"BLECentralPlugin\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "framework": {
-                "parents": {
-                    "CoreBluetooth.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "CoreGraphics.framework": [
-                        {
-                            "xml": false,
-                            "count": 2
-                        }
-                    ],
-                    "AudioToolbox.framework": [
-                        {
-                            "xml": true,
-                            "count": 1
-                        }
-                    ],
-                    "AssetsLibrary.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "MobileCoreServices.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "CoreLocation.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "*-Info.plist": {
-                "parents": {
-                    "UISupportedInterfaceOrientations": [
-                        {
-                            "xml": "<array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>",
-                            "count": 1
-                        }
-                    ],
-                    "UISupportedInterfaceOrientations~ipad": [
-                        {
-                            "xml": "<array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationPortraitUpsideDown</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>",
-                            "count": 1
-                        }
-                    ],
-                    "UIRequiresFullScreen": [
-                        {
-                            "xml": "<string>YES</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSLocationWhenInUseUsageDescription": [
-                        {
-                            "xml": "<string />",
-                            "count": 1
-                        }
-                    ]
-                }
-            }
-        }
+        "files": {}
     },
     "installed_plugins": {
         "com.plugin.datepicker": {
@@ -129,25 +16,28 @@
         "cordova-plugin-ble-central": {
             "PACKAGE_NAME": "com.childrenLab"
         },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
         "cordova-plugin-ipad-multitasking": {
             "PACKAGE_NAME": "com.childrenLab"
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.childrenLab"
         },
-        "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
-        "org.apache.cordova.dialogs": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
-        "org.apache.cordova.file": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
-        "org.apache.cordova.geolocation": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
-        "org.apache.cordova.inappbrowser": {
+        "phonegap-plugin-push": {
             "PACKAGE_NAME": "com.childrenLab"
         }
     },

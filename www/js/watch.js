@@ -75,20 +75,22 @@ Watch.prototype.attachEvent = function(){
 		if(ev.type == "swiperight"){
 			self.switchTemplate(self.$findNowTemplate, 'findNow');
 		} else if(ev.type == "swipeleft") {
+			app.tool.showLoading();
+			self.scan();
 			self.switchTemplate(self.$batteryTemplate, 'battery');
 		}
 	});
 
-	$('div').on('click', this.$pageDot, function(){
-		console.error("test");
+/*	$('div').on('click', this.$pageDot, function(){
 		if($(this).hasClass('dot_findNow')){
 			self.switchTemplate(self.$findNowTemplate, 'findNow');
 		}else{
 			self.switchTemplate(self.$batteryTemplate, 'battery');
 		}
-	});
+	});*/
 
 	this.$findNowButton.on('click', function(){
+		console.error("this");
 		if(!self.searchOn){
 			self.searchOn = true;
 			self.bluetooth.watchRange({
@@ -103,7 +105,7 @@ Watch.prototype.initialBluetooth_load = function(){
 
 	this.attachEvent();
 
-	this.scan();
+	//this.scan();
 };
 
 Watch.prototype.scan = function(){
@@ -124,7 +126,7 @@ Watch.prototype.getBatteryLife = function(oArgs, data){
 
 Watch.prototype.getBatteryLife_load = function(oArgs, data){
 	this.bluetooth.disconnect();
-
+	app.tool.hideLoading();
 	$('div.batteryTitle').html(data.toString() + "%")
 };
 

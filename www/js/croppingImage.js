@@ -47,7 +47,7 @@ CroppingImage.prototype.attachEvent = function () {
 };
 
 CroppingImage.prototype.cropImage = function(){
-	var croppedImage = this.crop.data(300, 300, 'png');
+	var croppedImage = this.crop.data(600, 600, 'png');
 	this.uploadImage(croppedImage);
 };
 
@@ -90,8 +90,8 @@ CroppingImage.prototype.gotFile = function(fileEntry){
 			self.crop.init({
 				container: '.previewImage',
 				image: evt.target.result,
-				width: 300,
-				height: 300,
+				width: 600,
+				height: 600,
 				mask: true,
 				zoom: {
 					steps: 0.01,

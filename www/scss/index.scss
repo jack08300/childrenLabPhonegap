@@ -415,6 +415,10 @@ div.indexPage {
 	div.pageCover {
 		position: absolute;
 		top: 0;
+
+		&.rolePage{
+			width: 82%;
+		}
 	}
 
 	div.signInButtons {
@@ -746,6 +750,16 @@ a:active {
 }
 
 /***************** Main Menu **************/
+div.profileImage {
+	display: inline-block;
+	img {
+		width: 40vw;
+		height: 40vw;
+		border-radius: 50%;
+		background-color: white;
+	}
+}
+
 #menuPanel {
 	background-color: #58585a;
 	color: white;
@@ -759,16 +773,6 @@ a:active {
 		div.container {
 			display: inline-block;
 			padding-top: 2em;
-
-			div.profileImage {
-				display: inline-block;
-				img {
-					width: 100px;
-					height: 100px;
-					border-radius: 50%;
-					background-color: white;
-				}
-			}
 
 			div.viewAccount {
 				font-size: 10px;
@@ -1195,7 +1199,7 @@ div.dashboardPage {
 		display: inline-block;
 
 		div.title, div.status {
-			font-size: 7vw;
+			font-size: 9vw;
 		}
 
 
@@ -1231,7 +1235,7 @@ div.dashboardPage {
 			div.mainButton {
 				font-family: avenir_bold, Georgia, "Times New Roman", serif;
 				margin: 5vw 8vw;
-				font-size: 6vw;
+				font-size: 5vw;
 			}
 		}
 
@@ -1251,7 +1255,7 @@ div.dashboardPage {
 		}
 
 		div.title {
-			font-size:10vw;
+			font-size:7vw;
 			margin-bottom:5vw;
 		}
 	}
@@ -1744,6 +1748,11 @@ div.calendarPage {
 
 					span.eventName{
 						left: 10vw;
+					}
+
+					div.description {
+						position:relative;
+						margin:1vw 8vw;
 					}
 				}
 			}

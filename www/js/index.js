@@ -35,6 +35,7 @@ var app = {
 			emailRegistered: "/user/isEmailRegistered",
 			signIn: "/api/login",
 			submitKidInfo: "/kids/add",
+			getKidsInfo: "/kids/list",
 			searchSchedule: "/schedule/search",
 			scheduleCreateAPI: "/schedule/create",
 			retrieveScheduleMessage: "/schedule/retrieveMessage",

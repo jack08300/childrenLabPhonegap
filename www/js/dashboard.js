@@ -20,6 +20,7 @@ Dashboard.prototype.init = function() {
 
 Dashboard.prototype.deviceReady = function() {
 
+	app.tool.showLoading();
 
 	app.addHeaderBar({title: 'Dashboard'});
 	app.addMenuBar();
@@ -32,8 +33,79 @@ Dashboard.prototype.deviceReady = function() {
 	this.$searchTemplate = $('div.searchTemplate');
 	this.menu = $('div.menu');
 
+
 	this.attachEvent();
 	this.switchTemplate(this.$syncTemplate);
+	this.$profileImage = $('div.profileImage',this.$container);
+	this.$name = $('div.name', this.$container);
+	this.retrieveData();
+
+};
+
+Dashboard.prototype.pushNotification = function(){
+	var push = PushNotification.init({
+		"ios": {
+			"sound": true,
+			"vibration": true,
+			"badge": true
+		}
+	});
+
+	PushNotification.hasPermission(function(data) {
+		if (data.isEnabled) {
+			console.log("Push notification is enabled");
+		}
+	});
+
+	push.on('registration', function(data) {
+		console.log(data.registrationId);
+
+		app.tool.ajax({
+			url: app.setting.serverBase + "/user/updateRegistration",
+			context: this,
+			data: {
+				registrationId: data.registrationId
+			}
+		});
+	});
+
+	push.on('notification', function(data) {
+		app.notification(data.title, data.message);
+
+		push.finish(function() {
+			console.log("processing of push data is finished");
+		});
+	});
+
+	push.on('error', function(e) {
+		console.log(e.message);
+	});
+};
+
+Dashboard.prototype.retrieveData = function(){
+	app.tool.ajax({
+		url: app.setting.serverBase + app.setting.api.getKidsInfo,
+		type: 'post',
+		context: this,
+		data: {},
+		callback: this.retrieveData_load
+	});
+};
+
+Dashboard.prototype.retrieveData_load = function(data){
+	console.error(data);
+
+	if(data.success){
+		var kids = data.kids[0];
+
+		if(kids.profile){
+			this.$profileImage.find('img').attr('src', 'http://avatar.childrenlab.com/' + kids.profile);
+		}
+
+		this.$name.html(kids.nickName || kids.firstName);
+	}
+	app.tool.hideLoading();
+	this.pushNotification();
 };
 
 Dashboard.prototype.attachEvent = function() {

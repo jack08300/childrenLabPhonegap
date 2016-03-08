@@ -71,33 +71,36 @@ UvIndex.prototype.updateUvIndex = function(result) {
 	this.weather = result.data.weather;
 
 	var uvIndex = this.weather[0].uvIndex;
+	//For test
+	uvIndex = 1;
 	var color, text;
 	switch(uvIndex){
-		case '1':
-		case '2':
-		case '3':
-		case '4':
+		case 1:
+		case 2:
+		case 3:
+		case 4:
 			color = "#4eb400";
 			text = "You can safely enjoy being outside!";
 			break;
-		case '5':
-		case '6':
-		case '7':
+		case 5:
+		case 6:
+		case 7:
 			color = "#f88700";
 			text = "Seek shade during midday hours! Slip on a shirt, slop on sunscreen and slap on hat!";
 			break;
 		default:
 			color = "#d8001d";
 			text = "Avoid being outside during midday hours! Make sure you seek shade! Shirt, sunscreen and hat are a must!";
+			break;
 	}
 
-	this.$uvIndex.html(this.weather[0].uvIndex);
+	this.$uvIndex.html(uvIndex);
 	this.$text.html(text).css('color', color);
 	this.$circle.css({
 		'color': color,
 		'border-color': color
 	});
-	this.$location.html("Hong Kong");
+	this.$location.html("San Francisco, CA");
 };
 
 

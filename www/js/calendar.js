@@ -90,7 +90,7 @@ Calendar.prototype.updateCalendar = function(oArgs) {
 		}
 
 		var events = this.getCalendarEventByDay(i);
-		for(var j=0;j<events.length;j++){
+		for(var j=0;j<events.length && j < 3;j++){
 			$tempDay.append('<span class="event ' + events[j].color + '" style="left: ' + (5+ 2*j) + 'vw;"></span>').addClass("hasEvent");
 		}
 
@@ -361,7 +361,7 @@ Calendar.prototype.renderEventPage_load = function() {
 	if(this.eventList.length > 0){
 		var firstEventTime =  moment(this.eventList[0].startDate, "YYYY-MM-DD HH:mm:ss");
 
-		this.$eventTime.html(firstEventTime.format("HH:mm:ss"));
+		this.$eventTime.html(firstEventTime.format("HH:mm"));
 		this.$eventName.html(this.eventList[0].eventName);
 		this.$fullSchedule.show();
 	}else{
@@ -400,13 +400,26 @@ Calendar.prototype.showEventList = function() {
 	this.$eventList = $('div.eventList');
 	this.$eventList.empty();
 
+	var self = this;
 	for(var i = 0;i<this.eventList.length; i++){
-		var startTime =  moment(this.eventList[i].startDate, "YYYY-MM-DD HH:mm:ss");
-		var endTime =  moment(this.eventList[i].startDate, "YYYY-MM-DD HH:mm:ss");
+		var event = this.eventList[i];
+		var startTime =  moment(event.startDate, "YYYY-MM-DD HH:mm:ss");
+		var endTime =  moment(event.endDate, "YYYY-MM-DD HH:mm:ss");
 
-		var eacEvent = $('<div class="eachEvent ' + this.eventList[i].color + '"> <span class="eventTime">' + startTime.format("HH:mm") + ' - ' + endTime.format("HH:mm") + '</span> <span class="eventName">' + this.eventList[i].eventName + '</span> </div>');
 
-		this.$eventList.append(eacEvent);
+		var eachEvent = $('<div data_id="' + i + '" class="eachEvent ' + event.color + '"> <span class="eventTime">' + startTime.format("HH:mm") + ' - ' + endTime.format("HH:mm") + '</span> <span class="eventName">' + event.eventName + '</span> <div class="description"></div> </div>');
+
+		eachEvent.on('click', function(){
+			var des = $(this).find('div.description');
+			if(des.text() != ''){
+				des.html("");
+			}else{
+				des.html(self.eventList[$(this).attr('data_id')].description);
+			}
+
+		});
+
+		this.$eventList.append(eachEvent);
 	}
 
 	this.$eventList.show();

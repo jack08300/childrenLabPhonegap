@@ -27,11 +27,9 @@ SignInUp.prototype.init = function () {
 	this.$facebookButton = $('div.facebookButton');
 	this.isRegistered = true;
 
-
-	//app.animateBackground({ background: 'div.indexPage' });
-	//HACK:
-	//window.location = window.rootPath + "pages/dashboard.html";
 	this.attachEvent();
+
+
 };
 
 SignInUp.prototype.testFacebook = function() {
@@ -469,7 +467,7 @@ SignInUp.prototype.findDevice = function () {
 			self.findDevice_load();
 		}
 
-	}, 5000);
+	}, 15000);
 };
 
 SignInUp.prototype.findDevice_load = function () {

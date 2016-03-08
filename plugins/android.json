@@ -95,19 +95,10 @@
         "com.plugin.datepicker": {
             "PACKAGE_NAME": "com.childrenLab"
         },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.childrenLab"
         },
-        "org.apache.cordova.dialogs": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
         "org.apache.cordova.file": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
-        "org.apache.cordova.geolocation": {
             "PACKAGE_NAME": "com.childrenLab"
         },
         "com.synconset.imagepicker": {
@@ -120,6 +111,15 @@
             "PACKAGE_NAME": "com.childrenLab"
         },
         "cordova-plugin-ble-central": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.childrenLab"
         }
     },
