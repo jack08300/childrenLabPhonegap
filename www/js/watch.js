@@ -34,7 +34,7 @@ Watch.prototype.deviceReady = function () {
 	this.$batteryTemplate = $('div.template.batteryTemplate');
 	this.$findNow = $('div.findNow', this.$findNowTemplate);
 	this.$findNowButton = $('div.button', this.$findNow);
-	this.switchTemplate(this.$findNowTemplate, 'findNow');
+
 	this.$pageDot = $('div.pageDot');
 	this.$debugRssi = $('div.debugRssi');
 
@@ -75,8 +75,10 @@ Watch.prototype.attachEvent = function(){
 		if(ev.type == "swiperight"){
 			self.switchTemplate(self.$findNowTemplate, 'findNow');
 		} else if(ev.type == "swipeleft") {
-			app.tool.showLoading();
-			self.scan();
+			if(!self.batteryLife){
+				app.tool.showLoading();
+				self.scan();
+			}
 			self.switchTemplate(self.$batteryTemplate, 'battery');
 		}
 	});
@@ -104,7 +106,7 @@ Watch.prototype.attachEvent = function(){
 Watch.prototype.initialBluetooth_load = function(){
 
 	this.attachEvent();
-
+	this.switchTemplate(this.$findNowTemplate, 'findNow');
 	//this.scan();
 };
 
@@ -127,7 +129,8 @@ Watch.prototype.getBatteryLife = function(oArgs, data){
 Watch.prototype.getBatteryLife_load = function(oArgs, data){
 	this.bluetooth.disconnect();
 	app.tool.hideLoading();
-	$('div.batteryTitle').html(data.toString() + "%")
+	this.batteryLife = data.toString();
+	$('div.batteryTitle').html(this.batteryLife + "%")
 };
 
 Watch.prototype.updateRange = function(oArgs, rssi){

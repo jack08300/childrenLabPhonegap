@@ -31,20 +31,28 @@ Temperature.prototype.deviceReady = function () {
 	this.$description = $('div.description');
 
 
-	app.addHeaderBar({title: 'Weather'});
+	app.addHeaderBar({title: 'Weather', context: this, backButton: {name: 'dashboard none'}});
 
 	app.addMenuBar();
 
+	this.$backButton = $('div.backButton');
+	this.$backButton.on('click', function(){
+		window.localStorage.setItem("processSync", 'no');
+		window.location = window.rootPath + "pages/dashboard.html";
+	});
+	this.$backButton.show();
+
 	this.attachEvent();
-	self.currentPositionGet();
-/*	navigator.geolocation.getCurrentPosition(
-		function(position){
+	//self.currentPositionGet();
+	navigator.geolocation.getCurrentPosition(
+		function (position) {
 			self.currentPositionGet(position);
-		}, function(e){
+		}, function (e) {
 			self.onGetPositionError(e);
 		}
-	);*/
+	);
 
+	app.tool.showLoading();
 };
 
 Temperature.prototype.onGetPositionError = function(e) {
@@ -54,9 +62,27 @@ Temperature.prototype.onGetPositionError = function(e) {
 Temperature.prototype.currentPositionGet = function(position) {
 	var self = this;
 
+	var lat = position.coords.latitude;
+	var lon = position.coords.longitude;
+
 	$.ajax({
-		url: "http://api.worldweatheronline.com/free/v2/weather.ashx?q=Hong Kong&format=json&num_of_days=1&key=29e2cef2e5823da0db09d11a307ba",
+		url: "http://api.wunderground.com/api/4e52e4fac905f5f7/geolookup/q/" + lat + "," + lon + ".json",
 		success: function(data){
+			self.getLocation(data);
+		}
+	});
+};
+
+Temperature.prototype.getLocation = function (data) {
+	var self = this;
+
+	var city = data.location.city;
+	var state = data.location.state;
+
+	//http://www.wunderground.com/weather/api
+	$.ajax({
+		url: "http://api.wunderground.com/api/4e52e4fac905f5f7/conditions/q/" + state + "/" + city + ".json",
+		success: function (data) {
 			self.updateTemperature(data);
 		}
 	});
@@ -75,23 +101,25 @@ Temperature.prototype.attachEvent = function () {
 };
 
 Temperature.prototype.updateTemperature = function (result) {
-	this.weatherResult = result.data.current_condition[0];
+	this.weatherResult = result.current_observation;
 
-	this.$temperature.html(this.weatherResult.temp_F + "&deg;F");
-	this.$location.html("Hong Kong");
-	this.$description.html(this.weatherResult.weatherDesc[0].value);
+	this.$temperature.html(parseInt(this.weatherResult.temp_c) + "&deg;C");
+	this.$location.html(this.weatherResult.observation_location.city);
+	this.$description.html(this.weatherResult.weather);
+
+	app.tool.hideLoading()
 };
 
 Temperature.prototype.switchHumidity = function () {
 	this.$weatherPage.addClass('humidity');
-	this.$temperature.html(this.weatherResult.humidity + "%");
+	this.$temperature.html(this.weatherResult.relative_humidity);
 	this.$description.html("");
 };
 
 Temperature.prototype.switchTemperature = function () {
 	this.$weatherPage.removeClass('humidity');
-	this.$temperature.html(this.weatherResult.temp_F + "&deg;F");
-	this.$description.html(this.weatherResult.weatherDesc[0].value);
+	this.$temperature.html(parseInt(this.weatherResult.temp_c) + "&deg;C");
+	this.$description.html(this.weatherResult.weather);
 };
 
 

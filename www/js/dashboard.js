@@ -20,7 +20,7 @@ Dashboard.prototype.init = function() {
 
 Dashboard.prototype.deviceReady = function() {
 
-	app.tool.showLoading();
+
 
 	app.addHeaderBar({title: 'Dashboard'});
 	app.addMenuBar();
@@ -35,11 +35,16 @@ Dashboard.prototype.deviceReady = function() {
 
 
 	this.attachEvent();
-	this.switchTemplate(this.$syncTemplate);
-	this.$profileImage = $('div.profileImage',this.$container);
-	this.$name = $('div.name', this.$container);
-	this.retrieveData();
-
+	if(window.localStorage.getItem("processSync") === 'no'){
+		this.switchTemplate(this.$dashboardTemplate);
+		window.localStorage.setItem("processSync", true);
+	}else{
+		app.tool.showLoading();
+		this.switchTemplate(this.$syncTemplate);
+		this.$profileImage = $('div.profileImage',this.$container);
+		this.$name = $('div.name', this.$container);
+		this.retrieveData();
+	}
 };
 
 Dashboard.prototype.pushNotification = function(){
@@ -105,7 +110,7 @@ Dashboard.prototype.retrieveData_load = function(data){
 		this.$name.html(kids.nickName || kids.firstName);
 	}
 	app.tool.hideLoading();
-	this.pushNotification();
+	//this.pushNotification();
 };
 
 Dashboard.prototype.attachEvent = function() {

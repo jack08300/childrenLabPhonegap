@@ -80,9 +80,16 @@ Activity.prototype.deviceReady = function () {
 	});
 
 
-	app.addHeaderBar({title: 'Activity'});
+	app.addHeaderBar({title: 'Activity', context: this, backButton: {name: 'dashboard none'}});
 
 	app.addMenuBar();
+
+	this.$backButton = $('div.backButton');
+	this.$backButton.on('click', function(){
+		window.localStorage.setItem("processSync", 'no');
+		window.location = window.rootPath + "pages/dashboard.html";
+	});
+	this.$backButton.show();
 
 	this.attachEvent();
 

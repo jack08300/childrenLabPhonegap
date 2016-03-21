@@ -453,7 +453,7 @@ div.menu.bottom {
       background: url("../img/menu/navi_icons_calendar.svg") no-repeat 50%; }
     div.menu.bottom > div.dashboardPageIcon {
       background: url("../img/menu/navi_icons_chart.svg") no-repeat 50%; }
-    div.menu.bottom > div.mailPageIcon {
+    div.menu.bottom > div.comingPageIcon {
       background: url("../img/menu/navi_icons_mail.svg") no-repeat 50%; }
     div.menu.bottom > div.profilePageIcon {
       background: url("../img/menu/navi_icons_profile.svg") no-repeat 50%; }
@@ -463,7 +463,7 @@ div.menu.bottom {
       background: #fcfcfc url("../img/menu/navi_icons_calendar_selected.svg") no-repeat 50%; }
     div.menu.bottom > div.dashboardPageIcon.active {
       background: #fcfcfc url("../img/menu/navi_icons_chart_selected.svg") no-repeat 50%; }
-    div.menu.bottom > div.mailPageIcon.active {
+    div.menu.bottom > div.comingPageIcon.active {
       background: #fcfcfc url("../img/menu/navi_icons_mail_selected.svg") no-repeat 50%; }
     div.menu.bottom > div.profilePageIcon.active {
       background: #fcfcfc url("../img/menu/navi_icons_profile_selected.svg") no-repeat 50%; }
@@ -1445,3 +1445,18 @@ div.watchPage div.pageDot {
     margin: 5vw 2vw 1vw 2vw; }
     div.watchPage div.pageDot > div.active {
       background-color: #999899; }
+
+div.comingPage {
+  background-color: #c4ecf6 !important;
+  text-align: center; }
+  div.comingPage img {
+    width: 65vw;
+    margin-top: 10vw; }
+  div.comingPage div.backgroundOverlay {
+    position: absolute;
+    width: 100%;
+    height: 50vw;
+    background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
+    background-size: 500px;
+    z-index: 2;
+    bottom: 5vw; }

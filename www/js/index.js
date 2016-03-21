@@ -200,7 +200,7 @@ var app = {
 		this.$watch = $("<div class='watchPageIcon icon'></div>");
 		this.$calendar = $("<div class='calendarPageIcon icon'></div>");
 		this.$dashboard = $("<div class='dashboardPageIcon icon'></div>");
-		this.$mail = $("<div class='mailPageIcon icon'></div>");
+		this.$mail = $("<div class='comingPageIcon icon'></div>");
 		this.$profile = $("<div class='profilePageIcon icon'></div>");
 
 
@@ -242,7 +242,10 @@ var app = {
 		});
 
 		this.$mail.on('click', function(){
-
+			if(currentPageClass.indexOf('comingPage') != -1){
+				return;
+			}
+			window.location = window.rootPath + "pages/message.html";
 		});
 
 		this.$profile.on('click', function(){

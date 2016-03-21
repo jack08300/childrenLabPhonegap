@@ -231,7 +231,7 @@ Calendar.prototype.showDateTimePicker = function($field, field) {
 			return;
 		}
 
-		var dateString = selectedDate.format("YYYY/MM/DD hh:mm:ss");
+		var dateString = selectedDate.format("YYYY/MM/DD HH:mm:ss");
 		$field.text(dateString);
 		$field.css('color', 'black');
 	});
@@ -359,7 +359,14 @@ Calendar.prototype.renderEventPage_load = function() {
 	weekday.find('div').addClass('active');
 
 	if(this.eventList.length > 0){
-		var firstEventTime =  moment(this.eventList[0].startDate, "YYYY-MM-DD HH:mm:ss");
+		var nextEvent = this.findNextEvent(this.eventList);
+		var firstEventTime;
+		if(!nextEvent){
+			firstEventTime =  moment(this.eventList[0].startDate, "YYYY-MM-DD HH:mm:ss");
+		}else{
+			firstEventTime =  moment(nextEvent.startDate, "YYYY-MM-DD HH:mm:ss");
+		}
+
 
 		this.$eventTime.html(firstEventTime.format("HH:mm"));
 		this.$eventName.html(this.eventList[0].eventName);
@@ -393,6 +400,19 @@ Calendar.prototype.renderEventPage_load = function() {
 	app.tool.hideLoading();
 };
 
+Calendar.prototype.findNextEvent = function(data) {
+	var nextEvent;
+	for(var i=0;i<data.length;i++){
+		if(moment().isBefore(data.startDate)){
+			nextEvent = data;
+			break;
+		}
+
+	}
+	return nextEvent;
+
+};
+
 Calendar.prototype.showEventList = function() {
 	var self = this;
 	this.$mainEvent.addClass("none");
@@ -400,7 +420,6 @@ Calendar.prototype.showEventList = function() {
 	this.$eventList = $('div.eventList');
 	this.$eventList.empty();
 
-	var self = this;
 	for(var i = 0;i<this.eventList.length; i++){
 		var event = this.eventList[i];
 		var startTime =  moment(event.startDate, "YYYY-MM-DD HH:mm:ss");

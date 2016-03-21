@@ -416,7 +416,7 @@ div.indexPage {
 		position: absolute;
 		top: 0;
 
-		&.rolePage{
+		&.rolePage {
 			width: 82%;
 		}
 	}
@@ -609,7 +609,7 @@ div.menu.bottom {
 		&.dashboardPageIcon {
 			background: url('../img/menu/navi_icons_chart.svg') no-repeat 50%;
 		}
-		&.mailPageIcon {
+		&.comingPageIcon {
 			background: url('../img/menu/navi_icons_mail.svg') no-repeat 50%;
 		}
 		&.profilePageIcon {
@@ -625,7 +625,7 @@ div.menu.bottom {
 		&.dashboardPageIcon.active {
 			background: #fcfcfc url('../img/menu/navi_icons_chart_selected.svg') no-repeat 50%
 		}
-		&.mailPageIcon.active {
+		&.comingPageIcon.active {
 			background: #fcfcfc url('../img/menu/navi_icons_mail_selected.svg') no-repeat 50%
 		}
 		&.profilePageIcon.active {
@@ -1112,7 +1112,9 @@ div.dashboardPage {
 		text-align: center;
 		padding-top: 5vw;
 
-		div.content { position: absolute; }
+		div.content {
+			position: absolute;
+		}
 
 		&.bad {
 			background: url('../img/dashboard/dashboard-bg-bad.png') no-repeat;
@@ -1173,7 +1175,7 @@ div.dashboardPage {
 
 			div.dashboardIcon {
 				background: url("../img/dashboard/monster-yellow.png") no-repeat;
-				background-position-y:-5vw;
+				background-position-y: -5vw;
 				background-size: 57vw;
 				width: 55vw;
 				height: 60vw;
@@ -1202,8 +1204,6 @@ div.dashboardPage {
 			font-size: 9vw;
 		}
 
-
-
 	}
 	div.dashboardButtons {
 		position: absolute;
@@ -1226,11 +1226,10 @@ div.dashboardPage {
 
 	}
 
-
 	/***************** Sync *****************/
 	div.syncTemplate {
 		.buttons {
-			float:none;
+			float: none;
 
 			div.mainButton {
 				font-family: avenir_bold, Georgia, "Times New Roman", serif;
@@ -1245,7 +1244,7 @@ div.dashboardPage {
 			background-color: black;
 			display: inline-block;
 			border-radius: 50%;
-			border:1vw solid white;
+			border: 1vw solid white;
 		}
 
 		div.name {
@@ -1255,8 +1254,8 @@ div.dashboardPage {
 		}
 
 		div.title {
-			font-size:7vw;
-			margin-bottom:5vw;
+			font-size: 7vw;
+			margin-bottom: 5vw;
 		}
 	}
 
@@ -1286,10 +1285,9 @@ div.dashboardPage {
 				top: -11vw;
 				position: relative;
 				z-index: -1;
-				transition:all 0.8s;
+				transition: all 0.8s;
 			}
 		}
-
 
 		div.mainButton {
 			font-family: avenir_bold, Georgia, "Times New Roman", serif;
@@ -1298,7 +1296,6 @@ div.dashboardPage {
 		}
 	}
 }
-
 
 /******************** Weather Page ***********************/
 
@@ -1508,11 +1505,11 @@ div.activityPage {
 		position: absolute;
 		bottom: 18vw;
 		z-index: 3;
-		width:100%;
-		text-align:center;
+		width: 100%;
+		text-align: center;
 
 		div.center {
-			display:inline-block;
+			display: inline-block;
 			> div {
 				margin: 0 5vw;
 				float: left;
@@ -1537,7 +1534,6 @@ div.activityPage {
 			}
 		}
 
-
 	}
 
 	#activityStatus {
@@ -1550,11 +1546,11 @@ div.activityPage {
 			text-align: center;
 			color: $green;
 			background-color: $grey;
-			margin : 4px;
+			margin: 4px;
 
-			>span {
-				position:relative;
-				top:6px;
+			> span {
+				position: relative;
+				top: 6px;
 			}
 
 			&.active {
@@ -1572,7 +1568,6 @@ div.addButton {
 	right: 4vw;
 	top: 8vw;
 
-
 	> div {
 		background-color: $lightBlue;
 		position: relative;
@@ -1586,7 +1581,7 @@ div.addButton {
 	div.pipe {
 		height: 100%;
 		width: 1vw;
-		left:2.5vw;
+		left: 2.5vw;
 	}
 }
 
@@ -1600,18 +1595,17 @@ div.backButton {
 	> div {
 		color: $lightBlue;
 		position: relative;
-		font-size:7vw;
+		font-size: 7vw;
 	}
 
 }
-
 
 /******************** Calendar ***********************/
 div.calendarPage {
 	overflow: hidden !important;
 	background-color: #cdeef6 !important;
 
-	div.calendarOverlay{
+	div.calendarOverlay {
 		position: absolute;
 		width: 100%;
 		height: 100%;
@@ -1620,8 +1614,8 @@ div.calendarPage {
 	}
 
 	div.container {
-		z-index:2;
-		position:relative;
+		z-index: 2;
+		position: relative;
 	}
 
 	div.backgroundOverlay {
@@ -1657,7 +1651,7 @@ div.calendarPage {
 		div.calendarHeader {
 			width: 100%;
 
-			>div {
+			> div {
 				display: inline-block;
 
 				> div {
@@ -1665,7 +1659,7 @@ div.calendarPage {
 					padding: 0 1vw;
 				}
 
-				.monthYear,.dayMonth {
+				.monthYear, .dayMonth {
 					color: #fd713a;
 					font-size: 5vw;
 					font-family: avenir_bold, Georgia, "Times New Roman", serif;
@@ -1673,7 +1667,7 @@ div.calendarPage {
 			}
 		}
 
-		div.calendarContent{
+		div.calendarContent {
 			margin-top: 10vw;
 
 			div.week {
@@ -1685,10 +1679,10 @@ div.calendarPage {
 					text-align: center;
 					width: inherit;
 
-					>div {
-						width:5vw;
-						height:5vw;
-						border-radius:5vw;
+					> div {
+						width: 5vw;
+						height: 5vw;
+						border-radius: 5vw;
 						padding: 1vw;
 						display: inline-block;
 
@@ -1702,22 +1696,22 @@ div.calendarPage {
 			}
 
 			div.mainEvent {
-				div.eventCircle{
-					height:55vw;
-					width:55vw;
-					display:inline-block;
-					border-radius:55vw;
-					margin-top:5vw;
-					border:2vw solid white;
+				div.eventCircle {
+					height: 55vw;
+					width: 55vw;
+					display: inline-block;
+					border-radius: 55vw;
+					margin-top: 5vw;
+					border: 2vw solid white;
 				}
 
 				div.eventContent {
 					color: $orange;
-					margin-top:15vw;
+					margin-top: 15vw;
 
 					div.eventTime {
 						font-family: avenir_bold, Georgia, "Times New Roman", serif;
-						font-size:10vw;
+						font-size: 10vw;
 					}
 
 					div.eventName {
@@ -1728,31 +1722,31 @@ div.calendarPage {
 				div.seeFullButton {
 					width: 50vw;
 					display: inline-block;
-					margin-top:10vw;
+					margin-top: 10vw;
 				}
 			}
 
 			div.eventList {
 				text-align: left;
-				margin-top:2vw;
+				margin-top: 2vw;
 				color: white;
 				font-family: avenir_bold, Georgia, "Times New Roman", serif;
 
 				div.eachEvent {
-					padding:5vw 0;
+					padding: 5vw 0;
 
 					span {
-						position:relative;
+						position: relative;
 						left: 8vw;
 					}
 
-					span.eventName{
+					span.eventName {
 						left: 10vw;
 					}
 
 					div.description {
-						position:relative;
-						margin:1vw 8vw;
+						position: relative;
+						margin: 1vw 8vw;
 					}
 				}
 			}
@@ -1760,7 +1754,6 @@ div.calendarPage {
 			div.days {
 				display: inline-block;
 				margin-top: 7vw;
-
 
 				> div {
 					float: left;
@@ -1781,7 +1774,7 @@ div.calendarPage {
 						height: 1.5vw;
 						width: 1.5vw;
 						padding: 0;
-						margin:0;
+						margin: 0;
 						top: 4.5vw;
 						left: 5vw;
 					}
@@ -1805,33 +1798,30 @@ div.calendarPage {
 				color: #c0bfc1;
 				background-color: white;
 				text-align: left;
-				font-size:5vw;
+				font-size: 5vw;
 				padding: 1.5vw;
 				border-radius: 5px;
 				width: 92%;
 				margin-top: 1.5vw;
 				margin-bottom: 1.5vw;
-				display:inline-block;
+				display: inline-block;
 				height: 6vw;
-				overflow-y:hidden;
-
+				overflow-y: hidden;
 
 				&.open {
 					height: 15vw;
 				}
 
-				>span {
+				> span {
 					position: absolute;
 					right: 8vw;
 					margin: 0 !important;
 				}
 			}
 
-
-
 			div.selection, div.colorSelection {
-				font-size:5vw;
-				>span {
+				font-size: 5vw;
+				> span {
 					display: inline-block;
 					width: 6vw;
 					height: 6vw;
@@ -1842,33 +1832,37 @@ div.calendarPage {
 
 			> input {
 				border: none;
-				margin:1.5vw 0;
+				margin: 1.5vw 0;
 				width: 90%;
 				color: black;
-				font-size:5vw;
+				font-size: 5vw;
 
-			  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-					color:    #c0bfc1;
+				&::-webkit-input-placeholder {
+					/* WebKit, Blink, Edge */
+					color: #c0bfc1;
 				}
-				&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-					color:    #c0bfc1;
-					opacity:  1;
+				&:-moz-placeholder {
+					/* Mozilla Firefox 4 to 18 */
+					color: #c0bfc1;
+					opacity: 1;
 				}
-				&::-moz-placeholder { /* Mozilla Firefox 19+ */
-					color:    #c0bfc1;
-					opacity:  1;
+				&::-moz-placeholder {
+					/* Mozilla Firefox 19+ */
+					color: #c0bfc1;
+					opacity: 1;
 				}
-				&:-ms-input-placeholder { /* Internet Explorer 10-11 */
-					color:    #c0bfc1;
+				&:-ms-input-placeholder {
+					/* Internet Explorer 10-11 */
+					color: #c0bfc1;
 				}
 			}
 
 			> textarea {
 				border: none;
 				width: 94%;
-				height:25vw;
-				margin-top:1.5vw;
-				font-size:5vw;
+				height: 25vw;
+				margin-top: 1.5vw;
+				font-size: 5vw;
 
 				&::-webkit-input-placeholder {
 					color: #c0bfc1;
@@ -1883,13 +1877,13 @@ div.calendarPage {
 
 		}
 
-		div.button{
+		div.button {
 			text-align: center;
 
 			div.mainButton {
-				display:inline-block;
+				display: inline-block;
 				width: 30vw;
-				text-align:center;
+				text-align: center;
 
 			}
 		}
@@ -1917,9 +1911,8 @@ div.calendarPage {
 
 }
 
-
 /******************** My Watch ***********************/
-div.watchPage{
+div.watchPage {
 
 	div.title {
 		color: $orange;
@@ -1930,8 +1923,8 @@ div.watchPage{
 	}
 
 	div.container {
-		z-index:2;
-		position:relative;
+		z-index: 2;
+		position: relative;
 	}
 
 	div.watchOverlay {
@@ -1957,7 +1950,7 @@ div.watchPage{
 		text-align: center;
 
 		div {
-			display:inline-block;
+			display: inline-block;
 			margin-top: 3.7vw;
 			transition: border 0.5s ease-out;
 
@@ -2001,8 +1994,8 @@ div.watchPage{
 							color: white;
 
 							> span {
-								position:relative;
-								top:3.5vw;
+								position: relative;
+								top: 3.5vw;
 							}
 						}
 
@@ -2012,11 +2005,10 @@ div.watchPage{
 		}
 	}
 
-
-	div.battery{
+	div.battery {
 		text-align: center;
 		div {
-			display:inline-block;
+			display: inline-block;
 			margin-top: 3.7vw;
 
 			&.circle {
@@ -2030,10 +2022,10 @@ div.watchPage{
 				font-size: 10vw;
 				padding: 0;
 				margin-top: 10vw;
-				margin-left:0;
+				margin-left: 0;
 			}
 		}
-		div.batteryImage{
+		div.batteryImage {
 			background: url('../img/batteryIcon.png') no-repeat;
 			width: 42.1vw;
 			height: 31vw;
@@ -2043,7 +2035,7 @@ div.watchPage{
 		}
 	}
 
-	div.pageDot{
+	div.pageDot {
 		position: relative;
 		z-index: 2;
 		display: inline-block;
@@ -2061,5 +2053,25 @@ div.watchPage{
 				background-color: $grey;
 			}
 		}
+	}
+}
+
+div.comingPage {
+	background-color: #c4ecf6 !important;
+	text-align:center;
+
+	img {
+		width: 65vw;
+		margin-top:10vw;
+	}
+
+	div.backgroundOverlay {
+		position: absolute;
+		width: 100%;
+		height: 50vw;
+		background: transparent url("../img/background/city-01-overall.png") 0 0 no-repeat;
+		background-size: 500px;
+		z-index: 2;
+		bottom: 5vw;
 	}
 }

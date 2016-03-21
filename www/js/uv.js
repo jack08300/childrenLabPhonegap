@@ -11,11 +11,11 @@ UvIndex.prototype.init = function () {
 		gapReady.resolve();
 	}, false);
 
-	$(document).one("mobileinit", function(){
+	$(document).one("mobileinit", function () {
 		jqmReady.resolve();
 	});
 
-	$.when(gapReady, jqmReady).then(function(){
+	$.when(gapReady, jqmReady).then(function () {
 		self.deviceReady();
 	});
 
@@ -31,33 +31,45 @@ UvIndex.prototype.deviceReady = function () {
 	this.$text = $('div.text');
 
 
-	app.addHeaderBar({title: 'UVI'});
+	app.addHeaderBar({title: 'UVI', context: this, backButton: {name: 'dashboard none'}});
 
 	app.addMenuBar();
 
+	this.$backButton = $('div.backButton');
+	this.$backButton.on('click', function(){
+		window.localStorage.setItem("processSync", 'no');
+		window.location = window.rootPath + "pages/dashboard.html";
+	});
+	this.$backButton.show();
+
 	this.attachEvent();
-	self.currentPositionGet();
-	/*	navigator.geolocation.getCurrentPosition(
-	 function(position){
-	 self.currentPositionGet(position);
-	 }, function(e){
-	 self.onGetPositionError(e);
-	 }
-	 );*/
+	//self.currentPositionGet();
+	navigator.geolocation.getCurrentPosition(
+		function (position) {
+			self.currentPositionGet(position);
+		}, function (e) {
+			self.onGetPositionError(e);
+		}
+	);
+
+	app.tool.showLoading();
 
 };
 
-UvIndex.prototype.onGetPositionError = function(e) {
+UvIndex.prototype.onGetPositionError = function (e) {
 	console.error(e);
 };
 
-UvIndex.prototype.currentPositionGet = function(position) {
+UvIndex.prototype.currentPositionGet = function (position) {
 	var self = this;
+	var lat = position.coords.latitude;
+	var lon = position.coords.longitude;
 
+	//http://www.wunderground.com/weather/api
 	$.ajax({
-		url: "http://api.worldweatheronline.com/free/v2/weather.ashx?q=Hong Kong&format=json&num_of_days=1&key=29e2cef2e5823da0db09d11a307ba",
-		success: function(data){
-			self.updateUvIndex(data);
+		url: "http://api.wunderground.com/api/4e52e4fac905f5f7/geolookup/q/" + lat + "," + lon + ".json",
+		success: function (data) {
+			self.getLocation(data);
 		}
 	});
 };
@@ -67,14 +79,31 @@ UvIndex.prototype.attachEvent = function () {
 
 };
 
-UvIndex.prototype.updateUvIndex = function(result) {
-	this.weather = result.data.weather;
+UvIndex.prototype.getLocation = function (data) {
+	console.error(data);
+	var self = this;
 
-	var uvIndex = this.weather[0].uvIndex;
-	//For test
-	uvIndex = 1;
+	var city = data.location.city;
+	var state = data.location.state;
+
+	//http://www.wunderground.com/weather/api
+	$.ajax({
+		url: "http://api.wunderground.com/api/4e52e4fac905f5f7/conditions/q/" + state + "/" + city + ".json",
+		success: function (data) {
+			self.updateUvIndex(data);
+		}
+	});
+};
+
+UvIndex.prototype.updateUvIndex = function (result) {
+	console.error(result);
+	this.weather = result.current_observation;
+
+	var uvIndex = parseInt(this.weather.UV);
+
 	var color, text;
-	switch(uvIndex){
+	switch (uvIndex) {
+		case 0:
 		case 1:
 		case 2:
 		case 3:
@@ -100,7 +129,9 @@ UvIndex.prototype.updateUvIndex = function(result) {
 		'color': color,
 		'border-color': color
 	});
-	this.$location.html("San Francisco, CA");
+	this.$location.html(this.weather.observation_location.city);
+
+	app.tool.hideLoading();
 };
 
 
