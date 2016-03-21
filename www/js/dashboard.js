@@ -219,7 +219,9 @@ Dashboard.prototype.findDevice_load = function(){
 };
 
 Dashboard.prototype.writeTimeToDevice = function () {
-	var time = moment().unix();
+	var time = moment().unix() + moment().utcOffset()*60;
+	console.error("Write: " + time);
+	console.error(moment.unix(time).format("YYYY MM DD HH:mm:ss Z"));
 
 	this.bluetooth.write({
 		serviceId: 'FFA0',
@@ -271,7 +273,11 @@ Dashboard.prototype.getDeviceTime = function (oArgs, data) {
 Dashboard.prototype.getSizeOfData = function (oArgs, data) {
 	if(data){
 		var byteArray = data.split(",");
-		var receivedTime = this.byteArrayToLong(byteArray);
+		var receivedTime = this.byteArrayToLong(byteArray) - moment().utcOffset()*60;
+
+		console.error("Received long: " + receivedTime);
+		console.error("Received time: " + moment.unix(receivedTime).format("YYYY MM DD HH:mm:ss Z"));
+
 		if(receivedTime != 0){
 			window.localStorage.setItem(this.deviceTimeName, receivedTime);
 		}
