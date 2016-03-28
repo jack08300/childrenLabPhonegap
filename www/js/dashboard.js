@@ -220,9 +220,6 @@ Dashboard.prototype.findDevice_load = function(){
 
 Dashboard.prototype.writeTimeToDevice = function () {
 	var time = moment().unix() + moment().utcOffset()*60;
-	console.error("Write: " + time);
-	console.error(moment.unix(time).format("YYYY MM DD HH:mm:ss Z"));
-
 	this.bluetooth.write({
 		serviceId: 'FFA0',
 		characterId: 'FFA3',
@@ -297,9 +294,35 @@ Dashboard.prototype.getSizeOfData_load = function (oArgs, data) {
 	background.css("background", "url(../img/dashboard/monster-yellow.png) 10vw 0vw no-repeat");
 	background.css("background-size", "40vw");
 	this.lastReceivedDataSize = parseInt(data);
-	this.getDataFromDevice();
+	this.sendAlertTimeToDevice();
 
 };
+
+Dashboard.prototype.sendAlertTimeToDevice = function () {
+	var alertData = window.localStorage.getItem("PendingAlert") ? JSON.parse(window.localStorage.getItem("PendingAlert")) : null;
+	if(alertData) {
+		for(var i = 0;i < alertData; i++){
+			this.bluetooth.write({
+				serviceId: 'FFA0',
+				characterId: 'FFA7',
+				data: this.longToByteArray(alertData[i].date),
+				context: this
+			});
+
+
+
+			this.bluetooth.write({
+				serviceId: 'FFA0',
+				characterId: 'FFA8',
+				data: alertData[i].alert,
+				context: this
+			});
+		}
+	}
+
+	this.getDataFromDevice();
+};
+
 
 Dashboard.prototype.getDataFromDevice = function () {
 	if(this.lastReceivedDataSize && this.lastReceivedDataSize != 0){
@@ -347,8 +370,6 @@ Dashboard.prototype.storeData = function (data) {
 	}else{
 		this.getDataFromDevice();
 	}
-
-
 };
 
 Dashboard.prototype.uploadLocalData = function (oArgs) {

@@ -23,7 +23,7 @@ Message.prototype.init = function () {
 
 Message.prototype.deviceReady = function () {
 
-	app.addHeaderBar({title: 'Weather'});
+	app.addHeaderBar({title: 'Message'});
 
 	app.addMenuBar();
 };

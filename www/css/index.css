@@ -1325,6 +1325,8 @@ div.calendarPage {
       display: inline-block;
       width: 30vw;
       text-align: center; }
+  div.calendarPage div.addCalendar div.ui-select {
+    padding: 0 .5em !important; }
   div.calendarPage .yellow {
     background-color: #fad04e; }
   div.calendarPage .purple {
