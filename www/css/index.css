@@ -314,7 +314,7 @@ div.indexPage {
   div.indexPage div.indexOptions {
     position: relative; }
     div.indexPage div.indexOptions > div {
-      padding: 20px 30px;
+      padding: 20px 0px;
       text-align: center; }
   div.indexPage div.separateLine {
     color: #999899; }
@@ -333,6 +333,8 @@ div.indexPage {
     top: 0; }
     div.indexPage div.pageCover.rolePage {
       width: 82%; }
+    div.indexPage div.pageCover .signInUp, div.indexPage div.pageCover .signUp, div.indexPage div.pageCover .deviceInfo {
+      width: 80vw; }
   div.indexPage div.signInButtons {
     position: relative;
     margin-top: 35px; }
@@ -341,7 +343,8 @@ div.indexPage {
     div.indexPage div.signInButtons div.signUpText {
       font-size: 14px; }
   div.indexPage div.signButtons {
-    position: relative; }
+    position: relative;
+    width: 80vw; }
   div.indexPage div.hideToRight {
     position: relative;
     top: 0;
@@ -732,47 +735,67 @@ div.feedbackPage div.container {
     display: inline-block; }
 
 /******************** UpdateProfile Page ***********************/
-div.profilePage label {
-  display: inline-block; }
-
-div.profilePage div.container {
-  padding: 10px; }
-
-div.profilePage div.mainRadio {
+div.profilePage {
+  background-color: #cdeef6 !important;
   text-align: center; }
-
-div.profilePage div.profileImageContainer {
-  text-align: center;
-  width: 100%; }
-  div.profilePage div.profileImageContainer div.profileImage {
-    display: inline-block; }
-    div.profilePage div.profileImageContainer div.profileImage img {
-      width: 10em;
-      height: 10em;
-      overflow: hidden;
+  div.profilePage div.personalProfile {
+    margin-bottom: 5vw; }
+    div.profilePage div.personalProfile div.title {
+      color: #fd713a;
+      font-family: avenir_bold, Georgia, "Times New Roman", serif;
+      font-size: 7vw; }
+    div.profilePage div.personalProfile div.subTitle {
+      line-height: 6vw;
+      color: #999a9a;
+      font-size: 4vw; }
+  div.profilePage div.deviceProfile {
+    background-color: #fad04e;
+    color: white;
+    padding: 3vw 0;
+    position: absolute;
+    width: 100%;
+    left: 0; }
+    div.profilePage div.deviceProfile div.title {
+      font-family: avenir_bold, Georgia, "Times New Roman", serif;
+      margin-bottom: 3vw; }
+    div.profilePage div.deviceProfile img {
+      width: 18vw;
       border-radius: 50%;
-      background-color: white; }
-  div.profilePage div.profileImageContainer div.viewAccount {
-    font-size: 10px; }
-
-div.profilePage div.croppingImagePage {
-  text-align: center;
-  margin-top: 50px; }
-  div.profilePage div.croppingImagePage div.zoom {
-    width: 10px;
-    height: 10px;
-    background-color: black; }
-
-div.profilePage .ui-panel {
-  width: 20em !important; }
-
-div.profilePage .ui-panel-animate.ui-panel-page-content-position-right {
-  -webkit-transform: translate3d(-20em, 0, 0) !important;
-  -moz-transform: translate3d(-20em, 0, 0) !important;
-  transform: translate3d(-20em, 0, 0) !important; }
-
-div.profilePage div.ui-panel-wrapper {
-  margin-bottom: 80px; }
+      border: 1px solid white; }
+  div.profilePage label {
+    display: inline-block; }
+  div.profilePage div.container {
+    padding: 10px; }
+  div.profilePage div.mainRadio {
+    text-align: center; }
+  div.profilePage div.profileImageContainer {
+    text-align: center;
+    width: 100%; }
+    div.profilePage div.profileImageContainer div.profileImage {
+      display: inline-block; }
+      div.profilePage div.profileImageContainer div.profileImage img {
+        width: 10em;
+        height: 10em;
+        overflow: hidden;
+        border-radius: 50%;
+        background-color: white; }
+    div.profilePage div.profileImageContainer div.viewAccount {
+      font-size: 10px; }
+  div.profilePage div.croppingImagePage {
+    text-align: center;
+    margin-top: 50px; }
+    div.profilePage div.croppingImagePage div.zoom {
+      width: 10px;
+      height: 10px;
+      background-color: black; }
+  div.profilePage .ui-panel {
+    width: 20em !important; }
+  div.profilePage .ui-panel-animate.ui-panel-page-content-position-right {
+    -webkit-transform: translate3d(-20em, 0, 0) !important;
+    -moz-transform: translate3d(-20em, 0, 0) !important;
+    transform: translate3d(-20em, 0, 0) !important; }
+  div.profilePage div.ui-panel-wrapper {
+    margin-bottom: 80px; }
 
 /******************** Setting Page ***********************/
 div.settingPage div.container {

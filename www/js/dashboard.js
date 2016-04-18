@@ -1,25 +1,25 @@
-var Dashboard = function(){};
+var Dashboard = function () {
+};
 
 var gapReady = $.Deferred();
 var jqmReady = $.Deferred();
 
-Dashboard.prototype.init = function() {
+Dashboard.prototype.init = function () {
 	var self = this;
 	document.addEventListener('deviceready', function () {
 		gapReady.resolve();
 	}, false);
 
-	$(document).one("mobileinit", function(){
+	$(document).one("mobileinit", function () {
 		jqmReady.resolve();
 	});
 
-	$.when(gapReady, jqmReady).then(function(){
+	$.when(gapReady, jqmReady).then(function () {
 		self.deviceReady();
 	});
 };
 
-Dashboard.prototype.deviceReady = function() {
-
+Dashboard.prototype.deviceReady = function () {
 
 
 	app.addHeaderBar({title: 'Dashboard'});
@@ -35,19 +35,19 @@ Dashboard.prototype.deviceReady = function() {
 
 
 	this.attachEvent();
-	if(window.localStorage.getItem("processSync") === 'no'){
+	if (window.localStorage.getItem("processSync") === 'no') {
 		this.switchTemplate(this.$dashboardTemplate);
 		window.localStorage.setItem("processSync", true);
-	}else{
+	} else {
 		app.tool.showLoading();
 		this.switchTemplate(this.$syncTemplate);
-		this.$profileImage = $('div.profileImage',this.$container);
+		this.$profileImage = $('div.profileImage', this.$container);
 		this.$name = $('div.name', this.$container);
 		this.retrieveData();
 	}
 };
 
-Dashboard.prototype.pushNotification = function(){
+Dashboard.prototype.pushNotification = function () {
 	var push = PushNotification.init({
 		"ios": {
 			"sound": true,
@@ -56,13 +56,13 @@ Dashboard.prototype.pushNotification = function(){
 		}
 	});
 
-	PushNotification.hasPermission(function(data) {
+	PushNotification.hasPermission(function (data) {
 		if (data.isEnabled) {
 			console.log("Push notification is enabled");
 		}
 	});
 
-	push.on('registration', function(data) {
+	push.on('registration', function (data) {
 		console.log(data.registrationId);
 
 		app.tool.ajax({
@@ -74,20 +74,20 @@ Dashboard.prototype.pushNotification = function(){
 		});
 	});
 
-	push.on('notification', function(data) {
+	push.on('notification', function (data) {
 		app.notification(data.title, data.message);
 
-		push.finish(function() {
+		push.finish(function () {
 			console.log("processing of push data is finished");
 		});
 	});
 
-	push.on('error', function(e) {
+	push.on('error', function (e) {
 		console.log(e.message);
 	});
 };
 
-Dashboard.prototype.retrieveData = function(){
+Dashboard.prototype.retrieveData = function () {
 	app.tool.ajax({
 		url: app.setting.serverBase + app.setting.api.getKidsInfo,
 		type: 'post',
@@ -97,48 +97,49 @@ Dashboard.prototype.retrieveData = function(){
 	});
 };
 
-Dashboard.prototype.retrieveData_load = function(data){
+Dashboard.prototype.retrieveData_load = function (data) {
 	console.error(data);
 
-	if(data.success){
+	if (data.success && data.kids.length > 0) {
 		var kids = data.kids[0];
-
-		if(kids.profile){
+		if (kids.profile) {
 			this.$profileImage.find('img').attr('src', 'http://avatar.childrenlab.com/' + kids.profile);
 		}
 
 		this.$name.html(kids.nickName || kids.firstName);
+	}else{
+		this.switchTemplate(this.$dashboardTemplate);
 	}
 	app.tool.hideLoading();
 	//this.pushNotification();
 };
 
-Dashboard.prototype.attachEvent = function() {
+Dashboard.prototype.attachEvent = function () {
 	var self = this;
 
-	$('div.weatherButton').on('click', this.dashboardButtons, function(){
+	$('div.weatherButton').on('click', this.dashboardButtons, function () {
 		window.location = window.rootPath + "pages/temperature.html";
 	});
 
-	$('div.uvButton').on('click', this.dashboardButtons, function(){
+	$('div.uvButton').on('click', this.dashboardButtons, function () {
 		window.location = window.rootPath + "pages/uv.html";
 	});
 
-	$('div.activityButton').on('click', this.dashboardButtons, function(){
+	$('div.activityButton').on('click', this.dashboardButtons, function () {
 		window.location = window.rootPath + "pages/activity.html";
 	});
 
-	$('div.noSync').on('click', this.$syncTemplate, function() {
+	$('div.noSync').on('click', this.$syncTemplate, function () {
 		self.switchTemplate(self.$dashboardTemplate);
 	});
 
-	$('div.sync').on('click', this.$syncTemplate, function() {
+	$('div.sync').one('click', this.$syncTemplate, function () {
 		self.switchTemplate(self.$searchTemplate);
 		self.initBluetooth();
 	});
 };
 
-Dashboard.prototype.positionDashboard = function(){
+Dashboard.prototype.positionDashboard = function () {
 	var width = this.dashboardPage.width();
 
 	var centerWidth = (width / 2) - (this.dashboardButtons.width() / 2);
@@ -147,15 +148,15 @@ Dashboard.prototype.positionDashboard = function(){
 	this.content = $('div.content', this.dashboardPage);
 	var height = this.$container.height();
 
-	var centerHeight = ((height - (this.menu.height()+80)) / 2) - (this.content.height() / 2);
-	centerWidth = (width/2) - (this.content.width() / 2);
+	var centerHeight = ((height - (this.menu.height() + 80)) / 2) - (this.content.height() / 2);
+	centerWidth = (width / 2) - (this.content.width() / 2);
 	this.content.css({
 		left: centerWidth,
 		top: centerHeight
 	});
 };
 
-Dashboard.prototype.initBluetooth = function(){
+Dashboard.prototype.initBluetooth = function () {
 	this.localDataName = "ActivityData";
 	this.initialName = "initialDevice";
 	this.deviceTimeName = "lastDeviceTime";
@@ -181,9 +182,9 @@ Dashboard.prototype.initBluetooth = function(){
 	this.watchStatus();
 };
 
-Dashboard.prototype.initialBluetooth_load = function(){
+Dashboard.prototype.initialBluetooth_load = function () {
 	var self = this;
-	setTimeout(function(){
+	setTimeout(function () {
 		self.bluetooth.isConnected({
 			callback: self.initialBluetooth_isConnect,
 			context: self,
@@ -194,12 +195,13 @@ Dashboard.prototype.initialBluetooth_load = function(){
 };
 
 Dashboard.prototype.initialBluetooth_isConnect = function (oArgs, data) {
-	if(data){
+	console.error("is connected: " + data);
+	if (data) {
 		this.bluetooth.disconnect({
 			callback: this.initialBluetooth_isConnect,
 			context: this
 		});
-	}else{
+	} else {
 		this.bluetooth.startScan({
 			callback: this.findDevice_load,
 			context: this
@@ -207,7 +209,7 @@ Dashboard.prototype.initialBluetooth_isConnect = function (oArgs, data) {
 	}
 };
 
-Dashboard.prototype.findDevice_load = function(){
+Dashboard.prototype.findDevice_load = function () {
 	this.$searchInfo.html("Found your device!");
 	this.bluetooth.write({
 		serviceId: "FFA0",
@@ -219,7 +221,7 @@ Dashboard.prototype.findDevice_load = function(){
 };
 
 Dashboard.prototype.writeTimeToDevice = function () {
-	var time = moment().unix() + moment().utcOffset()*60;
+	var time = moment().unix() + moment().utcOffset() * 60;
 	this.bluetooth.write({
 		serviceId: 'FFA0',
 		characterId: 'FFA3',
@@ -242,9 +244,11 @@ Dashboard.prototype.getMacAddress = function () {
 
 Dashboard.prototype.getMacAddress_load = function () {
 	this.macId = window.localStorage.getItem("MAC_ID");
+	console.error("I got mac ID Next check connceted");
 	this.bluetooth.isConnected({
 		callback: this.getDeviceTime,
-		context: this
+		context: this,
+		noConnect: true
 	});
 
 };
@@ -268,14 +272,14 @@ Dashboard.prototype.getDeviceTime = function (oArgs, data) {
 };
 
 Dashboard.prototype.getSizeOfData = function (oArgs, data) {
-	if(data){
+	if (data) {
 		var byteArray = data.split(",");
-		var receivedTime = this.byteArrayToLong(byteArray) - moment().utcOffset()*60;
+		var receivedTime = this.byteArrayToLong(byteArray) - moment().utcOffset() * 60;
 
 		console.error("Received long: " + receivedTime);
 		console.error("Received time: " + moment.unix(receivedTime).format("YYYY MM DD HH:mm:ss Z"));
 
-		if(receivedTime != 0){
+		if (receivedTime != 0) {
 			window.localStorage.setItem(this.deviceTimeName, receivedTime);
 		}
 	}
@@ -294,48 +298,95 @@ Dashboard.prototype.getSizeOfData_load = function (oArgs, data) {
 	background.css("background", "url(../img/dashboard/monster-yellow.png) 10vw 0vw no-repeat");
 	background.css("background-size", "40vw");
 	this.lastReceivedDataSize = parseInt(data);
-	this.sendAlertTimeToDevice();
+
+	this.sendAlertToDevice({alertData: window.localStorage.getItem("PendingAlert") ? JSON.parse(window.localStorage.getItem("PendingAlert")) : null});
 
 };
 
-Dashboard.prototype.sendAlertTimeToDevice = function () {
-	var alertData = window.localStorage.getItem("PendingAlert") ? JSON.parse(window.localStorage.getItem("PendingAlert")) : null;
-	if(alertData) {
-		for(var i = 0;i < alertData; i++){
-			this.bluetooth.write({
-				serviceId: 'FFA0',
-				characterId: 'FFA7',
-				data: this.longToByteArray(alertData[i].date),
-				context: this
-			});
-
-
-
-			this.bluetooth.write({
-				serviceId: 'FFA0',
-				characterId: 'FFA8',
-				data: alertData[i].alert,
-				context: this
-			});
+Dashboard.prototype.sendAlertToDevice = function (oArgs) {
+	var alertData = oArgs.alertData;
+	console.error(alertData);
+	if (alertData && alertData.length > 0) {
+		var alertDate = moment(alertData[0].date);
+		var now = moment();
+		console.error("Alert is after: " + alertDate.isAfter(now));
+		if (alertDate.isAfter(now)) {
+			this.sendAlertTypeToDevice(alertData);
+		} else {
+			window.localStorage.setItem("PendingAlert", alertData.toString());
 		}
+	}else{
+		this.bluetooth.write({
+			serviceId: 'FFA0',
+			characterId: 'FFA7',
+			data: 0,
+			context: this
+		});
+
+		this.bluetooth.write({
+			serviceId: 'FFA0',
+			characterId: 'FFA8',
+			data: 0,
+			context: this,
+			callback: this.getDataFromDevice
+		});
 	}
 
-	this.getDataFromDevice();
+
+};
+
+Dashboard.prototype.sendAlertTypeToDevice = function (alertData) {
+	console.error(alertData[0].date);
+	var date = moment(alertData[0].date);
+
+	console.error("updating FFA8: " + (date.unix() + moment().utcOffset() * 60));
+	this.bluetooth.write({
+		serviceId: 'FFA0',
+		characterId: 'FFA8',
+		data: alertData[0].alert,
+		alertData: alertData,
+		context: this,
+		callback: this.sendAlertTimeToDevice
+	});
+};
+
+Dashboard.prototype.sendAlertTimeToDevice = function (oArgs) {
+	var alertDate = oArgs.alertData[0];
+	console.error(alertDate.date);
+	var date = moment(alertDate.date);
+
+	console.error("updating FFA7: " + (date.unix() + moment().utcOffset() * 60));
+	this.bluetooth.write({
+		serviceId: 'FFA0',
+		characterId: 'FFA7',
+		data: this.longToByteArray(date.unix() + moment().utcOffset() * 60),
+		alertData: oArgs.alertData,
+		context: this,
+		callback: this.sendNextAlert
+	});
+};
+
+Dashboard.prototype.sendNextAlert = function(oArgs){
+	var alertData = oArgs.alertData;
+	if(alertData.length > 0){
+		alertData = alertData.slice(1);
+	}
+	this.sendAlertToDevice({alertData: alertData});
 };
 
 
 Dashboard.prototype.getDataFromDevice = function () {
-	if(this.lastReceivedDataSize && this.lastReceivedDataSize != 0){
+	if (this.lastReceivedDataSize && this.lastReceivedDataSize != 0) {
 		this.receivingDataCount = this.lastReceivedDataSize;
-		window.localStorage.setItem(this.deviceTimeName, parseInt(window.localStorage.getItem(this.deviceTimeName)) + (this.lastReceivedDataSize/2));
+		window.localStorage.setItem(this.deviceTimeName, parseInt(window.localStorage.getItem(this.deviceTimeName)) + (this.lastReceivedDataSize / 2));
 		this.lastReceivedDataSize = 0;
 	}
 
-	if(this.receivingDataCount == 52){
+	if (this.receivingDataCount == 52) {
 		this.receivingDataCount = 0;
 		this.getDeviceTime({}, true);
 
-	}else{
+	} else {
 
 		this.bluetooth.read({
 			serviceId: 'FFA0',
@@ -362,12 +413,12 @@ Dashboard.prototype.storeData = function (data) {
 
 	window.localStorage.setItem(this.localDataName, localData);
 
-	if(localData.length > 8000){
+	if (localData.length > 8000) {
 		this.uploadLocalData({
 			callback: this.getDataFromDevice,
 			context: this
 		})
-	}else{
+	} else {
 		this.getDataFromDevice();
 	}
 };
@@ -378,7 +429,7 @@ Dashboard.prototype.uploadLocalData = function (oArgs) {
 	var localData = window.localStorage.getItem(this.localDataName) || '';
 
 
-	if(!localData || localData == '') {
+	if (!localData || localData == '') {
 		this.isUploadingData = false;
 		return false;
 	}
@@ -407,55 +458,57 @@ Dashboard.prototype.uploadData = function (data, oArgs) {
 
 Dashboard.prototype.uploadData_load = function () {
 	var self = this;
-	setTimeout(function(){
+	setTimeout(function () {
 		self.uploadLocalData();
 	}, 500);
 
 };
 
 
-Dashboard.prototype.disconnectDevice = function(){
-	if(window.localStorage.getItem("MAC_ID")){
+Dashboard.prototype.disconnectDevice = function () {
+	console.error("disconnected");
+	if (window.localStorage.getItem("MAC_ID")) {
 		window.localStorage.setItem(this.initialName, window.localStorage.getItem("MAC_ID"));
 	}
 	this.isReceivingData = false;
 	this.uploadLocalData();
 	this.$searchInfo.html("Sync Completed");
 	$('div.background').hide();
+
+
 	var self = this;
-	$('div.gotoDashboard').show().on('click', function(){
+	$('div.gotoDashboard').show().on('click', function () {
 		self.switchTemplate(self.$dashboardTemplate);
 	});
 
 };
 
-Dashboard.prototype.watchStatus = function(){
+Dashboard.prototype.watchStatus = function () {
 	var self = this;
 	var monster = $('div.background');
 	this.monsterDegree = 30;
 	monster.css("transform", "rotate(" + this.monsterDegree + "deg)");
-	setInterval(function(){
-		if(self.isReceivingData || self.isUploadingData){
+	setInterval(function () {
+		if (self.isReceivingData || self.isUploadingData) {
 			self.monsterDegree = -self.monsterDegree;
 			monster.css("transform", "rotate(" + self.monsterDegree + "deg)");
 
-		}else{
+		} else {
 			//
 		}
 	}, 1000);
 };
 
 
-Dashboard.prototype.switchTemplate = function($template){
+Dashboard.prototype.switchTemplate = function ($template) {
 	this.$container.html($template.clone(true).removeClass("template"));
 	this.positionDashboard();
 };
 
 
-
-Dashboard.prototype.byteArrayToLong = function(byteArray) {
+Dashboard.prototype.byteArrayToLong = function (byteArray) {
 	var value = 0;
-	for ( var i = byteArray.length - 1; i >= 0; i--) {
+	for (var i = byteArray.length - 1; i >= 0; i--) {
 		value = (value * 256) + parseInt(byteArray[i]);
 	}
 
@@ -463,13 +516,13 @@ Dashboard.prototype.byteArrayToLong = function(byteArray) {
 };
 
 
-Dashboard.prototype.longToByteArray = function(long) {
+Dashboard.prototype.longToByteArray = function (long) {
 	var byteArray = [0, 0, 0, 0];
 
-	for ( var index = 0; index < byteArray.length; index ++ ) {
+	for (var index = 0; index < byteArray.length; index++) {
 		var byte = long & 0xff;
-		byteArray [ index ] = byte;
-		long = (long - byte) / 256 ;
+		byteArray [index] = byte;
+		long = (long - byte) / 256;
 	}
 
 	return byteArray;

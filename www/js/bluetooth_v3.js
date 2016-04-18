@@ -123,7 +123,10 @@ Bluetooth.prototype.isConnected = function (oArgs, device) {
 		},
 		function () {
 			self.debugger("Not connected: " + device.id);
-			if(!this.deviceInit && !oArgs.noConnect){
+/*			setTimeout(function(){
+
+			}, 500);*/
+			if(self.deviceInit && oArgs.noConnect){
 				self.connect(oArgs, device);
 			}else{
 				self.callbackMethod(oArgs, false);
@@ -181,7 +184,6 @@ Bluetooth.prototype.read = function (oArgs) {
 			if(received != '' && received.substring(0, 1) == ","){
 				received = received.substring(1);
 			}
-
 
 			if (oArgs.type == "MAC_ID") {
 				self.macId = received.substring(0, 12);

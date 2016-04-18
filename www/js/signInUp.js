@@ -29,7 +29,9 @@ SignInUp.prototype.init = function () {
 
 	this.attachEvent();
 
-
+	app.pageSwitch({
+		pageIn: 'div.signButtons'
+	});
 };
 
 SignInUp.prototype.testFacebook = function() {

@@ -74,6 +74,7 @@ UpdateProfile.prototype.retrieveUserProfile_load = function (data) {
 				$(this).prop("checked", true);
 			}
 		});
+		this.kids = data.kids;
 
 		this.attachEvent();
 	}else{

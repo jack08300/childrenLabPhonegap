@@ -386,7 +386,7 @@ div.indexPage {
 	div.indexOptions {
 		position: relative;
 		> div {
-			padding: 20px 30px;
+			padding: 20px 0px;
 			text-align: center;
 		}
 	}
@@ -419,6 +419,10 @@ div.indexPage {
 		&.rolePage {
 			width: 82%;
 		}
+
+		.signInUp, .signUp, .deviceInfo {
+			width: 80vw;
+		}
 	}
 
 	div.signInButtons {
@@ -436,6 +440,7 @@ div.indexPage {
 
 	div.signButtons {
 		position: relative;
+		width: 80vw;
 	}
 
 	div.hideToRight {
@@ -1024,6 +1029,47 @@ div.feedbackPage {
 
 /******************** UpdateProfile Page ***********************/
 div.profilePage {
+	background-color: #cdeef6 !important;
+	text-align: center;
+
+	div.personalProfile {
+		margin-bottom: 5vw;
+
+		div.title {
+			color: #fd713a;
+			font-family: avenir_bold, Georgia, "Times New Roman", serif;
+			font-size: 7vw;
+		}
+		div.subTitle {
+			line-height: 6vw;
+			color: #999a9a;
+			font-size:4vw;
+		}
+	}
+
+	div.deviceProfile {
+		background-color: #fad04e;
+		color: white;
+		padding: 3vw 0;
+		position: absolute;
+		width: 100%;
+		left: 0;
+		div.title{
+			font-family: avenir_bold, Georgia, "Times New Roman", serif;
+			margin-bottom:3vw;
+		}
+		img {
+			width:18vw;
+			border-radius:50%;
+			border: 1px solid white;
+
+		}
+	}
+
+
+
+
+
 
 	label {
 		display: inline-block;

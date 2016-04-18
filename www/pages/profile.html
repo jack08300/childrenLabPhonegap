@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title></title>
+	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" type="text/css" href="../css/lib/jquery.mobile-1.4.5.min.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/lib/crop.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/index.css"/>
@@ -11,62 +12,27 @@
 
 <div class="profilePage" data-role="page">
 
-	<div class="panel right" data-role="panel" data-position="right" data-display="push" id="cropPanel">
-		<div class="croppingImagePage">
-
-			<div class="scaleImage">
-				<div class="previewImage">
-
-				</div>
-				<div class="mainButton cropButton">Crop And Upload</div>
-			</div>
-
-		</div>
-	</div>
-
-
 	<div class="container" data-role="content">
-		<form id="updateForm">
 
-			<div class="profileImageContainer">
-				<div class="profileImage">
-					<img/>
-				</div>
-
-				<!--<input type="file" onClick="app.fileSelector()" name="image" value="Upload new photo"/>-->
+		<div class="personalProfile">
+			<div class="profileImage">
+				<img/>
 			</div>
 
-			<div class="updateProfile">
-				<div class="errorMessage mainError"></div>
+			<div class="personalInfo">
+				<div class="title">Lena Lin</div>
+				<div class="subTitle phoneNumber">+1.347-740-98705</div>
+				<div class="subTitle email">jack08300@gmail.com</div>
+				<div class="subTitle address">4713 39th place<br/> Sunnyside, NY 11004</div>
+			</div>
+		</div>
 
-				<div class="mainEdit">
-					<input type="email" name="email" placeholder="Email" data-role="none" />
-				</div>
-				<div class="mainEdit">
-					<input type="text" name="firstName" placeholder="First Name" data-role="none" />
-				</div>
-				<div class="mainEdit">
-					<input type="text" name="lastName" placeholder="Last Name" data-role="none" />
-				</div>
-				<div class="mainEdit">
-					<input type="number" name="phoneNumber" placeholder="Phone Number" data-role="none" />
-				</div>
-
-
-				<div class="mainRadio">
-
-					<label for="sexMale">Male</label>
-					<input type="radio" name="sex" value="Male" id="sexMale" data-role="none" >
-					<label for="sexFemale">Female</label>
-					<input type="radio" name="sex" value="Female" id="sexFemale" data-role="none" />
-				</div>
-
-				<div class="mainButton updateButton">Update</div>
+		<div class="deviceProfile">
+			<div class="title"> My Device </div>
+			<div class="deviceList">
 
 			</div>
-
-		</form>
-
+		</div>
 
 	</div>
 </div>

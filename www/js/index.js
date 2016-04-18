@@ -252,7 +252,7 @@ var app = {
 			if(currentPageClass.indexOf('updateProfilePage') != -1){
 				return;
 			}
-			window.location = window.rootPath + "pages/updateProfile.html";
+			window.location = window.rootPath + "pages/profile.html";
 		});
 
 	},
@@ -357,11 +357,21 @@ var app = {
 	pageSwitch: function(oArgs){
 		oArgs = oArgs || {};
 
-		$(oArgs.pageOut).animate({
-			left: '-150%'
-		});
+		var pageOut = oArgs.pageOut;
+		if(pageOut){
+			$(pageOut).animate({
+				left: '-150%'
+			});
+		}
+
+
+		var pageIn = $(oArgs.pageIn);
+		console.error(pageIn);
+		console.error(pageIn.width);
+		var centerLeft = $(document).width()/2 - pageIn.width()/2;
+		//pageIn.removeClass("hideToRight");
 		$(oArgs.pageIn).animate({
-			left: '0'
+			left: centerLeft
 		});
 
 
