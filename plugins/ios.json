@@ -7,16 +7,7 @@
         "files": {}
     },
     "installed_plugins": {
-        "com.plugin.datepicker": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
-        "com.synconset.imagepicker": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
         "cordova-plugin-ble-central": {
-            "PACKAGE_NAME": "com.childrenLab"
-        },
-        "cordova-plugin-device": {
             "PACKAGE_NAME": "com.childrenLab"
         },
         "cordova-plugin-dialogs": {
@@ -41,5 +32,18 @@
             "PACKAGE_NAME": "com.childrenLab"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "com.plugin.datepicker": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.childrenLab"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.childrenLab"
+        }
+    }
 }

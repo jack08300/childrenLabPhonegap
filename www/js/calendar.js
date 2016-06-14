@@ -274,7 +274,7 @@ Calendar.prototype.submitEvent = function () {
 	};
 
 	if(data.alert != '0'){
-		var time = moment(data.startDate);
+		var time = moment(data.startDate).unix() + moment().utcOffset()*60;
 		console.error(time);
 		var pendingAlerts = window.localStorage.getItem("PendingAlert");
 		console.error(pendingAlerts);

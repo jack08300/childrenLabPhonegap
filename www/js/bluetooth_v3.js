@@ -8,7 +8,9 @@ Bluetooth.prototype.init = function (oArgs) {
 	oArgs = oArgs || {};
 	var self = this;
 
-	this.deviceId = "8D804989-EED6-B482-8367-6B1E074C0FF5";
+	var deviceId = window.localStorage.getItem("deviceId");
+	this.deviceId = deviceId ? deviceId : "8E2779DF-7583-074C-6D2E-DBC6EA2BF7A6";
+
 	this.serviceUuid = ['1803', '1802', '1804'];
 
 	this.storageDeviceName = "ConnectedDevice";
@@ -24,9 +26,9 @@ Bluetooth.prototype.init = function (oArgs) {
 	this.disconnectCallback = oArgs.disconnectCallback;
 
 	this.$debug = oArgs.$debug;
-
-	window.localStorage.removeItem(this.storageDeviceName);
-	window.localStorage.removeItem(this.storageDataName);
+	/*
+	 window.localStorage.removeItem(this.storageDeviceName);
+	 window.localStorage.removeItem(this.storageDataName);*/
 
 	this.isEnabled(oArgs);
 
@@ -88,7 +90,7 @@ Bluetooth.prototype.watchRange = function (oArgs) {
 			var rssi = device.rssi;
 			self.callbackMethod(oArgs, rssi);
 
-			setTimeout(function(){
+			setTimeout(function () {
 				self.watchRange(oArgs);
 			}, 500);
 		},
@@ -122,15 +124,19 @@ Bluetooth.prototype.isConnected = function (oArgs, device) {
 			self.callbackMethod(oArgs, true);
 		},
 		function () {
-			self.debugger("Not connected: " + device.id);
-/*			setTimeout(function(){
 
-			}, 500);*/
-			if(self.deviceInit && oArgs.noConnect){
-				self.connect(oArgs, device);
-			}else{
-				self.callbackMethod(oArgs, false);
-			}
+			self.debugger("Not connected: " + device.id);
+
+			setTimeout(function () {
+				console.error("Device init: " + self.deviceInit);
+				console.error("Device on connect: " + oArgs.noConnect);
+				if (self.deviceInit || oArgs.noConnect) {
+					self.callbackMethod(oArgs, false);
+				} else {
+					self.connect(oArgs, device);
+				}
+			}, 1000);
+
 		}
 	);
 };
@@ -142,22 +148,28 @@ Bluetooth.prototype.connect = function (oArgs, device) {
 
 	ble.connect(device.id,
 		function () {
+			console.error("connected to : " + device.id);
 			self.deviceId = device.id;
+			window.localStorage.setItem("deviceId", device.id);
 			self.callbackMethod(oArgs);
 		},
 		function (error) {
+			console.error("Disconnected");
+			console.error(error);
+			console.error(self.deviceInit);
 			self.debugger("Disconnect");
 			self.callbackMethod(self.disconnectCallback);
-
-			if(self.deviceInit){
+/*
+			if (self.deviceInit) {
 				self.debugger("Sleep for 3 minutes before reconnect again.");
-				setTimeout(function(){
+				setTimeout(function () {
 					self.startScan(self.scanArgs);
 				}, 300000);
 
-			}else{
+			} else {
 				self.startScan(self.scanArgs);
-			}
+			}*/
+
 		}
 	);
 
@@ -173,15 +185,15 @@ Bluetooth.prototype.read = function (oArgs) {
 			for (var i = 0; i < bytes.length; i++) {
 				if (oArgs.type == "MAC_ID") {
 					received += bytes[i].toString(16);
-				} else if(oArgs.type == "TIME") {
+				} else if (oArgs.type == "TIME") {
 					received += bytes[i];
 				} else {
-					received +=  "," + bytes[i];
+					received += "," + bytes[i];
 				}
 
 			}
 
-			if(received != '' && received.substring(0, 1) == ","){
+			if (received != '' && received.substring(0, 1) == ",") {
 				received = received.substring(1);
 			}
 
@@ -189,7 +201,7 @@ Bluetooth.prototype.read = function (oArgs) {
 				self.macId = received.substring(0, 12);
 				window.localStorage.setItem("MAC_ID", self.macId);
 				self.deviceInit = true;
-				self.debugger("Initial Setup was success, Mac ID: " + self.macId);
+				console.error("Initial Setup was success, Mac ID: " + self.macId);
 			}
 
 			self.debugger("Received From :" + oArgs.characterId + " Data: " + received);
@@ -207,22 +219,22 @@ Bluetooth.prototype.write = function (oArgs) {
 	var self = this;
 
 	var data = oArgs.data;
-
-	if(!(data instanceof Uint8Array)){
+	console.error("Data: " + data);
+	if (!(data instanceof Uint8Array)) {
 		var array = new Uint8Array(data.length);
 		for (var i = 0, l = data.length; i < l; i++) {
 			array[i] = data[i];
 		}
-	}else{
+	} else {
 		array = data;
 	}
 
 
-	this.debugger("Writing to: " + oArgs.serviceId + "  " + oArgs.characterId + " " + array.length + " " + array);
+	console.error("Writing to: " + oArgs.serviceId + "  " + oArgs.characterId + " " + array.length + " " + array);
 
 	ble.write(this.deviceId, oArgs.serviceId, oArgs.characterId, array.buffer,
 		function () {
-			self.debugger("Success wrote");
+			console.error("Success wrote");
 			self.callbackMethod(oArgs);
 		},
 		function (error) {
@@ -262,19 +274,19 @@ Bluetooth.prototype.callbackMethod = function (oArgs, data) {
 Bluetooth.prototype.debugger = function (message) {
 	if (this.$debug) {
 		this.$debug.append("<div>" + message + ".</div>");
-		this.$debug.scrollTop(this.$debug.height()+this.$debug.scrollTop());
+		this.$debug.scrollTop(this.$debug.height() + this.$debug.scrollTop());
 	}
 
 };
 
-Bluetooth.prototype.disconnect = function(oArgs){
+Bluetooth.prototype.disconnect = function (oArgs) {
 	var self = this;
 	ble.disconnect(this.deviceId,
-	function(){
-		self.debugger("Disconnect success");
-		self.callbackMethod(oArgs, false);
-	},
-	function(e){
-		self.debugger("Disconnect Error " + e);
-	});
+		function () {
+			self.debugger("Disconnect success");
+			self.callbackMethod(oArgs, false);
+		},
+		function (e) {
+			self.debugger("Disconnect Error " + e);
+		});
 };
